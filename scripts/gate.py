@@ -1,0 +1,243 @@
+#!/usr/bin/env python3
+"""Tastee post gate: the checkable half.
+
+Checks a draft against a persona folder (TASTE.md + claims.md) before it posts.
+No AI calls, no network. Same input always gives the same answer, so an agent
+can call it as a hard gate and a human can trust it.
+
+    python3 gate.py --persona ../personas/example --surface linkedin draft.txt
+    echo "text" | python3 gate.py --persona ../personas/example --surface x -
+    python3 gate.py --persona ../personas/example --backtest   # runs on corpus/posts.md
+
+Verdict: BLOCK (must fix before posting), FIX (should fix), PASS.
+The taste half (hook, voice, boldness, rhythm) is judged by the critique skill,
+not here, because it needs judgment.
+"""
+import argparse
+import datetime as dt
+import json
+import re
+import sys
+from pathlib import Path
+
+FILLER = ["streamline", "leverage", "unlock", "seamless", "empower", "game-changer", "game changer",
+          "hope this finds you well", "in today's fast-paced", "delve", "elevate your"]
+SLANG = ["lol", "tbh", "ngl", "lmao", "bro", "ik "]
+CLAIM_NOUNS = (r"(companies|cos|customers|clients|leads|meetings|messages|founders|signups|"
+               r"requests|users|people\s+served|launches|pivots|vas|replies)")
+SKELETONS = {
+    "arr_guide": r"\$\s?\d+\s?k\+?\s?(arr|mrr)",
+    "how_to_guide": r"\b(guide|here'?s how|here'?s \d+|\d+ things|\d+ lessons|\d+ checks)\b",
+    "scale_with_own_product": r"(using|use) (my|our) (own )?(scaling )?product to scale",
+}
+
+
+def norm(s):
+    return re.sub(r"\s+", " ", s.lower().replace("’", "'")).strip()
+
+
+def load_persona(folder):
+    folder = Path(folder)
+    claims = (folder / "claims.md").read_text()
+    approved = claims.split("## Needs", 1)[0]
+    stories = []
+    if "## Story checks" in claims:
+        for line in claims.split("## Story checks", 1)[1].split("\n## ", 1)[0].splitlines():
+            if line.startswith("- ") and "::" in line:
+                desc, rx = line[2:].split("::", 1)
+                stories.append((desc.strip(), rx.strip()))
+    banned = []
+    if "## Banned phrases" in claims:
+        for line in claims.split("## Banned phrases", 1)[1].split("\n## ", 1)[0].splitlines():
+            if line.startswith("- ") and "::" in line:
+                desc, rx = line[2:].split("::", 1)
+                banned.append((desc.strip(), rx.strip()))
+
+    def field(name):
+        m = re.search(r"^" + name + r":\s*(.+)$", claims, re.M)
+        return norm(m.group(1)) if m else ""
+    return {"approved_text": norm(approved), "folder": folder, "stories": stories, "banned": banned,
+            "owner": field("owner"), "product": field("product")}
+
+
+EXAMPLE_CUES = ("words like", "opening with", "openers like", "things like", "like saying", "for example", "e.g.", "such as")
+
+
+def is_example(t, start):
+    return any(c in t[max(0, start - 60):start] for c in EXAMPLE_CUES)
+
+
+def money_claims(t):
+    """Revenue/money and business-count claims, with the number normalised."""
+    out = []
+    for m in re.finditer(r"\$\s?(\d[\d,.]*)\s?(k|m)?\+?\s*(arr|mrr|in revenue|revenue|a month|/month|per month)?", t):
+        num = (m.group(1).replace(",", "") + (m.group(2) or "")).rstrip(".")
+        if not is_example(t, m.start()):
+            out.append((m.group(0).strip(), num, "money"))
+    for m in re.finditer(r"\b(\d[\d,.]*)\s?(k)?\+?\s*(?:" + CLAIM_NOUNS + r")\b", t):
+        num = m.group(1).replace(",", "") + (m.group(2) or "")
+        if t[max(0, m.start() - 3):m.start()] == "in " or is_example(t, m.start()):
+            continue  # "1 in 6 leads" is a ratio, not a claim
+        out.append((m.group(0).strip(), num, "count"))
+    for m in re.finditer(r"\b(\d+(?:\.\d+)?)\s?%", t):
+        if not is_example(t, m.start()):
+            out.append((m.group(0), m.group(1), "percent"))
+    for m in re.finditer(r"\b(\d+)\s?(?:->|→|to)\s?(\d+)\s+meetings", t):
+        out.append((m.group(0), m.group(1) + "->" + m.group(2), "count"))
+    return out
+
+
+def approved_number(num, approved_text):
+    base = num.lower()
+    forms = {base}
+    if base.endswith("k"):
+        n = base[:-1]
+        forms |= {n + ",000", n + "000", n + "k"}
+    elif base.isdigit() and len(base) >= 4:
+        forms |= {f"{int(base):,}", base[:-3] + "k" if base.endswith("000") else base}
+    return any(re.search(r"(?<![\d,])" + re.escape(f) + r"(?![\d])", approved_text) for f in forms)
+
+
+def ngrams(t, n=3):
+    w = re.findall(r"[a-z0-9']+", t)
+    return {" ".join(w[i:i + n]) for i in range(len(w) - n + 1)}
+
+
+def check(text, persona, surface="reddit", history=()):
+    t = norm(text)
+    issues = []
+
+    def add(level, check_name, detail, quote=""):
+        issues.append({"level": level, "check": check_name, "detail": detail, "quote": quote})
+
+    # 1. dashes
+    for d in ("—", "–", "--"):
+        if d in text:
+            add("BLOCK", "em_dash", "Em dash or double hyphen (house rule).", d)
+
+    # 2. claims vs claims.md
+    seen = set()
+    for quote, num, kind in money_claims(t):
+        if (quote, num) in seen:
+            continue
+        seen.add((quote, num))
+        if approved_number(num, persona["approved_text"]):
+            continue
+        level = "BLOCK" if kind == "money" or "arr" in quote or "mrr" in quote else "FIX"
+        add(level, "unapproved_claim", "Number not in claims.md. Add it to claims.md or cut it.", quote)
+
+    # 2b. personal stories the owner must confirm they happened
+    for desc, rx in persona.get("stories", []):
+        m = re.search(rx, t)
+        if m:
+            add("FIX", "unconfirmed_story", f"Story not confirmed by the owner: {desc}.", m.group(0))
+
+    # 3. banned phrases from claims.md ("## Banned phrases": "- why :: regex")
+    for desc, rx in persona.get("banned", []):
+        for m in re.finditer(rx, t):
+            add("BLOCK", "banned_phrase", desc, m.group(0))
+
+    # 4. filler
+    for f in FILLER:
+        for m in re.finditer(re.escape(f), t):
+            if not is_example(t, m.start()):
+                add("FIX", "filler", "Corporate filler word.", f)
+                break
+
+    # 5. slang overuse (voice rule: at most once)
+    slang_hits = [s.strip() for s in SLANG if re.search(r"\b" + re.escape(s.strip()) + r"\b", t)]
+    total = sum(len(re.findall(r"\b" + re.escape(s) + r"\b", t)) for s in slang_hits)
+    if total > 2:
+        add("FIX", "slang", f"Slang used {total} times. Voice rule: once, maybe twice.", ", ".join(slang_hits))
+
+    # 6. disclosure + self-promo honesty (reddit)
+    prod, owner = persona.get("product"), persona.get("owner")
+    names_product = bool(prod) and prod in t
+    if surface == "reddit":
+        disclosed = re.search(r"(i (run|founded|built|am building)|i'm building|founder of|my (startup|company|product))", t)
+        if names_product and not disclosed and not (owner and owner in t):
+            add("FIX", "disclosure", "Names the product without saying you built it.")
+        if "i will not promote" in t and names_product:
+            add("BLOCK", "promo_honesty", "Says 'I will not promote' but names the product.", "i will not promote")
+
+    # 7. sameness vs recent posts on the same surface
+    skel = {k for k, p in SKELETONS.items() if re.search(p, t)}
+    grams = ngrams(t)
+    for h in history:
+        hskel = h["skeleton"] & skel
+        overlap = len(grams & h["grams"]) / max(1, min(len(grams), len(h["grams"])))
+        if hskel or overlap > 0.12:
+            why = []
+            if hskel:
+                why.append("same skeleton: " + ", ".join(sorted(hskel)))
+            if overlap > 0.12:
+                why.append(f"{overlap:.0%} shared phrasing")
+            add("FIX", "sameness", f"Too close to {h['id']} ({h['date']}): " + "; ".join(why), h["title"][:70])
+
+    uniq, keys = [], set()
+    for i in issues:
+        k = (i["check"], i["quote"])
+        if k not in keys:
+            keys.add(k)
+            uniq.append(i)
+    issues = uniq
+    verdict = "BLOCK" if any(i["level"] == "BLOCK" for i in issues) else "FIX" if issues else "PASS"
+    return {"verdict": verdict, "issues": issues, "skeleton": sorted(skel)}
+
+
+def parse_corpus(path):
+    posts = []
+    for block in Path(path).read_text().split("\n## ")[1:]:
+        head, _, body = block.partition("\n")
+        parts = [p.strip() for p in head.split("|")]
+        pid, date, surface = parts[0], parts[1], parts[2]
+        title = ""
+        if body.startswith("title:"):
+            title, _, body = body.partition("\n")
+            title = title[6:].strip()
+        posts.append({"id": pid, "date": date, "surface": surface.split()[0], "title": title,
+                      "text": (title + "\n" + body).strip(), "drafter": parts[3].replace("drafter:", "").strip()})
+    return posts
+
+
+def backtest(persona_dir):
+    persona = load_persona(persona_dir)
+    posts = parse_corpus(Path(persona_dir) / "corpus" / "posts.md")
+    rows, history = [], []
+    for p in posts:
+        d = dt.date.fromisoformat(p["date"])
+        recent = [h for h in history if h["surface"] == p["surface"] and (d - h["d"]).days <= 7]
+        r = check(p["text"], persona, p["surface"], recent)
+        rows.append({**p, **r})
+        history.append({"id": p["id"], "date": p["date"], "d": d, "surface": p["surface"], "title": p["title"],
+                        "skeleton": set(r["skeleton"]), "grams": ngrams(norm(p["text"]))})
+    return rows
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--persona", required=True)
+    ap.add_argument("--surface", default="reddit", choices=["reddit", "x", "linkedin", "instagram", "youtube"])
+    ap.add_argument("--backtest", action="store_true")
+    ap.add_argument("--json", action="store_true")
+    ap.add_argument("file", nargs="?")
+    a = ap.parse_args()
+    if a.backtest:
+        rows = backtest(a.persona)
+        if a.json:
+            print(json.dumps([{k: v for k, v in r.items() if k != "text"} for r in rows], indent=2))
+        else:
+            for r in rows:
+                print(f"{r['id']} {r['date']} {r['surface']:7} {r['verdict']:5} {r['title'][:60]}")
+                for i in r["issues"]:
+                    print(f"    {i['level']:5} {i['check']:16} {i['quote'][:50]!r}  {i['detail']}")
+        return
+    text = sys.stdin.read() if a.file in (None, "-") else Path(a.file).read_text()
+    r = check(text, load_persona(a.persona), a.surface)
+    print(json.dumps(r, indent=2) if a.json else f"{r['verdict']}\n" + "\n".join(
+        f"  {i['level']} {i['check']}: {i['quote']!r} {i['detail']}" for i in r["issues"]))
+    sys.exit(2 if r["verdict"] == "BLOCK" else 0)
+
+
+if __name__ == "__main__":
+    main()

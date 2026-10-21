@@ -1,0 +1,4 @@
+# private notes and decks, never publish
+private/
+deck/
+__pycache__/

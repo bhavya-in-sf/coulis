@@ -1,0 +1,17 @@
+{
+  "name": "tastee",
+  "owner": {
+    "name": "Bhavya Goel"
+  },
+  "metadata": {
+    "description": "The taste layer for AI. Starts with founder writing.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "tastee",
+      "description": "Three commands: setup (build your TASTE.md), critique (the critic step: scores a draft on separate axes and fixes the weakest), learn (updates your taste from what you actually changed).",
+      "source": "./"
+    }
+  ]
+}
