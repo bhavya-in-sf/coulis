@@ -1,0 +1,18 @@
+[
+  {
+    "id": "E1",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "E2",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:banned_phrase:the first",
+      "BLOCK:em_dash:—",
+      "BLOCK:unapproved_claim:$20k mrr",
+      "FIX:filler:leverage",
+      "FIX:unapproved_claim:5,000 users"
+    ]
+  }
+]

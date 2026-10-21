@@ -88,6 +88,9 @@ def money_claims(t):
 
 
 def approved_number(num, approved_text):
+    if "->" in num:
+        x, y = num.split("->")
+        return bool(re.search(re.escape(x) + r"\s?(->|→|to)\s?" + re.escape(y), approved_text))
     base = num.lower()
     forms = {base}
     if base.endswith("k"):

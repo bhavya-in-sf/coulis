@@ -2,3 +2,8 @@
 private/
 deck/
 __pycache__/
+# local API data: profiles hold private business numbers
+*.db
+*.db-journal
+node_modules/
+sdk/typescript/dist/

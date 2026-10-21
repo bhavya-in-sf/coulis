@@ -44,10 +44,17 @@ Use them together: Taste Skill or Impeccable for your landing page, Tastee for t
 ## Evidence
 Every rule maps to research or labeled practitioner experience in [EVIDENCE.md](EVIDENCE.md), including what each source does *not* prove.
 
+## For developers (v0.2, preview)
+- `tastee_core/`: the taste layer as a library. JSON in, JSON out.
+- `mcp/server.py`: MCP server with `tastee_check`, `tastee_critique`, `tastee_learn`, `tastee_profile`. Ships inside the plug-in.
+- `api/`: the Taste API (REST): profiles, check, critique, learn, rule approval, usage. See [docs/API.md](docs/API.md).
+- `sdk/`: Python and TypeScript clients. `examples/writing_app.py` shows a writing app gating every draft.
+- `evals/`: a regression suite (same input, same verdict) and an edit-pairs suite. Run `python3 -m unittest discover -s tests`.
+
 ## Roadmap
-- v0.1: founder writing, local `TASTE.md` (this release)
-- Next: a universal taste MCP for Claude, ChatGPT and Cursor
-- Later: pitches and decks, then a Taste API for AI writing apps
+- v0.1: founder writing, local `TASTE.md`
+- v0.2: core library, MCP server, Taste API preview, SDKs, evals (this release)
+- Next: hosted API, pitches and decks
 
 ## License
 MIT. Built by Bhavya Goel.
