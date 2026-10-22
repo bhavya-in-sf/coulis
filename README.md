@@ -44,16 +44,19 @@ Use them together: Taste Skill or Impeccable for your landing page, Tastee for t
 ## Evidence
 Every rule maps to research or labeled practitioner experience in [EVIDENCE.md](EVIDENCE.md), including what each source does *not* prove.
 
-## For developers (v0.2, preview)
+## For developers (preview)
 - `tastee_core/`: the taste layer as a library. JSON in, JSON out.
-- `mcp/server.py`: MCP server with `tastee_check`, `tastee_critique`, `tastee_learn`, `tastee_profile`. Ships inside the plug-in.
+- `mcp/server.py`: MCP server with `tastee_check`, `tastee_critique` (works without an API key), `tastee_learn`, `tastee_add` and `tastee_profile`. Ships inside the plug-in.
 - `api/`: the Taste API (REST): profiles, check, critique, learn, rule approval, usage. See [docs/API.md](docs/API.md).
 - `sdk/`: Python and TypeScript clients. `examples/writing_app.py` shows a writing app gating every draft.
+- `personas/bhavya/`: a real founder's profile, published with her permission: TASTE.md built from 673 public LinkedIn posts, an approved-facts list, and 553 posts to test against. Point Tastee at it to see a real taste profile in action: `TASTEE_PROFILE_DIR=personas/bhavya`.
 - `evals/`: a regression suite (same input, same verdict) and an edit-pairs suite. Run `python3 -m unittest discover -s tests`.
 
 ## Roadmap
 - v0.1: founder writing, local `TASTE.md`
-- v0.2: core library, MCP server, Taste API preview, SDKs, evals (this release)
+- v0.2: core library, MCP server, Taste API preview, SDKs, evals
+- v0.3: gate calibrated on real posts; MCP works with no API key; `tastee_add`
+- v0.4: a real founder's profile and 553-post regression set (this release)
 - Next: hosted API, pitches and decks
 
 ## License

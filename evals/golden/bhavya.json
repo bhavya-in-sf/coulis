@@ -1,0 +1,3276 @@
+[
+  {
+    "id": "B001",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B002",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B003",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B004",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B005",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:unapproved_claim:$1,000"
+    ]
+  },
+  {
+    "id": "B006",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B007",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B008",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B009",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B010",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B011",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B012",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B013",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B014",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B015",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B016",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B017",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B018",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B019",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B020",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:80%"
+    ]
+  },
+  {
+    "id": "B021",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B022",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B023",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B024",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B025",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B026",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B027",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B028",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B029",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B030",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B031",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B032",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B033",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B034",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B035",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B036",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B037",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B038",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B039",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B040",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B041",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:filler:empower"
+    ]
+  },
+  {
+    "id": "B042",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B043",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B044",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B045",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B046",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B047",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B048",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B049",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B050",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B051",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B052",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B053",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B054",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B055",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B056",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B057",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B058",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B059",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B060",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B061",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B062",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B063",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B064",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B065",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B066",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B067",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B068",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B069",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B070",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B071",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B072",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B073",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B074",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B075",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:20%",
+      "FIX:unapproved_claim:80%"
+    ]
+  },
+  {
+    "id": "B076",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B077",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B078",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B079",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B080",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B081",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B082",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B083",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B084",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B085",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B086",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B087",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B088",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B089",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B090",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B091",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B092",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B093",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B094",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B095",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B096",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B097",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B098",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B099",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B100",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:filler:empower"
+    ]
+  },
+  {
+    "id": "B101",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B102",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B103",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B104",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B105",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B106",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B107",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B108",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:filler:game changer"
+    ]
+  },
+  {
+    "id": "B109",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B110",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B111",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B112",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B113",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B114",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013"
+    ]
+  },
+  {
+    "id": "B115",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B116",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B117",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013"
+    ]
+  },
+  {
+    "id": "B118",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B119",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013"
+    ]
+  },
+  {
+    "id": "B120",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B121",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B122",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B123",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B124",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B125",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B126",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B127",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:80%"
+    ]
+  },
+  {
+    "id": "B128",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B129",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B130",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B131",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B132",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B133",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B134",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B135",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B136",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B137",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B138",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B139",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B140",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B141",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B142",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B143",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B144",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B145",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B146",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:unapproved_claim:$299",
+      "BLOCK:unapproved_claim:$449/month"
+    ]
+  },
+  {
+    "id": "B147",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B148",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B149",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B150",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B151",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B152",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B153",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:20 clients"
+    ]
+  },
+  {
+    "id": "B154",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B155",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:20%"
+    ]
+  },
+  {
+    "id": "B156",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:filler:empower",
+      "FIX:unapproved_claim:2 companies"
+    ]
+  },
+  {
+    "id": "B157",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B158",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B159",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B160",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B161",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B162",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:filler:empower",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B163",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B164",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B165",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B166",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B167",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B168",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B169",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B170",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B171",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B172",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B173",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B174",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:filler:empower"
+    ]
+  },
+  {
+    "id": "B175",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B176",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B177",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B178",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B179",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B180",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:filler:game changer",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B181",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B182",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B183",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B184",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:filler:empower"
+    ]
+  },
+  {
+    "id": "B185",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B186",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B187",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B188",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B189",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B190",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B191",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:363%"
+    ]
+  },
+  {
+    "id": "B192",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B193",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B194",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B195",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B196",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B197",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B198",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B199",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B200",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B201",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B202",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B203",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B204",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B205",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B206",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B207",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B208",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B209",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:banned_phrase:delve",
+      "FIX:filler:delve"
+    ]
+  },
+  {
+    "id": "B210",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B211",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B212",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B213",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B214",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013"
+    ]
+  },
+  {
+    "id": "B215",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B216",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B217",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013",
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B218",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B219",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B220",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B221",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B222",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:unapproved_claim:80%"
+    ]
+  },
+  {
+    "id": "B223",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B224",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B225",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B226",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B227",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B228",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B229",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B230",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B231",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B232",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B233",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B234",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B235",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B236",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B237",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B238",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B239",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B240",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:unapproved_claim:2 clients"
+    ]
+  },
+  {
+    "id": "B241",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B242",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B243",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:filler:elevate your"
+    ]
+  },
+  {
+    "id": "B244",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B245",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B246",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B247",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B248",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B249",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013",
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B250",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B251",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:filler:empower"
+    ]
+  },
+  {
+    "id": "B252",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B253",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B254",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:filler:seamless"
+    ]
+  },
+  {
+    "id": "B255",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B256",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B257",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B258",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B259",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B260",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B261",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B262",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B263",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B264",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B265",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B266",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B267",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B268",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B269",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B270",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B271",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B272",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B273",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B274",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B275",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B276",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B277",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B278",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B279",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B280",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B281",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B282",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B283",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B284",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:80%"
+    ]
+  },
+  {
+    "id": "B285",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:unapproved_claim:$ 2."
+    ]
+  },
+  {
+    "id": "B286",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B287",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B288",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B289",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B290",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B291",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B292",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B293",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B294",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B295",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B296",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B297",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B298",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B299",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B300",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B301",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:filler:leverage"
+    ]
+  },
+  {
+    "id": "B302",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:unapproved_claim:15 leads"
+    ]
+  },
+  {
+    "id": "B303",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B304",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B305",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B306",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B307",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B308",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B309",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B310",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:filler:empower"
+    ]
+  },
+  {
+    "id": "B311",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B312",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B313",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B314",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B315",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B316",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B317",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B318",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B319",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B320",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B321",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B322",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B323",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B324",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B325",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B326",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B327",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B328",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B329",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B330",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:filler:leverage",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B331",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B332",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B333",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B334",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B335",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B336",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B337",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B338",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B339",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B340",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B341",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B342",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:filler:unlock",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B343",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B344",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B345",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B346",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B347",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B348",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B349",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B350",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B351",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B352",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B353",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B354",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B355",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B356",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B357",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B358",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B359",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B360",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B361",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B362",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B363",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B364",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:filler:leverage"
+    ]
+  },
+  {
+    "id": "B365",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B366",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B367",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B368",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B369",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013"
+    ]
+  },
+  {
+    "id": "B370",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B371",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B372",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B373",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:unapproved_claim:$100 m",
+      "BLOCK:unapproved_claim:$3.95"
+    ]
+  },
+  {
+    "id": "B374",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B375",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B376",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B377",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:banned_phrase:game-changer",
+      "FIX:filler:game-changer",
+      "FIX:unapproved_claim:63%"
+    ]
+  },
+  {
+    "id": "B378",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B379",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:filler:empower"
+    ]
+  },
+  {
+    "id": "B380",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B381",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B382",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B383",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B384",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B385",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B386",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B387",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B388",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:95%"
+    ]
+  },
+  {
+    "id": "B389",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B390",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B391",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B392",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B393",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013"
+    ]
+  },
+  {
+    "id": "B394",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B395",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B396",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B397",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B398",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013",
+      "FIX:unapproved_claim:30%",
+      "FIX:unapproved_claim:70%",
+      "FIX:unapproved_claim:80%"
+    ]
+  },
+  {
+    "id": "B399",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B400",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B401",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B402",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B403",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B404",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B405",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B406",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B407",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B408",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B409",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B410",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B411",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B412",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B413",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B414",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B415",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B416",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B417",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B418",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:filler:game changer"
+    ]
+  },
+  {
+    "id": "B419",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013",
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B420",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B421",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B422",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B423",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B424",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B425",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B426",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B427",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B428",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013",
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B429",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B430",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B431",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B432",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B433",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B434",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:",
+      "FIX:unapproved_claim:12+ leads"
+    ]
+  },
+  {
+    "id": "B435",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:filler:leverage",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B436",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "BLOCK:unapproved_claim:$10k/month",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B437",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B438",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B439",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B440",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B441",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B442",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B443",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B444",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B445",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:unapproved_claim:$50m",
+      "FIX:unapproved_claim:10+ founders"
+    ]
+  },
+  {
+    "id": "B446",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B447",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B448",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B449",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B450",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B451",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B452",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B453",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B454",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B455",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B456",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B457",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B458",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B459",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B460",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B461",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B462",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013"
+    ]
+  },
+  {
+    "id": "B463",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B464",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013"
+    ]
+  },
+  {
+    "id": "B465",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B466",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B467",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:",
+      "FIX:unapproved_claim:12 leads"
+    ]
+  },
+  {
+    "id": "B468",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B469",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B470",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B471",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013"
+    ]
+  },
+  {
+    "id": "B472",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013"
+    ]
+  },
+  {
+    "id": "B473",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B474",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B475",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B476",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B477",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B478",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B479",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B480",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013"
+    ]
+  },
+  {
+    "id": "B481",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013",
+      "FIX:filler:leverage"
+    ]
+  },
+  {
+    "id": "B482",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B483",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:filler:leverage"
+    ]
+  },
+  {
+    "id": "B484",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B485",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013"
+    ]
+  },
+  {
+    "id": "B486",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2013"
+    ]
+  },
+  {
+    "id": "B487",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B488",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B489",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B490",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:unapproved_claim:$2,000/month"
+    ]
+  },
+  {
+    "id": "B491",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B492",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B493",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B494",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B495",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B496",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:unapproved_claim:$2300 a month"
+    ]
+  },
+  {
+    "id": "B497",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B498",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B499",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B500",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B501",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B502",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B503",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014"
+    ]
+  },
+  {
+    "id": "B504",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:em_dash:\u2014",
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B505",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B506",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B507",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B508",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:sameness:"
+    ]
+  },
+  {
+    "id": "B509",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B510",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B511",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B512",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B513",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B514",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:80%"
+    ]
+  },
+  {
+    "id": "B515",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B516",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B517",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B518",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B519",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B520",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B521",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B522",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B523",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B524",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B525",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:unapproved_claim:$400k"
+    ]
+  },
+  {
+    "id": "B526",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B527",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B528",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B529",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B530",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B531",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B532",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B533",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B534",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B535",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B536",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B537",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B538",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B539",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B540",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B541",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:unapproved_claim:$5m+"
+    ]
+  },
+  {
+    "id": "B542",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B543",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:80%"
+    ]
+  },
+  {
+    "id": "B544",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:664 companies"
+    ]
+  },
+  {
+    "id": "B545",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B546",
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:80%"
+    ]
+  },
+  {
+    "id": "B547",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B548",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B549",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B550",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B551",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B552",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "id": "B553",
+    "verdict": "BLOCK",
+    "issues": [
+      "BLOCK:unapproved_claim:$7500"
+    ]
+  }
+]

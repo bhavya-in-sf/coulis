@@ -75,6 +75,12 @@ class Core(unittest.TestCase):
         r = regression(EXAMPLE, ROOT / "evals" / "golden" / "example.json")
         self.assertTrue(r["pass"], r["drift"])
 
+    def test_regression_real_founder(self):
+        # 553 real public posts from a founder (personas/bhavya): any verdict drift fails
+        r = regression(ROOT / "personas" / "bhavya", ROOT / "evals" / "golden" / "bhavya.json")
+        self.assertEqual(r["cases"], 553)
+        self.assertTrue(r["pass"], r["drift"][:5])
+
 
 class ApiFlow(unittest.TestCase):
     def setUp(self):
