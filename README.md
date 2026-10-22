@@ -2,16 +2,64 @@
 
 **The taste layer for AI. It learns what good looks like to you, and checks every draft before you see it.**
 
-A free, open-source Claude plug-in. v0.1 starts with founder writing: launch posts, LinkedIn and X posts, cold emails, bios, investor updates.
+A free, open-source plug-in for Claude, Claude Desktop and Cursor. It starts with founder writing: launch posts, LinkedIn and X posts, cold emails, bios, investor updates.
+
+## What it does, on a real draft
+A typical AI draft, checked against a real founder's profile ([personas/bhavya](personas/bhavya)):
+
+```
+In today's fast-paced world, every founder needs a game-changer — and AI is it.
+We've helped 300+ founders grow, and our clients see 10x reach in 30 days.
+Want to know how? Comment below!
+```
+
+What Tastee sends back, in under a second, with no model call:
+
+```
+BLOCK
+  BLOCK em_dash: '—' Em dash or double hyphen (house rule).
+  FIX unapproved_claim: '300+ founders' Number not in claims.md. Add it to claims.md or cut it.
+  BLOCK banned_phrase: "in today's fast-paced world" Generic AI filler she cuts from every draft
+  BLOCK banned_phrase: 'game-changer' Generic AI filler she cuts from every draft
+```
+
+And a post in her own voice, with only approved numbers:
+
+```
+100 investors who back women building AI.
+Every week the same question lands in my inbox: who writes the checks?
+So here they are. Angels and funds, pre-seed through growth.
+Comment "INVESTORS" and I'll send you the list.
+```
+
+```
+PASS
+```
+
+Then `/tastee:critique` scores the draft on 8 separate axes against her own samples, and rewrites only the weakest line.
+
+**Tested on a real team.** On 47 messages a startup's team drafted for its creator program, Tastee flagged the pay terms 32 times, because two versions of the terms were in circulation. Once the team confirmed one version, 46 of 47 passed, and the gate still caught the one unsupported number.
+
+## Try it in 60 seconds (no setup)
+Check any draft against the real founder profile that ships with the repo:
+
+```bash
+git clone https://github.com/bhavya-in-sf/tastee && cd tastee
+echo "We just hit \$50k MRR — a total game-changer." | python3 scripts/gate.py --persona personas/bhavya -
+```
+
+Python 3.10+ only, nothing to install. Then make it yours with `/tastee:setup`.
 
 ## Why
 AI writing sounds like everyone else. Memory tools help the AI know who you are, but nothing checks the finished draft against your taste. Tastee adds that check, the critic step, and learns from what you actually change.
 
-## Install (Claude Code)
+## Install
+**Claude Code** (plug-in: commands plus the MCP tools):
 ```
 /plugin marketplace add bhavya-in-sf/tastee
 /plugin install tastee@tastee
 ```
+**Claude Desktop, Cursor and other MCP apps:** see [docs/INSTALL.md](docs/INSTALL.md). No API key needed.
 
 ## Three commands
 | Command | What it does |
