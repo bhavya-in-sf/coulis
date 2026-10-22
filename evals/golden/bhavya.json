@@ -1064,8 +1064,10 @@
   },
   {
     "id": "B189",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:2x"
+    ]
   },
   {
     "id": "B190",
@@ -1098,8 +1100,10 @@
   },
   {
     "id": "B195",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:2x"
+    ]
   },
   {
     "id": "B196",
@@ -1173,7 +1177,8 @@
     "verdict": "BLOCK",
     "issues": [
       "BLOCK:banned_phrase:delve",
-      "FIX:filler:delve"
+      "FIX:filler:delve",
+      "FIX:unapproved_claim:4x"
     ]
   },
   {
@@ -1194,7 +1199,8 @@
     "id": "B212",
     "verdict": "BLOCK",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "BLOCK:em_dash:\u2014",
+      "FIX:unapproved_claim:5x"
     ]
   },
   {
@@ -1279,7 +1285,8 @@
     "id": "B224",
     "verdict": "BLOCK",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "BLOCK:em_dash:\u2014",
+      "FIX:unapproved_claim:3x"
     ]
   },
   {
@@ -1371,7 +1378,8 @@
     "verdict": "BLOCK",
     "issues": [
       "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "FIX:sameness:",
+      "FIX:unapproved_claim:3x"
     ]
   },
   {
@@ -1538,7 +1546,9 @@
     "id": "B260",
     "verdict": "BLOCK",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "BLOCK:em_dash:\u2014",
+      "FIX:unapproved_claim:3x",
+      "FIX:unapproved_claim:50x"
     ]
   },
   {
@@ -1613,7 +1623,8 @@
     "verdict": "BLOCK",
     "issues": [
       "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "FIX:sameness:",
+      "FIX:unapproved_claim:100x"
     ]
   },
   {
@@ -2149,8 +2160,10 @@
   },
   {
     "id": "B356",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:3x"
+    ]
   },
   {
     "id": "B357",
@@ -2174,8 +2187,10 @@
   },
   {
     "id": "B361",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:4x"
+    ]
   },
   {
     "id": "B362",
@@ -2317,8 +2332,10 @@
   },
   {
     "id": "B386",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:2x"
+    ]
   },
   {
     "id": "B387",
@@ -2585,7 +2602,8 @@
     "verdict": "BLOCK",
     "issues": [
       "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "FIX:sameness:",
+      "FIX:unapproved_claim:3x"
     ]
   },
   {
@@ -2597,7 +2615,8 @@
     "id": "B433",
     "verdict": "BLOCK",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "BLOCK:em_dash:\u2014",
+      "FIX:unapproved_claim:3x"
     ]
   },
   {
@@ -2624,7 +2643,8 @@
     "issues": [
       "BLOCK:em_dash:\u2014",
       "BLOCK:unapproved_claim:$10k/month",
-      "FIX:sameness:"
+      "FIX:sameness:",
+      "FIX:unapproved_claim:3x"
     ]
   },
   {
@@ -2686,8 +2706,10 @@
   },
   {
     "id": "B447",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:4x"
+    ]
   },
   {
     "id": "B448",
@@ -2701,8 +2723,10 @@
   },
   {
     "id": "B450",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:2x"
+    ]
   },
   {
     "id": "B451",
@@ -2736,8 +2760,10 @@
   },
   {
     "id": "B457",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:2x"
+    ]
   },
   {
     "id": "B458",
@@ -3051,8 +3077,10 @@
   },
   {
     "id": "B512",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:10x"
+    ]
   },
   {
     "id": "B513",
@@ -3190,8 +3218,10 @@
   },
   {
     "id": "B539",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:4.5x"
+    ]
   },
   {
     "id": "B540",

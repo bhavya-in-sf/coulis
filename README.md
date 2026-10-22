@@ -19,6 +19,7 @@ What Tastee sends back, in under a second, with no model call:
 BLOCK
   BLOCK em_dash: '—' Em dash or double hyphen (house rule).
   FIX unapproved_claim: '300+ founders' Number not in claims.md. Add it to claims.md or cut it.
+  FIX unapproved_claim: '10x' Number not in claims.md. Add it to claims.md or cut it.
   BLOCK banned_phrase: "in today's fast-paced world" Generic AI filler she cuts from every draft
   BLOCK banned_phrase: 'game-changer' Generic AI filler she cuts from every draft
 ```

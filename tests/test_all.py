@@ -65,6 +65,13 @@ class Core(unittest.TestCase):
         self.assertEqual(check("We hit $50k MRR last month.", p)["verdict"], "BLOCK")
         self.assertEqual(check("A coach we work with closed a $4,000 deal.", p)["verdict"], "BLOCK")
 
+    def test_multiplier_claims(self):
+        p = profile_from_folder(EXAMPLE)
+        self.assertEqual(check("Our clients see 10x reach in 30 days.", p)["verdict"], "FIX")
+        self.assertEqual(check("We got 2.5x more leads.", p)["verdict"], "FIX")
+        for ok in ("Support is open 24x7.", "Use a 2x2 matrix.", "Notion grew 10x after launch."):
+            self.assertEqual(check(ok, p)["verdict"], "PASS", ok)
+
     def test_learn_proposes_not_applies(self):
         p = profile_from_folder(EXAMPLE)
         out = learn("We leverage AI. It is great.", "It is great.", p)

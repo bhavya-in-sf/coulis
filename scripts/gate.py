@@ -82,6 +82,10 @@ def money_claims(t):
     for m in re.finditer(r"\b(\d+(?:\.\d+)?)\s?%", t):
         if not is_example(t, m.start()):
             out.append((m.group(0), m.group(1), "percent"))
+    # multipliers: "10x reach", "3x more leads", "2.5x faster" (not "24x7", "2x2", "4x4")
+    for m in re.finditer(r"\b(\d+(?:\.\d+)?)\s?x(?![\w\d])", t):
+        if not is_example(t, m.start()):
+            out.append((m.group(0), m.group(1) + "x", "percent"))
     for m in re.finditer(r"\b(\d+)\s?(?:->|→|to)\s?(\d+)\s+meetings", t):
         out.append((m.group(0), m.group(1) + "->" + m.group(2), "count"))
     return out
