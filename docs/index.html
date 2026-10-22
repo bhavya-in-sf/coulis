@@ -268,8 +268,8 @@ footer b{font-family:var(--display);font-weight:400;color:var(--red);letter-spac
           <label class="pick"><input type="radio" name="door" id="door-table" value="table"> The table</label>
           <label class="pick"><input type="radio" name="door" id="door-both" value="both"> Both</label>
         </fieldset>
-        <div class="field"><label for="wl-name">Name</label><input id="wl-name" name="name" autocomplete="name" required></div>
-        <div class="field"><label for="wl-email">Email</label><input id="wl-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="wl-name">Full name</label><input id="wl-name" name="name" autocomplete="name" placeholder="Jane Doe" required></div>
+        <div class="field"><label for="wl-email">Email</label><input id="wl-email" name="email" type="email" autocomplete="email" placeholder="jane@company.com" required></div>
         <div class="field"><label for="wl-role">What do you do?</label>
           <select id="wl-role" name="role"><option value="">Choose one</option><option>Founder</option><option>Writes for a founder</option><option>Investor</option><option>Developer</option><option>Something else</option></select></div>
         <div class="field"><label for="wl-link">LinkedIn or X (optional)</label><input id="wl-link" name="link" placeholder="linkedin.com/in/you"></div>
@@ -340,7 +340,8 @@ footer b{font-family:var(--display);font-weight:400;color:var(--red);letter-spac
     e.preventDefault();
     var name = document.getElementById("wl-name").value.trim(), email = document.getElementById("wl-email").value.trim();
     status.className = "status";
-    if (!name || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { status.className = "status err"; status.textContent = "Add your name and a valid email, then try again."; return; }
+    if (!name) { status.className = "status err"; status.textContent = "Add your name, then try again."; document.getElementById("wl-name").focus(); return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { status.className = "status err"; status.textContent = "That email doesn't look right. Use the format name@example.com."; document.getElementById("wl-email").focus(); return; }
     var data = {door: (form.querySelector("input[name=door]:checked")||{}).value, name:name, email:email,
       role: document.getElementById("wl-role").value, link: document.getElementById("wl-link").value.trim(),
       pain: document.getElementById("wl-pain").value.trim(), _subject: "Tastee waitlist: " + (form.querySelector("input[name=door]:checked")||{}).value, _template: "table"};
