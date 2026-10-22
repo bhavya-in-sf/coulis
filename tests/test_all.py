@@ -39,6 +39,15 @@ class Core(unittest.TestCase):
         self.assertEqual([b.regex for b in p.banned], [b.regex for b in p2.banned])
         self.assertEqual(profile_from_dict(p.to_dict()).to_dict(), p.to_dict())
 
+    def test_any_approved_heading_counts(self):
+        # found testing the MCP on a real team's claims.md: headings like "## Approved (confirmed ...)"
+        claims = ("owner: Sam\nproduct: Notely\n\n## Approved (confirmed by Sam, Oct 2026)\n- $100 a month plan\n\n"
+                  "## Approved credential wording\n- 2 to 17 meetings in a month\n\n## Needs confirm\n- revenue\n\n"
+                  "## Banned phrases\n- no firsts :: \\bthe first\\b\n")
+        p = parse_files("", claims)
+        self.assertEqual(p.approved_facts, ["$100 a month plan", "2 to 17 meetings in a month"])
+        self.assertEqual(check("Our plan is $100 a month.", p)["verdict"], "PASS")
+
     def test_check_is_deterministic(self):
         p = profile_from_folder(EXAMPLE)
         text = "Notely is the first app to hit $20k MRR"

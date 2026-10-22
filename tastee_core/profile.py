@@ -102,7 +102,11 @@ def parse_files(taste_md="", claims_md=""):
     p = Profile()
     if claims_md:
         p.owner, p.product = _field(claims_md, "owner"), _field(claims_md, "product")
-        p.approved_facts = _bullets(_section(claims_md, "Approved facts"))
+        # Same rule as the plug-in's gate: every bullet before "## Needs" is approved, under any
+        # "## Approved..." heading, except banned phrases and story checks.
+        head = claims_md.split("## Needs", 1)[0]
+        head = re.sub(r"^##\s+(Banned phrases|Story checks)[^\n]*\n.*?(?=^##\s|\Z)", "", head, flags=re.M | re.S)
+        p.approved_facts = [b for b in _bullets(head) if "::" not in b]
         p.needs_confirm = _bullets(_section(claims_md, "Needs confirm"))
         p.banned = _patterns(_section(claims_md, "Banned phrases"))
         p.story_checks = _patterns(_section(claims_md, "Story checks"))
