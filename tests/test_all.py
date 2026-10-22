@@ -144,6 +144,41 @@ class ApiFlow(unittest.TestCase):
         self.assertEqual((s, out["error"]["code"]), (400, "bad_json"))
 
 
+class Mcp(unittest.TestCase):
+    """The MCP server as a brand-new plug-in user would hit it: no API key, no claims.md yet."""
+
+    def setUp(self):
+        self.dir = tempfile.mkdtemp(dir=os.environ.get("TMPDIR"))
+        os.environ["TASTEE_PROFILE_DIR"] = self.dir
+        self.key = os.environ.pop("ANTHROPIC_API_KEY", None)
+        sys.path.insert(0, str(ROOT / "mcp"))
+        import server
+        self.s = server
+
+    def tearDown(self):
+        os.environ.pop("TASTEE_PROFILE_DIR", None)
+        if self.key:
+            os.environ["ANTHROPIC_API_KEY"] = self.key
+
+    def call(self, name, args):
+        r = self.s.handle({"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": name, "arguments": args}})
+        return r["result"]["structuredContent"]
+
+    def test_new_user_flow(self):
+        text = "We now have 1,200 users."
+        self.assertEqual(self.call("tastee_check", {"text": text})["verdict"], "FIX")
+        self.assertTrue(self.call("tastee_add", {"kind": "approved_fact", "text": "1,200 users"})["added"])
+        self.assertFalse(self.call("tastee_add", {"kind": "approved_fact", "text": "1,200 users"})["added"])
+        self.assertEqual(self.call("tastee_check", {"text": text})["verdict"], "PASS")
+        self.call("tastee_add", {"kind": "banned_phrase", "text": "game-changer", "reason": "generic"})
+        self.assertEqual(self.call("tastee_check", {"text": "A game-changer."})["verdict"], "BLOCK")
+
+    def test_critique_without_key_uses_host_model(self):
+        out = self.call("tastee_critique", {"text": "We now have 1,200 users."})
+        self.assertEqual(out["mode"], "host_model")
+        self.assertIn("rhythm", json.dumps(out["output_schema"]))
+
+
 class PythonSdk(unittest.TestCase):
     """Runs the real SDK against the real API handler, with urlopen routed in-process."""
 

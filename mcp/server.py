@@ -26,13 +26,19 @@ TOOLS = [
      "inputSchema": {"type": "object", "required": ["text"], "additionalProperties": False,
                      "properties": {"text": {"type": "string"}, "surface": SURFACE}}},
     {"name": "tastee_critique",
-     "description": "The critic step. Score a draft on 8 separate axes (clarity, proof, why_you, ask, hook, voice, boldness, rhythm) against the user's taste profile, and rewrite only the weakest part. Never one overall score. Makes one model call.",
+     "description": "The critic step. Score a draft on 8 separate axes (clarity, proof, why_you, ask, hook, voice, boldness, rhythm) against the user's taste profile, and rewrite only the weakest part. Never one overall score. With ANTHROPIC_API_KEY set it scores via the API; otherwise it returns the rubric and profile (mode: host_model) for you to score in this chat.",
      "inputSchema": {"type": "object", "required": ["text"], "additionalProperties": False,
                      "properties": {"text": {"type": "string"}, "surface": SURFACE}}},
     {"name": "tastee_learn",
      "description": "Propose taste rules from the difference between an AI draft and what the user actually posted. Rules are proposals only; the user must approve each one before it is saved.",
      "inputSchema": {"type": "object", "required": ["draft", "final"], "additionalProperties": False,
                      "properties": {"draft": {"type": "string"}, "final": {"type": "string"}}}},
+    {"name": "tastee_add",
+     "description": "Add one entry to the user's claims.md (created if missing): an approved fact the gate should allow (e.g. '1,200 users'), or a banned phrase with a reason. Only call this after the user explicitly says to add it.",
+     "inputSchema": {"type": "object", "required": ["kind", "text"], "additionalProperties": False,
+                     "properties": {"kind": {"type": "string", "enum": ["approved_fact", "banned_phrase"]},
+                                    "text": {"type": "string", "description": "The fact, or the phrase to ban"},
+                                    "reason": {"type": "string", "description": "Why it's banned (banned_phrase only)"}}}},
     {"name": "tastee_profile",
      "description": "Return the user's taste profile (TASTE.md + claims.md) as structured JSON.",
      "inputSchema": {"type": "object", "properties": {}, "additionalProperties": False}},
@@ -43,13 +49,65 @@ def profile():
     return profile_from_folder(os.environ.get("TASTEE_PROFILE_DIR", os.getcwd()))
 
 
+CLAIMS_TEMPLATE = """# claims.md
+
+The gate allows only the numbers and claims listed under Approved facts.
+
+owner:
+product:
+
+## Approved facts
+
+## Needs confirm
+
+## Banned phrases
+
+## Story checks
+"""
+
+
+def add_entry(kind, text, reason=""):
+    """Append one approved fact or banned phrase to claims.md, keeping the file hand-editable."""
+    import re
+    text = " ".join(text.split())
+    if not text:
+        raise ValueError("text is empty")
+    path = Path(os.environ.get("TASTEE_PROFILE_DIR", os.getcwd())) / "claims.md"
+    md = path.read_text() if path.exists() else CLAIMS_TEMPLATE
+    if kind == "approved_fact":
+        heading, line = "## Approved facts", f"- {text}"
+    else:
+        heading, line = "## Banned phrases", f"- {reason or 'Banned by the user'} :: " + r"\b" + re.escape(text.lower()) + r"\b"
+    if line in md:
+        return {"added": False, "note": "Already in claims.md", "file": str(path)}
+    if heading not in md:
+        md = md.rstrip() + f"\n\n{heading}\n"
+    i = md.index(heading) + len(heading)
+    nxt = md.find("\n## ", i)
+    block_end = len(md) if nxt < 0 else nxt
+    md = md[:block_end].rstrip() + f"\n{line}\n" + ("\n" + md[block_end:].lstrip("\n") if nxt >= 0 else "")
+    path.write_text(md)
+    return {"added": True, "kind": kind, "line": line, "file": str(path)}
+
+
 def call_tool(name, args):
     if name == "tastee_check":
         return check(args["text"], profile(), args.get("surface", "linkedin"))
     if name == "tastee_critique":
-        return critique(args["text"], profile(), args.get("surface", "linkedin"))
+        prof, surface = profile(), args.get("surface", "linkedin")
+        if not (os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN")):
+            # No key (the normal plug-in case): hand the rubric to the model already in the chat.
+            from tastee_core.critique import SYSTEM, SCHEMA, build_prompt
+            return {"mode": "host_model",
+                    "instructions": SYSTEM + "\n\nScore the draft below now, in this chat, and reply with JSON "
+                                    "matching `output_schema`. Then show the user each axis and the rewrite.",
+                    "task": build_prompt(args["text"], prof, surface),
+                    "output_schema": SCHEMA}
+        return critique(args["text"], prof, surface)
     if name == "tastee_learn":
         return learn(args["draft"], args["final"], profile())
+    if name == "tastee_add":
+        return add_entry(args["kind"], args["text"], args.get("reason", ""))
     if name == "tastee_profile":
         return profile().to_dict()
     raise KeyError(name)
