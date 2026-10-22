@@ -101,6 +101,48 @@ def approved_number(num, approved_text):
     return any(re.search(r"(?<![\d,])" + re.escape(f) + r"(?![\d])", approved_text) for f in forms)
 
 
+FIRST_PERSON = re.compile(r"\b(i|i'm|i've|i'd|me|my|we|we're|we've|our|us|client|clients|customer|customers|"
+                          r"user|users|team|teams)\b")
+STAT_CUES = re.compile(r"\b(of (people|founders|leaders|users|marketers|buyers|readers|posts|companies|women|men)|"
+                       r"most|average|typically|studies|research|survey)\b")
+
+
+def about_us(text, quote, persona):
+    """Is this number a claim about the owner or their business?
+
+    Calibrated on 673 founder posts (Oct 2026). Numbers inside quotation marks
+    are examples. Numbers in a sentence that names someone else (a capitalised
+    name that is not the owner or product) and has no first-person words are
+    about that third party. Everything else stays a claim to check.
+    """
+    flat = text.replace("’", "'").replace("\n", " ")
+    low = flat.lower()
+    k = low.find(quote)
+    if k < 0:
+        return True
+    start = max(low.rfind(c, 0, k) for c in ".!?:•→↳\"“") + 1
+    ends = [low.find(c, k + len(quote)) for c in ".!?\n•"]
+    end = min([e for e in ends if e > 0] or [len(low)])
+    sent, sent_low = flat[start:end], low[start:end]
+    before = low[:k]
+    if before.count("“") > before.count("”") or before.count('"') % 2 == 1:
+        return False  # inside a quotation: an example, not a claim
+    if FIRST_PERSON.search(sent_low):
+        return True
+    own = {persona.get("owner", ""), persona.get("product", "")}
+    starters = {"the", "a", "an", "this", "that", "these", "it", "its", "they", "their", "he", "she", "his", "her",
+                "you", "your", "if", "when", "now", "here", "there", "every", "most", "almost", "around", "about",
+                "over", "only", "just", "then", "so", "and", "but", "one", "in", "on", "at", "for", "with", "by"}
+    words = re.findall(r"[A-Za-z&][\w&']*", sent)
+    names = [w for i, w in enumerate(words) if w[0].isupper() and w.lower() not in own
+             and (i > 0 or w.lower() not in starters)]
+    if names:
+        return False  # names a third party, no first person: their number, not ours
+    if STAT_CUES.search(sent_low):
+        return True  # a general stat: still needs a source in claims.md
+    return True
+
+
 def ngrams(t, n=3):
     w = re.findall(r"[a-z0-9']+", t)
     return {" ".join(w[i:i + n]) for i in range(len(w) - n + 1)}
@@ -126,7 +168,9 @@ def check(text, persona, surface="reddit", history=()):
         seen.add((quote, num))
         if approved_number(num, persona["approved_text"]):
             continue
-        level = "BLOCK" if kind == "money" or "arr" in quote or "mrr" in quote else "FIX"
+        if not about_us(text, quote, persona):
+            continue  # a number about someone else, or a quoted example: not our claim
+        level ="BLOCK" if kind == "money" or "arr" in quote or "mrr" in quote else "FIX"
         add(level, "unapproved_claim", "Number not in claims.md. Add it to claims.md or cut it.", quote)
 
     # 2b. personal stories the owner must confirm they happened

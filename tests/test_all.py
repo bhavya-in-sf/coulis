@@ -47,6 +47,15 @@ class Core(unittest.TestCase):
         self.assertEqual(a["verdict"], "BLOCK")
         self.assertEqual(check("We hit 1,200 users", p)["verdict"], "PASS")
 
+    def test_numbers_about_others_pass(self):
+        # calibrated on real founder posts: third-party numbers and quoted examples are not our claims
+        p = profile_from_folder(EXAMPLE)
+        self.assertEqual(check("Capital F closed a $17M fund last month.", p)["verdict"], "PASS")
+        self.assertEqual(check("RB2B scaled from $0 to $5M ARR in 12 months.", p)["verdict"], "PASS")
+        self.assertEqual(check('Try an opener like “I lost $2M in 48 hours.”', p)["verdict"], "PASS")
+        self.assertEqual(check("We hit $50k MRR last month.", p)["verdict"], "BLOCK")
+        self.assertEqual(check("A coach we work with closed a $4,000 deal.", p)["verdict"], "BLOCK")
+
     def test_learn_proposes_not_applies(self):
         p = profile_from_folder(EXAMPLE)
         out = learn("We leverage AI. It is great.", "It is great.", p)
