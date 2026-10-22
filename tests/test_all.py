@@ -65,6 +65,13 @@ class Core(unittest.TestCase):
         self.assertEqual(check("We hit $50k MRR last month.", p)["verdict"], "BLOCK")
         self.assertEqual(check("A coach we work with closed a $4,000 deal.", p)["verdict"], "BLOCK")
 
+    def test_audience_claims(self):
+        # found dogfooding: "673 of my posts" and follower counts slipped through
+        p = profile_from_folder(EXAMPLE)
+        self.assertEqual(check("I have 90K followers.", p)["verdict"], "FIX")
+        self.assertEqual(check("We got 72,000 views in 30 days.", p)["verdict"], "FIX")
+        self.assertEqual(check("We hit 1,200 users.", p)["verdict"], "PASS")  # approved
+
     def test_multiplier_claims(self):
         p = profile_from_folder(EXAMPLE)
         self.assertEqual(check("Our clients see 10x reach in 30 days.", p)["verdict"], "FIX")

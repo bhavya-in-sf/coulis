@@ -162,8 +162,10 @@
   },
   {
     "id": "B032",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:2 members"
+    ]
   },
   {
     "id": "B033",
@@ -636,8 +638,11 @@
   },
   {
     "id": "B118",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:1000 subscribers",
+      "FIX:unapproved_claim:2500 impressions"
+    ]
   },
   {
     "id": "B119",
@@ -675,8 +680,10 @@
   },
   {
     "id": "B125",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:30,000+ views"
+    ]
   },
   {
     "id": "B126",
@@ -1149,8 +1156,10 @@
   },
   {
     "id": "B204",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:72,000 views"
+    ]
   },
   {
     "id": "B205",
@@ -1164,8 +1173,10 @@
   },
   {
     "id": "B207",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:20,000 followers"
+    ]
   },
   {
     "id": "B208",
@@ -1263,7 +1274,8 @@
     "id": "B221",
     "verdict": "BLOCK",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "BLOCK:em_dash:\u2014",
+      "FIX:unapproved_claim:2800 views"
     ]
   },
   {
@@ -1278,7 +1290,8 @@
     "id": "B223",
     "verdict": "BLOCK",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "BLOCK:em_dash:\u2014",
+      "FIX:unapproved_claim:7 members"
     ]
   },
   {
@@ -1286,6 +1299,7 @@
     "verdict": "BLOCK",
     "issues": [
       "BLOCK:em_dash:\u2014",
+      "FIX:unapproved_claim:2000 followers",
       "FIX:unapproved_claim:3x"
     ]
   },
@@ -1547,8 +1561,11 @@
     "verdict": "BLOCK",
     "issues": [
       "BLOCK:em_dash:\u2014",
+      "FIX:unapproved_claim:290k impressions",
+      "FIX:unapproved_claim:2k impressions",
       "FIX:unapproved_claim:3x",
-      "FIX:unapproved_claim:50x"
+      "FIX:unapproved_claim:50x",
+      "FIX:unapproved_claim:90k impressions"
     ]
   },
   {
@@ -1624,7 +1641,10 @@
     "issues": [
       "BLOCK:em_dash:\u2014",
       "FIX:sameness:",
-      "FIX:unapproved_claim:100x"
+      "FIX:unapproved_claim:100k views",
+      "FIX:unapproved_claim:100x",
+      "FIX:unapproved_claim:210k impressions",
+      "FIX:unapproved_claim:95k views"
     ]
   },
   {
@@ -1650,13 +1670,19 @@
     "id": "B275",
     "verdict": "BLOCK",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "BLOCK:em_dash:\u2014",
+      "FIX:unapproved_claim:3,00,000 impressions",
+      "FIX:unapproved_claim:30,000 impressions"
     ]
   },
   {
     "id": "B276",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:1000 views",
+      "FIX:unapproved_claim:1100 followers",
+      "FIX:unapproved_claim:700 followers"
+    ]
   },
   {
     "id": "B277",
@@ -1734,7 +1760,9 @@
     "id": "B288",
     "verdict": "BLOCK",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "BLOCK:em_dash:\u2014",
+      "FIX:unapproved_claim:0 followers",
+      "FIX:unapproved_claim:8,000 followers"
     ]
   },
   {
@@ -1764,8 +1792,10 @@
   },
   {
     "id": "B294",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:250 followers"
+    ]
   },
   {
     "id": "B295",
@@ -1815,7 +1845,9 @@
     "verdict": "BLOCK",
     "issues": [
       "BLOCK:em_dash:\u2014",
-      "FIX:unapproved_claim:15 leads"
+      "FIX:unapproved_claim:15 leads",
+      "FIX:unapproved_claim:426 followers",
+      "FIX:unapproved_claim:46 followers"
     ]
   },
   {
@@ -2438,8 +2470,10 @@
   },
   {
     "id": "B405",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:50,000 followers"
+    ]
   },
   {
     "id": "B406",
@@ -2463,8 +2497,10 @@
   },
   {
     "id": "B410",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:115,276 impressions"
+    ]
   },
   {
     "id": "B411",
@@ -2696,7 +2732,8 @@
     "verdict": "BLOCK",
     "issues": [
       "BLOCK:unapproved_claim:$50m",
-      "FIX:unapproved_claim:10+ founders"
+      "FIX:unapproved_claim:10+ founders",
+      "FIX:unapproved_claim:3,200 followers"
     ]
   },
   {
@@ -2735,8 +2772,11 @@
   },
   {
     "id": "B452",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:4,000 followers",
+      "FIX:unapproved_claim:6,000 followers"
+    ]
   },
   {
     "id": "B453",
@@ -2871,8 +2911,10 @@
   },
   {
     "id": "B476",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:10 posts"
+    ]
   },
   {
     "id": "B477",
@@ -2885,7 +2927,8 @@
     "id": "B478",
     "verdict": "FIX",
     "issues": [
-      "FIX:sameness:"
+      "FIX:sameness:",
+      "FIX:unapproved_claim:100k+ impressions"
     ]
   },
   {
@@ -3050,8 +3093,10 @@
   },
   {
     "id": "B507",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:400 followers"
+    ]
   },
   {
     "id": "B508",
@@ -3111,8 +3156,11 @@
   },
   {
     "id": "B518",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:211 posts",
+      "FIX:unapproved_claim:61,997 followers"
+    ]
   },
   {
     "id": "B519",
@@ -3153,8 +3201,10 @@
   },
   {
     "id": "B526",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:17,000 followers"
+    ]
   },
   {
     "id": "B527",
@@ -3213,8 +3263,10 @@
   },
   {
     "id": "B538",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:300k followers"
+    ]
   },
   {
     "id": "B539",
@@ -3225,8 +3277,10 @@
   },
   {
     "id": "B540",
-    "verdict": "PASS",
-    "issues": []
+    "verdict": "FIX",
+    "issues": [
+      "FIX:unapproved_claim:138,566 impressions"
+    ]
   },
   {
     "id": "B541",

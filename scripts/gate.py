@@ -23,7 +23,8 @@ from pathlib import Path
 FILLER = ["streamline", "leverage", "unlock", "seamless", "empower", "game-changer", "game changer",
           "hope this finds you well", "in today's fast-paced", "delve", "elevate your"]
 SLANG = ["lol", "tbh", "ngl", "lmao", "bro", "ik "]
-CLAIM_NOUNS = (r"(companies|cos|customers|clients|leads|meetings|messages|founders|signups|"
+CLAIM_NOUNS = (r"(companies|cos|customers|clients|leads|meetings|messages|founders|signups|followers|subscribers|"
+               r"readers|members|downloads|installs|stars|views|impressions|posts|"
                r"requests|users|people\s+served|launches|pivots|vas|replies)")
 SKELETONS = {
     "arr_guide": r"\$\s?\d+\s?k\+?\s?(arr|mrr)",
