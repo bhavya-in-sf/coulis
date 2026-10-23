@@ -60,6 +60,8 @@ AI writing sounds like everyone else. Memory tools help the AI know who you are,
 /plugin marketplace add bhavya-in-sf/tastee
 /plugin install tastee@tastee
 ```
+In Claude Code, the plug-in also adds a small check at the end of each reply: if Claude wrote a draft you might post and didn't run Tastee on it, it sends Claude back once to check it. Turn it off with `TASTEE_HOOK=0`.
+
 **Claude Desktop, Cursor and other MCP apps:** see [docs/INSTALL.md](docs/INSTALL.md). No API key needed.
 
 ## Three commands

@@ -199,6 +199,32 @@ class Mcp(unittest.TestCase):
         self.assertIn("rhythm", json.dumps(out["output_schema"]))
 
 
+class StopHook(unittest.TestCase):
+    """The plug-in's Stop hook sends unchecked drafts back once, and stays out of the way otherwise."""
+
+    def run_hook(self, turn, active=False):
+        import subprocess
+        d = tempfile.mkdtemp(dir=os.environ.get("TMPDIR"))
+        p = os.path.join(d, "t.jsonl")
+        rows = [{"type": "user", "message": {"content": "write me a post"}}] + turn
+        open(p, "w").write("\n".join(json.dumps(r) for r in rows))
+        out = subprocess.run([sys.executable, str(ROOT / "hooks" / "stop_check.py")], capture_output=True, text=True,
+                             input=json.dumps({"transcript_path": p, "stop_hook_active": active})).stdout
+        return json.loads(out)["decision"] if out.strip() else "allow"
+
+    def test_hook(self):
+        A = lambda *b: {"type": "assistant", "message": {"content": list(b)}}
+        t = lambda s: {"type": "text", "text": s}
+        post = "```\nI built a free tool that knows how I write. It checks every draft before it goes out.\n```"
+        self.assertEqual(self.run_hook([A(t(post))]), "block")
+        self.assertEqual(self.run_hook([A(t(post))], active=True), "allow")  # never loops
+        self.assertEqual(self.run_hook([A({"type": "tool_use", "name": "mcp__plugin_tastee_tastee__tastee_check"}),
+                                        A(t(post))]), "allow")
+        self.assertEqual(self.run_hook([A(t("> My LinkedIn just passed 62K followers."))]), "block")
+        self.assertEqual(self.run_hook([A(t("```bash\ngit push origin HEAD\n```"))]), "allow")
+        self.assertEqual(self.run_hook([A(t("Pushed. Everything is in sync."))]), "allow")
+
+
 class PythonSdk(unittest.TestCase):
     """Runs the real SDK against the real API handler, with urlopen routed in-process."""
 

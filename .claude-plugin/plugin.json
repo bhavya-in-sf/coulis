@@ -1,7 +1,7 @@
 {
   "name": "tastee",
   "description": "The taste layer for AI. Learns what good writing looks like to you, and checks every draft before you see it. Starts with founder writing.",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "author": {
     "name": "Bhavya Goel"
   },

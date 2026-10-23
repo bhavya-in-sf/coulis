@@ -131,7 +131,10 @@ def log_use(name, args, out):
     if name == "tastee_skip":
         entry.update({"reason": args.get("reason", ""), "kind": args.get("kind", "")})
     try:
-        path = profile_dir() / "tastee-log.jsonl"
+        home = Path.home() / ".tastee"  # one log for every profile, so the record isn't split
+        path = (home if home.is_dir() else profile_dir()) / "tastee-log.jsonl"
+        if _ARG_DIR["dir"]:
+            entry["profile"] = _ARG_DIR["dir"]
         with path.open("a") as f:
             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
     except OSError:
