@@ -10,6 +10,6 @@ from .profile import Profile, profile_from_folder, profile_from_dict, profile_fr
 from .engine import check, learn, backtest
 from .critique import critique, AXES, CHECKABLE, TASTE
 
-__version__ = "0.4.2"
+__version__ = "0.4.3"
 __all__ = ["Profile", "profile_from_folder", "profile_from_dict", "profile_from_samples",
            "check", "learn", "backtest", "critique", "AXES", "CHECKABLE", "TASTE", "__version__"]

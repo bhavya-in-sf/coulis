@@ -44,7 +44,7 @@ curl -X POST localhost:8787/v1/check -H "Authorization: Bearer $KEY" \
 ```
 
 ### Critique response shape
-`axes` has exactly 8 keys: `clarity`, `proof`, `why_you`, `ask` (checkable) and `hook`, `voice`, `boldness`, `rhythm` (taste). Each is `{score 1-10, why, quote}`. Plus `slop_found`, `weakest_axis`, `rewrite {before, after}`, `missing_proof`.
+`axes` has exactly 8 keys: `clarity`, `proof`, `why_you`, `ask` (checkable) and `hook`, `voice`, `boldness`, `rhythm` (taste). Each is `{score 1-10, why, quote}`. Plus `slop_found`, `weakest_axis`, `rewrite {before, after}`, `missing_proof`, and two more checks answered in a sentence or left empty: `bias` (who is missing from the story, or shown only as a stereotype) and `private_data` (a client, company or personal detail that may not belong in public).
 Model: `TASTEE_MODEL` (default `claude-opus-5-5`), effort `TASTEE_EFFORT` (default `low`, because it runs on every draft).
 
 ## Profile format (`tastee.profile/v1`)

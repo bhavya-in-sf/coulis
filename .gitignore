@@ -7,3 +7,5 @@ __pycache__/
 *.db-journal
 node_modules/
 sdk/typescript/dist/
+# design tooling scratch
+.taste-skill/

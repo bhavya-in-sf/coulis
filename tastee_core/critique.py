@@ -29,7 +29,7 @@ _axis_schema = {"type": "object", "additionalProperties": False, "required": ["s
 
 SCHEMA = {
     "type": "object", "additionalProperties": False,
-    "required": ["axes", "slop_found", "weakest_axis", "rewrite", "missing_proof"],
+    "required": ["axes", "slop_found", "weakest_axis", "rewrite", "missing_proof", "bias", "private_data"],
     "properties": {
         "axes": {"type": "object", "additionalProperties": False, "required": list(AXES),
                  "properties": {a: _axis_schema for a in AXES}},
@@ -38,6 +38,8 @@ SCHEMA = {
         "rewrite": {"type": "object", "additionalProperties": False, "required": ["before", "after"],
                     "properties": {"before": {"type": "string"}, "after": {"type": "string"}}},
         "missing_proof": {"type": "string"},
+        "bias": {"type": "string", "description": "Who is missing from the story, or shown only as a stereotype. Empty if nobody."},
+        "private_data": {"type": "string", "description": "Any client, company or personal detail that looks private and may not belong in public. Empty if none."},
     },
 }
 
@@ -49,7 +51,10 @@ Taste axes (hook, voice, boldness, rhythm) are judged against this person's samp
 Every "why" must cite words from the draft in "quote".
 Pick the weakest axis and rewrite only the part of the draft that fixes it. The person stays the author.
 Never invent facts, numbers, names, stories or experience. If proof is weak, put the specific missing number, name or result in "missing_proof"; otherwise leave it empty.
-List generic or AI-sounding phrases you found in "slop_found", quoted exactly."""
+List generic or AI-sounding phrases you found in "slop_found", quoted exactly.
+Two more checks, answered in one sentence each or left empty:
+"bias": who is missing from the story, or shown only as a stereotype?
+"private_data": does the draft include a client, company or personal detail that looks private (a name, a number, a deal, a health or family detail) and may not belong in public?"""
 
 
 def build_prompt(text, profile, surface):
