@@ -17,19 +17,17 @@
   --soft:#5A4F4C; --pass:#2E6B3A;
   --script:'Pacifico','Brush Script MT',cursive;
   --sans:'Archivo','Helvetica Neue',Arial,sans-serif;
-  --s1:clamp(38px,6.2vw,92px); --s2:clamp(34px,5vw,64px); --s3:clamp(22px,2.4vw,30px); --s4:17px; --s5:14px;
+  --s1:clamp(38px,6.2vw,92px); --s2:clamp(30px,4vw,52px); --s3:clamp(22px,2.4vw,30px); --s4:17px; --s5:14px;
   --gap:clamp(72px,9vw,120px); --m:clamp(20px,4vw,56px);
   color-scheme:light;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:var(--s4);line-height:1.5;overflow-x:hidden;
-  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='40' viewBox='0 0 32 40'%3E%3Crect x='12' y='0' width='8' height='6' rx='2' fill='%23F5EFE6' stroke='%231E1A1A' stroke-width='1.5'/%3E%3Cpath d='M10 6h12l2 6v24a3 3 0 0 1-3 3H11a3 3 0 0 1-3-3V12z' fill='%23B3241C' stroke='%231E1A1A' stroke-width='1.5'/%3E%3Crect x='10' y='18' width='12' height='8' rx='1' fill='%23F2EBC4'/%3E%3C/svg%3E") 16 2, auto}
-a,button,label,input,select,textarea{cursor:inherit}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:var(--s4);line-height:1.5;overflow-x:hidden}
 ::selection{background:var(--mustard);color:var(--ink)}
 :focus-visible{outline:3px solid var(--eighties);outline-offset:3px}
 .wrap{max-width:1180px;margin:0 auto;padding-left:max(var(--m),env(safe-area-inset-left,0px));padding-right:max(var(--m),env(safe-area-inset-right,0px))}
-h1,h2,h3{font-weight:900;font-style:italic;letter-spacing:-.02em;line-height:.95;margin:0;text-wrap:balance}
+h1,h2,h3{font-weight:800;font-style:normal;letter-spacing:-.02em;line-height:1;margin:0;text-wrap:balance}
 h2{font-size:var(--s2)}
 p{margin:0}
 .lede{font-size:var(--s3);line-height:1.3;max-width:34ch}
@@ -52,14 +50,14 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px
 .navlinks a:hover{color:var(--ketchup)}
 
 /* hero: the counter. Bottle on the right, sign on the left, one action. */
-.hero{background:var(--blue);position:relative;overflow:hidden}
+.hero{background:var(--cream);position:relative;overflow:hidden}
 .hero .wrap{min-height:min(88svh,820px);display:grid;grid-template-columns:8fr 4fr;gap:32px;align-items:center;padding-block:48px 64px}
 .hero .sign{font-family:var(--script);color:var(--wine);font-size:clamp(28px,3.4vw,44px);display:inline-block;transform:rotate(-3deg);transform-origin:left bottom}
 .hero h1{font-size:var(--s1);margin:8px 0 22px}
 .hero .lede{color:var(--eighties);margin-bottom:32px}
 .hero .ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .hero .link{color:var(--wine);font-weight:700}
-.bottle{justify-self:center;width:min(100%,360px);filter:none}
+.bottle{justify-self:center;width:min(100%,260px);margin:0}
 .bottle svg{width:100%;height:auto;display:block;overflow:visible}
 .drip{transform-origin:top center;animation:drip 3.2s cubic-bezier(.16,1,.3,1) infinite}
 @keyframes drip{0%{transform:scaleY(.2)}60%{transform:scaleY(1)}100%{transform:scaleY(1)}}
@@ -85,10 +83,10 @@ textarea{width:100%;min-height:190px;resize:vertical;border:0;background:var(--p
   -webkit-mask:linear-gradient(#000 0 0) /* taste-skill-ignore: a mask for the torn ticket edge, not a fill */ top/100% calc(100% - 12px) no-repeat,radial-gradient(circle at 7px 100%,transparent 6px,#000 6.5px) bottom/14px 12px repeat-x}
 .ticket .top{display:flex;justify-content:space-between;align-items:baseline;font-weight:700;font-size:var(--s5);color:var(--soft)}
 .ticket .top b{font-size:var(--s4);color:var(--ink)}
-.stamp{display:inline-block;font:900 clamp(40px,4.5vw,56px)/1 var(--sans);font-style:italic;color:var(--ketchup);border:4px solid var(--ketchup);padding:6px 16px 4px;transform:rotate(-5deg);margin:22px 0 14px;letter-spacing:-.02em;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.stamp{display:inline-block;font:800 clamp(32px,3.6vw,44px)/1 var(--sans);color:var(--ketchup);border:3px solid var(--ketchup);padding:6px 14px 4px;transform:rotate(-2deg);margin:22px 0 14px;letter-spacing:-.02em;transition:transform .35s cubic-bezier(.16,1,.3,1)}
 .stamp.PASS{color:var(--pass);border:4px solid var(--pass)}
 .stamp.FIX{color:var(--eighties);border:4px solid var(--eighties)}
-.stamp.pop{transform:rotate(-5deg) scale(1.12)}
+.stamp.pop{transform:rotate(-2deg) scale(1.08)}
 .lines{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .lines li{display:grid;grid-template-columns:92px 1fr;gap:12px;align-items:baseline;padding-top:10px;background:none}
 .lines li+li{padding-top:14px}
@@ -110,18 +108,18 @@ textarea{width:100%;min-height:190px;resize:vertical;border:0;background:var(--p
 .legs p{max-width:30ch}
 
 /* proof: a lineless table */
-.proof{background:var(--wine);color:var(--lemonade);padding-block:var(--gap)}
-.proof h2{max-width:14ch;color:var(--lemonade)}
-.proof h2 span{display:block;padding-left:clamp(0px,8vw,120px)}
-.proof .lede{color:var(--blue);margin-top:18px;max-width:48ch}
-table{width:100%;border-collapse:collapse;margin-top:56px;font-variant-numeric:tabular-nums}
-th{text-align:left;font-weight:700;font-size:var(--s5);color:var(--blue);padding:0 12px 14px}
+.proof{background:var(--lemonade);color:var(--ink);padding-block:var(--gap)}
+.proof h2{max-width:16ch}
+.proof h2 span{display:inline}
+.proof .lede{color:var(--soft);margin-top:18px;max-width:48ch}
+table{width:100%;border-collapse:collapse;margin-top:48px;font-variant-numeric:tabular-nums}
+th{text-align:left;font-weight:700;font-size:var(--s5);color:var(--soft);padding:0 12px 14px}
 td{padding:16px 12px;vertical-align:top}
-tbody tr:nth-child(odd){background:rgba(245,239,230,.07)}
+tbody tr:nth-child(odd){background:rgba(30,26,26,.05)}
 td:last-child,th:last-child{width:36%}
 td:first-child{white-space:nowrap}
-td b{font-size:var(--s3);font-weight:900;font-style:italic;color:var(--mustard)}
-.proof .note{margin-top:24px;font-size:var(--s5);color:var(--blue);max-width:70ch}
+td b{font-size:var(--s3);font-weight:800;color:var(--ketchup)}
+.proof .note{margin-top:24px;font-size:var(--s5);color:var(--soft);max-width:70ch}
 
 /* features: the ticket as a plate in a manual, with margin notes */
 .plate{background:var(--cream);padding-block:var(--gap)}
@@ -141,11 +139,11 @@ td b{font-size:var(--s3);font-weight:900;font-style:italic;color:var(--mustard)}
 .rule b{color:var(--wine)}
 
 /* cta: one word is the button */
-.join{display:block;background:var(--ketchup);color:var(--cream);text-decoration:none;position:relative;height:60svh;min-height:380px;overflow:hidden;transition:background .1s}
-.join:hover,.join:focus-visible{background:var(--mustard);color:var(--ketchup)}
-.join .say{position:absolute;left:var(--m);top:28px;font-size:20px;max-width:32ch;font-weight:500}
-.join .arrow{position:absolute;right:var(--m);top:28px;width:48px;height:48px}
-.join .word{position:absolute;left:0;right:0;bottom:-2vw;text-align:center;font:900 clamp(96px,27vw,420px)/1 var(--sans);letter-spacing:-.04em;white-space:nowrap}
+.join{display:block;background:var(--ketchup);color:var(--cream);text-decoration:none;position:relative;height:38svh;min-height:260px;overflow:hidden;transition:background .15s}
+.join:hover,.join:focus-visible{background:var(--wine)}
+.join .say{position:absolute;left:var(--m);top:28px;font-size:18px;max-width:32ch;font-weight:500}
+.join .arrow{position:absolute;right:var(--m);top:28px;width:40px;height:40px}
+.join .word{position:absolute;left:0;right:0;bottom:-1vw;text-align:center;font:800 clamp(72px,14vw,220px)/1 var(--sans);letter-spacing:-.04em;white-space:nowrap}
 
 /* seats: form, install, newsletter */
 .seats{background:var(--blue);padding-block:var(--gap)}
@@ -172,7 +170,7 @@ footer .links{display:grid;gap:10px;justify-items:start;align-content:start}
 footer .links a{color:var(--mustard);font-weight:700;text-decoration:none}
 footer .links a:hover{color:var(--cream)}
 footer .legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--blue);margin-top:72px}
-footer .giant{font-family:var(--script);color:var(--wine);font-size:clamp(150px,30vw,520px);line-height:.8;white-space:nowrap;text-align:center;transform:translateY(30%);margin-top:8px;user-select:none}
+footer .giant{font-family:var(--script);color:var(--wine);font-size:clamp(96px,16vw,260px);line-height:.9;white-space:nowrap;text-align:center;transform:translateY(22%);margin-top:8px;user-select:none}
 
 /* entrances: parts arrive in reading order, once; visible without script */
 .rise{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
@@ -193,11 +191,11 @@ footer .giant{font-family:var(--script);color:var(--wine);font-size:clamp(150px,
   td{padding:6px 12px}
   tbody tr{padding:12px 0}
   td:last-child{text-align:left}
-  .join{height:46svh;min-height:300px}
-  .join .say{font-size:17px;max-width:24ch}
-  .join .arrow{width:32px;height:32px}
-  .join .word{font-size:min(29vw,140px)}
-  footer .giant{font-size:36vw;text-align:left;padding-left:var(--m)}
+  .join{height:32svh;min-height:220px}
+  .join .say{font-size:16px;max-width:24ch}
+  .join .arrow{width:28px;height:28px}
+  .join .word{font-size:min(22vw,110px)}
+  footer .giant{font-size:24vw;text-align:left;padding-left:var(--m)}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -208,21 +206,19 @@ footer .giant{font-family:var(--script);color:var(--wine);font-size:clamp(150px,
 <body class="no-js">
 <script>document.body.classList.remove('no-js')</script>
 
-<div class="checker" aria-hidden="true"></div>
 <nav aria-label="Main">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="sauce, home">
       <svg width="20" height="26" viewBox="0 0 32 40" aria-hidden="true"><rect x="12" y="0" width="8" height="6" rx="2" fill="#F5EFE6" stroke="#1E1A1A" stroke-width="1.5"/><path d="M10 6h12l2 6v24a3 3 0 0 1-3 3H11a3 3 0 0 1-3-3V12z" fill="#B3241C" stroke="#1E1A1A" stroke-width="1.5"/><rect x="10" y="18" width="12" height="8" rx="1" fill="#F2EBC4"/></svg>
       <span class="word">sauce</span>
     </a>
-    <div class="navlinks"><a href="#taste">Taste test</a><a href="#proof">Proof</a><a href="#seat">Get a seat</a><a href="https://github.com/bhavya-in-sf/tastee" rel="noopener">GitHub</a></div>
+    <div class="navlinks"><a href="#taste">Try it</a><a href="#proof">Proof</a><a href="#seat">Waitlist</a><a href="https://github.com/bhavya-in-sf/tastee" rel="noopener">GitHub</a></div>
   </div>
 </nav>
 
 <header class="hero" id="top">
   <div class="wrap">
     <div>
-      <span class="sign neon">open 24 hours</span>
       <h1>Does your AI sound like you?</h1>
       <p class="lede">sauce is a free, open-source Claude plug-in. It learns your taste from what you write and tastes every draft before it goes out.</p>
       <div class="ctas"><a class="btn" href="#taste">Taste a draft</a><a class="link" href="https://github.com/bhavya-in-sf/tastee" rel="noopener">Get it free on GitHub</a></div>
@@ -245,12 +241,12 @@ footer .giant{font-family:var(--script);color:var(--wine);font-size:clamp(150px,
 <section class="counter" id="taste" aria-labelledby="taste-h">
   <div class="wrap">
     <div class="head">
-      <h2 id="taste-h" class="rise">The taste test. Order up.</h2>
-      <p class="rise">Type any draft. The cook checks it against a real founder's taste profile and prints the ticket. No account, no AI call, under a second.</p>
+      <h2 id="taste-h" class="rise">Try it on a draft.</h2>
+      <p class="rise">Type any draft. sauce checks it against a real founder's taste profile and prints the result. No account, no AI call, under a second.</p>
     </div>
     <div class="bench">
       <div class="pad rise">
-        <label for="draft">Your order</label>
+        <label for="draft">Your draft</label>
         <textarea id="draft" spellcheck="false">Excited to share that we're leveraging AI to 10x your workflow — a total game-changer. 300+ founders already trust us. Comment below!</textarea>
         <div class="tries" aria-label="Try an example">
           <button type="button" data-try="Excited to share that we're leveraging AI to 10x your workflow — a total game-changer. 300+ founders already trust us. Comment below!">AI slop</button>
@@ -260,7 +256,7 @@ footer .giant{font-family:var(--script);color:var(--wine);font-size:clamp(150px,
         <p class="facts"><b>This counter uses Bhavya's real profile.</b> Numbers she has approved: <span>62K followers</span><span>Top Voice 2024</span><span>about 3,000 newsletter readers</span><span>100 investors</span><span>673 posts checked</span> Banned: em dashes, "game-changer", "delve". Anything else gets sent back.</p>
       </div>
       <div class="ticket rise" id="ticket" aria-live="polite">
-        <div class="top"><b>Order #001</b><span>LinkedIn · sauce checks it</span></div>
+        <div class="top"><b>Draft #001</b><span>LinkedIn</span></div>
         <div class="stamp" id="stamp">BLOCK</div>
         <ul class="lines" id="lines"></ul>
         <p class="foot" id="foot"></p>
@@ -273,13 +269,13 @@ footer .giant{font-family:var(--script);color:var(--wine);font-size:clamp(150px,
   <div class="wrap">
     <div class="intro">
       <h2 id="how-h" class="rise">Write it. Taste it. Send it.</h2>
-      <p class="rise">AI drafts arrive fast and all sound alike: 53.7% of long-form LinkedIn posts from influential profiles in 2025 read as likely AI (Originality.ai, Jan 2026). sauce puts one cook between the draft and the send button. Everything passes through the same taste, then comes out in your order.</p>
+      <p class="rise">AI drafts arrive fast and all sound alike: 53.7% of long-form LinkedIn posts from influential profiles in 2025 read as likely AI (Originality.ai, Jan 2026). sauce puts one check between the draft and the send button. Everything passes through your taste, then comes out in your voice.</p>
     </div>
     <svg id="flow" class="rise" viewBox="0 0 1200 270" role="img" aria-label="Diagram: scattered drops on the left are pulled into one tight ribbon in the middle and come out as even rows on the right"></svg>
     <div class="legs">
       <div class="rise"><b>Draft</b><p>Five writers, one agent, or just you at 11pm. The drafts come in every voice but yours.</p></div>
-      <div class="rise"><b>Taste</b><p>One cook. Your approved facts, your banned phrases, your rules. Eight axes, scored one by one, never averaged.</p></div>
-      <div class="rise"><b>Send</b><p>Out comes writing in your order. Edit it anyway, and sauce learns the rule you just taught it. You approve every rule.</p></div>
+      <div class="rise"><b>Taste</b><p>One check. Your approved facts, your banned phrases, your rules. Eight axes, scored one by one, never averaged.</p></div>
+      <div class="rise"><b>Send</b><p>Out comes writing in your voice. Edit it anyway, and sauce learns the rule you just taught it. You approve every rule.</p></div>
     </div>
   </div>
 </section>
@@ -303,17 +299,17 @@ footer .giant{font-family:var(--script);color:var(--wine);font-size:clamp(150px,
 
 <section class="plate" id="plate" aria-labelledby="plate-h">
   <div class="wrap">
-    <h2 id="plate-h" class="rise">Anatomy of a ticket</h2>
+    <h2 id="plate-h" class="rise">What a check looks like</h2>
     <div class="grid">
       <div>
         <div class="notes l">
-          <div class="note rise" data-for="num"><b>The order number</b><p>Every draft gets one. Checks are logged, so you can see what sauce caught this month.</p></div>
+          <div class="note rise" data-for="num"><b>The draft number</b><p>Every draft gets one. Checks are logged, so you can see what sauce caught this month.</p></div>
           <div class="note rise" data-for="stamp"><b>The stamp</b><p>BLOCK must be fixed. FIX should be. PASS ships. Nothing is scored out of 100.</p></div>
           <div class="note rise" data-for="claim"><b>The number check</b><p>Any figure not on your approved list is sent back. Numbers about other people pass.</p></div>
         </div>
       </div>
       <div class="ticket rise" data-ui aria-label="An example sauce ticket">
-        <div class="top" data-part="num"><b>Order #214</b><span>X post · 14:02</span></div>
+        <div class="top" data-part="num"><b>Draft #214</b><span>X post · 14:02</span></div>
         <div class="stamp FIX" data-part="stamp">FIX</div>
         <ul class="lines">
           <li data-part="claim"><span class="lvl FIX">FIX</span><span><span class="q">"$50k MRR"</span><br><span class="d">Not on your approved list. Add it, or cut it.</span></span></li>
@@ -326,7 +322,7 @@ footer .giant{font-family:var(--script);color:var(--wine);font-size:clamp(150px,
         <div class="notes">
           <div class="note rise" data-for="banned"><b>The banned list</b><p>Words you never want to see again. You add them in plain English: "ban game-changer."</p></div>
           <div class="note rise" data-for="axes"><b>Eight axes</b><p>Clarity, proof, why you, the ask are firm. Hook, voice, boldness, rhythm follow your samples. Only the weakest line gets rewritten.</p></div>
-          <div class="note rise" data-for="learn"><b>The chef remembers</b><p>Edit before posting, and sauce proposes the rule it learned. You say yes or no.</p></div>
+          <div class="note rise" data-for="learn"><b>It learns from your edits</b><p>Edit before posting, and sauce proposes the rule it learned. You say yes or no.</p></div>
         </div>
       </div>
     </div>
@@ -334,7 +330,7 @@ footer .giant{font-family:var(--script);color:var(--wine);font-size:clamp(150px,
 </section>
 
 <a class="join" href="#seat" aria-label="Join the waitlist">
-  <span class="say">Grab a seat. Early access to the plug-in, and invites to our dinners.</span>
+  <span class="say">Join the waitlist. Early access to the plug-in, and invites to our dinners.</span>
   <svg class="arrow" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 38 38 10M16 10h22v22" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
   <span class="word">JOIN</span>
 </a>
@@ -343,12 +339,12 @@ footer .giant{font-family:var(--script);color:var(--wine);font-size:clamp(150px,
   <div class="wrap">
     <div class="grid">
       <div class="booth rise">
-        <h3 id="seat-h">Save my seat</h3>
-        <p>Pick a door. Both are free.</p>
+        <h3 id="seat-h">Join the waitlist</h3>
+        <p>Pick one or both. Both are free.</p>
         <form id="wl" novalidate>
           <div class="picks" role="radiogroup" aria-label="Which door">
             <label><input type="radio" name="door" id="door-plugin" value="plugin" checked>The plug-in</label>
-            <label><input type="radio" name="door" id="door-table" value="table">A seat at the table</label>
+            <label><input type="radio" name="door" id="door-table" value="table">The dinners</label>
             <label><input type="radio" name="door" id="door-both" value="both">Both</label>
           </div>
           <label class="f" for="wl-name">Full name</label><input id="wl-name" name="name" autocomplete="name" placeholder="Jane Doe" required>
@@ -356,24 +352,24 @@ footer .giant{font-family:var(--script);color:var(--wine);font-size:clamp(150px,
           <label class="f" for="wl-role">What do you do?</label>
           <select id="wl-role" name="role"><option value="">Choose one</option><option>Founder</option><option>Writes for a founder</option><option>Investor</option><option>Developer</option><option>Something else</option></select>
           <label class="f" for="wl-pain">What's the one thing you delete from every AI draft? (optional)</label><input id="wl-pain" name="pain">
-          <div style="margin-top:20px"><button class="btn" type="submit" id="wl-submit">Save my seat</button></div>
+          <div style="margin-top:20px"><button class="btn" type="submit" id="wl-submit">Join the waitlist</button></div>
           <p class="msg" id="wl-msg" role="status" aria-live="polite"></p>
         </form>
       </div>
       <div class="stack">
         <div class="booth rise">
-          <h3>Dine in: install it now</h3>
+          <h3>Install it now</h3>
           <p>In Claude Code, two lines. Claude Desktop and Cursor work too.</p>
           <pre>/plugin marketplace add bhavya-in-sf/tastee
 /plugin install tastee@tastee</pre>
           <a class="btn ghost" href="https://github.com/bhavya-in-sf/tastee" rel="noopener">View the repo</a>
         </div>
         <div class="booth rise">
-          <h3>The table</h3>
-          <p>Dinners in San Francisco where founders and investors with taste meet through food, art, music and ideas. Invite-only, never paid. Tick "a seat at the table" and tell us what you're building.</p>
+          <h3>The dinners</h3>
+          <p>Small dinners in San Francisco where founders and investors with taste meet through food, art, music and ideas. Invite-only, never paid. Tick "the dinners" and tell us what you're building.</p>
         </div>
         <div class="booth rise">
-          <h3>The daily paper</h3>
+          <h3>The newsletter</h3>
           <p>Women building AI in San Francisco, every Thursday. About 3,000 readers.</p>
           <p style="margin-top:14px"><a class="btn ghost" href="https://bhavyainsf.substack.com/subscribe" rel="noopener">Subscribe</a></p>
         </div>
@@ -388,7 +384,7 @@ footer .giant{font-family:var(--script);color:var(--wine);font-size:clamp(150px,
       <div><h2 class="rise">Taste it before you send it.</h2><p style="margin-top:22px"><a class="btn" href="#taste">Taste a draft</a></p></div>
       <div class="links rise"><a href="https://github.com/bhavya-in-sf/tastee" rel="noopener">GitHub</a><a href="https://bhavyainsf.substack.com" rel="noopener">Newsletter</a><a href="https://www.linkedin.com/in/bhavyagoel4/" rel="noopener">LinkedIn</a><a href="#seat">Waitlist</a></div>
     </div>
-    <div class="legal"><span>Cooked up in San Francisco by Bhavya Goel. MIT licensed.</span><span>Pictures drawn in-house. No cookies, no tracking.</span></div>
+    <div class="legal"><span>Made in San Francisco by Bhavya Goel. MIT licensed.</span><span>No cookies, no tracking.</span></div>
   </div>
   <div class="giant" aria-hidden="true">sauce</div>
 </footer>
@@ -424,13 +420,14 @@ footer .giant{font-family:var(--script);color:var(--wine);font-size:clamp(150px,
   }
   var ta=document.getElementById("draft"), stamp=document.getElementById("stamp"), lines=document.getElementById("lines"), foot=document.getElementById("foot"), ticket=document.getElementById("ticket"), n=1;
   var COPY={BLOCK:"Sent back. Fix the BLOCK lines before this goes out.",FIX:"Close. Fix the FIX lines and it ships.",PASS:"Ships. Specific, approved, and in her voice."};
+  var LABEL="Draft #";
   function esc(s){return s.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
   function render(animate){
     var r=check(ta.value);
     stamp.className="stamp "+r.verdict; stamp.textContent=r.verdict;
     lines.innerHTML=r.issues.map(function(i){return '<li><span class="lvl '+i.level+'">'+i.level+'</span><span><span class="q">'+esc(i.q)+'</span><br><span class="d">'+esc(i.d)+'</span></span></li>'}).join("");
     foot.textContent=COPY[r.verdict]+" Checked in under a second, no AI call.";
-    ticket.querySelector(".top b").textContent="Order #"+String(n).padStart(3,"0");
+    ticket.querySelector(".top b").textContent=LABEL+String(n).padStart(3,"0");
     if(animate){ stamp.classList.add("pop"); setTimeout(function(){stamp.classList.remove("pop")},350); }
   }
   var timer; ta.addEventListener("input",function(){ clearTimeout(timer); timer=setTimeout(function(){ n++; render(true); },250); });
@@ -472,15 +469,15 @@ footer .giant{font-family:var(--script);color:var(--wine);font-size:clamp(150px,
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ msg.textContent="That email doesn't look right. Use name@example.com."; document.getElementById("wl-email").focus(); return; }
     var door=(f.querySelector("input[name=door]:checked")||{}).value;
     var data={door:door,name:name,email:email,role:document.getElementById("wl-role").value,pain:document.getElementById("wl-pain").value.trim(),_subject:"sauce waitlist: "+door,_template:"table"};
-    btn.disabled=true; btn.textContent="Saving...";
+    btn.disabled=true; btn.textContent="Joining...";
     var ctrl=window.AbortController?new AbortController():null, t=setTimeout(function(){ if(ctrl) ctrl.abort(); },15000);
     fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(data),signal:ctrl?ctrl.signal:undefined})
       .then(function(r){ return r.json().catch(function(){return {}}).then(function(j){ return {ok:r.ok,j:j}; }); })
       .then(function(res){ var m=String((res.j&&res.j.message)||""); if(/activat/i.test(m)){ msg.textContent="Almost there: the form needs confirming by the owner. Try again in a little while."; return; }
         if(!res.ok||String(res.j.success)==="false") throw new Error(m);
-        f.reset(); msg.className="msg ok"; msg.textContent=door==="table"?"Seat saved. Invites go out by hand, so watch your inbox.":"Seat saved. We'll email you when the next release ships."; })
+        f.reset(); msg.className="msg ok"; msg.textContent=door==="table"?"You're on the list. Invites go out by hand, so watch your inbox.":"You're on the list. We'll email you when the next release ships."; })
       .catch(function(e){ msg.textContent=(e&&e.name==="AbortError")?"This is taking too long. Check your connection and try again.":"That didn't go through. Check your connection and try again."; })
-      .then(function(){ clearTimeout(t); btn.disabled=false; btn.textContent="Save my seat"; });
+      .then(function(){ clearTimeout(t); btn.disabled=false; btn.textContent="Join the waitlist"; });
   });
 })();
 </script>
