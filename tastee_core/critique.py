@@ -75,7 +75,10 @@ def critique(text, profile, surface="linkedin", model=None, effort=None, client=
     """Score a draft on 8 axes. Requires the anthropic SDK and a credential."""
     import anthropic  # imported here so the deterministic half has no dependency
 
-    client = client or anthropic.Anthropic()
+    if client is None:
+        # an org-level key must name a workspace; set ANTHROPIC_WORKSPACE_ID (wrkspc_...) or use a workspace key
+        ws = os.environ.get("ANTHROPIC_WORKSPACE_ID")
+        client = anthropic.Anthropic(default_headers={"anthropic-workspace-id": ws} if ws else None)
     model = model or os.environ.get("TASTEE_MODEL", "claude-opus-5-5")
     effort = effort or os.environ.get("TASTEE_EFFORT", "low")
     response = client.messages.create(
