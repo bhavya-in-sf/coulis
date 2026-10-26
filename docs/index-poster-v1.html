@@ -1,0 +1,365 @@
+<title>Tastee</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta charset="utf-8">
+<meta name="description" content="A free, open-source Claude plug-in that checks every post against your taste and your approved facts before it goes out.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one long 70s poster. Giant red condensed wordmark over a folded sky, a live gate demo as the hero, then two doors. Single-theme by choice (a printed poster). */
+:root{
+  --sky:#2f80e4; --sky-deep:#1f6fd6; --sky-soft:#bfe0fa; --red:#e3141b; --ink:#1d1a18; --paper:#fffaf2;
+  --honey:#f2a516; --honey-d:#c97a06; --pass:#1b7a3a; --muted:#6a5f55; --line:#e6d8c4;
+  --display:"Anton","Bebas Neue","Impact","Arial Narrow",sans-serif;
+  --body:"Poppins","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --step-0:clamp(1rem,.95rem + .25vw,1.125rem); --step-1:clamp(1.25rem,1.1rem + .6vw,1.6rem);
+  --step-2:clamp(2rem,1.4rem + 2.6vw,3.6rem); --step-hero:clamp(5.5rem,2rem + 19vw,19rem);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--body);font-size:var(--step-0);line-height:1.55;color:var(--ink);
+  background:linear-gradient(180deg,var(--sky-deep) 0,var(--sky) 900px,#5ea6ee 1700px,var(--sky-soft) 100%);}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+/* print texture: grain + one vertical fold */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.10;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+.fold{position:absolute;top:0;bottom:0;left:50%;width:44px;margin-left:-22px;pointer-events:none;z-index:1;
+  background:linear-gradient(90deg,transparent,rgba(20,30,60,.07) 45%,rgba(20,30,60,.16) 50%,rgba(255,255,255,.22) 52%,transparent)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--honey);outline-offset:3px}
+
+/* top captions, split hard left / right like the posters */
+.caps{display:flex;justify-content:space-between;gap:16px;padding-block:22px 0;font-family:var(--display);color:var(--red);
+  letter-spacing:.18em;font-size:clamp(.8rem,.7rem + .3vw,1rem);position:relative;z-index:2}
+.caps a{text-decoration:none}
+header.hero{position:relative;overflow:hidden;padding-block:0 56px}
+.word{font-family:var(--display);font-weight:400;color:var(--red);font-size:var(--step-hero);line-height:.82;margin:.08em 0 0;
+  letter-spacing:-.01em;text-transform:uppercase;position:relative;z-index:2;text-shadow:0 3px 0 rgba(120,0,0,.14);
+  animation:slam .8s cubic-bezier(.2,.9,.2,1.1) both}
+@keyframes slam{0%{transform:translateY(-40px) scaleY(1.12);opacity:0}60%{transform:translateY(5px) scaleY(.98);opacity:1}100%{transform:none;opacity:1}}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:clamp(20px,4vw,48px);align-items:start;margin-top:clamp(16px,3vw,36px);position:relative;z-index:3}
+.pitch{background:var(--paper);padding:clamp(22px,3vw,34px);box-shadow:0 18px 40px rgba(10,40,90,.25);display:flex;flex-direction:column;gap:16px}
+.pitch h2{margin:0;font-size:var(--step-1);line-height:1.25;font-weight:600;text-wrap:balance}
+.pitch p{margin:0;max-width:62ch}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.btn{font:600 1rem var(--body);border:2px solid var(--ink);background:var(--ink);color:var(--paper);padding:12px 20px;border-radius:999px;
+  text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.red{background:var(--red);border-color:var(--red);color:#fff}
+.src{font-size:.8rem;color:var(--muted)}
+
+/* the live gate: the most characteristic thing Tastee does */
+.gate{background:var(--ink);color:var(--paper);box-shadow:0 22px 50px rgba(10,30,70,.35);display:flex;flex-direction:column}
+.gate-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid rgba(255,250,242,.14);
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.04em;color:#c9bfb3}
+.gate label{font-family:var(--mono);font-size:.78rem;color:#c9bfb3;padding:14px 18px 0;display:block}
+.gate textarea{margin:8px 18px 0;min-height:132px;resize:vertical;background:#2a2622;color:var(--paper);border:1px solid #4a433c;
+  font:400 1rem/1.5 var(--body);padding:12px 14px;width:calc(100% - 36px)}
+.facts{padding:10px 18px 0;font-family:var(--mono);font-size:.75rem;color:#c9bfb3;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.facts span{border:1px solid #4a433c;padding:2px 8px;border-radius:999px;color:var(--paper)}
+.verdict-row{display:flex;align-items:center;gap:14px;padding:16px 18px 6px}
+.stamp{font-family:var(--display);font-size:2.4rem;line-height:1;letter-spacing:.04em;border:4px solid currentColor;padding:4px 14px 2px;transform:rotate(-4deg);
+  transition:transform .25s}
+.stamp.BLOCK{color:var(--red)}.stamp.FIX{color:var(--honey)}.stamp.PASS{color:#4fc27a}
+.verdict-row p{margin:0;font-size:.9rem;color:#c9bfb3}
+.issues{list-style:none;margin:0;padding:6px 18px 18px;display:flex;flex-direction:column;gap:8px}
+.issues li{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:.9rem;align-items:baseline}
+.lvl{font-family:var(--mono);font-size:.72rem;padding:2px 7px;border-radius:4px;font-weight:500}
+.lvl.BLOCK{background:var(--red);color:#fff}.lvl.FIX{background:var(--honey);color:var(--ink)}
+.issues q{font-family:var(--mono);font-size:.82rem;color:#ffd6a0;quotes:"\201C" "\201D"}
+.gate-foot{margin-top:auto;padding:12px 18px;border-top:1px solid rgba(255,250,242,.14);font-size:.8rem;color:#c9bfb3}
+
+/* sections */
+section{position:relative;padding-block:clamp(48px,7vw,96px)}
+.eyebrow{font-family:var(--display);color:var(--red);letter-spacing:.18em;font-size:.95rem;margin:0 0 10px}
+.sh{font-family:var(--display);font-weight:400;text-transform:uppercase;color:var(--paper);font-size:var(--step-2);line-height:.95;margin:0 0 28px;
+  text-wrap:balance;max-width:16ch;text-shadow:0 2px 0 rgba(10,40,90,.25)}
+.sh.ink{color:var(--red);text-shadow:none}
+.pains{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.pain{background:var(--paper);padding:22px;display:flex;flex-direction:column;gap:8px}
+.pain b{font-size:1.05rem;line-height:1.3}
+.pain p{margin:0;font-size:.95rem;color:#4a423b}
+.stat-band{margin-top:22px;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;color:var(--paper)}
+.stat-band .n{font-family:var(--display);font-size:clamp(3rem,2rem + 4vw,5.5rem);line-height:.9;color:#fff}
+.stat-band p{margin:0;max-width:52ch}
+.stat-band .src{color:#dbe9fa}
+
+/* how it works: a real sequence, so numbered */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;counter-reset:s}
+.step{background:var(--paper);padding:22px;display:flex;flex-direction:column;gap:10px;position:relative}
+.step::before{counter-increment:s;content:counter(s);font-family:var(--display);color:var(--red);font-size:3rem;line-height:.9}
+.step code{font-family:var(--mono);font-size:.85rem;background:#f3e9da;padding:2px 6px}
+.step p{margin:0;font-size:.95rem;color:#4a423b}
+
+/* the 8 axes */
+.axes-wrap{background:var(--paper);padding:clamp(22px,3vw,36px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:28px;align-items:start}
+.axes-wrap h3{margin:0 0 6px;font-size:var(--step-1)}
+.axes-wrap p{margin:0;max-width:56ch}
+.axgroups{display:flex;flex-direction:column;gap:18px}
+.axgroup h4{margin:0 0 8px;font-family:var(--display);font-weight:400;letter-spacing:.12em;font-size:1rem}
+.axgroup.check h4{color:var(--ink)}.axgroup.taste h4{color:var(--red)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:2px solid var(--ink);border-radius:999px;padding:5px 14px;font-weight:600;font-size:.95rem;background:#fff}
+.taste .chip{border-color:var(--red);color:var(--red)}
+
+/* two doors */
+.doors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.door{min-width:0;background:var(--paper);padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;gap:14px;border-top:10px solid var(--ink)}
+.door.club{border-top-color:var(--red)}
+.door h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(2rem,1.5rem + 2vw,3rem);line-height:.95;margin:0}
+.door.club h3{color:var(--red)}
+.door p{margin:0}
+pre.install{margin:0;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:.85rem;padding:14px 16px;overflow-x:auto;line-height:1.6}
+.tag{display:inline-block;font-family:var(--mono);font-size:.75rem;background:#f3e9da;padding:3px 8px;align-self:flex-start}
+
+/* waitlist form */
+form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;background:var(--paper);padding:clamp(22px,3vw,34px)}
+form .full{grid-column:1/-1}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-weight:600;font-size:.9rem}
+.field input,.field select,.field textarea{font:400 1rem var(--body);padding:11px 12px;border:2px solid var(--ink);background:#fff;color:var(--ink);border-radius:0;width:100%}
+fieldset{border:0;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+legend{font-weight:600;font-size:.9rem;margin-bottom:8px;padding:0}
+.pick{display:flex;align-items:center;gap:8px;border:2px solid var(--ink);padding:10px 14px;cursor:pointer;font-weight:500}
+.pick input{accent-color:var(--red);width:18px;height:18px}
+.pick:has(input:checked){background:var(--ink);color:var(--paper)}
+.form-note{font-size:.85rem;color:var(--muted);margin:0}
+.status{grid-column:1/-1;margin:0;font-weight:600}
+.status.ok{color:var(--pass)}.status.err{color:var(--red)}
+footer{padding-block:40px 56px;color:#2a4a72;font-size:.9rem}
+footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+footer b{font-family:var(--display);font-weight:400;color:var(--red);letter-spacing:.12em}
+
+/* dessert art */
+.art{position:absolute;right:-40px;top:clamp(120px,14vw,220px);width:min(46vw,560px);z-index:0;opacity:.95;pointer-events:none}
+.drip{transform-origin:top;animation:drip 3.4s ease-in-out infinite alternate}
+@keyframes drip{from{transform:scaleY(.3)}to{transform:scaleY(1)}}
+
+@media (max-width:960px){
+  .hero-grid,.axes-wrap,.doors{grid-template-columns:1fr}
+  .pains,.steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .art{opacity:.35}
+}
+@media (max-width:560px){
+  .pains,.steps,form{grid-template-columns:1fr}
+  .caps span.r{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="hero">
+  <div class="fold" aria-hidden="true"></div>
+  <svg class="art" viewBox="0 0 600 520" aria-hidden="true">
+    <defs>
+      <linearGradient id="edge" x1="0" x2="1"><stop offset="0" stop-color="#a8642a"/><stop offset=".4" stop-color="#e6ad66"/><stop offset="1" stop-color="#8f5320"/></linearGradient>
+      <radialGradient id="top" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#ffe2b0"/><stop offset=".6" stop-color="#e9b26a"/><stop offset="1" stop-color="#b8742f"/></radialGradient>
+      <linearGradient id="hon" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd25a"/><stop offset="1" stop-color="#e08a00"/></linearGradient>
+      <radialGradient id="sun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffecaa" stop-opacity=".95"/><stop offset=".6" stop-color="#ffd678" stop-opacity=".45"/><stop offset="1" stop-color="#ffd678" stop-opacity="0"/></radialGradient>
+      <g id="pc"><ellipse cx="0" cy="8" rx="160" ry="34" fill="url(#edge)"/><ellipse cx="0" cy="-6" rx="158" ry="30" fill="url(#top)"/><ellipse cx="-58" cy="-16" rx="62" ry="7" fill="#fff" opacity=".35"/></g>
+    </defs>
+    <circle cx="320" cy="220" r="230" fill="url(#sun)"/>
+    <ellipse cx="320" cy="470" rx="260" ry="40" fill="#fff" opacity=".9"/>
+    <use href="#pc" x="320" y="440"/><use href="#pc" x="320" y="400"/><use href="#pc" x="320" y="360"/><use href="#pc" x="320" y="320"/>
+    <path d="M180 318 C240 292 400 292 460 318 C440 334 420 328 410 356 C395 334 380 340 370 376 C360 340 340 334 320 346 C300 334 270 334 250 366 C240 334 210 336 180 318Z" fill="url(#hon)"/>
+    <path d="M210 314 C260 300 380 298 430 310" stroke="#fff6cf" stroke-width="5" stroke-linecap="round" fill="none" opacity=".8"/>
+    <rect class="drip" x="246" y="356" width="10" height="70" rx="5" fill="url(#hon)"/>
+    <rect class="drip" x="406" y="350" width="9" height="90" rx="5" fill="url(#hon)" style="animation-delay:1s"/>
+  </svg>
+  <div class="wrap">
+    <div class="caps"><span>TASTE BEFORE</span><span class="r">YOU POST</span></div>
+    <h1 class="word" data-name>Tastee</h1>
+    <div class="hero-grid">
+      <div class="pitch">
+        <h2>A free Claude plug-in that checks every post against your taste and your approved facts, before it goes out.</h2>
+        <p>AI writing sounds like everyone else, and when five people write as one founder, the facts drift. <span data-name>Tastee</span> adds the step nobody has: a critic that tastes the draft and sends it back if it's off. Then it learns from what you actually change.</p>
+        <div class="cta-row">
+          <a class="btn red" href="#doors">Join the waitlist</a>
+          <a class="btn ghost" href="https://github.com/bhavya-in-sf/tastee" rel="noopener" target="_blank">See it on GitHub</a>
+        </div>
+        <p class="src">Open source, MIT. Runs inside Claude. No account, and your taste file stays on your machine.</p>
+      </div>
+
+      <div class="gate" aria-labelledby="gate-title">
+        <div class="gate-top"><span id="gate-title">/tastee:gate · live demo</span><span>example founder: Sam, Notely</span></div>
+        <label for="draft">Edit this draft. The gate re-checks as you type.</label>
+        <textarea id="draft" spellcheck="false">Big news — Notely is the first AI notes app for teams. We leverage AI to hit $20k MRR and 5,000 users.</textarea>
+        <div class="facts" aria-label="Approved facts for this example">approved facts: <span>1,200 users</span><span>40 paying teams</span><span>launched in March</span></div>
+        <div class="verdict-row" aria-live="polite"><div class="stamp BLOCK" id="stamp">BLOCK</div><p id="vtext">Must fix before posting.</p></div>
+        <ul class="issues" id="issues"></ul>
+        <div class="gate-foot">The real gate runs these same kinds of checks with no model call, so it's instant. Try: "Notely has 1,200 users and 40 paying teams."</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section aria-labelledby="pain-h">
+    <div class="wrap">
+      <p class="eyebrow">THE PROBLEM</p>
+      <h2 class="sh" id="pain-h">Your AI doesn't know what good tastes like to you</h2>
+      <div class="pains">
+        <div class="pain"><b>It sounds like everyone else.</b><p>Same openers, same rhythm, same "game-changer." Readers scroll past it.</p></div>
+        <div class="pain"><b>It doesn't know how you write.</b><p>You paste the same three examples and re-explain your style every session.</p></div>
+        <div class="pain"><b>Memory gets it wrong.</b><p>It remembers the wrong thing, or applies one note to everything you write.</p></div>
+        <div class="pain"><b>Managing memory is a chore.</b><p>Style files, prompts and notes to keep updated by hand, forever.</p></div>
+      </div>
+      <div class="stat-band">
+        <span class="n">53.7%</span>
+        <p>of long-form LinkedIn posts from influential profiles in 2025 were flagged as likely AI.<br><span class="src">Originality.ai, Jan 2026: 3,368 posts from 99 profiles</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="how-h">
+    <div class="wrap">
+      <p class="eyebrow">HOW IT WORKS</p>
+      <h2 class="sh" id="how-h">Four commands inside Claude</h2>
+      <div class="steps">
+        <div class="step"><b>Set up your taste</b><p>Answer 5 questions and paste 3 things you're proud of. You get <code>TASTE.md</code>, your taste in one file you own.</p><code>/tastee:setup</code></div>
+        <div class="step"><b>Gate every draft</b><p>Blocks numbers you never approved, banned phrases and house-rule breaks. Quotes each problem.</p><code>/tastee:gate</code></div>
+        <div class="step"><b>Get a real critique</b><p>Eight separate scores, each quoting your draft. It rewrites only the weakest part, so you stay the author.</p><code>/tastee:critique</code></div>
+        <div class="step"><b>Teach it with edits</b><p>Paste the AI draft and what you actually posted. It proposes rules, and you approve each one.</p><code>/tastee:learn</code></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="axes-h">
+    <div class="wrap">
+      <div class="axes-wrap">
+        <div>
+          <p class="eyebrow">THE CRITIC STEP</p>
+          <h3 id="axes-h">Firm on facts. Personal on voice. Never one score.</h3>
+          <p>Experts agree on whether writing is clear and backed by proof, and they disagree on taste. So <span data-name>Tastee</span> holds the checkable half the same for everyone, and learns the taste half from you. Every axis is reported on its own, because one averaged number hides what to fix.</p>
+          <p class="src" style="margin-top:12px">Memory is like handing a chef your recipe card. A critic is someone who tastes the dish and sends it back if it's off.</p>
+        </div>
+        <div class="axgroups">
+          <div class="axgroup check"><h4>CHECKABLE · SAME FOR EVERYONE</h4><div class="chips"><span class="chip">Clarity</span><span class="chip">Proof</span><span class="chip">Why you</span><span class="chip">Ask</span></div></div>
+          <div class="axgroup taste"><h4>TASTE · LEARNED FROM YOU</h4><div class="chips"><span class="chip">Hook</span><span class="chip">Voice</span><span class="chip">Boldness</span><span class="chip">Rhythm</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="doors" aria-labelledby="doors-h">
+    <div class="wrap">
+      <p class="eyebrow">TWO DOORS IN</p>
+      <h2 class="sh" id="doors-h">Pick your door. Both are free.</h2>
+      <div class="doors">
+        <div class="door">
+          <span class="tag">for builders</span>
+          <h3>The plug-in</h3>
+          <p>Install it in Claude Code today. Open source, free forever, and your taste file never leaves your folder.</p>
+          <pre class="install">/plugin marketplace add bhavya-in-sf/tastee
+/plugin install tastee@tastee</pre>
+          <p class="src">Join the list to hear about new releases, including the MCP server for Cursor and other tools.</p>
+        </div>
+        <div class="door club">
+          <span class="tag">invite only</span>
+          <h3>The table</h3>
+          <p>Small dinners in San Francisco where founders and investors meet through food, art, music and ideas. Curated, invite-only, and never paid.</p>
+          <p class="src">Tell us what you're building. Invites go out by hand.</p>
+        </div>
+      </div>
+
+      <form id="wl" style="margin-top:20px" novalidate>
+        <fieldset class="full">
+          <legend>Which door?</legend>
+          <label class="pick"><input type="radio" name="door" id="door-plugin" value="plugin" checked> The plug-in</label>
+          <label class="pick"><input type="radio" name="door" id="door-table" value="table"> The table</label>
+          <label class="pick"><input type="radio" name="door" id="door-both" value="both"> Both</label>
+        </fieldset>
+        <div class="field"><label for="wl-name">Full name</label><input id="wl-name" name="name" autocomplete="name" placeholder="Jane Doe" required></div>
+        <div class="field"><label for="wl-email">Email</label><input id="wl-email" name="email" type="email" autocomplete="email" placeholder="jane@company.com" required></div>
+        <div class="field"><label for="wl-role">What do you do?</label>
+          <select id="wl-role" name="role"><option value="">Choose one</option><option>Founder</option><option>Writes for a founder</option><option>Investor</option><option>Developer</option><option>Something else</option></select></div>
+        <div class="field"><label for="wl-link">LinkedIn or X (optional)</label><input id="wl-link" name="link" placeholder="linkedin.com/in/you"></div>
+        <div class="field full"><label for="wl-pain">What's the one thing you delete from every AI draft? (optional)</label><textarea id="wl-pain" name="pain" rows="2"></textarea></div>
+        <div class="full cta-row" style="align-items:center"><button class="btn red" type="submit" id="wl-submit">Join the waitlist</button>
+          <p class="form-note">We only email about releases and invites. No spam, unsubscribe anytime.</p></div>
+        <p class="status" id="wl-status" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <span><b data-name>Tastee</b> · the taste layer for AI</span>
+    <span>Built in San Francisco by Bhavya Goel · <a href="https://github.com/bhavya-in-sf/tastee" rel="noopener" target="_blank">GitHub</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* NAME: the one place to swap the wordmark (name not locked) */
+  var NAME = "Tastee";
+  /* WAITLIST: paste a form endpoint (Tally, Formspree, Basin or your own) that accepts a JSON POST.
+     Empty means preview mode: nothing is sent anywhere. */
+  var WAITLIST_ENDPOINT = "https://formsubmit.co/ajax/ac327ff10bcd43f64f6e489f7fb0f09c";
+
+  document.title = NAME;
+  [].forEach.call(document.querySelectorAll("[data-name]"), function(el){ el.textContent = NAME; });
+
+  /* mini gate: a browser port of a few checks from scripts/gate.py, for the demo only */
+  var APPROVED = ["1,200 users", "40 paying teams", "launched in march"];
+  var FILLER = ["streamline","leverage","unlock","seamless","empower","game-changer","game changer","delve","in today's fast-paced","elevate your"];
+  var BANNED = [{rx:/\bthe first\b/g, why:'Never call Notely "the first" anything.'}];
+  function approved(num){
+    var a = APPROVED.join(" ").toLowerCase(), base = num.toLowerCase().replace(/,/g,"");
+    var forms = [base];
+    if (/k$/.test(base)) forms.push(base.slice(0,-1)+"000", base.slice(0,-1)+",000");
+    if (/^\d{4,}$/.test(base)) forms.push(Number(base).toLocaleString("en-US"));
+    return forms.some(function(f){ return new RegExp("(^|[^\\d,])"+f.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"(?!\\d)").test(a); });
+  }
+  function check(text){
+    var t = text.toLowerCase().replace(/’/g,"'"), out = [], seen = {};
+    function add(level, check, quote, detail){ var k = check+"|"+quote; if (seen[k]) return; seen[k]=1; out.push({level:level, check:check, quote:quote, detail:detail}); }
+    ["—","–","--"].forEach(function(d){ if (text.indexOf(d) > -1) add("BLOCK","Em dash",d,"House rule: no em dashes or double hyphens."); });
+    var m, money = /\$\s?(\d[\d,.]*)\s?(k|m)?\+?\s*(arr|mrr|revenue|a month|per month)?/g;
+    while ((m = money.exec(t))) { if (!approved(m[1]+(m[2]||""))) add("BLOCK","Unapproved claim",m[0].trim(),"This number isn't in the approved facts. Add it there or cut it."); }
+    var count = /\b(\d[\d,.]*)\s?(k)?\+?\s*(users|customers|teams|paying teams|clients|signups|founders)\b/g;
+    while ((m = count.exec(t))) { if (!approved(m[1].replace(/,/g,"")+(m[2]||""))) add("FIX","Unapproved claim",m[0].trim(),"This number isn't in the approved facts. Add it there or cut it."); }
+    BANNED.forEach(function(b){ var r; b.rx.lastIndex = 0; while ((r = b.rx.exec(t))) add("BLOCK","Banned phrase",r[0],b.why); });
+    FILLER.forEach(function(f){ if (t.indexOf(f) > -1) add("FIX","Filler",f,"Corporate filler word. Say what actually happened."); });
+    var verdict = out.some(function(i){return i.level==="BLOCK";}) ? "BLOCK" : out.length ? "FIX" : "PASS";
+    return {verdict:verdict, issues:out};
+  }
+  var ta = document.getElementById("draft"), stamp = document.getElementById("stamp"), vtext = document.getElementById("vtext"), list = document.getElementById("issues");
+  var COPY = {BLOCK:"Must fix before posting.", FIX:"Should fix. Close, though.", PASS:"Ships. Specific, approved, and yours."};
+  function esc(s){ return s.replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  function render(){
+    var r = check(ta.value);
+    stamp.className = "stamp " + r.verdict; stamp.textContent = r.verdict; vtext.textContent = COPY[r.verdict];
+    list.innerHTML = r.issues.map(function(i){ return '<li><span class="lvl '+i.level+'">'+i.level+'</span><span><b>'+i.check+'</b> <q>'+esc(i.quote)+'</q><br>'+esc(i.detail)+'</span></li>'; }).join("");
+  }
+  ta.addEventListener("input", render); render();
+
+  /* waitlist */
+  var form = document.getElementById("wl"), status = document.getElementById("wl-status"), btn = document.getElementById("wl-submit");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("wl-name").value.trim(), email = document.getElementById("wl-email").value.trim();
+    status.className = "status";
+    if (!name) { status.className = "status err"; status.textContent = "Add your name, then try again."; document.getElementById("wl-name").focus(); return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { status.className = "status err"; status.textContent = "That email doesn't look right. Use the format name@example.com."; document.getElementById("wl-email").focus(); return; }
+    var data = {door: (form.querySelector("input[name=door]:checked")||{}).value, name:name, email:email,
+      role: document.getElementById("wl-role").value, link: document.getElementById("wl-link").value.trim(),
+      pain: document.getElementById("wl-pain").value.trim(), _subject: "Tastee waitlist: " + (form.querySelector("input[name=door]:checked")||{}).value, _template: "table"};
+    if (!WAITLIST_ENDPOINT) { status.className = "status err"; status.textContent = "This is a preview, so signups aren't collected here yet. Nothing was sent."; return; }
+    btn.disabled = true; btn.textContent = "Joining..."; status.className = "status"; status.textContent = "";
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 15000);
+    fetch(WAITLIST_ENDPOINT, {method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"}, body:JSON.stringify(data), signal: ctrl ? ctrl.signal : undefined})
+      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return {ok: r.ok, j: j}; }); })
+      .then(function(res){
+        var msg = String((res.j && res.j.message) || "");
+        if (/activat/i.test(msg)) { status.className = "status err"; status.textContent = "Almost there: the list owner needs to confirm this form first. Please try again in a little while."; return; }
+        if (!res.ok || String(res.j.success) === "false") throw new Error(msg || "failed");
+        form.reset(); status.className = "status ok";
+        status.textContent = data.door === "table" ? "You're on the list. Invites go out by hand, so watch your inbox." : "You're on the list. We'll email you when the next release ships."; })
+      .catch(function(e){ status.className = "status err";
+        status.textContent = (e && e.name === "AbortError") ? "This is taking too long. Check your connection and try again." : "That didn't go through. Check your connection and try again."; })
+      .then(function(){ clearTimeout(timer); btn.disabled = false; btn.textContent = "Join the waitlist"; });
+  });
+})();
+</script>
