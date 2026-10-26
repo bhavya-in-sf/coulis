@@ -9,3 +9,4 @@ node_modules/
 sdk/typescript/dist/
 # design tooling scratch
 .taste-skill/
+.vercel
