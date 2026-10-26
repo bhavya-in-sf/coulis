@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Tastee Stop hook: make sure drafts get checked.
+"""Sauce Stop hook: make sure drafts get checked.
 
 Runs when Claude finishes a reply. If the reply contains text the user is
 likely to post or send (a quoted block or an unlabelled code block of prose)
-and no Tastee tool ran during the turn, it asks Claude to check those drafts
-with tastee_check, or record tastee_skip with a reason, before the user sees
+and no Sauce tool ran during the turn, it asks Claude to check those drafts
+with sauce_check, or record sauce_skip with a reason, before the user sees
 the reply. It asks once per turn, never loops, and never blocks on errors.
 
-Turn off with TASTEE_HOOK=0.
+Turn off with SAUCE_HOOK=0.
 """
 import json
 import os
@@ -60,7 +60,7 @@ def drafts_in(text):
 
 
 def main():
-    if os.environ.get("TASTEE_HOOK", "1") == "0":
+    if (os.environ.get("SAUCE_HOOK") or os.environ.get("TASTEE_HOOK", "1")) == "0":
         return
     try:
         data = json.load(sys.stdin)
@@ -69,21 +69,21 @@ def main():
         turn = last_turn(data["transcript_path"])
     except Exception:
         return  # never get in the way on errors
-    used_tastee, text = False, []
+    used_sauce, text = False, []
     for r in turn:
         for b in r.get("message", {}).get("content", []) or []:
-            if b.get("type") == "tool_use" and "tastee_" in b.get("name", ""):
-                used_tastee = True
+            if b.get("type") == "tool_use" and "sauce_" in b.get("name", ""):
+                used_sauce = True
             elif b.get("type") == "text":
                 text.append(b.get("text", ""))
     drafts = drafts_in("\n".join(text))
-    if drafts and not used_tastee:
+    if drafts and not used_sauce:
         print(json.dumps({
             "decision": "block",
-            "reason": (f"Tastee: this reply has {len(drafts)} draft(s) the user may post or send, and none were "
-                       "checked. Run tastee_check on each draft (use profile_dir if it's written for a company "
+            "reason": (f"Sauce: this reply has {len(drafts)} draft(s) the user may post or send, and none were "
+                       "checked. Run sauce_check on each draft (use profile_dir if it's written for a company "
                        "or client), fix any BLOCK issues, then give the reply again. If a block isn't something "
-                       "the user will post or send, call tastee_skip with the reason instead."),
+                       "the user will post or send, call sauce_skip with the reason instead."),
         }))
 
 

@@ -1,7 +1,7 @@
 // TypeScript client for the Taste API. Zero dependencies (uses global fetch).
 //
-//   import { Tastee } from "tastee";
-//   const t = new Tastee({ apiKey: process.env.TASTEE_API_KEY! });
+//   import { Sauce } from "sauce";
+//   const t = new Sauce({ apiKey: process.env.SAUCE_API_KEY! });
 //   const { verdict, issues } = await t.check(profileId, "Notely hit $20k MRR");
 
 export type Surface = "linkedin" | "x" | "reddit" | "instagram" | "youtube";
@@ -26,7 +26,7 @@ export interface CritiqueResult {
 
 export interface ProposedRule { id: string; text: string; source: "learned"; approved: false }
 
-export class TasteeError extends Error {
+export class SauceError extends Error {
   status: number;
   code: string;
   constructor(status: number, code: string, message: string) {
@@ -36,13 +36,13 @@ export class TasteeError extends Error {
   }
 }
 
-export interface TasteeOptions { apiKey: string; baseUrl?: string }
+export interface SauceOptions { apiKey: string; baseUrl?: string }
 
-export class Tastee {
+export class Sauce {
   private apiKey: string;
   private baseUrl: string;
 
-  constructor(opts: TasteeOptions) {
+  constructor(opts: SauceOptions) {
     if (!opts.apiKey) throw new Error("apiKey is required");
     this.apiKey = opts.apiKey;
     this.baseUrl = (opts.baseUrl ?? "http://localhost:8787").replace(/\/$/, "");
@@ -55,7 +55,7 @@ export class Tastee {
       body: body === undefined ? undefined : JSON.stringify(body),
     });
     const data = (await res.json().catch(() => ({}))) as any;
-    if (!res.ok) throw new TasteeError(res.status, data?.error?.code ?? "http_error", data?.error?.message ?? res.statusText);
+    if (!res.ok) throw new SauceError(res.status, data?.error?.code ?? "http_error", data?.error?.message ?? res.statusText);
     return data as T;
   }
 

@@ -1,9 +1,9 @@
 ---
 name: setup
-description: Build the user's TASTE.md, their personal taste profile for writing. Use when the user says "set up taste", "create my TASTE.md", "learn my voice", or runs /tastee:setup, or when /tastee:critique finds no TASTE.md.
+description: Build the user's TASTE.md, their personal taste profile for writing. Use when the user says "set up taste", "create my TASTE.md", "learn my voice", or runs /sauce:setup, or when /sauce:critique finds no TASTE.md.
 ---
 
-# Tastee: setup
+# Sauce: setup
 
 Goal: create a `TASTE.md` in the user's current folder, so they never have to re-explain their style.
 
@@ -18,8 +18,8 @@ Goal: create a `TASTE.md` in the user's current folder, so they never have to re
 3. From the 3 samples, write 3 to 6 observations under "My rules", in the user's terms (for example "Short paragraphs, 1 to 2 lines", "Uses numbers in the first line"). Only describe what is actually in the samples. Do not invent traits.
 4. Fill the template at `templates/TASTE.md` (in this plugin's root folder, two levels up from this skill) with their answers and samples. Leave "Learned from my edits" empty.
 5. Show the finished file and ask: "Save this as TASTE.md here?" Write it only after a yes.
-6. Facts the gate should allow. Ask: "List the numbers and claims you're happy to post publicly (users, revenue, customers, credentials). Anything not on this list gets flagged." Show them as a list and, after a yes, save each one with the `tastee_add` tool (kind `approved_fact`). If the tool isn't available, write them under "## Approved facts" in a `claims.md` next to TASTE.md. If they skip, create `claims.md` anyway and tell them the gate will flag every number until they add facts.
-7. Tell them the next step: run `/tastee:critique` on any draft, or `/tastee:gate` before posting.
+6. Facts the gate should allow. Ask: "List the numbers and claims you're happy to post publicly (users, revenue, customers, credentials). Anything not on this list gets flagged." Show them as a list and, after a yes, save each one with the `sauce_add` tool (kind `approved_fact`). If the tool isn't available, write them under "## Approved facts" in a `claims.md` next to TASTE.md. If they skip, create `claims.md` anyway and tell them the gate will flag every number until they add facts.
+7. Tell them the next step: run `/sauce:critique` on any draft, or `/sauce:gate` before posting.
 
 ## Rules
 - The user's own words go in the file. Don't polish their samples.

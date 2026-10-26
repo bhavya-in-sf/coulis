@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Tastee from the command line: the same tools as the MCP server, logging included.
+"""Sauce from the command line: the same tools as the MCP server, logging included.
 
-    python3 scripts/tastee.py check "your draft"            # or: echo "draft" | ... check -
-    python3 scripts/tastee.py critique "your draft"
-    python3 scripts/tastee.py skip "why it didn't fit" --kind "Slack reply"
-    python3 scripts/tastee.py add approved_fact "1,200 users"
-    python3 scripts/tastee.py log                            # summary of uses and skips
+    python3 scripts/sauce.py check "your draft"            # or: echo "draft" | ... check -
+    python3 scripts/sauce.py critique "your draft"
+    python3 scripts/sauce.py skip "why it didn't fit" --kind "Slack reply"
+    python3 scripts/sauce.py add approved_fact "1,200 users"
+    python3 scripts/sauce.py log                            # summary of uses and skips
     add --profile DIR to use another profile (e.g. a company's)
 """
 import argparse
@@ -30,23 +30,23 @@ def main():
     read = lambda s: sys.stdin.read() if s == "-" else s
     extra = {"profile_dir": a.profile} if a.profile else {}
     if a.cmd == "log":
-        path = server.profile_dir() / "tastee-log.jsonl"
+        path = server.home_dir() / ("sauce-log.jsonl" if (server.home_dir() / "sauce-log.jsonl").exists() or not (server.home_dir() / "tastee-log.jsonl").exists() else "tastee-log.jsonl")
         rows = [json.loads(l) for l in path.read_text().splitlines()] if path.exists() else []
         print(f"{len(rows)} entries in {path}")
         print("by tool:", dict(collections.Counter(r["tool"] for r in rows)))
         print("verdicts:", dict(collections.Counter(r.get("verdict") for r in rows if r.get("verdict"))))
         for r in rows:
-            if r["tool"] == "tastee_skip":
+            if r["tool"] == "sauce_skip":
                 print(f"  skip {r['ts']}: {r.get('kind') or '?'}: {r['reason']}")
         return
     if a.cmd in ("check", "critique"):
-        out = server.call_tool("tastee_" + a.cmd, {"text": read(a.args[0]), "surface": a.surface, **extra})
+        out = server.call_tool("sauce_" + a.cmd, {"text": read(a.args[0]), "surface": a.surface, **extra})
     elif a.cmd == "skip":
-        out = server.call_tool("tastee_skip", {"reason": a.args[0], "kind": a.kind, **extra})
+        out = server.call_tool("sauce_skip", {"reason": a.args[0], "kind": a.kind, **extra})
     elif a.cmd == "add":
-        out = server.call_tool("tastee_add", {"kind": a.args[0], "text": a.args[1], **extra})
+        out = server.call_tool("sauce_add", {"kind": a.args[0], "text": a.args[1], **extra})
     else:
-        out = server.call_tool("tastee_learn", {"draft": read(a.args[0]), "final": read(a.args[1]), **extra})
+        out = server.call_tool("sauce_learn", {"draft": read(a.args[0]), "final": read(a.args[1]), **extra})
     if a.cmd == "check":
         print(out["verdict"])
         for i in out["issues"]:

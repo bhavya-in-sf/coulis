@@ -1,6 +1,6 @@
 # TASTE.md
 
-Your taste, in one file. Tastee reads this before every critique. You own it: edit or delete anything.
+Your taste, in one file. Sauce reads this before every critique. You own it: edit or delete anything.
 
 Scope: Bhavya's own LinkedIn and X writing. Built 22 Oct 2026 from 673 of her public LinkedIn posts (Nov 2022 to Sep 2026). Rules lean on the 105 posts from 2026, her current voice.
 
@@ -10,7 +10,7 @@ Scope: Bhavya's own LinkedIn and X writing. Built 22 Oct 2026 from 673 of her pu
 - What I want readers to do: save the resource, comment the keyword, follow for the next one.
 
 ## My voice in 3 samples
-<!-- Proposed by Tastee from your 2026 posts. Swap in the 3 you're proudest of. -->
+<!-- Proposed by Sauce from your 2026 posts. Swap in the 3 you're proudest of. -->
 
 ### Sample 1
 100 investors who actually back women building AI.
@@ -73,5 +73,5 @@ Most AI chat resets. You explain yourself, get something useful, close the app, 
 - No em dashes or double hyphens, ever. (House rule. 13% of 2026 posts still used one, so the gate blocks them.)
 
 ## Learned from my edits
-<!-- Added by /tastee:learn, only after you approve each one. -->
+<!-- Added by /sauce:learn, only after you approve each one. -->
 <!-- Format: - [YYYY-MM-DD] Rule. (Evidence: "what the draft said" → "what you posted") -->

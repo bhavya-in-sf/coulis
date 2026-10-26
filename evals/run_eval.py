@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tastee eval set. Two suites.
+"""Sauce eval set. Two suites.
 
 1. Regression (deterministic, free): run the gate over a persona's corpus and
    compare every verdict to a saved golden file. Same input must give the same
@@ -10,7 +10,7 @@
        python3 evals/run_eval.py regression --persona ~/Cowork/taste-layer/personas/pumpgtm \
            --golden ~/Cowork/taste-layer/personas/pumpgtm/backtest.json
 
-2. Edit pairs: does Tastee predict what a human actually changes?
+2. Edit pairs: does Sauce predict what a human actually changes?
    Each pair is {id, draft, final}. Free metrics come from the gate and learn.
    --critique adds a model call per pair (costs money, opt-in): does the critic's
    weakest-axis rewrite touch a sentence the human really changed?
@@ -26,7 +26,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from tastee_core import backtest, check, learn, profile_from_folder  # noqa: E402
+from sauce_core import backtest, check, learn, profile_from_folder  # noqa: E402
 
 
 def snapshot(persona):
@@ -72,7 +72,7 @@ def edits(persona, pairs_path, use_critique=False):
         learned += bool(rules)
         row = {"id": p["id"], "gate_flags": len(d_keys), "human_fixed": len(human_fixed), "rules": len(rules)}
         if use_critique:
-            from tastee_core import critique
+            from sauce_core import critique
             c = critique(p["draft"], profile)
             changed = set(sentences(p["draft"])) - set(sentences(p["final"]))
             before = c["rewrite"]["before"].strip()

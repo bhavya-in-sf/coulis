@@ -2,7 +2,7 @@
 """Taste API (REST, v1). Standard library HTTP server; put it behind a TLS proxy
 in production.
 
-    TASTEE_ENC_KEY=$(python3 api/admin.py new-enc-key) python3 api/server.py --port 8787
+    SAUCE_ENC_KEY=$(python3 api/admin.py new-enc-key) python3 api/server.py --port 8787
 
 Endpoints (all JSON, all need `Authorization: Bearer <key>` except /v1/health):
     GET    /v1/health
@@ -25,8 +25,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from tastee_core import __version__, check, critique, learn, profile_from_dict, profile_from_samples  # noqa: E402
-from tastee_core.profile import Rule  # noqa: E402
+from sauce_core import __version__, check, critique, learn, profile_from_dict, profile_from_samples  # noqa: E402
+from sauce_core.profile import Rule  # noqa: E402
 from api.store import Store  # noqa: E402
 
 MAX_BODY = 200_000  # bytes
@@ -86,7 +86,7 @@ class Api:
         except ValueError as e:
             return 400, {"error": {"code": "invalid", "message": str(e)}}
         except Exception as e:  # never echo drafts or stack traces to the client
-            print(f"[tastee] internal error: {type(e).__name__}", file=sys.stderr)
+            print(f"[sauce] internal error: {type(e).__name__}", file=sys.stderr)
             return 500, {"error": {"code": "internal", "message": "Internal error."}}
 
     def route(self, method, path, key, body):
@@ -152,7 +152,7 @@ class Api:
 
 def make_handler(api):
     class Handler(BaseHTTPRequestHandler):
-        server_version = "Tastee/" + __version__
+        server_version = "Sauce/" + __version__
 
         def _go(self):
             n = int(self.headers.get("content-length") or 0)
@@ -181,7 +181,7 @@ def main():
     a = ap.parse_args()
     api = Api(Store())
     if not api.store.cipher.enabled:
-        print("[tastee] WARNING: TASTEE_ENC_KEY not set, profiles stored unencrypted (dev only).", file=sys.stderr)
+        print("[sauce] WARNING: SAUCE_ENC_KEY not set, profiles stored unencrypted (dev only).", file=sys.stderr)
     print(f"Taste API v{__version__} on http://{a.host}:{a.port}", file=sys.stderr)
     ThreadingHTTPServer((a.host, a.port), make_handler(api)).serve_forever()
 

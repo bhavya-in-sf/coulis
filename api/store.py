@@ -35,10 +35,10 @@ def _hash(key):
 
 
 class Cipher:
-    """Encrypts profile blobs. TASTEE_ENC_KEY must be a Fernet key in production."""
+    """Encrypts profile blobs. SAUCE_ENC_KEY must be a Fernet key in production."""
 
     def __init__(self, key=None):
-        key = key or os.environ.get("TASTEE_ENC_KEY")
+        key = key or os.environ.get("SAUCE_ENC_KEY")
         self.enabled = bool(key)
         if self.enabled:
             from cryptography.fernet import Fernet
@@ -51,7 +51,7 @@ class Cipher:
         tag, body = blob[:2], blob[2:]
         if tag == b"F1":
             if not self.enabled:
-                raise RuntimeError("Profile is encrypted but TASTEE_ENC_KEY is not set.")
+                raise RuntimeError("Profile is encrypted but SAUCE_ENC_KEY is not set.")
             return self.f.decrypt(body)
         return body
 
@@ -63,7 +63,7 @@ class Cipher:
 
 class Store:
     def __init__(self, path=None, cipher=None):
-        self.path = path or os.environ.get("TASTEE_DB", "tastee.db")
+        self.path = path or os.environ.get("SAUCE_DB", "sauce.db")
         self.db = sqlite3.connect(self.path, check_same_thread=False)
         self.db.executescript(SCHEMA)
         self.lock = threading.Lock()

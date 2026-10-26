@@ -3,7 +3,7 @@
 A real founder's approved-facts list, published with her permission. The gate allows these numbers and flags any other claim about herself or her clients.
 
 owner: Bhavya
-product: Tastee
+product: Sauce
 
 ## Approved facts
 - 62K LinkedIn followers

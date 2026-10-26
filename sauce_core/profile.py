@@ -9,7 +9,7 @@ import re
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 
-SCHEMA_VERSION = "tastee.profile/v1"
+SCHEMA_VERSION = "sauce.profile/v1"
 
 
 @dataclass

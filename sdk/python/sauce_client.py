@@ -1,7 +1,7 @@
 """Python client for the Taste API. Standard library only.
 
-    from tastee_client import Tastee
-    t = Tastee(api_key="tst_...", base_url="http://localhost:8787")
+    from sauce_client import Sauce
+    t = Sauce(api_key="tst_...", base_url="http://localhost:8787")
     prof = t.create_profile(samples=["a post I'm proud of", "another"], owner="Sam", approved_facts=["1,200 users"])
     result = t.check(prof["id"], "Notely hit $20k MRR")
     if result["verdict"] == "BLOCK": ...
@@ -12,19 +12,19 @@ import urllib.error
 import urllib.request
 
 
-class TasteeError(Exception):
+class SauceError(Exception):
     def __init__(self, status, code, message):
         super().__init__(f"{status} {code}: {message}")
         self.status, self.code, self.message = status, code, message
 
 
-class Tastee:
+class Sauce:
     def __init__(self, api_key=None, base_url=None, timeout=60):
-        self.api_key = api_key or os.environ.get("TASTEE_API_KEY")
-        self.base_url = (base_url or os.environ.get("TASTEE_BASE_URL", "http://localhost:8787")).rstrip("/")
+        self.api_key = api_key or os.environ.get("SAUCE_API_KEY")
+        self.base_url = (base_url or os.environ.get("SAUCE_BASE_URL", "http://localhost:8787")).rstrip("/")
         self.timeout = timeout
         if not self.api_key:
-            raise ValueError("Pass api_key or set TASTEE_API_KEY.")
+            raise ValueError("Pass api_key or set SAUCE_API_KEY.")
 
     def _req(self, method, path, body=None):
         data = json.dumps(body).encode() if body is not None else None
@@ -38,7 +38,7 @@ class Tastee:
                 err = json.loads(e.read())["error"]
             except Exception:
                 err = {"code": "http_error", "message": str(e)}
-            raise TasteeError(e.code, err.get("code"), err.get("message")) from None
+            raise SauceError(e.code, err.get("code"), err.get("message")) from None
 
     # profiles
     def create_profile(self, samples=None, profile=None, **fields):

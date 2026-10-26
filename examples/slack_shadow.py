@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """sauce shadow mode for a Slack channel: read drafts, run the gate, log results. Posts nothing.
 
-    python3 examples/slack_shadow.py --env ~/.tastee/secrets/pumpgtm-slack.env \
-        --profile ~/Cowork/taste-layer/personas/pumpgtm --out ~/.tastee/shadow/pumpgtm
+    python3 examples/slack_shadow.py --env ~/.sauce/secrets/pumpgtm-slack.env \
+        --profile ~/Cowork/taste-layer/personas/pumpgtm --out ~/.sauce/shadow/pumpgtm
     python3 examples/slack_shadow.py ... --digest          # print what it would have caught, by day
 
 The .env file holds two lines: SLACK_BOT_TOKEN=xoxb-...  and  SLACK_CHANNEL=C...
@@ -20,7 +20,7 @@ import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from tastee_core import check, learn, profile_from_folder  # noqa: E402
+from sauce_core import check, learn, profile_from_folder  # noqa: E402
 
 MIN_WORDS = 20
 

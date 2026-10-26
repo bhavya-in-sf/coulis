@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tastee learn: turn an edit into a rule.
+"""Sauce learn: turn an edit into a rule.
 
 Compares what was drafted with what actually went out (or what a human
 changed after a HALT) and proposes TASTE.md rules from the difference.

@@ -6,8 +6,8 @@ Status: developer preview. Runs locally. Not a hosted service yet, and nothing h
 
 ## Run it
 ```
-python3 api/admin.py new-enc-key                     # save as TASTEE_ENC_KEY in a secret manager
-export TASTEE_ENC_KEY=...  TASTEE_DB=tastee.db
+python3 api/admin.py new-enc-key                     # save as SAUCE_ENC_KEY in a secret manager
+export SAUCE_ENC_KEY=...  SAUCE_DB=sauce.db
 python3 api/admin.py create-key --owner you --rate 60 # prints a key once
 python3 api/server.py --port 8787
 ```
@@ -45,13 +45,13 @@ curl -X POST localhost:8787/v1/check -H "Authorization: Bearer $KEY" \
 
 ### Critique response shape
 `axes` has exactly 8 keys: `clarity`, `proof`, `why_you`, `ask` (checkable) and `hook`, `voice`, `boldness`, `rhythm` (taste). Each is `{score 1-10, why, quote}`. Plus `slop_found`, `weakest_axis`, `rewrite {before, after}`, `missing_proof`, and two more checks answered in a sentence or left empty: `bias` (who is missing from the story, or shown only as a stereotype) and `private_data` (a client, company or personal detail that may not belong in public).
-Model: `TASTEE_MODEL` (default `claude-opus-5-5`), effort `TASTEE_EFFORT` (default `low`, because it runs on every draft).
+Model: `SAUCE_MODEL` (default `claude-opus-5-5`), effort `SAUCE_EFFORT` (default `low`, because it runs on every draft).
 
-## Profile format (`tastee.profile/v1`)
+## Profile format (`sauce.profile/v1`)
 The same data as the plug-in's `TASTE.md` + `claims.md`, as JSON: `owner`, `product`, `who_i_write_as`, `audience`, `goal`, `samples[]`, `rules[] {text, source: user|learned, approved, added}`, `approved_facts[]`, `needs_confirm[]`, `banned[] {why, regex}`, `story_checks[] {why, regex}`. Converts both ways (`Profile.to_files()`).
 
 ## Privacy defaults
-- Profiles and pending rules are **encrypted at rest** (Fernet). Without `TASTEE_ENC_KEY` the server warns and runs in dev mode.
+- Profiles and pending rules are **encrypted at rest** (Fernet). Without `SAUCE_ENC_KEY` the server warns and runs in dev mode.
 - **No request logging.** The server logs no paths, bodies or IPs.
 - **Drafts are never stored.** Metering records counts and token totals only.
 - **No training on customer data.** Nothing sent to the API is used to train any model.
@@ -61,10 +61,10 @@ The same data as the plug-in's `TASTE.md` + `claims.md`, as JSON: `owner`, `prod
 `{"error": {"code": "...", "message": "..."}}` with status 400 (`missing_field`, `bad_json`, `invalid`), 401 `unauthorized`, 404 `not_found`, 413 `too_long`/`too_large`, 429 `rate_limited`, 500 `internal` (never echoes your draft).
 
 ## Clients
-- Python: `sdk/python/tastee_client.py` (standard library only)
+- Python: `sdk/python/sauce_client.py` (standard library only)
 - TypeScript: `sdk/typescript` (zero dependencies, global `fetch`)
 - MCP: `mcp/server.py` (Claude, Cursor, any MCP client). Ships inside the Claude plug-in from v0.2.
-- Example app: `examples/writing_app.py` (Claude drafts, Tastee gates, one revision if blocked)
+- Example app: `examples/writing_app.py` (Claude drafts, Sauce gates, one revision if blocked)
 
 ## Evals
 ```

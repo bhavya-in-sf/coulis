@@ -1,5 +1,5 @@
 {
-  "name": "tastee",
+  "name": "sauce",
   "version": "0.2.0",
   "description": "TypeScript client for the Taste API: the gate, the critic step and learning from edits.",
   "license": "MIT",

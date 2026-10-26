@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tastee post gate: the checkable half.
+"""Sauce post gate: the checkable half.
 
 Checks a draft against a persona folder (TASTE.md + claims.md) before it posts.
 No AI calls, no network. Same input always gives the same answer, so an agent

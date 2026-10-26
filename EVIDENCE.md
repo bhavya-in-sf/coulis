@@ -1,6 +1,6 @@
 # Evidence ledger
 
-Every rule in Tastee traces back to one of two kinds of source, always labeled:
+Every rule in Sauce traces back to one of two kinds of source, always labeled:
 
 - **Research (E):** a paper or dataset, linked, with what it proves and what it doesn't.
 - **Practitioner (P):** real editing experience, labeled as experience, not research.

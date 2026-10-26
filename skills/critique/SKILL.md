@@ -1,14 +1,14 @@
 ---
 name: critique
-description: The critic step. Score a piece of writing (post, launch announcement, cold email, bio, investor update) on 8 separate taste axes against the user's TASTE.md, then rewrite only the weakest part. Use when the user says "critique this", "does this sound like me", "taste check", "make this less generic", or runs /tastee:critique.
+description: The critic step. Score a piece of writing (post, launch announcement, cold email, bio, investor update) on 8 separate taste axes against the user's TASTE.md, then rewrite only the weakest part. Use when the user says "critique this", "does this sound like me", "taste check", "make this less generic", or runs /sauce:critique.
 ---
 
-# Tastee: critique (the critic step)
+# Sauce: critique (the critic step)
 
 Goal: check a draft against what good looks like for this user, and send it back if it's off.
 
 ## Before scoring
-1. Read `TASTE.md` in the current folder. If there is none, say so and offer `/tastee:setup`. You can still critique using the seed defaults, but say that you are.
+1. Read `TASTE.md` in the current folder. If there is none, say so and offer `/sauce:setup`. You can still critique using the seed defaults, but say that you are.
 2. Read `reference/axes.md` and `reference/seed-taste.md` in this plugin's root folder (two levels up from this skill). TASTE.md wins over the seed whenever they disagree.
 
 ## Output format
@@ -42,4 +42,4 @@ Keep it tight. Exactly this shape:
 - Rewrite only the weakest part, not the whole draft, unless the user asks. The user stays the author.
 - Do not invent facts, numbers, stories or experience.
 - This step runs only when called, so normal drafting stays fast.
-- Offer at the end, in one line: "After you post, run /tastee:learn with this draft and your final version so I learn what you changed."
+- Offer at the end, in one line: "After you post, run /sauce:learn with this draft and your final version so I learn what you changed."
