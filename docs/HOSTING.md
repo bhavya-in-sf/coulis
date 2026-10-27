@@ -18,7 +18,7 @@ curl -s https://sauce-api.fly.dev/v1/health
 
 ## Give someone an API key
 ```bash
-fly ssh console -C "python3 api/admin.py create-key --name 'tester name'"
+fly ssh console -C "python3 api/admin.py create-key --owner 'tester name'"
 ```
 Send them the key and `docs/API.md`. Keys are stored hashed; a lost key is replaced, not recovered.
 
