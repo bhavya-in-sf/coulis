@@ -59,6 +59,25 @@ def drafts_in(text):
     return found
 
 
+def edited_pair(checked, drafts, min_change=0.15, max_change=0.8):
+    """The checked draft and the final draft, when they are the same piece edited (not a different post)."""
+    def toks(t):
+        return re.findall(r"[a-z0-9']+", t.lower())
+    for final in drafts:
+        f = toks(final)
+        if len(f) < 12:
+            continue
+        for c in checked:
+            cs = toks(c)
+            if not cs or abs(len(cs) - len(f)) > max(len(cs), len(f)) * 0.5:
+                continue
+            same = len(set(cs) & set(f)) / max(len(set(cs) | set(f)), 1)
+            change = 1 - same
+            if min_change <= change <= max_change:
+                return c, final
+    return None
+
+
 def main():
     if (os.environ.get("SAUCE_HOOK") or os.environ.get("TASTEE_HOOK", "1")) == "0":
         return
@@ -69,14 +88,29 @@ def main():
         turn = last_turn(data["transcript_path"])
     except Exception:
         return  # never get in the way on errors
-    used_sauce, text = False, []
+    used_sauce, learned, checked, text = False, False, [], []
     for r in turn:
         for b in r.get("message", {}).get("content", []) or []:
             if b.get("type") == "tool_use" and "sauce_" in b.get("name", ""):
                 used_sauce = True
+                if b["name"].endswith("sauce_learn"):
+                    learned = True
+                if b["name"].endswith("sauce_check"):
+                    checked.append(str((b.get("input") or {}).get("text", "")))
             elif b.get("type") == "text":
                 text.append(b.get("text", ""))
     drafts = drafts_in("\n".join(text))
+    pair = edited_pair(checked, drafts) if (checked and drafts and not learned) else None
+    if pair:
+        # the draft that was checked is not the draft that went out: that difference is taste. Learn from it, once.
+        print(json.dumps({
+            "decision": "block",
+            "reason": ("Sauce: the final draft in this reply differs from the version that was checked. Call sauce_learn "
+                       "with draft = the checked version and final = the version in the reply (same profile_dir as the check), "
+                       "then give the reply again with the proposed rules listed in one short line each, for the user to approve or reject. "
+                       "Do not save any rule without their yes."),
+        }))
+        return
     if drafts and not used_sauce:
         print(json.dumps({
             "decision": "block",

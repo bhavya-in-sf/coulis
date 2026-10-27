@@ -4,7 +4,7 @@
 
 **The taste layer for AI. It learns what good looks like to you, and checks every draft before you see it.**
 
-A free, open-source plug-in for Claude, Claude Desktop and Cursor. It starts with founder writing: launch posts, LinkedIn and X posts, cold emails, bios, investor updates.
+A free, open-source check that runs inside Claude Code, Claude Desktop and Cursor today, and behind an API for everything else. It starts with founder writing: launch posts, LinkedIn and X posts, cold emails, bios, investor updates.
 
 ## What it does, on a real draft
 A typical AI draft, checked against a real founder's profile ([personas/bhavya](personas/bhavya)):

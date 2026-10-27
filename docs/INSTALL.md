@@ -66,3 +66,6 @@ Just ask in plain words:
 - **Tools don't show up:** check that the path in `args` is right (`ls /Users/YOU/sauce/mcp/server.py`) and restart the app.
 - **Every number gets flagged:** your `claims.md` has no approved facts yet. Add them with `sauce_add`.
 - **`python3` not found:** install Python from python.org, or use the full path (`which python3`).
+
+### ChatGPT, Slack, Google Docs, anything else
+These can't run a local MCP server. They call the hosted API instead (see `HOSTING.md` and `API.md`): one `POST /v1/check` with the draft and your profile id. The Chrome extension for LinkedIn and Gmail compose boxes is next.
