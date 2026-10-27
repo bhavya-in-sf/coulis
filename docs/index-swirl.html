@@ -38,7 +38,8 @@ nav .mark svg{width:28px;height:28px}
 nav .links{display:flex;gap:26px;align-items:center;font-size:14px}
 nav .links a{text-decoration:none;color:var(--muted)}
 nav .links a:hover{color:var(--ink)}
-nav .links .btn{height:38px;padding:0 16px;font-size:14px}
+nav .links .btn{height:38px;padding:0 16px;font-size:14px;color:#fff}
+nav .links .btn:hover{color:#fff}
 
 /* hero */
 .hero{padding:calc(130px + env(safe-area-inset-top,0px)) 0 0;text-align:center;position:relative}
@@ -171,7 +172,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 <header class="hero" id="top">
   <div class="wrap">
     <p class="eyebrow">Introducing sauce</p>
-    <h1 id="h1" style="margin-top:14px"><span class="w"><span>Sound</span></span> <span class="w"><span>like</span></span> <span class="w"><span class="bubble">you.</span></span><br><span class="w"><span>Even</span></span> <span class="w"><span>when</span></span> <span class="w"><span>AI</span></span> <span class="w"><span>writes</span></span> <span class="w"><span>it.</span></span></h1>
+    <h1 id="h1" style="margin-top:14px"><span class="w"><span>Sound</span></span> <span class="w"><span>like</span></span> <span class="w"><span><span class="bubble">you.</span></span></span><br><span class="w"><span>Even</span></span> <span class="w"><span>when</span></span> <span class="w"><span>AI</span></span> <span class="w"><span>writes</span></span> <span class="w"><span>it.</span></span></h1>
     <p class="lede">An editor for AI drafts, not a detector. sauce reads every draft against <b>your own facts and your own voice</b> before it goes out. It never writes a word for you. Free, open source, inside Claude and Cursor.</p>
     <div class="acts"><a class="btn red" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Get sauce, free</a><a class="btn ghost" href="#frag">Try it on this page</a></div>
     <p class="fine">No account. No credit card. Your taste file stays on your Mac.</p>
@@ -368,7 +369,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
     gsap.to("#swirl",{rotate:360,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:1.2}});
     gsap.fromTo(".stage .frag",{yPercent:4},{yPercent:-4,ease:"none",scrollTrigger:{trigger:".stage",start:"top bottom",end:"bottom top",scrub:true}});
     document.querySelectorAll(".split .vis").forEach(function(v){gsap.fromTo(v,{yPercent:8,rotate:1},{yPercent:-8,rotate:-1,ease:"none",scrollTrigger:{trigger:v,start:"top bottom",end:"bottom top",scrub:true}})});
-    document.querySelectorAll(".bubble").forEach(function(b){gsap.from(b,{scale:.6,rotate:-8,opacity:0,duration:.9,ease:"back.out(2)",scrollTrigger:{trigger:b,start:"top 88%"}})});
+    document.querySelectorAll("section .bubble").forEach(function(b){gsap.from(b,{scale:.6,rotate:-8,opacity:0,duration:.9,ease:"back.out(2)",scrollTrigger:{trigger:b,start:"top 88%"}})});
     document.querySelectorAll(".pcard .big").forEach(function(b){gsap.from(b,{opacity:0,y:30,duration:1,ease:"power3.out",scrollTrigger:{trigger:b,start:"top 85%"}})});
     gsap.to(".close .bigswirl",{rotate:180,ease:"none",scrollTrigger:{trigger:".close",start:"top bottom",end:"bottom top",scrub:true}});
   }
