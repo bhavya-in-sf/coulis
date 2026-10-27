@@ -118,6 +118,12 @@ section{padding:clamp(96px,11vw,160px) 0;position:relative}
 .cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .cards4 .card{min-height:240px}.cards4 .card h3{font-size:22px;margin-top:0}
 
+.cmp{width:100%;border-collapse:collapse;font-size:15px;min-width:640px}
+.cmp th,.cmp td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line)}
+.cmp th{font-size:13px;color:var(--muted);font-weight:600}
+.cmp td:first-child{color:var(--muted)}
+.cmp td:last-child,.cmp th:last-child{background:var(--red-soft)}
+.cmp td b{color:var(--red-dark)}
 .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:36px}
 .badge{font-size:13px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
 .badge.on{color:var(--ink);border-color:var(--ink)}
@@ -173,7 +179,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
   <div class="wrap">
     <p class="eyebrow">Introducing sauce</p>
     <h1 id="h1" style="margin-top:14px"><span class="w"><span>Sound</span></span> <span class="w"><span>like</span></span> <span class="w"><span><span class="bubble">you.</span></span></span><br><span class="w"><span>Even</span></span> <span class="w"><span>when</span></span> <span class="w"><span>AI</span></span> <span class="w"><span>writes</span></span> <span class="w"><span>it.</span></span></h1>
-    <p class="lede">An editor for AI drafts, not a detector. sauce reads every draft against <b>your own facts and your own voice</b> before it goes out. It never writes a word for you. Free, open source, inside Claude and Cursor.</p>
+    <p class="lede">Humanizers hide the tells. sauce checks the draft against <b>your own facts and your own voice</b>, sends it back with each problem quoted, and never writes a word for you. Not a detector either: it never guesses who wrote it. Free, open source, inside Claude and Cursor.</p>
     <div class="acts"><a class="btn red" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Get sauce, free</a><a class="btn ghost" href="#frag">Try it on this page</a></div>
     <p class="fine">No account. No credit card. Your taste file stays on your Mac.</p>
     <svg class="swirl" id="swirl" viewBox="0 0 320 300" aria-label="The sauce swirl" role="img">
@@ -195,14 +201,14 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
           <button type="button" class="chip" data-try="100 investors who back women building AI. One list. Comment INVESTORS and I'll send it.">Her real post</button>
           <button type="button" class="chip" data-try="I just passed 62K followers on LinkedIn. Here is what I'd tell my 2022 self.">An approved number</button>
         </div>
-        <div class="learn">Runs in your browser on <b>Bhavya's real profile</b>. Approved: 62K followers, Top Voice 2024, about 3,000 readers, 100 investors, 673 posts. Banned: em dashes, "game-changer", "delve". Edit the draft; it re-checks as you type.</div>
+        <div class="learn">Runs in your browser on <b>Bhavya's real profile</b>. Approved: 62K followers, Top Voice 2024, about 3,000 readers, 100 investors, 673 posts. Banned: em dashes, "game-changer", "delve". Edit the draft; it re-checks as you type. sauce never guesses who wrote this: these are your rules.</div>
       </div>
       <div class="shadow" aria-hidden="true"></div>
     </div>
   </div>
   <div class="strip" aria-label="Tested on real writing"><div class="track">
-    <span>Tested on <b>673</b> of one founder's posts</span><span><b>68%</b> pass as written</span><span><b>46 of 47</b> team drafts pass after one approved fact</span><span><b>41 of 44</b> posts read their author's voice</span><span><b>4 ms</b> per check, no model call</span><span><b>2,437</b> real posts behind the rules</span><span>Open source, <b>MIT</b></span>
-    <span>Tested on <b>673</b> of one founder's posts</span><span><b>68%</b> pass as written</span><span><b>46 of 47</b> team drafts pass after one approved fact</span><span><b>41 of 44</b> posts read their author's voice</span><span><b>4 ms</b> per check, no model call</span><span><b>2,437</b> real posts behind the rules</span><span>Open source, <b>MIT</b></span>
+    <span>Tested on <b>673</b> of one founder's posts</span><span><b>68%</b> pass as written</span><span><b>46 of 47</b> team drafts pass after one approved fact</span><span><b>41 of 44</b> posts read their author's voice</span><span><b>4 ms</b> per check, no model call</span><span><b>2,437</b> real posts behind the rules</span><span>LinkedIn cuts reach of posts that read as AI by about <b>40%</b></span><span>Open source, <b>MIT</b></span>
+    <span>Tested on <b>673</b> of one founder's posts</span><span><b>68%</b> pass as written</span><span><b>46 of 47</b> team drafts pass after one approved fact</span><span><b>41 of 44</b> posts read their author's voice</span><span><b>4 ms</b> per check, no model call</span><span><b>2,437</b> real posts behind the rules</span><span>LinkedIn cuts reach of posts that read as AI by about <b>40%</b></span><span>Open source, <b>MIT</b></span>
   </div></div>
 </header>
 
@@ -285,6 +291,14 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
     <div class="card reveal"><h3>Your facts, your file</h3><p>Two text files on your machine. No account.</p></div>
     <div class="card reveal"><h3>Reproducible</h3><p>Every number on this page reruns from the repo. 19 tests, golden files, open source.</p></div>
   </div>
+  <div class="tablewrap reveal" style="margin-top:48px;overflow-x:auto"><table class="cmp">
+    <tr><th></th><th>Humanizer skills</th><th>Tell linters</th><th>Grammarly, Jasper</th><th>sauce</th></tr>
+    <tr><td>Rewrites your text</td><td>Yes</td><td>No</td><td>Yes</td><td><b>Never</b></td></tr>
+    <tr><td>Checks your approved facts</td><td>No</td><td>No</td><td>No</td><td><b>Yes</b></td></tr>
+    <tr><td>Learns rules from your edits</td><td>No</td><td>No</td><td>No</td><td><b>Yes</b></td></tr>
+    <tr><td>A voice profile you own</td><td>A prompt</td><td>No</td><td>Team tones</td><td><b>Two files on your Mac</b></td></tr>
+    <tr><td>Guesses who wrote it</td><td>No</td><td>No</td><td>Detector</td><td><b>Never</b></td></tr>
+  </table></div>
 </div></section>
 
 <section class="flow"><div class="wrap">
