@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>sauce</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Does your AI sound like you? sauce is a free, open-source Claude plug-in that learns your taste and checks every draft before it goes out.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Archivo:ital,wght@0,400;0,500;0,700;0,900;1,900&display=swap" rel="stylesheet">
+<style>
+/* Direction: "dressed as something else", the American diner. Brand palette and faces kept.
+   Idea: the gate's output is a diner order ticket. Live thing: the taste-test counter. */
+:root{
+  --wine:#4A1518; --ketchup:#B3241C; --lemonade:#F2EBC4; --mustard:#E8C547;
+  --eighties:#2F4466; --blue:#AFC3DA; --cream:#F5EFE6; --ink:#1E1A1A; --paper:#FFFDF7;
+  --soft:#5A4F4C; --pass:#2E6B3A;
+  --script:'Pacifico','Brush Script MT',cursive;
+  --sans:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --s1:clamp(38px,6.2vw,92px); --s2:clamp(30px,4vw,52px); --s3:clamp(22px,2.4vw,30px); --s4:17px; --s5:14px;
+  --gap:clamp(72px,9vw,120px); --m:clamp(20px,4vw,56px);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:var(--s4);line-height:1.5;overflow-x:hidden}
+::selection{background:var(--mustard);color:var(--ink)}
+:focus-visible{outline:3px solid var(--eighties);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(var(--m),env(safe-area-inset-left,0px));padding-right:max(var(--m),env(safe-area-inset-right,0px))}
+h1,h2,h3{font-weight:800;font-style:normal;letter-spacing:-.02em;line-height:1;margin:0;text-wrap:balance}
+h2{font-size:var(--s2)}
+p{margin:0}
+.lede{font-size:var(--s3);line-height:1.3;max-width:34ch}
+.script{font-family:var(--script);font-style:normal;font-weight:400;letter-spacing:0}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--ketchup);color:var(--cream);border:0;border-radius:999px;padding:16px 28px;
+  font:900 var(--s4) var(--sans);text-decoration:none;transition:transform .25s cubic-bezier(.16,1,.3,1),background .2s}
+.btn:hover{background:var(--wine);transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--cream)}
+.checker{height:18px;background:conic-gradient( /* taste-skill-ignore: brand checkerboard strip, flat colours */ var(--ink) 25%,var(--cream) 0 50%,var(--ink) 0 75%,var(--cream) 0) 0 0/18px 18px}
+
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--cream)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--wine)}
+.logo .word{font-family:var(--script);font-size:30px;line-height:1}
+.navlinks{display:flex;gap:22px}
+.navlinks a{color:var(--eighties);font-weight:700;text-decoration:none;font-size:var(--s5)}
+.navlinks a:hover{color:var(--ketchup)}
+
+/* hero: the counter. Bottle on the right, sign on the left, one action. */
+.hero{background:var(--cream);position:relative}
+.hero .wrap{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:start;padding-block:40px 56px}
+.hero .lines li{grid-template-columns:58px 1fr;gap:10px}
+.hero .lines .d{font-size:13px}
+.hero .ticket{padding:20px 22px 28px}
+.hero .stamp{font-size:30px;margin:14px 0 10px}
+.hero .facts{display:none}
+@media (max-width:1200px){.hero .wrap{grid-template-columns:1fr;gap:28px}.hero .pitch{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:end;padding-top:12px}.hero .pitch h1{grid-column:1}.hero .pitch .lede{margin-bottom:0}.hero .pitch .ctas{grid-column:1}.hero .pitch .risk{grid-column:2;margin-top:0}}
+.hero h1{font-size:clamp(36px,4.6vw,68px);margin:8px 0 18px}
+.hero .lede{color:var(--eighties);margin-bottom:24px;max-width:30ch}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.hero .link{color:var(--wine);font-weight:700}
+.hero .risk{margin-top:16px;font-size:var(--s5);color:var(--soft);max-width:36ch}
+.hero .pitch{padding-top:24px}
+.drip{transform-origin:top center;animation:drip 3.2s cubic-bezier(.16,1,.3,1) infinite}
+@keyframes drip{0%{transform:scaleY(.2)}60%{transform:scaleY(1)}100%{transform:scaleY(1)}}
+
+/* the bench: pad and ticket, now in the first screen */
+.bench{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.pad{background:var(--lemonade);padding:22px}
+.pad label{display:block;font-weight:700;margin-bottom:10px}
+textarea{width:100%;min-height:150px;resize:vertical;border:0;background:var(--paper);color:var(--ink);padding:14px;font:500 15px/1.5 var(--sans);border:2px solid var(--ink)}
+.facts{margin-top:14px;font-size:13px;color:var(--soft)}
+.facts b{color:var(--ink)}
+.facts span{display:inline-block;background:var(--paper);padding:1px 8px;margin:4px 5px 0 0;border:1.5px solid var(--ink);color:var(--ink);font-weight:500}
+.tries{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+.tries button{background:var(--paper);border:0;border-radius:999px;padding:7px 12px;font:700 13px var(--sans);color:var(--ink)}
+.tries button:hover{background:var(--mustard)}
+/* proof strip: four numbers, one line, under the first screen */
+.strip{background:var(--ink);color:var(--cream)}
+.strip .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding-block:18px}
+.strip a{color:var(--cream);text-decoration:none;font-size:var(--s5);line-height:1.3}
+.strip a:hover{color:var(--mustard)}
+.strip b{display:block;font-size:var(--s3);font-weight:800;color:var(--mustard);font-variant-numeric:tabular-nums}
+
+/* the five won'ts */
+.wont{background:var(--cream);padding-block:var(--gap)}
+.wont h2{max-width:18ch}
+.wont .lede{color:var(--soft);margin-top:16px;max-width:46ch}
+.rules{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:24px;counter-reset:w}
+.rules li{counter-increment:w;padding-top:14px;border-top:2px solid var(--ink)}
+.rules li::before{content:counter(w);display:block;font:800 var(--s3) var(--sans);color:var(--ketchup);margin-bottom:8px}
+.rules b{display:block;font-size:20px;font-weight:800;margin-bottom:6px}
+.rules p{color:var(--soft);font-size:15px;line-height:1.45}
+.wont .src{margin-top:32px;font-size:13px;color:var(--soft);max-width:80ch}
+/* the ticket: the gate's real output as printed paper */
+.ticket{background:var(--paper);padding:26px 28px 34px;position:relative;box-shadow:0 18px 40px -22px rgba(30,26,26,.45); /* taste-skill-ignore: the ticket is paper lifted off the counter */transform-origin:top center;
+  -webkit-mask:linear-gradient(#000 0 0) /* taste-skill-ignore: a mask for the torn ticket edge, not a fill */ top/100% calc(100% - 12px) no-repeat,radial-gradient(circle at 7px 100%,transparent 6px,#000 6.5px) bottom/14px 12px repeat-x}
+.ticket .top{display:flex;justify-content:space-between;align-items:baseline;font-weight:700;font-size:var(--s5);color:var(--soft)}
+.ticket .top b{font-size:var(--s4);color:var(--ink)}
+.stamp{display:inline-block;font:800 clamp(32px,3.6vw,44px)/1 var(--sans);color:var(--ketchup);border:3px solid var(--ketchup);padding:6px 14px 4px;transform:rotate(-2deg);margin:22px 0 14px;letter-spacing:-.02em;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.stamp.PASS{color:var(--pass);border:4px solid var(--pass)}
+.stamp.FIX{color:var(--eighties);border:4px solid var(--eighties)}
+.stamp.pop{transform:rotate(-2deg) scale(1.08)}
+.lines{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.lines li{display:grid;grid-template-columns:92px 1fr;gap:12px;align-items:baseline;padding-top:10px;background:none}
+.lines li+li{padding-top:14px}
+.lines .lvl{font-weight:900;font-size:var(--s5);color:var(--ketchup)}
+.lines .lvl.FIX{color:var(--eighties)}
+.lines .q{font-weight:700}
+.lines .d{color:var(--soft);font-size:var(--s5)}
+.ticket .foot{margin-top:18px;font-size:var(--s5);color:var(--soft)}
+.ticket.print{animation:print .7s cubic-bezier(.16,1,.3,1)}
+@keyframes print{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+
+/* three legs, inside the plate */
+.legs{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:0 0 56px}
+.plate .sub{font-size:var(--s3);font-weight:800;margin-bottom:36px}
+.legs b{display:block;font-size:22px;font-style:italic;font-weight:900}
+.legs p{max-width:30ch}
+
+/* proof: a lineless table */
+.proof{background:var(--lemonade);color:var(--ink);padding-block:var(--gap)}
+.proof h2{max-width:16ch}
+.proof h2 span{display:inline}
+.proof .lede{color:var(--soft);margin-top:18px;max-width:48ch}
+table{width:100%;border-collapse:collapse;margin-top:48px;font-variant-numeric:tabular-nums}
+th{text-align:left;font-weight:700;font-size:var(--s5);color:var(--soft);padding:0 12px 14px}
+td{padding:16px 12px;vertical-align:top}
+tbody tr:nth-child(odd){background:rgba(30,26,26,.05)}
+td:last-child,th:last-child{width:36%}
+td:first-child{white-space:nowrap}
+td b{font-size:var(--s3);font-weight:800;color:var(--ketchup)}
+.proof .note{margin-top:24px;font-size:var(--s5);color:var(--soft);max-width:70ch}
+
+/* features: the ticket as a plate in a manual, with margin notes */
+.plate{background:var(--cream);padding-block:var(--gap)}
+.plate .grid{display:grid;grid-template-columns:1fr 400px 1fr;gap:40px;align-items:start}
+.plate h2{margin-bottom:48px;max-width:16ch}
+.notes{display:grid;gap:30px;padding-top:120px}
+.notes.l{text-align:right}
+.note{max-width:26ch;transition:opacity .3s}
+.notes.l .note{margin-left:auto}
+.note b{display:block;font-size:19px;font-weight:700;margin-bottom:4px}
+.note p{color:var(--soft);font-size:15px;line-height:1.45}
+.plate .ticket{box-shadow:none}
+.plate .ticket [data-part]{transition:opacity .3s}
+.plate.dim .ticket [data-part]{opacity:.3}
+.plate.dim .ticket [data-part].on{opacity:1}
+.rule{margin-top:14px;padding:12px 14px;background:var(--lemonade);font-size:var(--s5)}
+.rule b{color:var(--wine)}
+
+/* cta: one word is the button */
+.join{display:block;background:var(--ketchup);color:var(--cream);text-decoration:none;position:relative;height:38svh;min-height:260px;overflow:hidden;transition:background .15s}
+.join:hover,.join:focus-visible{background:var(--wine)}
+.join .say{position:absolute;left:var(--m);top:28px;font-size:18px;max-width:32ch;font-weight:500}
+.join .arrow{position:absolute;right:var(--m);top:28px;width:40px;height:40px}
+.join .word{position:absolute;left:0;right:0;bottom:-1vw;text-align:center;font:800 clamp(72px,14vw,220px)/1 var(--sans);letter-spacing:-.04em;white-space:nowrap}
+
+/* seats: form, install, newsletter */
+.seats{background:var(--blue);padding-block:var(--gap)}
+.seats .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
+.booth{background:var(--paper);padding:30px}
+.booth h3{font-size:30px;margin-bottom:8px}
+.booth p{color:var(--soft)}
+.picks{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 6px}
+.picks label{background:var(--cream);border:2px solid var(--ink);border-radius:999px;padding:8px 14px;font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.picks input{accent-color:var(--ketchup);margin:0}
+.picks label:has(input:checked){background:var(--ink);color:var(--cream)}
+label.f{display:block;font-weight:700;font-size:15px;margin:14px 0 6px}
+input,select{width:100%;padding:13px 14px;border:0;border:2px solid var(--ink);font:inherit;background:var(--cream);color:var(--ink)}
+.msg{min-height:24px;margin-top:12px;font-weight:700;color:var(--wine)}
+.msg.ok{color:var(--pass)}
+.stack{display:grid;gap:24px}
+.booth pre{margin:12px 0;background:var(--ink);color:var(--lemonade);padding:14px 16px;font-size:14px;overflow-x:auto;line-height:1.6}
+
+/* footer: invitation over a cropped name */
+footer{background:var(--ink);color:var(--cream);overflow:hidden;position:relative;padding-top:var(--gap)}
+footer .top{display:grid;grid-template-columns:7fr 5fr;gap:32px}
+footer h2{color:var(--cream);font-size:clamp(34px,5vw,72px);max-width:12ch}
+footer .links{display:grid;gap:10px;justify-items:start;align-content:start}
+footer .links a{color:var(--mustard);font-weight:700;text-decoration:none}
+footer .links a:hover{color:var(--cream)}
+footer .legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--blue);margin-top:72px}
+footer .giant{font-family:var(--script);color:var(--wine);font-size:clamp(96px,16vw,260px);line-height:.9;white-space:nowrap;text-align:center;transform:translateY(22%);margin-top:8px;user-select:none}
+
+/* entrances: parts arrive in reading order, once; visible without script */
+.rise{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.no-js .rise,.rise.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;padding-block:32px 40px}
+  .hero .pitch{display:block;padding-top:0}
+  .hero .risk{margin-top:14px}
+  .hero .lede{margin-bottom:22px}
+  .bench,.seats .grid,footer .top{grid-template-columns:1fr}
+  .strip .wrap{grid-template-columns:1fr 1fr}
+  .rules{grid-template-columns:1fr 1fr}
+  .plate .grid{grid-template-columns:1fr}
+  .plate h2{text-align:left}
+  .notes{padding-top:0;grid-template-columns:1fr 1fr;gap:20px}
+  .notes.l{text-align:left}.notes.l .note{margin-left:0}
+  .legs{grid-template-columns:1fr}
+  .navlinks{display:none}
+  th{display:none}
+  table,tbody,tr,td{display:block}
+  td{padding:6px 12px}
+  tbody tr{padding:12px 0}
+  td:last-child{text-align:left}
+  .join{height:32svh;min-height:220px}
+  .join .say{font-size:16px;max-width:24ch}
+  .join .arrow{width:28px;height:28px}
+  .join .word{font-size:min(22vw,110px)}
+  footer .giant{font-size:24vw;text-align:left;padding-left:var(--m)}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rise{opacity:1;transform:none}
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.remove('no-js')</script>
+
+<nav aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="sauce, home">
+      <svg width="20" height="26" viewBox="0 0 32 40" aria-hidden="true"><rect x="12" y="0" width="8" height="6" rx="2" fill="#F5EFE6" stroke="#1E1A1A" stroke-width="1.5"/><path d="M10 6h12l2 6v24a3 3 0 0 1-3 3H11a3 3 0 0 1-3-3V12z" fill="#B3241C" stroke="#1E1A1A" stroke-width="1.5"/><rect x="10" y="18" width="12" height="8" rx="1" fill="#F2EBC4"/></svg>
+      <span class="word">sauce</span>
+    </a>
+    <div class="navlinks"><a href="#taste">Try it</a><a href="#wont">Won't do</a><a href="#proof">Proof</a><a href="#seat">Waitlist</a><a href="https://github.com/bhavya-in-sf/sauce" rel="noopener">GitHub</a></div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="pitch">
+      <h1>Does your AI sound like you?</h1>
+      <p class="lede">sauce is a free Claude plug-in that checks every draft against your facts and your voice before it goes out. It never writes for you.</p>
+      <div class="ctas"><a class="btn" href="#taste">Taste a draft</a><a class="link" href="https://github.com/bhavya-in-sf/sauce" rel="noopener">Get it on GitHub</a></div>
+      <p class="risk">Free. Open source. No account. Your taste file stays on your Mac.</p>
+    </div>
+    <div class="bench" id="taste">
+      <div class="pad">
+        <label for="draft">Try it on a draft. Live, no account.</label>
+        <textarea id="draft" spellcheck="false">Excited to share that we're leveraging AI to 10x your workflow — a total game-changer. 300+ founders already trust us. Comment below!</textarea>
+        <div class="tries" aria-label="Try an example">
+          <button type="button" data-try="Excited to share that we're leveraging AI to 10x your workflow — a total game-changer. 300+ founders already trust us. Comment below!">AI slop</button>
+          <button type="button" data-try="100 investors who back women building AI. One list. Every week the same question lands in my inbox: who writes the checks? So here they are. Comment &quot;INVESTORS&quot; and I'll send it.">In her voice</button>
+          <button type="button" data-try="I just passed 62K followers on LinkedIn. Here is the one thing I'd tell my 2022 self.">Approved number</button>
+        </div>
+        <p class="facts"><b>This counter uses Bhavya's real profile.</b> Numbers she has approved: <span>62K followers</span><span>Top Voice 2024</span><span>about 3,000 newsletter readers</span><span>100 investors</span><span>673 posts checked</span> Banned: em dashes, "game-changer", "delve". Anything else gets sent back.</p>
+      </div>
+      <div class="ticket" id="ticket" aria-live="polite">
+        <div class="top"><b>Draft #001</b><span>LinkedIn</span></div>
+        <div class="stamp" id="stamp">BLOCK</div>
+        <ul class="lines" id="lines"></ul>
+        <p class="foot" id="foot"></p>
+      </div>
+    
+    </div>
+  </div>
+  <div class="strip" aria-label="Proof in numbers">
+    <div class="wrap">
+      <a href="#proof"><b>673</b> of Bhavya's posts checked</a>
+      <a href="#proof"><b>68%</b> pass as written</a>
+      <a href="#proof"><b>46 of 47</b> team drafts pass after one approved fact</a>
+      <a href="#proof"><b>4 ms</b> per check, no AI call</a>
+    </div>
+  </div>
+</header>
+
+<section class="wont" id="wont" aria-labelledby="wont-h">
+  <div class="wrap">
+    <h2 id="wont-h" class="rise">Five things sauce will not do.</h2>
+    <p class="lede rise">Every one of these is a complaint people leave on the tools that promise "your voice".</p>
+    <ol class="rules">
+      <li class="rise"><b>Write for you.</b><p>Jasper, Taplio and Copy.ai users say the output comes out generic. sauce only checks. The words stay yours.</p></li>
+      <li class="rise"><b>Nag you.</b><p>Grammarly suggests a friendlier tone, then suggests the formal one back. sauce gives one verdict, each issue quoted, nothing out of 100.</p></li>
+      <li class="rise"><b>Hide the price.</b><p>Writer publishes no prices; Copy.ai and Jasper reviews mention cancel traps. The plug-in is free and open source. No account.</p></li>
+      <li class="rise"><b>Flatten you.</b><p>Hemingway readers say it made them write "like third graders". sauce's rules are yours, learned from your own edits, approved one by one.</p></li>
+      <li class="rise"><b>Make a number up.</b><p>Any figure not on your approved list is sent back. That includes the ones on this page: every number here came out of the gate.</p></li>
+    </ol>
+    <p class="src rise">Sources: G2 reviews of Grammarly, Product Hunt reviews of Taplio, searchatlas.com and memeburn.com on Jasper, testedintelligence.com on Writer, Goodreads author blogs on Hemingway. Pulled 26 Oct 2026.</p>
+  </div>
+</section>
+
+
+<section class="proof" id="proof" aria-labelledby="proof-h">
+  <div class="wrap">
+    <h2 id="proof-h" class="rise">Tested on <span>real writing.</span></h2>
+    <p class="lede rise">Every number below came out of the gate itself and can be rerun from the GitHub repo.</p>
+    <table class="rise">
+      <thead><tr><th>When</th><th>What went in</th><th>What sauce did</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>22 Oct 2026</td><td>673 of Bhavya's own LinkedIn posts, 2022 to 2026</td><td>Checked each against her profile</td><td><b>68%</b> pass as written. The rest: em dashes, numbers she never backed up</td></tr>
+        <tr><td>22 Oct 2026</td><td>47 messages a startup's team drafted for its creator program</td><td>Flagged two versions of the pay terms, 32 times. The team confirmed one.</td><td><b>46 of 47</b> pass. The one unsupported number still caught</td></tr>
+        <tr><td>20 Oct 2026</td><td>17 drafts from the same team, replayed in order</td><td>Caught 6 different revenue figures and a format repeated 5 times in 8 days</td><td><b>9 stopped</b>, 2 sent back, 6 passed</td></tr>
+        <tr><td>22 Oct 2026</td><td>All 17 checks, timed</td><td>No AI call. Rules, run in order.</td><td><b>4 ms</b> total</td></tr>
+      </tbody>
+    </table>
+    <p class="note rise">Drafts came from the team's Slack, not the live posts. One team, one founder's own archive. Enough to show the pattern, not an accuracy rate.</p>
+  </div>
+</section>
+
+<section class="plate" id="plate" aria-labelledby="plate-h">
+  <div class="wrap">
+    <h2 id="plate-h" class="rise">Write it. Taste it. Send it.</h2>
+    <div class="legs">
+      <div class="rise"><b>Draft</b><p>Five writers, one agent, or just you at 11pm. The drafts come in every voice but yours.</p></div>
+      <div class="rise"><b>Taste</b><p>One check. Your approved facts, your banned phrases, your rules. Eight axes, scored one by one, never averaged.</p></div>
+      <div class="rise"><b>Send</b><p>Out comes writing in your voice. Edit it anyway, and sauce learns the rule you just taught it. You approve every rule.</p></div>
+    </div>
+    
+    <h3 class="rise sub">What a check looks like</h3>
+    <div class="grid">
+      <div>
+        <div class="notes l">
+          <div class="note rise" data-for="num"><b>The draft number</b><p>Every draft gets one. Checks are logged, so you can see what sauce caught this month.</p></div>
+          <div class="note rise" data-for="stamp"><b>The stamp</b><p>BLOCK must be fixed. FIX should be. PASS ships. Nothing is scored out of 100.</p></div>
+          <div class="note rise" data-for="claim"><b>The number check</b><p>Any figure not on your approved list is sent back. Numbers about other people pass.</p></div>
+        </div>
+      </div>
+      <div class="ticket rise" data-ui aria-label="An example sauce ticket">
+        <div class="top" data-part="num"><b>Draft #214</b><span>X post · 14:02</span></div>
+        <div class="stamp FIX" data-part="stamp">FIX</div>
+        <ul class="lines">
+          <li data-part="claim"><span class="lvl FIX">FIX</span><span><span class="q">"$50k MRR"</span><br><span class="d">Not on your approved list. Add it, or cut it.</span></span></li>
+          <li data-part="banned"><span class="lvl">BLOCK</span><span><span class="q">"game-changer"</span><br><span class="d">Banned. Your rule, 12 Oct.</span></span></li>
+          <li data-part="axes"><span class="lvl FIX">TASTE</span><span><span class="q">Hook 5 · Voice 8 · Proof 4 · Ask 9</span><br><span class="d">Weakest: Proof. Rewrite below keeps your voice.</span></span></li>
+        </ul>
+        <div class="rule" data-part="learn"><b>Learned from your last edit:</b> "You cut the opening question. Open with the number." Approve?</div>
+      </div>
+      <div>
+        <div class="notes">
+          <div class="note rise" data-for="banned"><b>The banned list</b><p>Words you never want to see again. You add them in plain English: "ban game-changer."</p></div>
+          <div class="note rise" data-for="axes"><b>Eight axes</b><p>Clarity, proof, why you, the ask are firm. Hook, voice, boldness, rhythm follow your samples. Only the weakest line gets rewritten.</p></div>
+          <div class="note rise" data-for="learn"><b>It learns from your edits</b><p>Edit before posting, and sauce proposes the rule it learned. You say yes or no.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a class="join" href="#seat" aria-label="Join the waitlist">
+  <span class="say">Join the waitlist. Early access to the plug-in, and invites to our dinners.</span>
+  <svg class="arrow" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 38 38 10M16 10h22v22" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <span class="word">JOIN</span>
+</a>
+
+<section class="seats" id="seat" aria-labelledby="seat-h">
+  <div class="wrap">
+    <div class="grid">
+      <div class="booth rise">
+        <h3 id="seat-h">Join the waitlist</h3>
+        <p>Pick one or both. Both are free.</p>
+        <form id="wl" novalidate>
+          <div class="picks" role="radiogroup" aria-label="Which door">
+            <label><input type="radio" name="door" id="door-plugin" value="plugin" checked>The plug-in</label>
+            <label><input type="radio" name="door" id="door-table" value="table">The dinners</label>
+            <label><input type="radio" name="door" id="door-both" value="both">Both</label>
+          </div>
+          <label class="f" for="wl-name">Full name</label><input id="wl-name" name="name" autocomplete="name" placeholder="Jane Doe" required>
+          <label class="f" for="wl-email">Email</label><input id="wl-email" name="email" type="email" autocomplete="email" placeholder="jane@company.com" required>
+          <label class="f" for="wl-role">What do you do?</label>
+          <select id="wl-role" name="role"><option value="">Choose one</option><option>Founder</option><option>Writes for a founder</option><option>Investor</option><option>Developer</option><option>Something else</option></select>
+          <label class="f" for="wl-pain">What's the one thing you delete from every AI draft? (optional)</label><input id="wl-pain" name="pain">
+          <div style="margin-top:20px"><button class="btn" type="submit" id="wl-submit">Join the waitlist</button></div>
+          <p class="msg" id="wl-msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <div class="stack">
+        <div class="booth rise">
+          <h3>Install it now</h3>
+          <p>In Claude Code, two lines. Claude Desktop and Cursor work too.</p>
+          <pre>/plugin marketplace add bhavya-in-sf/sauce
+/plugin install sauce@sauce</pre>
+          <a class="btn ghost" href="https://github.com/bhavya-in-sf/sauce" rel="noopener">View the repo</a>
+        </div>
+        <div class="booth rise">
+          <h3>The dinners</h3>
+          <p>Small dinners in San Francisco where founders and investors with taste meet through food, art, music and ideas. Invite-only, never paid. Tick "the dinners" and tell us what you're building.</p>
+        </div>
+        <div class="booth rise">
+          <h3>The newsletter</h3>
+          <p>Women building AI in San Francisco, every Thursday. About 3,000 readers.</p>
+          <p style="margin-top:14px"><a class="btn ghost" href="https://bhavyainsf.substack.com/subscribe" rel="noopener">Subscribe</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="top">
+      <div><h2 class="rise">Taste it before you send it.</h2><p style="margin-top:22px"><a class="btn" href="#taste">Taste a draft</a></p></div>
+      <div class="links rise"><a href="https://github.com/bhavya-in-sf/sauce" rel="noopener">GitHub</a><a href="https://bhavyainsf.substack.com" rel="noopener">Newsletter</a><a href="https://www.linkedin.com/in/bhavyagoel4/" rel="noopener">LinkedIn</a><a href="#seat">Waitlist</a></div>
+    </div>
+    <div class="legal"><span>Made in San Francisco by Bhavya Goel. MIT licensed.</span><span>No cookies, no tracking.</span></div>
+  </div>
+  <div class="giant" aria-hidden="true">sauce</div>
+</footer>
+
+<script>
+(function(){
+  /* ---- the live thing: a browser port of a few of sauce's gate rules, using Bhavya's public profile ---- */
+  var APPROVED = ["62K followers","62,000 followers","Top Voice 2024","3,000 newsletter readers","100 investors","673 posts","100+ AI companies","5 years"];
+  var FILLER = ["streamline","leverage","leveraging","unlock","seamless","empower","delve","in today's fast-paced","elevate your"];
+  var BANNED = [{rx:/\bgame-?changer\b/g,why:"Banned. Her rule: generic AI filler."},{rx:/\bdelve\b/g,why:"Banned. Her rule: generic AI filler."}];
+  var FIRST = /\b(i|i'm|i've|me|my|we|we're|our|us|clients?|customers?|users?|team)\b/;
+  function approved(num){
+    var a=APPROVED.join(" ").toLowerCase(), base=num.toLowerCase().replace(/,/g,"");
+    var forms=[base]; if(/k$/.test(base)) forms.push(base.slice(0,-1)+"000", base.slice(0,-1)+",000");
+    if(/^\d{4,}$/.test(base)) forms.push(Number(base).toLocaleString("en-US"));
+    return forms.some(function(f){ return new RegExp("(^|[^\\d,])"+f.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"(?!\\d)").test(a); });
+  }
+  function aboutUs(t,k){ var s=t.slice(Math.max(0,t.lastIndexOf(".",k)+1), (t.indexOf(".",k)+1)||t.length); return FIRST.test(s) || !/\b[A-Z][a-z]+/.test(s.replace(/^\s*[A-Z]/,"x")); }
+  function check(text){
+    var t=text.replace(/’/g,"'"), low=t.toLowerCase(), out=[], seen={};
+    function add(level,q,d){ var k=level+q; if(seen[k]) return; seen[k]=1; out.push({level:level,q:q,d:d}); }
+    ["—","–","--"].forEach(function(d){ if(t.indexOf(d)>-1) add("BLOCK",d,"Em dash or double hyphen. Her house rule."); });
+    var m, money=/\$\s?(\d[\d,.]*)\s?(k|m)?\+?\s*(arr|mrr|revenue)?/g;
+    while((m=money.exec(low))){ if(!approved(m[1]+(m[2]||"")) && aboutUs(t,m.index)) add("BLOCK",m[0].trim(),"Money claim not on her approved list."); }
+    var count=/\b(\d[\d,.]*)\s?(k)?\+?\s*(followers|subscribers|readers|users|customers|founders|companies|posts|investors|leads|clients)\b/g;
+    while((m=count.exec(low))){ if(!approved(m[1].replace(/,/g,"")+(m[2]||"")) && aboutUs(t,m.index)) add("FIX",m[0].trim(),"Number not on her approved list. Add it, or cut it."); }
+    var mult=/\b(\d+(?:\.\d+)?)\s?x(?![\w\d])/g;
+    while((m=mult.exec(low))){ if(aboutUs(t,m.index)) add("FIX",m[0].trim(),"A result claim. Prove it, or cut it."); }
+    BANNED.forEach(function(b){ var r; b.rx.lastIndex=0; while((r=b.rx.exec(low))) add("BLOCK",r[0],b.why); });
+    FILLER.forEach(function(f){ if(low.indexOf(f)>-1) add("FIX",f,"Filler. Say what actually happened."); });
+    var v=out.some(function(i){return i.level==="BLOCK"})?"BLOCK":out.length?"FIX":"PASS";
+    return {verdict:v,issues:out};
+  }
+  var ta=document.getElementById("draft"), stamp=document.getElementById("stamp"), lines=document.getElementById("lines"), foot=document.getElementById("foot"), ticket=document.getElementById("ticket"), n=1;
+  var COPY={BLOCK:"Sent back. Fix the BLOCK lines before this goes out.",FIX:"Close. Fix the FIX lines and it ships.",PASS:"Ships. Specific, approved, and in her voice."};
+  var LABEL="Draft #";
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  function render(animate){
+    var r=check(ta.value);
+    stamp.className="stamp "+r.verdict; stamp.textContent=r.verdict;
+    lines.innerHTML=r.issues.map(function(i){return '<li><span class="lvl '+i.level+'">'+i.level+'</span><span><span class="q">'+esc(i.q)+'</span><br><span class="d">'+esc(i.d)+'</span></span></li>'}).join("");
+    foot.textContent=COPY[r.verdict]+" Checked in under a second, no AI call.";
+    ticket.querySelector(".top b").textContent=LABEL+String(n).padStart(3,"0");
+    if(animate){ stamp.classList.add("pop"); setTimeout(function(){stamp.classList.remove("pop")},350); }
+  }
+  var timer; ta.addEventListener("input",function(){ clearTimeout(timer); timer=setTimeout(function(){ n++; render(true); },250); });
+  document.querySelectorAll("[data-try]").forEach(function(b){ b.addEventListener("click",function(){ ta.value=b.getAttribute("data-try"); n++; ticket.classList.remove("print"); void ticket.offsetWidth; ticket.classList.add("print"); render(true); }); });
+  render(false);
+
+  /* ---- how it works: 150 drops, scatter → ribbon → rows ---- */
+  var svg=document.getElementById("flow"), NS="http://www.w3.org/2000/svg", seed=7; if(svg){
+  function rnd(){ seed=(seed*16807)%2147483647; return seed/2147483647; }
+  var drop="M0-7c3 4 6 8 6 11a6 6 0 0 1-12 0c0-3 3-7 6-11z";
+  for(var i=0;i<150;i++){
+    var p=document.createElementNS(NS,"path"), x,y,c;
+    if(i<60){ x=20+rnd()*340; y=20+rnd()*230; c=i%2?"#B3241C":"#4A1518"; p.setAttribute("opacity",".55"); }
+    else if(i<110){ var j=i-60; x=430+(j%17)*20; y=110+Math.floor(j/17)*22; c="#B3241C"; }
+    else { var k=i-110; x=800+(k%8)*50; y=30+Math.floor(k/8)*44; c="#4A1518"; }
+    p.setAttribute("d",drop); p.setAttribute("fill",c); p.setAttribute("transform","translate("+x.toFixed(1)+" "+y.toFixed(1)+") scale(1.3)");
+    p.style.transition="transform 1.1s cubic-bezier(.16,1,.3,1) "+(i*6)+"ms,opacity .6s"; svg.appendChild(p);
+  } }
+
+  /* ---- entrances, once, in reading order ---- */
+  var io="IntersectionObserver" in window ? new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} }); },{threshold:.18}) : null;
+  document.querySelectorAll(".rise").forEach(function(el,i){ el.style.transitionDelay=((i%4)*80)+"ms"; io?io.observe(el):el.classList.add("in"); });
+
+  /* ---- the plate: hover a note, the rest of the ticket dims ---- */
+  var plate=document.getElementById("plate");
+  plate.querySelectorAll(".note").forEach(function(nt){
+    function on(){ plate.classList.add("dim"); plate.querySelectorAll("[data-part]").forEach(function(p){ p.classList.toggle("on", p.getAttribute("data-part")===nt.getAttribute("data-for")); }); }
+    function off(){ plate.classList.remove("dim"); }
+    nt.addEventListener("mouseenter",on); nt.addEventListener("mouseleave",off); nt.setAttribute("tabindex","0"); nt.addEventListener("focus",on); nt.addEventListener("blur",off);
+  });
+
+  /* ---- waitlist ---- */
+  var ENDPOINT="https://formsubmit.co/ajax/ac327ff10bcd43f64f6e489f7fb0f09c";
+  var f=document.getElementById("wl"), msg=document.getElementById("wl-msg"), btn=document.getElementById("wl-submit");
+  f.addEventListener("submit",function(e){
+    e.preventDefault(); msg.className="msg"; msg.textContent="";
+    var name=document.getElementById("wl-name").value.trim(), email=document.getElementById("wl-email").value.trim();
+    if(!name){ msg.textContent="Add your name, then try again."; document.getElementById("wl-name").focus(); return; }
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ msg.textContent="That email doesn't look right. Use name@example.com."; document.getElementById("wl-email").focus(); return; }
+    var door=(f.querySelector("input[name=door]:checked")||{}).value;
+    var data={door:door,name:name,email:email,role:document.getElementById("wl-role").value,pain:document.getElementById("wl-pain").value.trim(),_subject:"sauce waitlist: "+door,_template:"table"};
+    btn.disabled=true; btn.textContent="Joining...";
+    var ctrl=window.AbortController?new AbortController():null, t=setTimeout(function(){ if(ctrl) ctrl.abort(); },15000);
+    fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(data),signal:ctrl?ctrl.signal:undefined})
+      .then(function(r){ return r.json().catch(function(){return {}}).then(function(j){ return {ok:r.ok,j:j}; }); })
+      .then(function(res){ var m=String((res.j&&res.j.message)||""); if(/activat/i.test(m)){ msg.textContent="Almost there: the form needs confirming by the owner. Try again in a little while."; return; }
+        if(!res.ok||String(res.j.success)==="false") throw new Error(m);
+        f.reset(); msg.className="msg ok"; msg.textContent=door==="table"?"You're on the list. Invites go out by hand, so watch your inbox.":"You're on the list. We'll email you when the next release ships."; })
+      .catch(function(e){ msg.textContent=(e&&e.name==="AbortError")?"This is taking too long. Check your connection and try again.":"That didn't go through. Check your connection and try again."; })
+      .then(function(){ clearTimeout(t); btn.disabled=false; btn.textContent="Join the waitlist"; });
+  });
+})();
+</script>
+</body>
+</html>
