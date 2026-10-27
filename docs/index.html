@@ -261,7 +261,7 @@ footer .meta a{color:inherit}
     <span class="copy a" aria-hidden="true">Sound like<br><span class="slot"><span></span></span> you?</span>
     <span class="copy b" aria-hidden="true">Sound like<br><span class="slot"><span></span></span> you?</span>
   </h1>
-  <p class="sub">sauce is a free, open-source check for AI drafts. It runs inside Claude and Cursor today, and behind an API for everything else. It reads every draft against your approved facts and your voice before it goes out, and it never writes for you. <a href="#try">Try it on a draft below.</a></p>
+  <p class="sub">LinkedIn now cuts the reach of posts that read as AI by about 40%. sauce is a free, open-source editor for AI drafts, not a detector: it reads every draft against your own facts and your own rules before it goes out, and never writes a word for you. <a href="#try">Try it on a draft below.</a></p>
 </header>
 
 <section class="try" id="try" data-chapter="light" aria-labelledby="try-h">
@@ -310,15 +310,16 @@ footer .meta a{color:inherit}
 
 <section class="wont inv" id="wont" data-chapter="dark" aria-labelledby="wont-h">
   <div class="wrap">
-    <h2 id="wont-h" class="rise"><span class="indent"></span>Five things sauce will not do, and who does them.</h2>
+    <h2 id="wont-h" class="rise"><span class="indent"></span>Six things sauce will not do, and who does them.</h2>
     <div class="layout">
-      <p class="src rise">Each row is a complaint people leave on the tools that promise "your voice". Sources: G2 reviews of Grammarly; Product Hunt reviews of Taplio; searchatlas.com and memeburn.com on Jasper; testedintelligence.com on Writer; Goodreads author blogs on Hemingway. Pulled 26 Oct 2026.</p>
+      <p class="src rise">Each row is a complaint people leave on the tools that promise "your voice". Sources: G2 reviews of Grammarly; Product Hunt reviews of Taplio; searchatlas.com and memeburn.com on Jasper; testedintelligence.com on Writer; Goodreads author blogs on Hemingway; a Substack comment on AI detectors, Dec 2025; LinkedIn on reach, CNN 18 Oct 2026. Pulled 26 Oct 2026.</p>
       <span class="label rise">won't</span>
       <table class="rise">
         <tr><td class="kind">write</td><td class="what">Jasper, Taplio, Copy.ai: "the output comes out generic"</td><td class="ours">sauce only checks</td></tr>
         <tr><td class="kind">nag</td><td class="what">Grammarly: suggests a friendlier tone, then the formal one back</td><td class="ours">one verdict, each issue quoted</td></tr>
         <tr><td class="kind">hide the price</td><td class="what">Writer: no prices listed. Copy.ai, Jasper: cancel complaints</td><td class="ours">free, open source, no account</td></tr>
         <tr><td class="kind">flatten</td><td class="what">Hemingway: "made us write like third graders"</td><td class="ours">your rules, learned from your edits</td></tr>
+        <tr><td class="kind">guess who wrote it</td><td class="what">AI detectors flag real people: "It said 89% AI probability" on a handwritten poem</td><td class="ours">sauce never detects. It checks your draft against your rules</td></tr>
         <tr><td class="kind">invent a number</td><td class="what">Copy.ai: "occasionally includes fabricated facts"</td><td class="ours">unapproved figures are sent back</td></tr>
       </table>
     </div>
@@ -330,7 +331,8 @@ footer .meta a{color:inherit}
     <div>
       <h2 id="plug-h" class="rise">Inside Claude, it is a tool.</h2>
       <ol>
-        <li class="rise"><b>Install once.</b> Two commands in Claude Code. Your taste file lives on your Mac.</li>
+        <li class="rise"><b>An editor, not a writer.</b> It says what is wrong and names the fix. The words stay yours.</li>
+        <li class="rise"><b>Install once.</b> Two commands in Claude Code or Cursor. Your taste file lives on your Mac.</li>
         <li class="rise"><b>Every draft gets checked.</b> Claude calls sauce before it shows you anything. If it forgets, a hook sends it back.</li>
         <li class="rise"><b>Approve facts in plain English.</b> "Add 300 founders as a fact." It never asks again.</li>
         <li class="rise"><b>Critique scores eight things.</b> Clarity, proof, why you, the ask, hook, voice, boldness, rhythm. Never one number. Only the weakest line gets a rewrite.</li>
