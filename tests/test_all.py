@@ -270,5 +270,31 @@ class PythonSdk(unittest.TestCase):
             store.db.close()
 
 
+class Sameness(unittest.TestCase):
+    def test_sameness_score_and_gate(self):
+        from sauce_core import check, profile_from_samples
+        prof = profile_from_samples(["A real post about something specific I did last week."])
+        slop = "It's not about speed, it's about taste. Fast, cheap, and good. Comment below!"
+        r = check(slop, prof, "linkedin")
+        self.assertGreater(r["sameness"]["score"], 20)
+        self.assertEqual(check(slop, prof, "linkedin", max_sameness=10)["verdict"], "BLOCK")
+        clean = check("Three months ago we had no customers. Today we signed our 300th.", prof, "linkedin", max_sameness=100)
+        self.assertNotIn("sameness_gate", [i["check"] for i in clean["issues"]])
+
+    def test_linkedin_importer(self):
+        import tempfile, csv, os
+        from sauce_core.importers import setup_from_linkedin
+        d = tempfile.mkdtemp()
+        p = os.path.join(d, "Shares.csv")
+        with open(p, "w", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=["Date", "ShareLink", "ShareCommentary", "SharedUrl", "MediaUrl", "Visibility"])
+            w.writeheader()
+            for i in range(8):
+                w.writerow({"Date": f"2026-0{i+1}-01 10:00:00", "ShareLink": "", "ShareCommentary": ("Word " * 90).strip() + f" post {i}.", "SharedUrl": "", "MediaUrl": "", "Visibility": "MEMBER_NETWORK"})
+        out = setup_from_linkedin(p, os.path.join(d, "prof"), name="Test")
+        self.assertEqual(out["samples"], 6)
+        self.assertTrue(os.path.exists(os.path.join(d, "prof", "TASTE.md")))
+
+
 if __name__ == "__main__":
     unittest.main()

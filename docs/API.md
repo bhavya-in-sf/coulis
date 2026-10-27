@@ -73,3 +73,8 @@ python3 evals/run_eval.py edits --persona personas/example --pairs evals/edit_pa
 python3 -m unittest discover -s tests
 ```
 The regression suite fails on any verdict drift. The edits suite measures how often the gate flags what humans actually remove (`gate_agreement`); `--critique` adds a paid model call per pair to measure whether the critic targets what humans changed.
+
+
+## Sameness score and team gates (v0.6)
+Every `/v1/check` response carries `sameness`: `{score 0..100, label, hits}`, built only from quoted tells (em dash, banned phrase, filler, "it's not X, it's Y", question opener, "comment below", tricolon, emoji pile, one-line paragraphs). It is a style score, not a detector of who wrote the text.
+Pass `max_sameness` (0 to 100) in the body to turn it into a gate: the verdict becomes BLOCK with a `sameness_gate` issue when the score is above the limit. Teams set one number ("nothing ships above 50") and CI can fail on it.

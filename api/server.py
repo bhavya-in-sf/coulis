@@ -115,7 +115,7 @@ class Api:
         if method == "POST" and path == "/v1/check":
             need(body, "text")
             _, prof = self._profile(key, body)
-            return check(body["text"], prof, body.get("surface", "linkedin"), body.get("history", [])), (0, 0)
+            return check(body["text"], prof, body.get("surface", "linkedin"), body.get("history", []), max_sameness=body.get("max_sameness")), (0, 0)
         if method == "POST" and path == "/v1/critique":
             need(body, "text")
             _, prof = self._profile(key, body)

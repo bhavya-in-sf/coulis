@@ -29,6 +29,7 @@ def main():
     ap.add_argument("--linkedin", help="setup: a LinkedIn data export zip, or its Shares csv")
     ap.add_argument("--out", help="setup: folder to write TASTE.md and claims.md (default ~/.sauce)")
     ap.add_argument("--name", default="", help="setup: name / role line")
+    ap.add_argument("--max-sameness", type=int, help="check: BLOCK when the sameness score is above this (team gate)")
     a = ap.parse_args()
     read = lambda s: sys.stdin.read() if s == "-" else s
     extra = {"profile_dir": a.profile} if a.profile else {}
@@ -52,7 +53,8 @@ def main():
                 print(f"  skip {r['ts']}: {r.get('kind') or '?'}: {r['reason']}")
         return
     if a.cmd in ("check", "critique"):
-        out = server.call_tool("sauce_" + a.cmd, {"text": read(a.args[0]), "surface": a.surface, **extra})
+        gate_args = {"max_sameness": a.max_sameness} if (a.cmd == "check" and a.max_sameness is not None) else {}
+        out = server.call_tool("sauce_" + a.cmd, {"text": read(a.args[0]), "surface": a.surface, **gate_args, **extra})
     elif a.cmd == "skip":
         out = server.call_tool("sauce_skip", {"reason": a.args[0], "kind": a.kind, **extra})
     elif a.cmd == "add":
@@ -60,7 +62,8 @@ def main():
     else:
         out = server.call_tool("sauce_learn", {"draft": read(a.args[0]), "final": read(a.args[1]), **extra})
     if a.cmd == "check":
-        print(out["verdict"])
+        sm = out.get("sameness", {})
+        print(out["verdict"], f"(sameness {sm.get('score')}: {sm.get('label')})" if sm else "")
         for i in out["issues"]:
             print(f"  {i['level']} {i['check']}: {i['quote']!r} {i['detail']}")
     elif a.cmd == "critique" and out.get("mode") == "host_model":

@@ -114,3 +114,10 @@ Every rule maps to research or labeled practitioner experience in [EVIDENCE.md](
 
 ## License
 MIT. Built by Bhavya Goel.
+
+
+## Also in the box
+- `python3 scripts/deck_check.py deck.pdf` checks a deck slide by slide and flags the same noun with different numbers across slides ("300 customers" on slide 3, "350" on slide 9). Also .pptx and .md.
+- `python3 scripts/taste_card.py --out card.html` renders a shareable one-page card of how you write, measured from your own samples. Nothing invented.
+- `sauce setup --linkedin export.zip` builds your TASTE.md and claims.md from your own posts in one command.
+- `sauce check --max-sameness 50` turns the sameness score into a team gate.

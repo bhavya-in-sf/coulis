@@ -16,7 +16,7 @@ import learn as _learn  # noqa: E402
 SURFACES = ("reddit", "x", "linkedin", "instagram", "youtube")
 
 
-def check(text, profile, surface="linkedin", history=()):
+def check(text, profile, surface="linkedin", history=(), max_sameness=None):
     """Gate a draft. Returns {verdict: BLOCK|FIX|PASS, issues: [...], skeleton: [...]}.
 
     history: optional recent posts on the same surface, each {id, date, title, text},
@@ -28,7 +28,13 @@ def check(text, profile, surface="linkedin", history=()):
              "skeleton": {k for k, p in _gate.SKELETONS.items() if _gate.re.search(p, _gate.norm(h["text"]))},
              "grams": _gate.ngrams(_gate.norm(h["text"]))} for h in history]
     r = _gate.check(text, profile.to_persona(), surface, hist)
-    return {"verdict": r["verdict"], "issues": r["issues"], "skeleton": r["skeleton"],
+    same = r.get("sameness", {"score": 0, "label": "", "hits": []})
+    if max_sameness is not None and same["score"] > max_sameness:
+        r["issues"].append({"level": "BLOCK", "check": "sameness_gate",
+                            "detail": f"Sameness {same['score']} is over this profile's limit of {max_sameness}.",
+                            "quote": ", ".join(same["hits"][:3])})
+        r["verdict"] = "BLOCK"
+    return {"verdict": r["verdict"], "issues": r["issues"], "skeleton": r["skeleton"], "sameness": same,
             "counts": {lvl: sum(1 for i in r["issues"] if i["level"] == lvl) for lvl in ("BLOCK", "FIX")}}
 
 
