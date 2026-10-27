@@ -97,6 +97,34 @@ Use them together: Taste Skill or Impeccable for your landing page, Sauce for th
 ## Evidence
 Every rule maps to research or labeled practitioner experience in [EVIDENCE.md](EVIDENCE.md), including what each source does *not* prove.
 
+## For agents (Remix, Wajo, OpenClaw, your own)
+Personal agents now post, email and message as their owner. sauce is the check they run first. One call, deterministic, local, no model, about 4 ms.
+
+```python
+import sys; sys.path.insert(0, "path/to/sauce")
+from sauce_core import check, profile_from_folder
+
+profile = profile_from_folder("~/.sauce")              # the owner's TASTE.md + claims.md
+r = check("We're leveraging AI to 10x your workflow. 300+ founders trust us.", profile, surface="linkedin")
+r["verdict"]        # "FIX"
+r["issues"][0]      # {"level": "FIX", "check": "unapproved_claim", "quote": "10x", "detail": "Number not in claims.md. Add it to claims.md or cut it."}
+```
+
+From a shell or any language:
+```
+python3 scripts/sauce.py check - --json <<'DRAFT'
+the draft
+DRAFT
+```
+Exit code 2 = BLOCK (do not send), 1 = FIX (fix the quoted lines, then send), 0 = PASS. `--profile <folder>` checks as a client or a company instead of the owner.
+
+Rules for an agent: never send on BLOCK; never invent a number to satisfy a claim check (cut it or ask the owner to approve it); add facts only after the owner says yes (`sauce.py add approved_fact "..."`); when the owner edits your draft, run `sauce.py learn draft.txt final.txt` and propose the rules it finds.
+
+- OpenClaw skill: [`openclaw/`](openclaw/) (`clawhub install sauce`).
+- Claude Code and Claude Desktop: the plug-in above (MCP tools `sauce_check`, `sauce_add`, `sauce_learn`).
+- Over HTTP: the Taste API preview in [`api/`](api/), SDKs in [`sdk/`](sdk/).
+- Hosted API and per-check pricing for agent companies: not yet. Write to the address in the footer of the site.
+
 ## For developers (preview)
 - `sauce_core/`: the taste layer as a library. JSON in, JSON out.
 - `mcp/server.py`: MCP server with `sauce_check`, `sauce_critique` (works without an API key), `sauce_learn`, `sauce_add` and `sauce_profile`. Ships inside the plug-in.
