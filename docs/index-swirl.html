@@ -192,7 +192,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
     </svg>
     <div class="stage">
       <div class="frag" id="frag" data-ui role="group" aria-label="sauce check, live">
-        <div class="bar"><span><b>sauce_check</b> · profile: Bhavya</span><span class="pill" id="ms">4 ms</span></div>
+        <div class="bar"><span><b>sauce_check</b> · profile: Bhavya</span><span><span id="same" style="font-weight:600;margin-right:10px"></span><span class="pill" id="ms">4 ms</span></span></div>
         <div style="padding:12px 14px"><textarea id="draft" rows="4" spellcheck="false" aria-label="Your draft">Excited to share that we're leveraging AI to 10x your workflow — a total game-changer. 300+ founders already trust us. Comment below!</textarea></div>
         <div class="verdict BLOCK" id="verdict"><span class="dot"></span><span id="vword">BLOCK</span><span class="note" id="vnote">Sent back. Fix the BLOCK lines before this goes out.</span></div>
         <div id="lines"></div>
@@ -359,7 +359,11 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
     var mult=/\b(\d+(?:\.\d+)?)\s?x(?![\w\d])/g;while((m=mult.exec(low))){if(aboutUs(t,m.index))add("FIX",m[0].trim(),"A result claim. Prove it, or cut it.")}
     BANNED.forEach(function(b){var r;b.rx.lastIndex=0;while((r=b.rx.exec(low)))add("BLOCK",r[0],b.why)});
     FILLER.forEach(function(f){if(low.indexOf(f)>-1)add("FIX",f,"Filler. Say what actually happened.")});
-    var v=out.some(function(i){return i.level==="BLOCK"})?"BLOCK":out.length?"FIX":"PASS";return{verdict:v,issues:out}}
+    var v=out.some(function(i){return i.level==="BLOCK"})?"BLOCK":out.length?"FIX":"PASS";
+    var same=0;out.forEach(function(i){same+=i.level==="BLOCK"?20:10});
+    [[/\b(it'?s|this is|that'?s) not (just |only |about )?[^.?!]{3,60}?,? (it'?s|this is|but) /,12],[/^\s*[^.!?\n]{8,120}\?\s*(\n|$)/,12],[/\b(comment|drop) (below|a |")/,12],[/(^[^\n]{10,90}\n\n){4,}/m,12]].forEach(function(r){if(r[0].test(low))same+=r[1]});
+    same=Math.min(100,same);var lbl=same<=20?"sounds like a person":same<=50?"some AI tells":same<=80?"reads as AI":"pure slop";
+    return{verdict:v,issues:out,sameness:same,label:lbl}}
   var ta=document.getElementById("draft"),verdict=document.getElementById("verdict"),vword=document.getElementById("vword"),vnote=document.getElementById("vnote"),lines=document.getElementById("lines"),ms=document.getElementById("ms"),swirl=document.getElementById("swirl");
   var COPY={BLOCK:"Sent back. Fix the BLOCK lines before this goes out.",FIX:"Close. Fix the FIX lines and it ships.",PASS:"Ships. Specific, approved, in her voice."};
   function esc(s){return s.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
@@ -367,6 +371,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
   function render(){var t0=performance.now(),r=check(ta.value);verdict.className="verdict "+r.verdict;vword.textContent=r.verdict;vnote.textContent=COPY[r.verdict];
     lines.innerHTML=r.issues.map(function(i){return '<div class="row"><span class="lvl '+i.level+'">'+i.level+'</span><span><span class="q">'+esc(i.q)+'</span> <span class="d">'+esc(i.d)+'</span></span></div>'}).join("");
     ms.textContent=Math.max(1,Math.round(performance.now()-t0))+" ms";
+    var sm=document.getElementById("same");if(sm){sm.textContent="Sameness "+r.sameness+" / 100 · "+r.label;sm.style.color=r.sameness>50?"#b3241c":r.sameness>20?"#8a5a00":"#1f6b3a"}
     var mouth=swirl.querySelector(".face path");if(mouth)mouth.setAttribute("d",MOUTH[r.verdict]);
     swirl.style.filter=r.verdict==="PASS"?"drop-shadow(0 20px 40px rgba(227,38,28,.35))":"none"}
   var timer;ta.addEventListener("input",function(){clearTimeout(timer);timer=setTimeout(render,150)});

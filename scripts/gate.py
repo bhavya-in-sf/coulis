@@ -33,6 +33,36 @@ SKELETONS = {
 }
 
 
+# patterns that mark a draft as "the average AI post" (from the humanizer / tell-linter clusters and
+# Kobak et al. 2024). Each hit is a reason, quoted, never a guess about who wrote it.
+TELLS = [
+    ("not_x_but_y", r"\b(it'?s|this is|that'?s) not (just |only |about )?[^.?!]{3,60}?,? (it'?s|this is|but) ", "The \"it's not X, it's Y\" frame."),
+    ("question_opener", r"^\s*[^.!?\n]{8,120}\?\s*(\n|$)", "Opens with a question. The default AI hook."),
+    ("comment_cta", r"\b(comment|drop) (below|a |\"|\')[^.\n]{0,40}", "Ends with the stock \"comment below\" ask."),
+    ("tricolon", r"\b(\w+), (\w+),? and (\w+)\b[^.]{0,3}\.", "Three-item list cadence, three times the usual rate in AI text."),
+    ("emoji_pile", r"([\U0001F300-\U0001FAFF\u2600-\u27BF]\s*){3,}", "Three or more emoji in a row."),
+    ("one_line_paras", r"(?:^[^\n]{10,90}\n\n){4,}", "Four or more one-line paragraphs in a row."),
+]
+
+
+def sameness(text, issues):
+    """0 to 100: how much this draft reads like the statistical average AI post. Built only from
+    quoted, reproducible tells; it is a style score, not a detector of who wrote it."""
+    score, hits = 0, []
+    for i in issues:
+        if i["check"] == "em_dash": score += 20; hits.append("em dash")
+        elif i["check"] == "banned_phrase": score += 15; hits.append(i["quote"])
+        elif i["check"] == "filler": score += 10; hits.append(i["quote"])
+    low = text.lower().replace("’", "'")
+    for name, rx, why in TELLS:
+        if re.search(rx, low if name != "emoji_pile" else text, re.M | re.S):
+            score += 12; hits.append(name.replace("_", " "))
+    score = min(100, score)
+    label = ("sounds like a person" if score <= 20 else "some AI tells" if score <= 50 else
+             "reads as AI" if score <= 80 else "pure slop")
+    return {"score": score, "label": label, "hits": hits[:8]}
+
+
 def norm(s):
     return re.sub(r"\s+", " ", s.lower().replace("’", "'")).strip()
 
@@ -234,7 +264,7 @@ def check(text, persona, surface="reddit", history=()):
             uniq.append(i)
     issues = uniq
     verdict = "BLOCK" if any(i["level"] == "BLOCK" for i in issues) else "FIX" if issues else "PASS"
-    return {"verdict": verdict, "issues": issues, "skeleton": sorted(skel)}
+    return {"verdict": verdict, "issues": issues, "skeleton": sorted(skel), "sameness": sameness(text, issues)}
 
 
 def parse_corpus(path):

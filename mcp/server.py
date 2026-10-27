@@ -79,6 +79,21 @@ def profile():
     return profile_from_folder(profile_dir())
 
 
+def learned_recently(prof, days=7):
+    """How many rules were learned from edits in the last `days` days (the loop, made visible)."""
+    import datetime as _dt
+    today = _dt.date.today()
+    n = 0
+    for r in prof.rules:
+        if r.source == "learned" and r.added:
+            try:
+                if (today - _dt.date.fromisoformat(r.added)).days <= days:
+                    n += 1
+            except ValueError:
+                pass
+    return n
+
+
 CLAIMS_TEMPLATE = """# claims.md
 
 The gate allows only the numbers and claims listed under Approved facts.
@@ -160,7 +175,13 @@ def call_tool(name, args):
 
 def _call_tool(name, args):
     if name == "sauce_check":
-        return check(args["text"], profile(), args.get("surface", "linkedin"))
+        out = check(args["text"], profile(), args.get("surface", "linkedin"))
+        d = profile_dir()
+        if not ((d / "TASTE.md").exists() or (d / "claims.md").exists()):
+            out["profile_status"] = ("default: no profile yet, so every number is unapproved and only the house "
+                                     "tells are checked. Say 'add <fact> as a fact' to start claims.md, or run "
+                                     "/sauce:setup (or `sauce setup --linkedin export.zip`) to build your voice file.")
+        return out
     if name == "sauce_critique":
         prof, surface = profile(), args.get("surface", "linkedin")
         if not (os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN")):
@@ -179,7 +200,10 @@ def _call_tool(name, args):
     if name == "sauce_skip":
         return {"logged": True, "reason": args["reason"]}
     if name == "sauce_profile":
-        return profile().to_dict()
+        out = profile().to_dict()
+        out["learned_this_week"] = learned_recently(profile(), 7)
+        out["profile_dir"] = str(profile_dir())
+        return out
     raise KeyError(name)
 
 
