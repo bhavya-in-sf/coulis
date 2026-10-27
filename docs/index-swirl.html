@@ -366,7 +366,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
   var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
   if(window.gsap&&window.ScrollTrigger&&!reduce){
     gsap.registerPlugin(ScrollTrigger);
-    gsap.to("#swirl",{rotate:360,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:1.2}});
+    gsap.to("#swirl",{rotate:-22,y:40,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:1.2}});
     gsap.fromTo(".stage .frag",{yPercent:4},{yPercent:-4,ease:"none",scrollTrigger:{trigger:".stage",start:"top bottom",end:"bottom top",scrub:true}});
     document.querySelectorAll(".split .vis").forEach(function(v){gsap.fromTo(v,{yPercent:8,rotate:1},{yPercent:-8,rotate:-1,ease:"none",scrollTrigger:{trigger:v,start:"top bottom",end:"bottom top",scrub:true}})});
     document.querySelectorAll("section .bubble").forEach(function(b){gsap.from(b,{scale:.6,rotate:-8,opacity:0,duration:.9,ease:"back.out(2)",scrollTrigger:{trigger:b,start:"top 88%"}})});
