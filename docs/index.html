@@ -201,16 +201,16 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 
 <nav aria-label="Main"><div class="wrap in">
   <a class="mark" href="#top">sauce</a>
-  <div class="links"><a href="#product">Product</a><a href="#layers">How it works</a><a href="#proof">Proof</a><a href="https://github.com/bhavya-in-sf/sauce" rel="noopener">GitHub</a><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Get sauce, free</a></div>
+  <div class="links"><a href="#product">Product</a><a href="#layers">How it works</a><a href="#agents">Agents</a><a href="#proof">Proof</a><a href="https://github.com/bhavya-in-sf/sauce" rel="noopener">GitHub</a><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Get sauce, free</a></div>
 </div></nav>
 
 <header class="hero" id="top">
   <div class="light" aria-hidden="true"></div>
   <div class="curtain" aria-hidden="true"></div>
   <div class="wrap in">
-    <span class="eyebrow">Your new editor · not a detector</span>
+    <span class="eyebrow">Stop sounding like ChatGPT · an editor, not a detector</span>
     <h1 id="h1"><span class="w"><span>Sound</span></span> <span class="w"><span>like</span></span> <span class="w"><span>you.</span></span><br><span class="w"><span><i>Even</i></span></span> <span class="w"><span>when</span></span> <span class="w"><span>AI</span></span> <span class="w"><span>writes</span></span> <span class="w"><span>it.</span></span></h1>
-    <p class="lede">sauce reads every AI draft against <b>your own facts and your own voice</b> before it goes out. It never writes a word for you, and it never guesses who wrote it. Free, open source, inside Claude and Cursor.</p>
+    <p class="lede">sauce reads every AI draft against <b>your own facts and your own voice</b> before it goes out. It never writes a word for you, and it never guesses who wrote it. One profile that travels with you into Claude, Cursor and the agents that post as you. Free and open source.</p>
     <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Get sauce, free</a><a class="btn ghost" href="#frag">Try it on this page</a></div>
     <p class="fine">No account · No credit card · Your taste file stays on your Mac</p>
     <div class="glass" id="glass">
@@ -329,13 +329,56 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 <section class="flow"><div class="wrap">
   <div class="split reveal">
     <div class="text"><span class="eyebrow">Where it runs</span><h2>Don't change your workflow. Just add <i>sauce</i>.</h2>
-      <ul><li><b>Stay in Claude.</b> Two commands. A hook sends Claude back if it skipped the check.</li><li><b>Stay in Cursor.</b> One config block, same tools.</li><li><b>Stay in control.</b> MIT licence, the profile is yours, the API is next for everything else.</li></ul>
-      <div class="badges"><span class="badge on">Claude Code</span><span class="badge on">Claude Desktop</span><span class="badge on">Cursor</span><span class="badge on">MCP</span><span class="badge">ChatGPT · via API</span><span class="badge">Slack · via API</span><span class="badge on">MIT</span></div></div>
+      <ul><li><b>Stay in Claude.</b> Two commands. A hook sends Claude back if it skipped the check.</li><li><b>Stay in Cursor.</b> One config block, same tools.</li><li><b>Stay in control.</b> MIT licence, the profile is yours, the API is next for everything else.</li><li><b>Let your agents use it.</b> An OpenClaw skill and a one-call check for Remix, Wajo or your own agent: exit 2 means don't send.</li></ul>
+      <div class="badges"><span class="badge on">Claude Code</span><span class="badge on">Claude Desktop</span><span class="badge on">Cursor</span><span class="badge on">MCP</span><span class="badge on">OpenClaw</span><span class="badge">ChatGPT · via API</span><span class="badge">Slack · via API</span><span class="badge on">MIT</span></div></div>
     <div class="vis"><div data-ui>
       <div class="bar"><span><b>install</b></span><span class="pill">2 commands</span></div>
       <div style="padding:14px;font-family:var(--mono);font-size:13px;line-height:1.8;color:var(--ui-ink)">/plugin marketplace add bhavya-in-sf/sauce<br>/plugin install sauce@sauce</div>
       <div class="learn">Then <b>/sauce:setup</b>, or paste your LinkedIn export. The first check runs within a minute.</div>
     </div></div>
+  </div>
+</div></section>
+
+<section class="flow" id="agents"><div class="wrap">
+  <div class="split flip reveal">
+    <div class="text"><span class="eyebrow">For agents</span><h2>Your agents speak as you. sauce is the check they run <i>first</i>.</h2><p>Remix, Puff, Wajo, OpenClaw: personal agents now post, email and message under their owner's name. None of them checks the draft against the person. One call does.</p>
+      <ul><li>Deterministic, local, about 4 ms. No model, no cost per check.</li><li>Exit 2 BLOCK: do not send. 1 FIX: fix the quoted lines. 0 PASS: send.</li><li>Never invents a number to satisfy a check. Asks the owner instead.</li></ul>
+      <a class="more" href="https://github.com/bhavya-in-sf/sauce#for-agents-remix-wajo-openclaw-your-own" rel="noopener">The agent integration page</a></div>
+    <div class="vis"><div data-ui>
+      <div class="bar"><span><b>sauce.py check</b> · from any agent</span><span class="pill">exit 2</span></div>
+      <div style="padding:14px;font-family:var(--mono);font-size:13px;line-height:1.8;color:var(--ui-ink)">$ sauce check - --json &lt;&lt;'D'<br>We're leveraging AI to 10x your workflow.<br>D<br>{ "verdict": "FIX", "issues": [ { "quote": "10x", ... } ] }</div>
+      <div class="learn"><b>OpenClaw:</b> <span style="font-family:var(--mono)">clawhub install sauce</span>. The skill tells the agent when to check and what each verdict means.</div>
+    </div></div>
+  </div>
+</div></section>
+
+<section class="why" id="labs"><div class="wrap">
+  <div class="head reveal"><span class="eyebrow">Why not custom instructions?</span><h2>The labs ship style inside <i>one</i> app. Your taste should travel.</h2></div>
+  <div class="cards4">
+    <div class="card reveal"><h3>2023 to 2026</h3><p>Custom instructions, Claude Styles, memory across chats, personality presets, a 5,000-character limit. All typed by hand, locked to one app and one user, never checked against a draft.</p></div>
+    <div class="card reveal"><h3>One profile</h3><p>Two files you own. The same facts and voice in Claude, Cursor, OpenClaw and any agent that calls the API.</p></div>
+    <div class="card reveal"><h3>It learns</h3><p>From what you edit and what performs. Instructions don't. Every approved rule is a line you can read.</p></div>
+    <div class="card reveal"><h3>Shared by a team</h3><p>Anyone drafting as the founder gets the same yes and no. A sameness gate for the whole team.</p></div>
+  </div>
+</div></section>
+
+<section class="layers" id="box"><div class="wrap">
+  <div class="head reveal"><span class="eyebrow">Also in the box</span><h2>Four more tools, <i>same</i> profile.</h2></div>
+  <div class="cards4">
+    <div class="card reveal"><h3>Setup from LinkedIn</h3><p>One command builds TASTE.md and claims.md from your own export. Nothing invented.</p><div class="k">sauce setup --linkedin</div></div>
+    <div class="card reveal"><h3>Deck checker</h3><p>Reads a PDF, PPTX or Markdown deck slide by slide and flags the same noun with different numbers across slides.</p><div class="k">deck_check.py</div></div>
+    <div class="card reveal"><h3>Taste card</h3><p>A one-page card of how you write, measured from your own samples. Shareable.</p><div class="k">taste_card.py</div></div>
+    <div class="card reveal"><h3>Team gate</h3><p>Turn the sameness score into a limit for everyone drafting as one voice.</p><div class="k">--max-sameness</div></div>
+  </div>
+</div></section>
+
+<section class="why" id="next"><div class="wrap">
+  <div class="head reveal"><span class="eyebrow">Next · not built yet</span><h2>What's coming, <i>plainly</i> marked.</h2></div>
+  <div class="cards4">
+    <div class="card reveal"><h3>Hosted API</h3><p>Keys and per-check credits, so an agent company can wire it in a day. The preview runs locally today.</p></div>
+    <div class="card reveal"><h3>Every model</h3><p>The same profile in ChatGPT and Gemini through the API, not just Claude and Cursor.</p></div>
+    <div class="card reveal"><h3>Taste-lift</h3><p>Per-user dashboard: edit rate and engagement before and after. Fed by the log you already have.</p></div>
+    <div class="card reveal"><h3>Blind taste test</h3><p>30 real briefs, two outputs each, 20 to 30 raters. We publish the win rate, whatever it is.</p></div>
   </div>
 </div></section>
 
