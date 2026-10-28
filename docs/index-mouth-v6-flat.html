@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>sauce</title>
+<meta name="description" content="sauce checks every AI draft against your own facts and your own voice before it leaves your mouth. Free, open source, inside Claude, Cursor and the agents that post as you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* "The mouth": every post is something that leaves your mouth. The verdict is a mouth: shut for BLOCK, biting for FIX, open for PASS.
+   Black ground, off-white label cards, one lipstick red. Archivo Black uppercase, can-label fine print, typewriter type on the tickets. */
+:root{
+  --black:#0a0a0a; --white:#f4f2ee; --paper:#f8f6f1; --red:#c4161c; --red2:#8e0e12; --ink:#111111; --muted:#6b6b6b; --line:#d9d5cc; --amber:#e6b84a; --green:#1f6b3a;
+  --display:'Archivo Black','Arial Black',Helvetica,sans-serif; --sans:'Archivo','Helvetica Neue',Arial,sans-serif; --type:'Courier Prime','Courier New',monospace; /* taste-skill-ignore: typewriter face for the ticket, part of the can-label idea */
+  --m:clamp(18px,4vw,48px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--black);color:var(--white);font-family:var(--sans);font-size:17px;line-height:1.5}
+::selection{background:var(--red);color:var(--white)}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+a{color:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(var(--m),env(safe-area-inset-left,0px));padding-right:max(var(--m),env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-transform:uppercase;letter-spacing:-.04em;line-height:.9;text-wrap:balance}
+h2{font-size:clamp(40px,6vw,88px)}
+h2 em,h1 em{font-style:normal;color:var(--red)}
+p{margin:0}
+.fine{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;line-height:1.4}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--black);padding:16px 24px;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border:2px solid var(--white);cursor:pointer;font-family:var(--sans);transition:transform .2s}
+.btn:hover{transform:translate(-2px,-2px)}
+.btn.ghost{background:transparent;color:var(--white)}
+.btn:disabled{opacity:.5;transform:none;cursor:default}
+
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--black)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:76px}
+.mark{font-family:var(--display);font-size:34px;letter-spacing:-.05em;text-decoration:none;line-height:1}
+nav .links{display:flex;gap:26px;align-items:center}
+nav .links a{text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+nav .links a:hover{color:var(--red)}
+nav .links .btn{padding:12px 16px}
+
+/* the label card: a can label */
+.label{background:var(--white);color:var(--ink);padding:22px 22px 18px;display:flex;flex-direction:column;gap:14px;position:relative;transform:rotate(var(--r,0deg));transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.label:hover{transform:rotate(0deg)}
+.label .top{display:flex;justify-content:space-between;gap:16px}
+.label .top span{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;line-height:1.35;max-width:14ch}
+.label .top span:last-child{text-align:right}
+.label .word{font-family:var(--display);font-size:clamp(40px,4.4vw,56px);letter-spacing:-.05em;line-height:.9;text-transform:uppercase;text-align:center}
+.label .verdict{font-family:var(--display);font-size:30px;letter-spacing:-.03em;text-align:center;text-transform:uppercase}
+.label .verdict.BLOCK{color:var(--red)}
+.label .mouth{width:min(72%,220px);margin:0 auto;display:block}
+.label .foot{font-size:9px;letter-spacing:.06em;text-transform:uppercase;display:flex;justify-content:space-between;color:var(--muted);margin-top:auto}
+.label .fineprint{font-size:11px;line-height:1.5;color:var(--muted)}
+
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-block:48px 72px}
+h1{font-size:clamp(56px,8.6vw,140px)}
+.hero .lede{font-size:clamp(18px,1.7vw,22px);line-height:1.4;max-width:34ch;margin-top:28px;color:#cfcbc3}
+.hero .acts{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.hero .fine{margin-top:18px;color:#9a968e}
+.hero .label{max-width:440px;justify-self:center;--r:-3deg;width:100%}
+.hero .label:hover{transform:rotate(-3deg)}
+textarea{width:100%;min-height:96px;resize:vertical;border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);padding:12px;font:500 15px/1.45 var(--sans);border-radius:0}
+.issues{display:grid;gap:8px;font-family:var(--type);font-size:13px;line-height:1.4}
+.issues .row{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:baseline}
+.issues .lvl{font-weight:700;letter-spacing:.04em}
+.issues .lvl.BLOCK{color:var(--red)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:var(--black);color:var(--white);border:0;padding:8px 12px;font:700 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.chip:hover{background:var(--red)}
+
+/* proof strip: a ticker */
+.strip{border-top:2px solid var(--white);border-bottom:2px solid var(--white);overflow:hidden;white-space:nowrap;padding:14px 0;font-family:var(--type);font-size:14px;text-transform:uppercase;letter-spacing:.04em}
+.strip .track{display:inline-block;animation:marquee 40s linear infinite}
+.strip span{margin-right:48px}
+.strip b{color:var(--amber);font-weight:700}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+section{padding-block:clamp(72px,10vw,140px)}
+.head{display:grid;gap:18px;margin-bottom:48px;max-width:900px}
+.head p{color:#cfcbc3;font-size:18px;max-width:52ch}
+
+.meet .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.profile{--r:1.5deg}
+.profile .name{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:12px}
+.profile .name b{font-family:var(--display);font-size:34px;letter-spacing:-.04em}
+.profile .name span{font-family:var(--type);font-size:12px}
+.profile ul{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:10px;font-size:15px}
+.profile li{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start}
+.profile li svg{width:22px;height:14px;margin-top:5px}
+.profile .quote{border-top:2px solid var(--line);padding-top:16px;font-family:var(--type);font-size:13px;line-height:1.5}
+.profile .quote b{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-top:8px;color:var(--muted)}
+
+/* demos: looping sequences on white cards with a labelled cursor */
+.demos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.demo{background:var(--white);color:var(--ink);display:flex;flex-direction:column;min-height:440px;position:relative;overflow:hidden}
+.demo .bar{display:flex;justify-content:space-between;padding:12px 16px;border-bottom:2px solid var(--ink);font:700 11px var(--sans);letter-spacing:.08em;text-transform:uppercase}
+.demo .body{padding:16px;display:grid;gap:10px;font-family:var(--type);font-size:13px;line-height:1.45;align-content:start;flex:1}
+.demo .step{opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
+.demo .step.on{opacity:1;transform:none}
+.demo .you{font-family:var(--sans);font-weight:700;font-size:14px}
+.demo .tool{border-left:3px solid var(--ink);padding:6px 0 6px 12px}
+.demo .tool b{display:block;font-size:11px;letter-spacing:.06em;margin-bottom:4px}
+.demo .v{font-family:var(--display);font-size:22px;letter-spacing:-.03em}
+.demo .v.BLOCK{color:var(--red)}.demo .v.PASS{color:var(--green)}
+.demo .cursor{position:absolute;left:0;top:0;display:flex;align-items:center;gap:6px;pointer-events:none;transition:transform .6s cubic-bezier(.16,1,.3,1),opacity .3s;opacity:0}
+.demo .cursor.on{opacity:1}
+.demo .cursor svg{width:14px;height:18px}
+.demo .cursor span{background:var(--red);color:var(--white);font:700 10px var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:3px 6px}
+.demo .act{display:inline-block;background:var(--black);color:var(--white);padding:6px 10px;font:700 11px var(--sans);letter-spacing:.06em;text-transform:uppercase}
+.demo .act.quiet{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.demo .act.hit{background:var(--red);color:var(--white)}
+.demo .cap{padding:12px 16px;border-top:2px solid var(--line);font-size:12px;color:var(--muted);font-family:var(--sans)}
+
+.caps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cap{background:var(--white);color:var(--ink);padding:24px;display:flex;flex-direction:column;gap:10px;min-height:230px;transform:rotate(var(--r,0deg))}
+.cap:nth-child(2n){--r:1deg}.cap:nth-child(3n){--r:-1deg}
+.cap h3{font-size:26px;letter-spacing:-.03em}
+.cap p{font-size:15px;line-height:1.45}
+.cap .ex{font-family:var(--type);font-size:12px;color:var(--muted);border-top:2px solid var(--line);padding-top:10px;margin-top:auto}
+
+/* the menu: what the labs shipped, set like a price list */
+.menu .wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.list{font-family:var(--type);font-size:15px;line-height:1.6}
+.list h3{font-family:var(--sans);font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px;display:flex;justify-content:space-between}
+.list h3 span{font-family:var(--type);color:#9a968e;letter-spacing:0;text-transform:none}
+.list .r{display:flex;justify-content:space-between;gap:16px;padding:4px 0;border-bottom:2px dotted #3a3a3a}
+.list .r span:last-child{color:var(--amber);white-space:nowrap}
+.menu .side{display:grid;gap:20px}
+.menu .side p{font-size:18px;line-height:1.45;color:#cfcbc3;max-width:40ch}
+.menu .side p b{color:var(--white)}
+
+.agents .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.agents .label{--r:2deg;max-width:460px}
+.agents pre{margin:0;background:var(--black);color:var(--white);padding:14px;font:13px/1.6 var(--type);overflow-x:auto}
+.agents ul{margin:20px 0 0;padding-left:20px;display:grid;gap:8px;color:#cfcbc3;font-size:16px}
+.agents .acts{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
+
+.proofs{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.proofs .label{min-height:300px;--r:-2deg}
+.proofs .label:nth-child(2n){--r:2deg}
+.proofs .big{font-family:var(--display);font-size:clamp(40px,4.6vw,64px);letter-spacing:-.05em;text-align:center;line-height:.9}
+.proofs .big i{font-style:normal;color:var(--red)}
+.proofs p{font-size:14px;line-height:1.45;text-align:center}
+
+.next ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.next li{border:2px solid #2a2a2a;padding:22px;font-size:15px;line-height:1.45;color:#cfcbc3}
+.next li b{display:block;font-family:var(--display);font-size:20px;letter-spacing:-.03em;color:var(--white);margin-bottom:8px;text-transform:uppercase}
+
+/* close: the postcard, front and back */
+.close .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.postcard{padding:28px;--r:-3deg}
+.postcard .word{font-size:clamp(56px,6vw,92px);line-height:.85;position:relative;padding-bottom:30px}
+.postcard .word svg{width:46%;position:absolute;left:27%;bottom:-14%}
+.postcard.back{--r:2deg;text-align:center;font-family:var(--type);font-size:14px;line-height:1.5}
+.postcard.back .q{margin:0 auto;width:120px;height:120px;display:grid;place-items:center}
+.postcard.back .q canvas,.postcard.back .q img{width:120px;height:120px}
+.wl{display:grid;gap:12px;text-align:left;font-family:var(--sans)}
+.wl .doors{display:flex;gap:14px;flex-wrap:wrap}
+.wl .doors label{display:flex;gap:6px;align-items:center;cursor:pointer;font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:11px}
+.wl input,.wl select{width:100%;padding:11px 12px;border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);font:inherit;font-size:15px;border-radius:0}
+.wl .fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wl .act{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.wl .btn{background:var(--black);color:var(--white);border-color:var(--black);padding:12px 18px}
+.wl .msg{font-size:13px;font-weight:700;min-height:20px}
+.wl .msg.ok{color:var(--green)}.wl .msg.err{color:var(--red)}
+
+footer{border-top:2px solid var(--white);padding-block:40px}
+footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;font-size:14px}
+footer h4{margin:0 0 10px;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+footer a{text-decoration:none;color:#cfcbc3}footer a:hover{color:var(--red)}
+footer .legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--type);font-size:12px;color:#9a968e;border-top:2px dotted #3a3a3a;padding-top:16px;margin-top:8px}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+.no-js .reveal,.reveal.in{opacity:1;transform:none}
+.label.reveal.in{transform:rotate(var(--r,0deg))}
+
+@media (max-width:980px){
+  .hero .wrap,.meet .wrap,.menu .wrap,.agents .wrap,.close .wrap{grid-template-columns:1fr}
+  .demos,.caps{grid-template-columns:1fr}
+  .proofs,.next ol{grid-template-columns:1fr 1fr}
+  footer .wrap{grid-template-columns:1fr 1fr}
+  nav .links a:not(.btn){display:none}
+  .hero .label{--r:-2deg}
+}
+@media (max-width:560px){
+  .proofs,.next ol,.wl .fields,footer .wrap{grid-template-columns:1fr}
+  h1{font-size:15vw}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal,.demo .step{opacity:1;transform:none}
+  .demo .cursor{display:none}
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.remove('no-js')</script>
+
+<nav aria-label="Main"><div class="wrap">
+  <a class="mark" href="#top">sauce</a>
+  <div class="links"><a href="#try">Try it</a><a href="#how">How</a><a href="#agents">Agents</a><a href="#proof">Proof</a><a href="https://github.com/bhavya-in-sf/sauce" rel="noopener">GitHub</a><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Get sauce, free</a></div>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <div>
+    <h1>Mouth says <em>yes.</em><br>Brain says<br>check it.</h1>
+    <p class="lede">sauce reads every AI draft against your own facts and your own voice before it leaves your mouth. It never writes a word for you. It never guesses who wrote it. Free, open source, inside Claude, Cursor, your Slack and the agents that post as you.</p>
+    <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Get sauce, free</a><a class="btn ghost" href="#try">Try it on this page</a></div>
+    <p class="fine">No account · No credit card · Your taste file stays on your Mac</p>
+  </div>
+  <div class="label" id="try" data-ui>
+    <div class="top"><span>You don't pick the voice.</span><span>The voice picks you.</span></div>
+    <div class="word">sauce</div>
+    <textarea id="draft" aria-label="Your draft" spellcheck="false">Excited to share that we're leveraging AI to 10x your workflow — a total game-changer. 300+ founders already trust us. Comment below!</textarea>
+    <div class="verdict BLOCK" id="verdict">BLOCK</div>
+    <svg class="mouth" id="mouth" viewBox="0 0 200 110" aria-hidden="true"><path id="lips" d="M10 55 Q100 10 190 55 Q100 95 10 55Z" fill="#c4161c"/><path id="teeth" d="M30 52 Q100 30 170 52 L170 62 Q100 78 30 62Z" fill="#f4f2ee" opacity="0"/><path id="seam" d="M10 55 Q100 48 190 55" fill="none" stroke="#8e0e12" stroke-width="5" stroke-linecap="round"/></svg>
+    <div class="issues" id="lines"></div>
+    <div class="chips" aria-label="Try an example"><button type="button" class="chip" data-try="Excited to share that we're leveraging AI to 10x your workflow — a total game-changer. 300+ founders already trust us. Comment below!">The AI draft</button><button type="button" class="chip" data-try="100 investors who back women building AI. One list. Comment INVESTORS and I'll send it.">Her real post</button><button type="button" class="chip" data-try="I just passed 62K followers on LinkedIn. Here is what I'd tell my 2022 self.">An approved number</button></div>
+    <p class="fineprint">Runs in your browser on <b>Bhavya's real profile</b>. Approved: 62K followers, Top Voice 2024, about 3,000 readers, 100 investors, 673 posts. Banned: em dashes, "game-changer", "delve". Edit the draft; it re-checks as you type.</p>
+    <div class="foot"><span id="dnum">Draft #001</span><span id="ms">4 ms</span></div>
+  </div>
+</div></header>
+
+<div class="strip" aria-label="Tested on real writing"><div class="track" id="track">
+  <span>Tested on <b>673</b> of one founder's posts</span><span><b>68%</b> pass as written</span><span><b>46 of 47</b> team drafts pass after one approved fact</span><span><b>41 of 44</b> posts read their author's voice</span><span><b>4 ms</b> per check, no model call</span><span>Posts the gate would block got about <b>15% less</b> engagement on the founder's own account</span><span><b>2,437</b> real posts behind the rules</span><span>Open source · <b>MIT</b></span>
+</div></div>
+
+<section class="meet" id="meet"><div class="wrap">
+  <div class="head reveal"><h2>Your editor that never <em>writes.</em></h2><p>Train it on your facts and your voice once. Then it reads everything, in every tool, before it goes out. A checker cannot make you generic; the words stay yours.</p></div>
+  <div class="profile label reveal" data-ui>
+    <div class="name"><b>sauce</b><span>v0.6.2 · MIT</span></div>
+    <ul>
+      <li><svg viewBox="0 0 200 110" aria-hidden="true"><path d="M10 55 Q100 10 190 55 Q100 95 10 55Z" fill="#c4161c"/></svg><span>Reads your approved facts. Any number not on the list is sent back.</span></li>
+      <li><svg viewBox="0 0 200 110" aria-hidden="true"><path d="M10 50 Q100 0 190 50 Q100 110 10 50Z" fill="#c4161c"/><path d="M30 52 Q100 30 170 52 L170 62 Q100 78 30 62Z" fill="#f4f2ee"/></svg><span>Knows your banned words, your filler, and a format you used this week.</span></li>
+      <li><svg viewBox="0 0 200 110" aria-hidden="true"><path d="M10 50 Q100 -20 190 50 Q100 130 10 50Z" fill="#c4161c"/><path d="M28 52 Q100 20 172 52 Q100 70 28 52Z" fill="#f4f2ee"/></svg><span>Scores eight things separately, never one number. Rewrites only the weakest line.</span></li>
+      <li><svg viewBox="0 0 200 110" aria-hidden="true"><path d="M10 55 Q100 10 190 55 Q100 95 10 55Z" fill="#8e0e12"/></svg><span>Learns from what you edit. You approve every rule.</span></li>
+      <li><svg viewBox="0 0 200 110" aria-hidden="true"><path d="M10 50 Q100 -10 190 50 Q100 115 10 50Z" fill="#c4161c"/><ellipse cx="100" cy="52" rx="60" ry="22" fill="#0a0a0a"/></svg><span>Lives in Claude Code, Claude Desktop, Cursor and OpenClaw. Sends Claude back if it skipped the check.</span></li>
+      <li><svg viewBox="0 0 200 110" aria-hidden="true"><path d="M10 50 Q100 0 190 50 Q100 110 10 50Z" fill="#c4161c"/><path d="M30 52 Q100 30 170 52 L170 62 Q100 78 30 62Z" fill="#f4f2ee"/><path d="M100 30 L100 78" stroke="#0a0a0a" stroke-width="3"/></svg><span>Joins your Slack. It reads the drafts channel and checks every message before anyone hits post. Read-only today, so nothing is sent for you.</span></li>
+    </ul>
+    <div class="quote">"Memory is like handing a chef your recipe card. A critic is someone who tastes the dish and sends it back if it's off."<b>Bhavya Goel, who built it after five years of making founders sound like themselves</b></div>
+  </div>
+</div></section>
+
+<section class="how" id="how"><div class="wrap">
+  <div class="head reveal"><h2>Three loops. <em>Real</em> output.</h2><p>Each card replays a real exchange, the way it happens in Claude Code, in your edits, and in an agent. Nothing is mocked; the verdicts are the gate's.</p></div>
+  <div class="demos">
+    <div class="demo reveal" data-ui>
+      <div class="bar"><span>Claude Code</span><span>sauce_check</span></div>
+      <div class="body">
+        <div class="step you">Check this with sauce: "We're leveraging AI to 10x your workflow. 300+ founders trust us."</div>
+        <div class="step tool"><b>sauce_check</b><span class="v">FIX</span><br>"10x" A result claim. Prove it, or cut it.<br>"300+ founders" Not on your approved list.<br>"leveraging" Filler.</div>
+        <div class="step">Sent back. Want me to add "300 founders" as a fact?</div>
+        <div class="step you">Yes. Add it, then check again.</div>
+        <div class="step tool"><b>sauce_add · sauce_check</b>"300+ founders" passes now. One claim and one word left.</div>
+        <div class="step"><span class="act">Fix the two lines</span></div>
+      </div>
+      <div class="cursor" aria-hidden="true"><svg viewBox="0 0 14 18"><path d="M1 1l12 7-5 1.5L11 16l-2.5 1-3-6L1 14z" fill="#f4f2ee" stroke="#0a0a0a"/></svg><span>you</span></div>
+      <div class="cap">Approve a fact once, in plain English. It never asks again.</div>
+    </div>
+    <div class="demo reveal" data-ui>
+      <div class="bar"><span>Your edit</span><span>sauce_learn</span></div>
+      <div class="body">
+        <div class="step"><b>Draft:</b> Why do most launch posts fail? Because nobody states the number.</div>
+        <div class="step"><b>What you posted:</b> 46 of 47 drafts passed after one approved fact.</div>
+        <div class="step tool"><b>proposed rule</b>Open with the number, not a question. Seen 3 times this month.</div>
+        <div class="step tool"><b>proposed rule</b>Numbers before adjectives. Seen twice.</div>
+        <div class="step"><span class="act">Add both</span> &nbsp;<span class="act quiet">Not yet</span></div>
+        <div class="step tool"><b>TASTE.md</b>+2 rules, dated, yours to read.</div>
+      </div>
+      <div class="cursor" aria-hidden="true"><svg viewBox="0 0 14 18"><path d="M1 1l12 7-5 1.5L11 16l-2.5 1-3-6L1 14z" fill="#f4f2ee" stroke="#0a0a0a"/></svg><span>you</span></div>
+      <div class="cap">Your taste compounds in a file you own.</div>
+    </div>
+    <div class="demo reveal" data-ui>
+      <div class="bar"><span>An agent, before it posts</span><span>exit code</span></div>
+      <div class="body">
+        <div class="step">$ sauce check - --json &lt;&lt;'D'<br>We hit $50k MRR. Our AI makes writing effortless.<br>D</div>
+        <div class="step tool"><b>result</b><span class="v BLOCK">BLOCK</span><br>"$50k MRR" Money claim not on the approved list.<br>"effortless" Filler.</div>
+        <div class="step">exit 2</div>
+        <div class="step tool"><b>agent</b>Not sent. Asked the owner to approve "$50k MRR" or cut it.</div>
+        <div class="step you">Cut it.</div>
+        <div class="step tool"><b>result</b><span class="v PASS">PASS</span> · exit 0 · sent</div>
+      </div>
+      <div class="cursor" aria-hidden="true"><svg viewBox="0 0 14 18"><path d="M1 1l12 7-5 1.5L11 16l-2.5 1-3-6L1 14z" fill="#f4f2ee" stroke="#0a0a0a"/></svg><span>agent</span></div>
+      <div class="cap">Exit 2 BLOCK, 1 FIX, 0 PASS. Any agent can branch on it.</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="capsec"><div class="wrap">
+  <div class="head reveal"><h2>Six jobs, one <em>profile.</em></h2><p>Put sauce to work. Each job is tied to a result from the tests, not a promise.</p></div>
+  <div class="caps">
+    <div class="cap reveal"><h3>The gate</h3><p>Em dashes, filler, banned phrases, unapproved numbers and money claims, "10x" claims, a format you reused this week. Deterministic, 4 ms, no model.</p><div class="ex">17 team drafts replayed: 9 stopped, 2 sent back, 6 passed.</div></div>
+    <div class="cap reveal"><h3>Critique</h3><p>Clarity, proof, why you, the ask, hook, voice, boldness, rhythm. Scored apart against your own samples. Bias and private data flagged on the side.</p><div class="ex">41 of 44 held-out posts scored higher with their author's profile.</div></div>
+    <div class="cap reveal"><h3>Learn</h3><p>Compares your draft with what you posted and proposes the rule. You say yes or no.</p><div class="ex">Rules carry the date they were learned.</div></div>
+    <div class="cap reveal"><h3>Joins your Slack</h3><p>Point it at the channel where your team drafts. Every message gets the same check as the founder's own posts, with the last seven days as the sameness memory. Read-only: it reports, it never posts.</p><div class="ex">examples/slack_shadow.py · 47 team drafts checked this way, 46 pass after one approval.</div></div>
+    <div class="cap reveal"><h3>Deck checker</h3><p>Reads a PDF, PPTX or Markdown deck slide by slide and flags the same noun with different numbers across slides.</p><div class="ex">scripts/deck_check.py</div></div>
+    <div class="cap reveal"><h3>Team gate and the nudge</h3><p>One approved-facts file for everyone drafting as the founder, a sameness limit for the whole team, and in Claude Code a nudge that sends Claude back if it skipped the check.</p><div class="ex">Six different revenue figures caught on one team's drafts.</div></div>
+  </div>
+</div></section>
+
+<section class="menu" id="labs"><div class="wrap">
+  <div class="list reveal" data-ui>
+    <h3>What the labs shipped <span>(one app each)</span></h3>
+    <div class="r"><span>Custom instructions, OpenAI</span><span>Jul 2023</span></div>
+    <div class="r"><span>Memory, OpenAI</span><span>Feb 2024</span></div>
+    <div class="r"><span>Gems, Google</span><span>Aug 2024</span></div>
+    <div class="r"><span>Styles from writing samples, Anthropic</span><span>Nov 2024</span></div>
+    <div class="r"><span>Memory across all chats, OpenAI</span><span>Apr 2025</span></div>
+    <div class="r"><span>Personal context, Google</span><span>Aug 2025</span></div>
+    <div class="r"><span>Memory per project, Anthropic</span><span>Oct 2025</span></div>
+    <div class="r"><span>Personality presets, OpenAI</span><span>Nov 2025</span></div>
+    <div class="r"><span>Instructions limit to 5,000 chars, OpenAI</span><span>Jul 2026</span></div>
+    <h3 style="margin-top:28px">What sauce does <span>(every app)</span></h3>
+    <div class="r"><span>One profile, two files you own</span><span>yours</span></div>
+    <div class="r"><span>Checked against the draft, every time</span><span>4 ms</span></div>
+    <div class="r"><span>Learns from edits and performance</span><span>compounds</span></div>
+    <div class="r"><span>Shared by a team</span><span>one file</span></div>
+  </div>
+  <div class="side reveal">
+    <h2>They ship style in <em>one</em> app. Your taste should travel.</h2>
+    <p>Every lab now has a style box and a memory. All of it is typed by hand, locked to one app and one user, and <b>never checked against the finished draft</b>. sauce is the check, and the profile goes with you into Claude, Cursor, OpenClaw and any agent that calls it.</p>
+  </div>
+</div></section>
+
+<section class="agents" id="agents"><div class="wrap">
+  <div class="reveal">
+    <h2>Your agents speak as you. sauce is the check they run <em>first.</em></h2>
+    <ul>
+      <li>Remix, Puff, Wajo, OpenClaw: personal agents now post, email and message under their owner's name. None of them checks the draft against the person.</li>
+      <li>One call, deterministic, local, about 4 ms. No model, no cost per check.</li>
+      <li>Never invents a number to satisfy a check. Asks the owner instead.</li>
+    </ul>
+    <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/sauce#for-agents-remix-wajo-openclaw-your-own" rel="noopener">Agent integration page</a><a class="btn ghost" href="https://github.com/bhavya-in-sf/sauce/tree/main/openclaw" rel="noopener">OpenClaw skill</a></div>
+  </div>
+  <div class="label reveal" data-ui>
+    <div class="top"><span>Before post()</span><span>Exit code</span></div>
+    <div class="word">check</div>
+<pre>$ clawhub install sauce
+$ sauce check - --json &lt;&lt;'D'
+We're leveraging AI to 10x your workflow.
+D
+{ "verdict": "FIX",
+  "issues": [ { "quote": "10x", ... } ] }
+$ echo $?
+1</pre>
+    <div class="foot"><span>2 block · 1 fix · 0 pass</span><span>no network</span></div>
+  </div>
+</div></section>
+
+<section class="proof" id="proof"><div class="wrap">
+  <div class="head reveal"><h2>Tested on <em>real</em> writing.</h2><p>One founder's archive, one startup's Slack, eleven writers' held-out posts. Enough to show the pattern, not an accuracy rate. Every number reruns from the repo.</p></div>
+  <div class="proofs">
+    <div class="label reveal"><div class="top"><span>The founder's own archive</span><span>2022 to 2026</span></div><div class="big">68<i>%</i></div><p>of 673 LinkedIn posts pass as written. The rest: em dashes, filler, numbers never backed up.</p><div class="foot"><span>673 posts</span><span>22 Oct</span></div></div>
+    <div class="label reveal"><div class="top"><span>A startup's Slack drafts</span><span>47 messages</span></div><div class="big">46<i>/</i>47</div><p>pass after one fact is approved. The one unsupported number is still caught.</p><div class="foot"><span>one approval</span><span>22 Oct</span></div></div>
+    <div class="label reveal"><div class="top"><span>Eleven writers</span><span>voice test</span></div><div class="big">41<i>/</i>44</div><p>held-out posts scored higher with their author's profile than another's. Three ties, none lower.</p><div class="foot"><span>claude-opus-5-5</span><span>26 Oct</span></div></div>
+    <div class="label reveal"><div class="top"><span>The gate, timed</span><span>no model</span></div><div class="big">4<i>ms</i></div><p>per check. 17 drafts replayed in order: 9 stopped, 2 sent back, 6 passed.</p><div class="foot"><span>deterministic</span><span>20 Oct</span></div></div>
+  </div>
+</div></section>
+
+<section class="next"><div class="wrap">
+  <div class="head reveal"><h2>Not built yet, <em>plainly</em> marked.</h2></div>
+  <ol>
+    <li class="reveal"><b>Hosted API</b>Keys and per-check credits, so an agent company can wire it in a day. The preview runs locally today.</li>
+    <li class="reveal"><b>Every model</b>The same profile in ChatGPT and Gemini through the API, not just Claude and Cursor.</li>
+    <li class="reveal"><b>Taste-lift</b>Per-user dashboard: edit rate and engagement before and after. Fed by the log you already have.</li>
+    <li class="reveal"><b>Blind taste test</b>30 real briefs, two outputs each, 20 to 30 raters. We publish the win rate, whatever it is.</li>
+  </ol>
+</div></section>
+
+<section class="close" id="seat"><div class="wrap">
+  <div class="postcard label reveal" data-ui>
+    <div class="top"><span>Taste it before it leaves your mouth.</span><span>San Francisco</span></div>
+    <div class="word">sauce<svg viewBox="0 0 200 110" aria-hidden="true"><path d="M10 50 Q100 -20 190 50 Q100 130 10 50Z" fill="#c4161c"/><path d="M28 52 Q100 20 172 52 Q100 70 28 52Z" fill="#f4f2ee"/></svg></div>
+    <div class="foot"><span>Free · open source · MIT</span><span>github.com/bhavya-in-sf/sauce</span></div>
+  </div>
+  <div class="postcard label back reveal" data-ui>
+    <p>WHAT'S IN THE DRAFT?<br>YOU TELL ME.</p>
+    <div class="q" id="qr" aria-label="QR code to this page"></div>
+    <form class="wl" id="wl" novalidate>
+      <div class="doors" role="radiogroup" aria-label="What are you joining"><label><input type="radio" name="door" value="plugin" checked> The plug-in</label><label><input type="radio" name="door" value="table"> The dinners</label><label><input type="radio" name="door" value="both"> Both</label></div>
+      <div class="fields"><input id="wl-name" name="name" type="text" autocomplete="name" placeholder="Your name" aria-label="Your name"><input id="wl-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" aria-label="Your email"></div>
+      <select id="wl-role" name="role" aria-label="You are"><option>A founder</option><option>A marketer</option><option>A writer or ghostwriter</option><option>An engineer</option><option>An investor</option><option>Curious</option></select>
+      <input id="wl-pain" name="pain" type="text" placeholder="The last draft that went out wrong (optional)" aria-label="The last draft that went out wrong">
+      <div class="act"><button class="btn" id="wl-submit" type="submit">Join the waitlist</button><span class="msg" id="wl-msg" role="status" aria-live="polite"></span></div>
+    </form>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div><div class="mark">sauce</div><p style="margin-top:10px;max-width:30ch;color:#cfcbc3">An editor for AI drafts, not a detector. Built in San Francisco.</p></div>
+  <div><h4>Get started</h4><ul><li><a href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Install</a></li><li><a href="https://github.com/bhavya-in-sf/sauce/blob/main/docs/INSTALL.md" rel="noopener">Cursor and MCP</a></li><li><a href="https://github.com/bhavya-in-sf/sauce/tree/main/openclaw" rel="noopener">OpenClaw</a></li></ul></div>
+  <div><h4>Product</h4><ul><li><a href="#try">The gate</a></li><li><a href="#how">Critique and learn</a></li><li><a href="#agents">For agents</a></li><li><a href="https://github.com/bhavya-in-sf/sauce/blob/main/docs/API.md" rel="noopener">API</a></li></ul></div>
+  <div><h4>Company</h4><ul><li><a href="https://github.com/bhavya-in-sf/sauce" rel="noopener">GitHub</a></li><li><a href="#seat">Waitlist and dinners</a></li><li><a href="https://github.com/bhavya-in-sf/sauce/blob/main/EVIDENCE.md" rel="noopener">Evidence</a></li></ul></div>
+  <div class="legal"><span>2026 · sauce · MIT</span><span>Nothing leaves your Mac for the basic check</span></div>
+</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function(){
+  /* ---- the live thing: a browser port of a few of sauce's gate rules, on Bhavya's public profile ---- */
+  var APPROVED=["62K followers","62,000 followers","Top Voice 2024","3,000 newsletter readers","100 investors","673 posts","100+ AI companies","5 years"];
+  var FILLER=["streamline","leverage","leveraging","unlock","seamless","empower","delve","in today's fast-paced","elevate your","effortless"];
+  var BANNED=[{rx:/\bgame-?changer\b/g,why:"Banned. Her rule: generic AI filler."},{rx:/\bdelve\b/g,why:"Banned. Her rule: generic AI filler."}];
+  var FIRST=/\b(i|i'm|i've|me|my|we|we're|our|us|clients?|customers?|users?|team)\b/;
+  function approved(num){var a=APPROVED.join(" ").toLowerCase(),base=num.toLowerCase().replace(/,/g,"");var forms=[base];if(/k$/.test(base))forms.push(base.slice(0,-1)+"000",base.slice(0,-1)+",000");if(/^\d{4,}$/.test(base))forms.push(Number(base).toLocaleString("en-US"));return forms.some(function(f){return new RegExp("(^|[^\\d,])"+f.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"(?!\\d)").test(a)})}
+  function aboutUs(t,k){var s=t.slice(Math.max(0,t.lastIndexOf(".",k)+1),(t.indexOf(".",k)+1)||t.length);return FIRST.test(s)||!/\b[A-Z][a-z]+/.test(s.replace(/^\s*[A-Z]/,"x"))}
+  function check(text){var t=text.replace(/’/g,"'"),low=t.toLowerCase(),out=[],seen={};function add(l,q,d){var k=l+q;if(seen[k])return;seen[k]=1;out.push({level:l,q:q,d:d})}
+    ["—","–","--"].forEach(function(d){if(t.indexOf(d)>-1)add("BLOCK",d,"Em dash or double hyphen. Her house rule.")});
+    var m,money=/\$\s?(\d[\d,.]*)\s?(k|m)?\+?\s*(arr|mrr|revenue)?/g;while((m=money.exec(low))){if(!approved(m[1]+(m[2]||""))&&aboutUs(t,m.index))add("BLOCK",m[0].trim(),"Money claim not on her approved list.")}
+    var count=/\b(\d[\d,.]*)\s?(k)?\+?\s*(followers|subscribers|readers|users|customers|founders|companies|posts|investors|leads|clients)\b/g;while((m=count.exec(low))){if(!approved(m[1].replace(/,/g,"")+(m[2]||""))&&aboutUs(t,m.index))add("FIX",m[0].trim(),"Number not on her approved list. Add it, or cut it.")}
+    var mult=/\b(\d+(?:\.\d+)?)\s?x(?![\w\d])/g;while((m=mult.exec(low))){if(aboutUs(t,m.index))add("FIX",m[0].trim(),"A result claim. Prove it, or cut it.")}
+    BANNED.forEach(function(b){var r;b.rx.lastIndex=0;while((r=b.rx.exec(low)))add("BLOCK",r[0],b.why)});
+    FILLER.forEach(function(f){if(low.indexOf(f)>-1)add("FIX",f,"Filler. Say what actually happened.")});
+    var v=out.some(function(i){return i.level==="BLOCK"})?"BLOCK":out.length?"FIX":"PASS";return{verdict:v,issues:out}}
+  var ta=document.getElementById("draft"),verdict=document.getElementById("verdict"),lines=document.getElementById("lines"),ms=document.getElementById("ms"),dnum=document.getElementById("dnum"),n=1;
+  var lips=document.getElementById("lips"),teeth=document.getElementById("teeth"),seam=document.getElementById("seam");
+  var MOUTH={BLOCK:{lips:"M10 55 Q100 10 190 55 Q100 95 10 55Z",teeth:0,seam:1},FIX:{lips:"M10 50 Q100 0 190 50 Q100 110 10 50Z",teeth:1,seam:0},PASS:{lips:"M10 50 Q100 -20 190 50 Q100 130 10 50Z",teeth:1,seam:0}};
+  var TEETH={FIX:"M30 52 Q100 30 170 52 L170 62 Q100 78 30 62Z",PASS:"M28 52 Q100 20 172 52 Q100 70 28 52Z"};
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  function render(){var t0=performance.now(),r=check(ta.value);verdict.className="verdict "+r.verdict;verdict.textContent=r.verdict;
+    var m=MOUTH[r.verdict];lips.setAttribute("d",m.lips);teeth.setAttribute("opacity",m.teeth);if(TEETH[r.verdict])teeth.setAttribute("d",TEETH[r.verdict]);seam.setAttribute("opacity",m.seam);
+    lines.innerHTML=r.issues.map(function(i){return '<div class="row"><span class="lvl '+i.level+'">'+i.level+'</span><span><span class="q">'+esc(i.q)+'</span> '+esc(i.d)+'</span></div>'}).join("")||'<div class="row"><span class="lvl" style="color:#1f6b3a">OK</span><span>Specific, approved, in her voice. Ships.</span></div>';
+    ms.textContent=Math.max(1,Math.round(performance.now()-t0))+" ms";dnum.textContent="Draft #"+String(n).padStart(3,"0")}
+  var timer;ta.addEventListener("input",function(){clearTimeout(timer);timer=setTimeout(function(){n++;render()},150)});
+  document.querySelectorAll("[data-try]").forEach(function(b){b.addEventListener("click",function(){ta.value=b.getAttribute("data-try");n++;render()})});
+  render();
+
+  /* ---- ticker: duplicate the track so it loops ---- */
+  var track=document.getElementById("track");track.innerHTML+=track.innerHTML;
+
+  /* ---- the demos: each card replays its steps; the labelled cursor moves to the thing being clicked ---- */
+  var reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll(".demo").forEach(function(d){
+    var steps=[].slice.call(d.querySelectorAll(".step")),cur=d.querySelector(".cursor");
+    if(reduced){steps.forEach(function(s){s.classList.add("on")});return}
+    function run(){
+      steps.forEach(function(s){s.classList.remove("on")});cur.classList.remove("on");d.querySelectorAll(".act").forEach(function(a){a.classList.remove("hit")});
+      steps.forEach(function(s,i){setTimeout(function(){s.classList.add("on");
+        var act=s.querySelector(".act"),target=act||(s.classList.contains("you")?s:null);
+        if(target){var r=target.getBoundingClientRect(),b=d.getBoundingClientRect();cur.classList.add("on");cur.style.transform="translate("+(r.left-b.left+Math.min(40,r.width/2))+"px,"+(r.top-b.top+r.height/2)+"px)";if(act)setTimeout(function(){act.classList.add("hit")},500)}
+      },900*i+400)});
+      setTimeout(run,900*steps.length+2600);
+    }
+    steps[0].classList.add("on");  /* complete at rest: the first line shows before the loop starts */
+    var started=false,io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!started){started=true;run();io.disconnect()}})},{threshold:.15});io.observe(d);
+  });
+
+  /* ---- entrances, once ---- */
+  var io="IntersectionObserver" in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12}):null;
+  document.querySelectorAll(".reveal").forEach(function(el,i){el.style.transitionDelay=((i%3)*70)+"ms";io?io.observe(el):el.classList.add("in")});
+
+  /* ---- postcard QR: this page ---- */
+  try{if(window.QRCode){new QRCode(document.getElementById("qr"),{text:"https://bhavya-in-sf.github.io/sauce/",width:120,height:120,colorDark:"#0a0a0a",colorLight:"#f4f2ee",correctLevel:QRCode.CorrectLevel.M})}}catch(e){}
+
+  /* ---- waitlist ---- */
+  var ENDPOINT="https://formsubmit.co/ajax/ac327ff10bcd43f64f6e489f7fb0f09c";
+  var f=document.getElementById("wl"),msg=document.getElementById("wl-msg"),btn=document.getElementById("wl-submit");
+  f.addEventListener("submit",function(e){
+    e.preventDefault();msg.className="msg err";msg.textContent="";
+    var name=document.getElementById("wl-name").value.trim(),email=document.getElementById("wl-email").value.trim();
+    if(!name){msg.textContent="Add your name, then try again.";document.getElementById("wl-name").focus();return}
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg.textContent="That email doesn't look right. Use name@example.com.";document.getElementById("wl-email").focus();return}
+    var door=(f.querySelector("input[name=door]:checked")||{}).value;
+    var data={door:door,name:name,email:email,role:document.getElementById("wl-role").value,pain:document.getElementById("wl-pain").value.trim(),_subject:"sauce waitlist: "+door,_template:"table"};
+    btn.disabled=true;btn.textContent="Joining...";
+    var ctrl=window.AbortController?new AbortController():null,t=setTimeout(function(){if(ctrl)ctrl.abort()},15000);
+    fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(data),signal:ctrl?ctrl.signal:undefined})
+      .then(function(r){return r.json().catch(function(){return{}}).then(function(j){return{ok:r.ok,j:j}})})
+      .then(function(res){var m=String((res.j&&res.j.message)||"");if(/activat/i.test(m)){msg.textContent="Almost there: the form needs confirming by the owner. Try again in a little while.";return}
+        if(!res.ok||String(res.j.success)==="false")throw new Error(m);
+        f.reset();msg.className="msg ok";msg.textContent=door==="table"?"You're on the list. Invites go out by hand, so watch your inbox.":"You're on the list. We'll email you when the next release ships."})
+      .catch(function(e){msg.textContent=(e&&e.name==="AbortError")?"This is taking too long. Check your connection and try again.":"That didn't go through. Check your connection and try again."})
+      .then(function(){clearTimeout(t);btn.disabled=false;btn.textContent="Join the waitlist"})
+  });
+})();
+</script>
+</body>
+</html>

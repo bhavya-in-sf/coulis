@@ -42,6 +42,11 @@ nav .links a:hover{color:var(--red)}
 nav .links .btn{padding:12px 16px}
 
 /* the label card: a can label */
+.ph{position:relative;background:#1c1b19;overflow:hidden;display:grid;place-items:center;color:#8a8780;font:700 10px/1.4 var(--sans);letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:10px}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.ph.has img{display:block}.ph.has span{display:none}
+.ph span b{display:block;color:var(--red);font-size:11px;margin-bottom:4px}
+.paper{background-image:var(--paper-img,none);background-size:cover;background-blend-mode:multiply}
 .label{background:var(--white);color:var(--ink);padding:22px 22px 18px;display:flex;flex-direction:column;gap:14px;position:relative;transform:rotate(var(--r,0deg));transition:transform .4s cubic-bezier(.16,1,.3,1)}
 .label:hover{transform:rotate(0deg)}
 .label .top{display:flex;justify-content:space-between;gap:16px}
@@ -54,13 +59,20 @@ nav .links .btn{padding:12px 16px}
 .label .foot{font-size:9px;letter-spacing:.06em;text-transform:uppercase;display:flex;justify-content:space-between;color:var(--muted);margin-top:auto}
 .label .fineprint{font-size:11px;line-height:1.5;color:var(--muted)}
 
-.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-block:48px 72px}
-h1{font-size:clamp(56px,8.6vw,140px)}
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;padding-block:40px 80px}
+.hero .pile{position:relative;min-height:640px}
+.hero .pile>*{position:absolute}
+.hero .pile .label{left:6%;top:0;width:min(78%,420px);z-index:3;--r:-3deg}
+.hero .pile .ph.mouthA{right:0;top:38%;width:46%;aspect-ratio:1;z-index:2;transform:rotate(6deg)}
+.hero .pile .ph.hand{left:0;bottom:0;width:38%;aspect-ratio:1;z-index:1;transform:rotate(-5deg)}
+.hero .pile .tag{right:4%;top:6%;z-index:4;background:var(--red);color:var(--white);font:700 10px var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:8px 10px;transform:rotate(8deg)}
+.h1wrap{position:relative}
+.h1wrap .ph.under{position:absolute;left:-4%;bottom:-18%;width:52%;aspect-ratio:1;z-index:-1;transform:rotate(-4deg);opacity:.9}
+h1{font-size:clamp(56px,8.2vw,132px);position:relative;z-index:1}
 .hero .lede{font-size:clamp(18px,1.7vw,22px);line-height:1.4;max-width:34ch;margin-top:28px;color:#cfcbc3}
 .hero .acts{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
 .hero .fine{margin-top:18px;color:#9a968e}
-.hero .label{max-width:440px;justify-self:center;--r:-3deg;width:100%}
-.hero .label:hover{transform:rotate(-3deg)}
+.hero .pile .label:hover{transform:rotate(-3deg)}
 textarea{width:100%;min-height:96px;resize:vertical;border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);padding:12px;font:500 15px/1.45 var(--sans);border-radius:0}
 .issues{display:grid;gap:8px;font-family:var(--type);font-size:13px;line-height:1.4}
 .issues .row{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:baseline}
@@ -71,6 +83,8 @@ textarea{width:100%;min-height:96px;resize:vertical;border:1.5px solid var(--ink
 .chip:hover{background:var(--red)}
 
 /* proof strip: a ticker */
+.gridstrip{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;padding:6px var(--m)}
+.gridstrip .ph{aspect-ratio:1}
 .strip{border-top:2px solid var(--white);border-bottom:2px solid var(--white);overflow:hidden;white-space:nowrap;padding:14px 0;font-family:var(--type);font-size:14px;text-transform:uppercase;letter-spacing:.04em}
 .strip .track{display:inline-block;animation:marquee 40s linear infinite}
 .strip span{margin-right:48px}
@@ -137,9 +151,11 @@ section{padding-block:clamp(72px,10vw,140px)}
 .agents ul{margin:20px 0 0;padding-left:20px;display:grid;gap:8px;color:#cfcbc3;font-size:16px}
 .agents .acts{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
 
-.proofs{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.proofs .label{min-height:300px;--r:-2deg}
-.proofs .label:nth-child(2n){--r:2deg}
+.proofs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;align-items:start}
+.proofs .label{min-height:320px;--r:-2deg;margin-right:-14px}
+.proofs .label:nth-child(2n){--r:2.5deg;margin-top:34px}
+.proofs .label:nth-child(3){--r:-1deg;margin-top:12px}
+.proofs .label .ph{aspect-ratio:16/9;margin:0 -22px}
 .proofs .big{font-family:var(--display);font-size:clamp(40px,4.6vw,64px);letter-spacing:-.05em;text-align:center;line-height:.9}
 .proofs .big i{font-style:normal;color:var(--red)}
 .proofs p{font-size:14px;line-height:1.45;text-align:center}
@@ -149,10 +165,11 @@ section{padding-block:clamp(72px,10vw,140px)}
 .next li b{display:block;font-family:var(--display);font-size:20px;letter-spacing:-.03em;color:var(--white);margin-bottom:8px;text-transform:uppercase}
 
 /* close: the postcard, front and back */
-.close .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-.postcard{padding:28px;--r:-3deg}
-.postcard .word{font-size:clamp(56px,6vw,92px);line-height:.85;position:relative;padding-bottom:30px}
-.postcard .word svg{width:46%;position:absolute;left:27%;bottom:-14%}
+.close .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:0;align-items:center}
+.postcard{padding:28px;--r:-3deg;z-index:2}
+.postcard .word{font-size:clamp(64px,7vw,110px);line-height:.85;position:relative;padding-bottom:0}
+.postcard .ph.big{aspect-ratio:16/10;margin:-10px -28px -18px}
+.postcard.back{margin-left:-40px;margin-top:40px}
 .postcard.back{--r:2deg;text-align:center;font-family:var(--type);font-size:14px;line-height:1.5}
 .postcard.back .q{margin:0 auto;width:120px;height:120px;display:grid;place-items:center}
 .postcard.back .q canvas,.postcard.back .q img{width:120px;height:120px}
@@ -179,6 +196,11 @@ footer .legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:16
 
 @media (max-width:980px){
   .hero .wrap,.meet .wrap,.menu .wrap,.agents .wrap,.close .wrap{grid-template-columns:1fr}
+  .hero .pile{min-height:560px;margin-top:40px}
+  .h1wrap .ph.under{display:none}
+  .proofs{grid-template-columns:1fr 1fr;gap:18px}.proofs .label{margin:0!important}
+  .postcard.back{margin:24px 0 0}
+  .gridstrip{grid-template-columns:repeat(3,1fr)}
   .demos,.caps{grid-template-columns:1fr}
   .proofs,.next ol{grid-template-columns:1fr 1fr}
   footer .wrap{grid-template-columns:1fr 1fr}
@@ -206,11 +228,13 @@ footer .legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:16
 
 <header class="hero" id="top"><div class="wrap">
   <div>
-    <h1>Mouth says <em>yes.</em><br>Brain says<br>check it.</h1>
+    <div class="h1wrap"><h1>Mouth says <em>yes.</em><br>Brain says<br>check it.</h1><div class="ph under" data-photo="mouth-wordmark"><span><b>photo</b>mouth-wordmark.png<br>teeth clenched, from below</span><img alt=""></div></div>
     <p class="lede">sauce reads every AI draft against your own facts and your own voice before it leaves your mouth. It never writes a word for you. It never guesses who wrote it. Free, open source, inside Claude, Cursor, your Slack and the agents that post as you.</p>
     <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Get sauce, free</a><a class="btn ghost" href="#try">Try it on this page</a></div>
     <p class="fine">No account · No credit card · Your taste file stays on your Mac</p>
   </div>
+  <div class="pile">
+  <div class="tag">Draft #001 · checked in 4 ms</div>
   <div class="label" id="try" data-ui>
     <div class="top"><span>You don't pick the voice.</span><span>The voice picks you.</span></div>
     <div class="word">sauce</div>
@@ -222,7 +246,13 @@ footer .legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:16
     <p class="fineprint">Runs in your browser on <b>Bhavya's real profile</b>. Approved: 62K followers, Top Voice 2024, about 3,000 readers, 100 investors, 673 posts. Banned: em dashes, "game-changer", "delve". Edit the draft; it re-checks as you type.</p>
     <div class="foot"><span id="dnum">Draft #001</span><span id="ms">4 ms</span></div>
   </div>
+  <div class="ph mouthA" data-photo="mouth-pass"><span><b>photo</b>mouth-pass.png<br>open laugh, flash, black</span><img alt="A mouth, open in a laugh"></div>
+  <div class="ph hand" data-photo="hand-can"><span><b>photo</b>hand-can.png<br>hand holding a white can</span><img alt="A hand holding a plain white can"></div>
+  </div>
 </div></header>
+<div class="gridstrip" aria-hidden="true">
+  <div class="ph" data-photo="mouth-block"><span><b>photo</b>mouth-block</span><img alt=""></div><div class="ph" data-photo="mouth-fix"><span><b>photo</b>mouth-fix</span><img alt=""></div><div class="ph" data-photo="mouth-pass"><span><b>photo</b>mouth-pass</span><img alt=""></div><div class="ph" data-photo="mouth-grid"><span><b>photo</b>mouth-grid</span><img alt=""></div><div class="ph" data-photo="hands-cards"><span><b>photo</b>hands-cards</span><img alt=""></div><div class="ph" data-photo="mouth-wordmark"><span><b>photo</b>mouth-wordmark</span><img alt=""></div>
+</div>
 
 <div class="strip" aria-label="Tested on real writing"><div class="track" id="track">
   <span>Tested on <b>673</b> of one founder's posts</span><span><b>68%</b> pass as written</span><span><b>46 of 47</b> team drafts pass after one approved fact</span><span><b>41 of 44</b> posts read their author's voice</span><span><b>4 ms</b> per check, no model call</span><span>Posts the gate would block got about <b>15% less</b> engagement on the founder's own account</span><span><b>2,437</b> real posts behind the rules</span><span>Open source · <b>MIT</b></span>
@@ -353,10 +383,10 @@ $ echo $?
 <section class="proof" id="proof"><div class="wrap">
   <div class="head reveal"><h2>Tested on <em>real</em> writing.</h2><p>One founder's archive, one startup's Slack, eleven writers' held-out posts. Enough to show the pattern, not an accuracy rate. Every number reruns from the repo.</p></div>
   <div class="proofs">
-    <div class="label reveal"><div class="top"><span>The founder's own archive</span><span>2022 to 2026</span></div><div class="big">68<i>%</i></div><p>of 673 LinkedIn posts pass as written. The rest: em dashes, filler, numbers never backed up.</p><div class="foot"><span>673 posts</span><span>22 Oct</span></div></div>
-    <div class="label reveal"><div class="top"><span>A startup's Slack drafts</span><span>47 messages</span></div><div class="big">46<i>/</i>47</div><p>pass after one fact is approved. The one unsupported number is still caught.</p><div class="foot"><span>one approval</span><span>22 Oct</span></div></div>
-    <div class="label reveal"><div class="top"><span>Eleven writers</span><span>voice test</span></div><div class="big">41<i>/</i>44</div><p>held-out posts scored higher with their author's profile than another's. Three ties, none lower.</p><div class="foot"><span>claude-opus-5-5</span><span>26 Oct</span></div></div>
-    <div class="label reveal"><div class="top"><span>The gate, timed</span><span>no model</span></div><div class="big">4<i>ms</i></div><p>per check. 17 drafts replayed in order: 9 stopped, 2 sent back, 6 passed.</p><div class="foot"><span>deterministic</span><span>20 Oct</span></div></div>
+    <div class="label reveal"><div class="top"><span>The founder's own archive</span><span>2022 to 2026</span></div><div class="ph" data-photo="mouth-pass"><span><b>photo</b>mouth-pass</span><img alt=""></div><div class="big">68<i>%</i></div><p>of 673 LinkedIn posts pass as written. The rest: em dashes, filler, numbers never backed up.</p><div class="foot"><span>673 posts</span><span>22 Oct</span></div></div>
+    <div class="label reveal"><div class="top"><span>A startup's Slack drafts</span><span>47 messages</span></div><div class="ph" data-photo="mouth-fix"><span><b>photo</b>mouth-fix</span><img alt=""></div><div class="big">46<i>/</i>47</div><p>pass after one fact is approved. The one unsupported number is still caught.</p><div class="foot"><span>one approval</span><span>22 Oct</span></div></div>
+    <div class="label reveal"><div class="top"><span>Eleven writers</span><span>voice test</span></div><div class="ph" data-photo="mouth-grid"><span><b>photo</b>mouth-grid</span><img alt=""></div><div class="big">41<i>/</i>44</div><p>held-out posts scored higher with their author's profile than another's. Three ties, none lower.</p><div class="foot"><span>claude-opus-5-5</span><span>26 Oct</span></div></div>
+    <div class="label reveal"><div class="top"><span>The gate, timed</span><span>no model</span></div><div class="ph" data-photo="mouth-block"><span><b>photo</b>mouth-block</span><img alt=""></div><div class="big">4<i>ms</i></div><p>per check. 17 drafts replayed in order: 9 stopped, 2 sent back, 6 passed.</p><div class="foot"><span>deterministic</span><span>20 Oct</span></div></div>
   </div>
 </div></section>
 
@@ -373,7 +403,8 @@ $ echo $?
 <section class="close" id="seat"><div class="wrap">
   <div class="postcard label reveal" data-ui>
     <div class="top"><span>Taste it before it leaves your mouth.</span><span>San Francisco</span></div>
-    <div class="word">sauce<svg viewBox="0 0 200 110" aria-hidden="true"><path d="M10 50 Q100 -20 190 50 Q100 130 10 50Z" fill="#c4161c"/><path d="M28 52 Q100 20 172 52 Q100 70 28 52Z" fill="#f4f2ee"/></svg></div>
+    <div class="word">sauce</div>
+    <div class="ph big" data-photo="mouth-wordmark"><span><b>photo</b>mouth-wordmark.png<br>the mouth breaks the wordmark's baseline</span><img alt="A mouth with red lipstick and clenched teeth"></div>
     <div class="foot"><span>Free · open source · MIT</span><span>github.com/bhavya-in-sf/sauce</span></div>
   </div>
   <div class="postcard label back reveal" data-ui>
@@ -427,6 +458,14 @@ $ echo $?
   var timer;ta.addEventListener("input",function(){clearTimeout(timer);timer=setTimeout(function(){n++;render()},150)});
   document.querySelectorAll("[data-try]").forEach(function(b){b.addEventListener("click",function(){ta.value=b.getAttribute("data-try");n++;render()})});
   render();
+
+  /* ---- photos: when a file exists in photos/, it replaces its placeholder ---- */
+  document.querySelectorAll(".ph[data-photo]").forEach(function(ph){var img=ph.querySelector("img");if(!img)return;img.onload=function(){ph.classList.add("has")};img.onerror=function(){};img.src="photos/"+ph.getAttribute("data-photo")+".png"});
+  /* ---- paper: a crumpled-paper texture drawn once, multiplied under every label ---- */
+  try{var c=document.createElement("canvas");c.width=c.height=512;var x=c.getContext("2d"),id=x.createImageData(512,512),d=id.data,seed=7;function rnd(){seed=(seed*16807)%2147483647;return seed/2147483647}
+    for(var i=0;i<d.length;i+=4){var v=235+rnd()*20;d[i]=v;d[i+1]=v-2;d[i+2]=v-6;d[i+3]=255}x.putImageData(id,0,0);
+    x.strokeStyle="rgba(120,110,95,.18)";x.lineWidth=1;for(var k=0;k<26;k++){x.beginPath();var sx=rnd()*512,sy=rnd()*512;x.moveTo(sx,sy);for(var j=0;j<5;j++){x.lineTo(sx+(rnd()-.5)*380,sy+(rnd()-.5)*380)}x.stroke()}
+    document.documentElement.style.setProperty("--paper-img","url("+c.toDataURL("image/png")+")");document.querySelectorAll(".label").forEach(function(l){l.classList.add("paper")})}catch(e){}
 
   /* ---- ticker: duplicate the track so it loops ---- */
   var track=document.getElementById("track");track.innerHTML+=track.innerHTML;
