@@ -444,7 +444,8 @@ $ echo $?
       },900*i+400)});
       setTimeout(run,900*steps.length+2600);
     }
-    var started=false,io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!started){started=true;run();io.disconnect()}})},{threshold:.3});io.observe(d);
+    steps[0].classList.add("on");  /* complete at rest: the first line shows before the loop starts */
+    var started=false,io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!started){started=true;run();io.disconnect()}})},{threshold:.15});io.observe(d);
   });
 
   /* ---- entrances, once ---- */
