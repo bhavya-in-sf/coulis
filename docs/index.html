@@ -196,7 +196,11 @@ footer .legal{grid-column:1/-1;display:flex;justify-content:space-between;gap:16
 
 @media (max-width:980px){
   .hero .wrap,.meet .wrap,.menu .wrap,.agents .wrap,.close .wrap{grid-template-columns:1fr}
-  .hero .pile{min-height:560px;margin-top:40px}
+  .hero .pile{min-height:auto;margin-top:40px;display:grid;gap:16px}
+  .hero .pile>*{position:static;width:auto;transform:none}
+  .hero .pile .label{width:100%;--r:-2deg;transform:rotate(-2deg)}
+  .hero .pile .ph.mouthA,.hero .pile .ph.hand{width:100%;aspect-ratio:16/9}
+  .hero .pile .tag{justify-self:start;transform:rotate(-2deg)}
   .h1wrap .ph.under{display:none}
   .proofs{grid-template-columns:1fr 1fr;gap:18px}.proofs .label{margin:0!important}
   .postcard.back{margin:24px 0 0}
