@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>sauce</title>
+<meta name="description" content="sauce is a free, open-source editor for AI drafts, not a detector. It checks every draft against your own facts and your own voice before it goes out. Inside Claude and Cursor.">
+<meta property="og:title" content="sauce: sound like you, even when AI writes it">
+<meta property="og:description" content="An editor for AI drafts, not a detector. Free, open source, inside Claude and Cursor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+/* the midnight lounge: near-black ground, red light, amber liquid, a Didone that whispers; the product is the only white thing in the room */
+:root{
+  --bg:#0b0606; --bg2:#140909; --ink:#f3eadf; --muted:#b9a99c; --red:#e2301f; --red-deep:#8e1511; --amber:#f0a238; --cream:#f6eee3;
+  --display:'Bodoni Moda','Didot','Playfair Display',Georgia,serif;
+  --mono:'Space Mono',ui-monospace,Menlo,monospace;
+  --body:'DM Sans','Helvetica Neue',Arial,sans-serif;
+  --m:clamp(20px,4vw,64px); --w:1240px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --ui-bg:#f7f3ee; --ui-line:#e3dcd3; --ui-ink:#161111; --ui-muted:#6b625c; --ui-raised:#efe9e1;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--red);color:var(--cream)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+a{color:inherit}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:400;letter-spacing:-.01em;line-height:1;text-wrap:balance}
+h1 i,h2 i,h3 i{font-style:italic;font-weight:400;color:var(--amber)}
+p{margin:0}
+.wrap{max-width:var(--w);margin:0 auto;padding-left:max(var(--m),env(safe-area-inset-left,0px));padding-right:max(var(--m),env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;border-radius:999px;background:var(--red);color:var(--cream);text-decoration:none;font:600 15px var(--body);border:0;cursor:pointer;position:relative;overflow:hidden;transition:transform .25s var(--ease),box-shadow .25s}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s var(--ease)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 18px 50px -14px rgba(226,48,31,.7)}
+.btn:hover::after{transform:translateX(120%)}
+.btn.ghost{background:transparent;color:var(--cream);box-shadow:inset 0 0 0 1px rgba(243,234,223,.35)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1px var(--cream)}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:screen}
+.glow{position:fixed;width:520px;height:520px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(226,48,31,.22),transparent 60%);transform:translate(-50%,-50%);left:50%;top:40%;transition:left .6s var(--ease),top .6s var(--ease)}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:40;padding-top:env(safe-area-inset-top,0px);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(11,6,6,.55);border-bottom:1px solid rgba(243,234,223,.08)}
+nav .in{display:flex;align-items:center;justify-content:space-between;height:68px}
+nav .mark{font-family:var(--display);font-style:italic;font-size:30px;text-decoration:none;letter-spacing:-.01em;color:var(--cream)}
+nav .links{display:flex;gap:30px;align-items:center;font-size:14px}
+nav .links a{text-decoration:none;color:var(--muted);transition:color .2s}
+nav .links a:hover{color:var(--cream)}
+nav .links .btn{height:40px;padding:0 18px;font-size:14px;color:var(--cream)}
+nav .links .btn:hover{color:var(--cream)}
+
+/* hero */
+.hero{position:relative;padding:calc(140px + env(safe-area-inset-top,0px)) 0 0;text-align:center;overflow:hidden}
+.hero .light{position:absolute;inset:-20% -10% auto;height:120%;pointer-events:none;background:
+  radial-gradient(60% 50% at 50% 20%,rgba(226,48,31,.35),transparent 70%),
+  radial-gradient(40% 60% at 20% 70%,rgba(240,162,56,.14),transparent 70%),
+  radial-gradient(40% 60% at 80% 70%,rgba(142,21,17,.5),transparent 70%)}
+.hero .curtain{position:absolute;inset:0;pointer-events:none;opacity:.5;background:repeating-linear-gradient(90deg,rgba(0,0,0,.35) 0 26px,rgba(226,48,31,.08) 26px 44px,rgba(0,0,0,.2) 44px 80px);mask:linear-gradient(#000,transparent 75%);-webkit-mask:linear-gradient(#000,transparent 75%)}
+.hero .in{position:relative;z-index:1}
+.hero .eyebrow{display:inline-block;margin-bottom:26px}
+.hero h1{font-size:clamp(44px,6.4vw,94px);line-height:1.02;max-width:19ch;margin:0 auto}
+.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding:.06em .04em .14em;margin:-.06em -.04em -.14em}
+.hero h1 .w span{display:inline-block;transform:translateY(110%);transition:transform 1s var(--ease)}
+.js .hero.in h1 .w span{transform:none}
+.hero .lede{margin:28px auto 0;max-width:52ch;font-size:clamp(17px,1.4vw,20px);color:var(--muted)}
+.hero .lede b{color:var(--ink);font-weight:500}
+.hero .acts{display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap}
+.hero .fine{margin-top:14px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+/* the glass: the product sits in the coupe */
+.glass{position:relative;margin:70px auto 0;width:min(1040px,100%);height:min(760px,92vw);perspective:1400px}
+.glass svg.coupe{position:absolute;left:50%;top:0;transform:translateX(-50%);height:100%;width:auto;overflow:visible;filter:drop-shadow(0 40px 80px rgba(226,48,31,.35))}
+.liquid{transform-origin:center;animation:swirl 9s ease-in-out infinite}
+@keyframes swirl{0%,100%{transform:translateY(0) skewX(0)}50%{transform:translateY(-6px) skewX(-1.5deg)}}
+.frag{position:absolute;left:50%;top:16%;width:min(500px,80%);transform:translateX(-50%) rotateX(8deg);transform-style:preserve-3d;transition:transform .9s var(--ease)}
+.glass:hover .frag{transform:translateX(-50%) rotateX(0)}
+.reflect{position:absolute;left:0;right:0;bottom:-2%;height:30%;pointer-events:none;background:radial-gradient(50% 100% at 50% 100%,rgba(240,162,56,.28),transparent 70%)}
+
+/* the product's interface: the only pale thing in the room */
+[data-ui]{background:var(--ui-bg);color:var(--ui-ink);border-radius:12px;font:14px/20px var(--body);text-align:left;box-shadow:0 60px 120px -40px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.06);overflow:hidden}
+[data-ui] .bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--ui-line);color:var(--ui-muted);font-size:13px}
+[data-ui] .bar b{color:var(--ui-ink);font-weight:600}
+[data-ui] .bar .pill{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:999px;background:var(--ui-raised);color:var(--ui-muted);font-family:var(--mono);font-size:11px}
+[data-ui] textarea{width:100%;border:1px solid var(--ui-line);border-radius:8px;background:#fff;padding:10px 12px;font:14px/20px var(--body);color:var(--ui-ink);resize:vertical}
+[data-ui] textarea:focus{outline:2px solid var(--red);outline-offset:0;border-color:transparent}
+[data-ui] .verdict{display:flex;align-items:center;gap:10px;padding:12px 14px;border-top:1px solid var(--ui-line);font-weight:600;font-size:15px}
+[data-ui] .verdict .dot{width:10px;height:10px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px rgba(0,0,0,.05)}
+[data-ui] .verdict.BLOCK{color:#b3241c}[data-ui] .verdict.FIX{color:#8a5a00}[data-ui] .verdict.PASS{color:#1f6b3a}
+[data-ui] .verdict .note{color:var(--ui-muted);font-weight:400;font-size:13px}
+[data-ui] .row{display:grid;grid-template-columns:58px 1fr;gap:12px;align-items:baseline;padding:9px 14px;border-top:1px solid var(--ui-line)}
+[data-ui] .lvl{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.04em}
+[data-ui] .lvl.BLOCK{color:#b3241c}[data-ui] .lvl.FIX{color:#8a5a00}[data-ui] .lvl.PASS{color:#1f6b3a}
+[data-ui] .q{font-weight:600}
+[data-ui] .d{color:var(--ui-muted)}
+[data-ui] .tools{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--ui-line);flex-wrap:wrap;background:var(--ui-raised)}
+[data-ui] .chip{height:28px;padding:0 10px;border:1px solid var(--ui-line);border-radius:999px;background:#fff;font:13px/26px var(--body);color:var(--ui-ink);cursor:pointer}
+[data-ui] .chip:hover{border-color:var(--ui-ink)}
+[data-ui] .act{height:32px;padding:0 12px;border:0;border-radius:999px;background:var(--ui-ink);color:#fff;font:600 13px/32px var(--body);cursor:pointer}
+[data-ui] .learn{padding:10px 14px;border-top:1px solid var(--ui-line);color:var(--ui-muted);font-size:13px}
+[data-ui] .learn b{color:var(--ui-ink);font-weight:600}
+
+/* proof marquee */
+.strip{margin-top:80px;border-top:1px solid rgba(243,234,223,.1);border-bottom:1px solid rgba(243,234,223,.1);overflow:hidden;padding:18px 0}
+.strip .track{display:flex;gap:64px;width:max-content;animation:marquee 38s linear infinite;font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.strip .track b{color:var(--amber);font-weight:400}
+.strip:hover .track{animation-play-state:paused}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* split features (Apollo rhythm) */
+section{padding:clamp(100px,12vw,180px) 0;position:relative}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,96px);align-items:center}
+.split.flip .text{order:2}
+.split h2{font-size:clamp(36px,4.4vw,64px);max-width:14ch}
+.split .text p{margin-top:20px;color:var(--muted);max-width:44ch}
+.split ul{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:14px;max-width:44ch}
+.split li{padding-left:26px;position:relative}
+.split li::before{content:"";position:absolute;left:0;top:.55em;width:12px;height:12px;border-radius:50%;background:var(--red);box-shadow:0 0 18px rgba(226,48,31,.8)}
+.split .more{display:inline-block;margin-top:26px;font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);text-decoration:none;border-bottom:1px solid rgba(240,162,56,.4);padding-bottom:4px}
+.split .vis{position:relative}
+.split .vis::before{content:"";position:absolute;inset:-10% -8%;background:radial-gradient(50% 50% at 50% 50%,rgba(226,48,31,.22),transparent 70%);z-index:0;pointer-events:none}
+.split .vis [data-ui]{position:relative;z-index:1;max-width:560px;margin:0 auto}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.no-js .reveal,.reveal.in{opacity:1;transform:none}
+
+/* three layers */
+.layers .head{text-align:center;max-width:720px;margin:0 auto 56px}
+.layers h2{font-size:clamp(40px,5vw,76px)}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:linear-gradient(180deg,rgba(243,234,223,.06),rgba(243,234,223,.02));border:1px solid rgba(243,234,223,.1);border-radius:20px;padding:30px;min-height:360px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:transform .5s var(--ease),border-color .3s}
+.card:hover{transform:translateY(-6px);border-color:rgba(240,162,56,.5)}
+.card .n{font-family:var(--display);font-style:italic;font-size:64px;color:var(--red);line-height:1}
+.card h3{font-size:30px;margin-top:18px}
+.card p{color:var(--muted);margin-top:12px;font-size:15px}
+.card .k{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-top:22px}
+.card::after{content:"";position:absolute;right:-40px;bottom:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(226,48,31,.35),transparent 65%);opacity:0;transition:opacity .4s}
+.card:hover::after{opacity:1}
+
+/* why */
+.why .head{max-width:760px;margin-bottom:56px}
+.why h2{font-size:clamp(40px,5vw,76px)}
+.cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.cards4 .card{min-height:260px}
+.cards4 .card h3{font-size:24px;margin-top:0}
+
+/* workflow */
+.flow .split h2{max-width:12ch}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:40px}
+.badge{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:10px 14px;border:1px solid rgba(243,234,223,.18);border-radius:999px;color:var(--muted)}
+.badge.on{color:var(--cream);border-color:var(--amber)}
+
+/* proof cards (the testimonial row, with our real numbers) */
+.proof .head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:48px;flex-wrap:wrap}
+.proof h2{font-size:clamp(36px,4.4vw,64px);max-width:14ch}
+.pcards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.pcard{background:var(--bg2);border:1px solid rgba(243,234,223,.1);border-radius:20px;padding:28px;min-height:300px;display:flex;flex-direction:column;justify-content:space-between}
+.pcard .big{font-family:var(--display);font-size:clamp(40px,4vw,64px);line-height:1;color:var(--cream);font-variant-numeric:tabular-nums}
+.pcard .big i{color:var(--amber)}
+.pcard p{color:var(--muted);font-size:15px;margin-top:16px}
+.pcard .who{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-top:22px}
+
+/* close */
+.close{text-align:center;position:relative;overflow:hidden}
+.close .light{position:absolute;inset:0;pointer-events:none;background:radial-gradient(50% 60% at 50% 100%,rgba(226,48,31,.45),transparent 70%)}
+.close h2{font-size:clamp(44px,7vw,110px);max-width:12ch;margin:0 auto;position:relative}
+.close p{margin:24px auto 0;max-width:46ch;color:var(--muted);position:relative}
+.close .acts{display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap;position:relative}
+
+/* footer */
+footer{border-top:1px solid rgba(243,234,223,.1);padding:56px 0 40px;font-size:14px;color:var(--muted)}
+footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}
+footer .mark{font-family:var(--display);font-style:italic;font-size:34px;color:var(--cream)}
+footer h4{margin:0 0 12px;font:12px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--amber)}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+footer a{text-decoration:none;color:var(--muted)}
+footer a:hover{color:var(--cream)}
+footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+
+@media (max-width:900px){
+  nav .links a:not(.btn){display:none}
+  .hero{padding-top:110px}
+  .hero h1{font-size:12vw}
+  .glass{height:120vw;margin-top:40px}
+  .frag{width:94%;top:6%}
+  .split{grid-template-columns:1fr;gap:36px}
+  .split.flip .text{order:0}
+  .cards3,.cards4,.pcards{grid-template-columns:1fr}
+  .card,.pcard{min-height:0}
+  footer .cols{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal,.hero h1 .w span{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.replace('no-js','js')</script>
+<div class="grain" aria-hidden="true"></div>
+<div class="glow" id="glow" aria-hidden="true"></div>
+
+<nav aria-label="Main"><div class="wrap in">
+  <a class="mark" href="#top">sauce</a>
+  <div class="links"><a href="#product">Product</a><a href="#layers">How it works</a><a href="#agents">Agents</a><a href="#proof">Proof</a><a href="https://github.com/bhavya-in-sf/sauce" rel="noopener">GitHub</a><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Get sauce, free</a></div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="light" aria-hidden="true"></div>
+  <div class="curtain" aria-hidden="true"></div>
+  <div class="wrap in">
+    <span class="eyebrow">Stop sounding like ChatGPT · an editor, not a detector</span>
+    <h1 id="h1"><span class="w"><span>Sound</span></span> <span class="w"><span>like</span></span> <span class="w"><span>you.</span></span><br><span class="w"><span><i>Even</i></span></span> <span class="w"><span>when</span></span> <span class="w"><span>AI</span></span> <span class="w"><span>writes</span></span> <span class="w"><span>it.</span></span></h1>
+    <p class="lede">sauce reads every AI draft against <b>your own facts and your own voice</b> before it goes out. It never writes a word for you, and it never guesses who wrote it. One profile that travels with you into Claude, Cursor and the agents that post as you. Free and open source.</p>
+    <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Get sauce, free</a><a class="btn ghost" href="#frag">Try it on this page</a></div>
+    <p class="fine">No account · No credit card · Your taste file stays on your Mac</p>
+    <div class="glass" id="glass">
+      <svg class="coupe" viewBox="0 0 520 760" aria-hidden="true">
+        <defs>
+          <linearGradient id="liq" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffc45c"/><stop offset=".5" stop-color="#f0452c"/><stop offset="1" stop-color="#8e1511"/></linearGradient>
+          <linearGradient id="rim" x1="0" x2="1"><stop offset="0" stop-color="rgba(255,255,255,.05)"/><stop offset=".5" stop-color="rgba(255,255,255,.6)"/><stop offset="1" stop-color="rgba(255,255,255,.05)"/></linearGradient>
+        </defs>
+        <path class="liquid" d="M30 120 Q260 540 490 120 L30 120Z" fill="url(#liq)" style="filter:drop-shadow(0 0 40px rgba(240,162,56,.9))"/>
+        <path d="M20 110 Q260 560 500 110" fill="none" stroke="url(#rim)" stroke-width="3"/>
+        <ellipse cx="260" cy="110" rx="240" ry="26" fill="none" stroke="url(#rim)" stroke-width="3"/>
+        <path d="M252 470 L252 700 Q252 712 240 714 L150 724 Q140 726 140 736 L380 736 Q380 726 370 724 L280 714 Q268 712 268 700 L268 470Z" fill="rgba(243,234,223,.12)" stroke="rgba(255,255,255,.35)" stroke-width="2"/>
+      </svg>
+      <div class="frag" id="frag" data-ui role="group" aria-label="sauce check, live">
+        <div class="bar"><span><b>sauce_check</b> · profile: Bhavya</span><span class="pill" id="ms">4 ms</span></div>
+        <div style="padding:12px 14px"><textarea id="draft" rows="4" spellcheck="false" aria-label="Your draft">Excited to share that we're leveraging AI to 10x your workflow — a total game-changer. 300+ founders already trust us. Comment below!</textarea></div>
+        <div class="verdict BLOCK" id="verdict"><span class="dot"></span><span id="vword">BLOCK</span><span class="note" id="vnote">Sent back. Fix the BLOCK lines before this goes out.</span></div>
+        <div id="lines"></div>
+        <div class="tools">
+          <button type="button" class="chip" data-try="Excited to share that we're leveraging AI to 10x your workflow — a total game-changer. 300+ founders already trust us. Comment below!">The AI draft</button>
+          <button type="button" class="chip" data-try="100 investors who back women building AI. One list. Comment INVESTORS and I'll send it.">Her real post</button>
+          <button type="button" class="chip" data-try="I just passed 62K followers on LinkedIn. Here is what I'd tell my 2022 self.">An approved number</button>
+        </div>
+        <div class="learn">Runs in your browser on <b>Bhavya's real profile</b>. Approved: 62K followers, Top Voice 2024, about 3,000 readers, 100 investors, 673 posts. Banned: em dashes, "game-changer", "delve". Edit the draft; it re-checks as you type.</div>
+      </div>
+      <div class="reflect" aria-hidden="true"></div>
+    </div>
+  </div>
+  <div class="strip" aria-label="Tested on real writing"><div class="track">
+    <span>Tested on <b>673</b> of one founder's posts</span><span><b>68%</b> pass as written</span><span><b>46 of 47</b> team drafts pass after one approved fact</span><span><b>41 of 44</b> posts read their author's voice</span><span><b>4 ms</b> per check, no model call</span><span>Posts the gate would block got about <b>15% less</b> engagement on the founder's own account</span><span><b>2,437</b> real posts behind the rules</span><span>Open source · <b>MIT</b></span>
+    <span>Tested on <b>673</b> of one founder's posts</span><span><b>68%</b> pass as written</span><span><b>46 of 47</b> team drafts pass after one approved fact</span><span><b>41 of 44</b> posts read their author's voice</span><span><b>4 ms</b> per check, no model call</span><span>Posts the gate would block got about <b>15% less</b> engagement on the founder's own account</span><span><b>2,437</b> real posts behind the rules</span><span>Open source · <b>MIT</b></span>
+  </div></div>
+</header>
+
+<section id="product"><div class="wrap">
+  <div class="split reveal">
+    <div class="text"><span class="eyebrow">The gate</span><h2>Run every draft through <i>your</i> rules.</h2><p>Fixed rules, no model call, the same answer every time. It reads the draft and sends it back with each problem quoted.</p>
+      <ul><li>Em dashes, double hyphens, filler and your banned phrases</li><li>Any number, money figure or "10x" claim you have not approved</li><li>A format you already used this week</li></ul>
+      <a class="more" href="#layers">See the three layers</a></div>
+    <div class="vis"><div data-ui>
+      <div class="bar"><span><b>Draft</b> · LinkedIn · 14:02</span><span class="pill">4 ms</span></div>
+      <div style="padding:12px 14px">We hit $50k MRR this month. Our AI makes writing effortless for every founder who wants to grow.</div>
+      <div class="verdict FIX"><span class="dot"></span>FIX<span class="note">Close. Two lines to settle.</span></div>
+      <div class="row"><span class="lvl FIX">FIX</span><span><span class="q">"$50k MRR"</span> <span class="d">Not on your approved list. Add it, or cut it.</span></span></div>
+      <div class="row"><span class="lvl FIX">FIX</span><span><span class="q">"effortless"</span> <span class="d">Filler. Say what actually happened.</span></span></div>
+    </div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="split flip reveal">
+    <div class="text"><span class="eyebrow">Approved facts</span><h2>Give every teammate the <i>same</i> facts.</h2><p>One file of numbers the company stands behind. Anyone drafting as the founder gets the same yes and the same no.</p>
+      <ul><li>Approve a fact once, in plain English</li><li>Numbers about other people pass; numbers about you must be on the list</li><li>Six different revenue figures caught on one team's drafts</li></ul>
+      <a class="more" href="#proof">The numbers</a></div>
+    <div class="vis"><div data-ui>
+      <div class="bar"><span><b>claims.md</b> · approved facts</span><span class="pill">yours</span></div>
+      <div class="row"><span class="lvl PASS">OK</span><span><span class="q">62K followers</span> <span class="d">LinkedIn, Oct 2026</span></span></div>
+      <div class="row"><span class="lvl PASS">OK</span><span><span class="q">Top Voice 2024</span> <span class="d">LinkedIn</span></span></div>
+      <div class="row"><span class="lvl PASS">OK</span><span><span class="q">673 posts checked</span> <span class="d">22 Oct 2026</span></span></div>
+      <div class="row"><span class="lvl FIX">NEW</span><span><span class="q">$50k MRR</span> <span class="d">Proposed from today's draft. Approve?</span></span></div>
+      <div class="tools"><button type="button" class="act">Approve</button><button type="button" class="chip">Not yet</button></div>
+    </div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="split reveal">
+    <div class="text"><span class="eyebrow">The critique</span><h2>Let the check handle the <i>busywork</i>.</h2><p>Eight things scored separately, against your own samples. Never one number, because one number hides which thing is wrong. It rewrites only the weakest line.</p>
+      <ul><li>Clarity, proof, why you, the ask</li><li>Hook, voice, boldness, rhythm</li><li>Bias and private data flagged on the side</li></ul>
+      <a class="more" href="#layers">How it scores</a></div>
+    <div class="vis"><div data-ui>
+      <div class="bar"><span><b>sauce_critique</b> · 8 axes</span><span class="pill">opus</span></div>
+      <div class="row"><span class="lvl">HOOK</span><span><span class="q">5</span> <span class="d">Line one is a question. Open with the claim.</span></span></div>
+      <div class="row"><span class="lvl">VOICE</span><span><span class="q">8</span> <span class="d">Short declaratives, your cadence.</span></span></div>
+      <div class="row"><span class="lvl">PROOF</span><span><span class="q">4</span> <span class="d">Weakest. One claim, no number.</span></span></div>
+      <div class="row"><span class="lvl">ASK</span><span><span class="q">9</span> <span class="d">One action, named.</span></span></div>
+      <div class="learn"><b>Rewrite, weakest line only:</b> "Three months ago we had no customers. Today we signed our 300th."</div>
+    </div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="split flip reveal">
+    <div class="text"><span class="eyebrow">Learning</span><h2>Built on writing you can <i>actually</i> trust.</h2><p>Edit a checked draft and sauce proposes the rule it saw. You say yes or no. Every approved rule is a line in a file you own, so your taste compounds and travels with you.</p>
+      <ul><li>Calibrated on 2,437 real posts across 38 voices</li><li>Your profile built from your own posts in one command</li><li>Nothing is trained; nothing leaves your Mac for the basic check</li></ul>
+      <a class="more" href="https://github.com/bhavya-in-sf/sauce" rel="noopener">Read the code</a></div>
+    <div class="vis"><div data-ui>
+      <div class="bar"><span><b>sauce_learn</b> · from your edit</span><span class="pill">proposed</span></div>
+      <div style="padding:12px 14px;color:var(--ui-muted)">You cut the opening question and led with the number.</div>
+      <div class="row"><span class="lvl FIX">RULE</span><span><span class="q">Open with the claim, not a question.</span> <span class="d">Seen 3 times this month.</span></span></div>
+      <div class="row"><span class="lvl FIX">RULE</span><span><span class="q">Numbers before adjectives.</span> <span class="d">Seen twice.</span></span></div>
+      <div class="tools"><button type="button" class="act">Add both</button><button type="button" class="chip">Pick</button><button type="button" class="chip">No</button></div>
+    </div></div>
+  </div>
+</div></section>
+
+<section class="layers" id="layers"><div class="wrap">
+  <div class="head reveal"><span class="eyebrow">How it works</span><h2>One check. <i>Three</i> layers.</h2></div>
+  <div class="cards3">
+    <div class="card reveal"><div><div class="n">01</div><h3>Gate</h3><p>Fixed rules against your facts and banned phrases. Four milliseconds, no model, same answer every time.</p></div><div class="k">Deterministic</div></div>
+    <div class="card reveal"><div><div class="n">02</div><h3>Critique</h3><p>Eight axes scored separately against your own samples. Rewrites only the weakest line.</p></div><div class="k">Claude, your subscription</div></div>
+    <div class="card reveal"><div><div class="n">03</div><h3>Learn</h3><p>Your edits become proposed rules. You approve each one. The file is yours.</p></div><div class="k">Compounds</div></div>
+  </div>
+</div></section>
+
+<section class="why"><div class="wrap">
+  <div class="head reveal"><span class="eyebrow">Why sauce</span><h2>Judgment that actually <i>holds</i>.</h2></div>
+  <div class="cards4">
+    <div class="card reveal"><h3>Never writes</h3><p>A checker cannot make you generic. The words stay yours.</p></div>
+    <div class="card reveal"><h3>Never detects</h3><p>It never guesses who wrote it, so it cannot flag you by mistake. It checks your draft against your rules.</p></div>
+    <div class="card reveal"><h3>Your facts, your file</h3><p>Two text files on your machine. Approved numbers and your voice. No account.</p></div>
+    <div class="card reveal"><h3>Reproducible</h3><p>Every number on this page reruns from the repo. 19 tests, golden files, open source.</p></div>
+  </div>
+</div></section>
+
+<section class="flow"><div class="wrap">
+  <div class="split reveal">
+    <div class="text"><span class="eyebrow">Where it runs</span><h2>Don't change your workflow. Just add <i>sauce</i>.</h2>
+      <ul><li><b>Stay in Claude.</b> Two commands. A hook sends Claude back if it skipped the check.</li><li><b>Stay in Cursor.</b> One config block, same tools.</li><li><b>Stay in control.</b> MIT licence, the profile is yours, the API is next for everything else.</li><li><b>Let your agents use it.</b> An OpenClaw skill and a one-call check for Remix, Wajo or your own agent: exit 2 means don't send.</li></ul>
+      <div class="badges"><span class="badge on">Claude Code</span><span class="badge on">Claude Desktop</span><span class="badge on">Cursor</span><span class="badge on">MCP</span><span class="badge on">OpenClaw</span><span class="badge">ChatGPT · via API</span><span class="badge">Slack · via API</span><span class="badge on">MIT</span></div></div>
+    <div class="vis"><div data-ui>
+      <div class="bar"><span><b>install</b></span><span class="pill">2 commands</span></div>
+      <div style="padding:14px;font-family:var(--mono);font-size:13px;line-height:1.8;color:var(--ui-ink)">/plugin marketplace add bhavya-in-sf/sauce<br>/plugin install sauce@sauce</div>
+      <div class="learn">Then <b>/sauce:setup</b>, or paste your LinkedIn export. The first check runs within a minute.</div>
+    </div></div>
+  </div>
+</div></section>
+
+<section class="flow" id="agents"><div class="wrap">
+  <div class="split flip reveal">
+    <div class="text"><span class="eyebrow">For agents</span><h2>Your agents speak as you. sauce is the check they run <i>first</i>.</h2><p>Remix, Puff, Wajo, OpenClaw: personal agents now post, email and message under their owner's name. None of them checks the draft against the person. One call does.</p>
+      <ul><li>Deterministic, local, about 4 ms. No model, no cost per check.</li><li>Exit 2 BLOCK: do not send. 1 FIX: fix the quoted lines. 0 PASS: send.</li><li>Never invents a number to satisfy a check. Asks the owner instead.</li></ul>
+      <a class="more" href="https://github.com/bhavya-in-sf/sauce#for-agents-remix-wajo-openclaw-your-own" rel="noopener">The agent integration page</a></div>
+    <div class="vis"><div data-ui>
+      <div class="bar"><span><b>sauce.py check</b> · from any agent</span><span class="pill">exit 2</span></div>
+      <div style="padding:14px;font-family:var(--mono);font-size:13px;line-height:1.8;color:var(--ui-ink)">$ sauce check - --json &lt;&lt;'D'<br>We're leveraging AI to 10x your workflow.<br>D<br>{ "verdict": "FIX", "issues": [ { "quote": "10x", ... } ] }</div>
+      <div class="learn"><b>OpenClaw:</b> <span style="font-family:var(--mono)">clawhub install sauce</span>. The skill tells the agent when to check and what each verdict means.</div>
+    </div></div>
+  </div>
+</div></section>
+
+<section class="why" id="labs"><div class="wrap">
+  <div class="head reveal"><span class="eyebrow">Why not custom instructions?</span><h2>The labs ship style inside <i>one</i> app. Your taste should travel.</h2></div>
+  <div class="cards4">
+    <div class="card reveal"><h3>2023 to 2026</h3><p>Custom instructions, Claude Styles, memory across chats, personality presets, a 5,000-character limit. All typed by hand, locked to one app and one user, never checked against a draft.</p></div>
+    <div class="card reveal"><h3>One profile</h3><p>Two files you own. The same facts and voice in Claude, Cursor, OpenClaw and any agent that calls the API.</p></div>
+    <div class="card reveal"><h3>It learns</h3><p>From what you edit and what performs. Instructions don't. Every approved rule is a line you can read.</p></div>
+    <div class="card reveal"><h3>Shared by a team</h3><p>Anyone drafting as the founder gets the same yes and no. A sameness gate for the whole team.</p></div>
+  </div>
+</div></section>
+
+<section class="layers" id="box"><div class="wrap">
+  <div class="head reveal"><span class="eyebrow">Also in the box</span><h2>Four more tools, <i>same</i> profile.</h2></div>
+  <div class="cards4">
+    <div class="card reveal"><h3>Setup from LinkedIn</h3><p>One command builds TASTE.md and claims.md from your own export. Nothing invented.</p><div class="k">sauce setup --linkedin</div></div>
+    <div class="card reveal"><h3>Deck checker</h3><p>Reads a PDF, PPTX or Markdown deck slide by slide and flags the same noun with different numbers across slides.</p><div class="k">deck_check.py</div></div>
+    <div class="card reveal"><h3>Taste card</h3><p>A one-page card of how you write, measured from your own samples. Shareable.</p><div class="k">taste_card.py</div></div>
+    <div class="card reveal"><h3>Team gate</h3><p>Turn the sameness score into a limit for everyone drafting as one voice.</p><div class="k">--max-sameness</div></div>
+  </div>
+</div></section>
+
+<section class="why" id="next"><div class="wrap">
+  <div class="head reveal"><span class="eyebrow">Next · not built yet</span><h2>What's coming, <i>plainly</i> marked.</h2></div>
+  <div class="cards4">
+    <div class="card reveal"><h3>Hosted API</h3><p>Keys and per-check credits, so an agent company can wire it in a day. The preview runs locally today.</p></div>
+    <div class="card reveal"><h3>Every model</h3><p>The same profile in ChatGPT and Gemini through the API, not just Claude and Cursor.</p></div>
+    <div class="card reveal"><h3>Taste-lift</h3><p>Per-user dashboard: edit rate and engagement before and after. Fed by the log you already have.</p></div>
+    <div class="card reveal"><h3>Blind taste test</h3><p>30 real briefs, two outputs each, 20 to 30 raters. We publish the win rate, whatever it is.</p></div>
+  </div>
+</div></section>
+
+<section class="proof" id="proof"><div class="wrap">
+  <div class="head reveal"><div><span class="eyebrow">Proof</span><h2>Tested on <i>real</i> writing.</h2></div><p style="max-width:40ch;color:var(--muted)">One founder's archive, one startup's Slack, eleven writers' held-out posts. Enough to show the pattern, not an accuracy rate.</p></div>
+  <div class="pcards">
+    <div class="pcard reveal"><div><div class="big">68<i>%</i></div><p>of 673 LinkedIn posts, 2022 to 2026, pass as written. The rest: em dashes, filler, numbers never backed up.</p></div><div class="who">The founder's own archive</div></div>
+    <div class="pcard reveal"><div><div class="big">46<i>/</i>47</div><p>drafts pass after one fact is approved. The one unsupported number is still caught.</p></div><div class="who">A startup's Slack drafts</div></div>
+    <div class="pcard reveal"><div><div class="big">41<i>/</i>44</div><p>held-out posts scored higher with their author's profile than another's. Three ties, none lower.</p></div><div class="who">Eleven writers, voice test</div></div>
+    <div class="pcard reveal"><div><div class="big">4<i>ms</i></div><p>per check, no model call. 17 drafts replayed: 9 stopped, 2 sent back, 6 passed.</p></div><div class="who">The gate, timed</div></div>
+  </div>
+</div></section>
+
+<section class="close"><div class="light" aria-hidden="true"></div><div class="wrap">
+  <h2 class="reveal">It's time to <i>taste it</i> before you send it.</h2>
+  <p class="reveal">Two commands. The default rules work before you have told it anything about yourself. Your taste file grows from there.</p>
+  <div class="acts reveal"><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Get sauce, free</a><a class="btn ghost" href="https://voiceprint-vibe-checker.lovable.app" rel="noopener">Score a draft online</a></div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="cols">
+    <div><div class="mark">sauce</div><p style="margin-top:10px;max-width:30ch">An editor for AI drafts, not a detector. Built in San Francisco.</p></div>
+    <div><h4>Get started</h4><ul><li><a href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Install</a></li><li><a href="https://github.com/bhavya-in-sf/sauce/blob/main/docs/INSTALL.md" rel="noopener">Cursor and MCP</a></li><li><a href="https://voiceprint-vibe-checker.lovable.app" rel="noopener">Free online check</a></li></ul></div>
+    <div><h4>Product</h4><ul><li><a href="#product">The gate</a></li><li><a href="#layers">Critique</a></li><li><a href="#layers">Learn</a></li><li><a href="https://github.com/bhavya-in-sf/sauce/blob/main/docs/API.md" rel="noopener">API</a></li></ul></div>
+    <div><h4>Company</h4><ul><li><a href="https://github.com/bhavya-in-sf/sauce" rel="noopener">GitHub</a></li><li><a href="index-editorial-v3.html#seat">Waitlist and dinners</a></li><li><a href="https://github.com/bhavya-in-sf/sauce/blob/main/README.md" rel="noopener">README</a></li></ul></div>
+  </div>
+  <div class="legal"><span>2026 · sauce · MIT</span><span>Nothing leaves your Mac for the basic check</span></div>
+</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  /* ---- the live thing: a browser port of a few of sauce's gate rules, on Bhavya's public profile ---- */
+  var APPROVED=["62K followers","62,000 followers","Top Voice 2024","3,000 newsletter readers","100 investors","673 posts","100+ AI companies","5 years"];
+  var FILLER=["streamline","leverage","leveraging","unlock","seamless","empower","delve","in today's fast-paced","elevate your","effortless"];
+  var BANNED=[{rx:/\bgame-?changer\b/g,why:"Banned. Her rule: generic AI filler."},{rx:/\bdelve\b/g,why:"Banned. Her rule: generic AI filler."}];
+  var FIRST=/\b(i|i'm|i've|me|my|we|we're|our|us|clients?|customers?|users?|team)\b/;
+  function approved(num){var a=APPROVED.join(" ").toLowerCase(),base=num.toLowerCase().replace(/,/g,"");var forms=[base];if(/k$/.test(base))forms.push(base.slice(0,-1)+"000",base.slice(0,-1)+",000");if(/^\d{4,}$/.test(base))forms.push(Number(base).toLocaleString("en-US"));return forms.some(function(f){return new RegExp("(^|[^\\d,])"+f.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"(?!\\d)").test(a)})}
+  function aboutUs(t,k){var s=t.slice(Math.max(0,t.lastIndexOf(".",k)+1),(t.indexOf(".",k)+1)||t.length);return FIRST.test(s)||!/\b[A-Z][a-z]+/.test(s.replace(/^\s*[A-Z]/,"x"))}
+  function check(text){var t=text.replace(/’/g,"'"),low=t.toLowerCase(),out=[],seen={};function add(l,q,d){var k=l+q;if(seen[k])return;seen[k]=1;out.push({level:l,q:q,d:d})}
+    ["—","–","--"].forEach(function(d){if(t.indexOf(d)>-1)add("BLOCK",d,"Em dash or double hyphen. Her house rule.")});
+    var m,money=/\$\s?(\d[\d,.]*)\s?(k|m)?\+?\s*(arr|mrr|revenue)?/g;while((m=money.exec(low))){if(!approved(m[1]+(m[2]||""))&&aboutUs(t,m.index))add("BLOCK",m[0].trim(),"Money claim not on her approved list.")}
+    var count=/\b(\d[\d,.]*)\s?(k)?\+?\s*(followers|subscribers|readers|users|customers|founders|companies|posts|investors|leads|clients)\b/g;while((m=count.exec(low))){if(!approved(m[1].replace(/,/g,"")+(m[2]||""))&&aboutUs(t,m.index))add("FIX",m[0].trim(),"Number not on her approved list. Add it, or cut it.")}
+    var mult=/\b(\d+(?:\.\d+)?)\s?x(?![\w\d])/g;while((m=mult.exec(low))){if(aboutUs(t,m.index))add("FIX",m[0].trim(),"A result claim. Prove it, or cut it.")}
+    BANNED.forEach(function(b){var r;b.rx.lastIndex=0;while((r=b.rx.exec(low)))add("BLOCK",r[0],b.why)});
+    FILLER.forEach(function(f){if(low.indexOf(f)>-1)add("FIX",f,"Filler. Say what actually happened.")});
+    var v=out.some(function(i){return i.level==="BLOCK"})?"BLOCK":out.length?"FIX":"PASS";return{verdict:v,issues:out}}
+  var ta=document.getElementById("draft"),verdict=document.getElementById("verdict"),vword=document.getElementById("vword"),vnote=document.getElementById("vnote"),lines=document.getElementById("lines"),ms=document.getElementById("ms");
+  var COPY={BLOCK:"Sent back. Fix the BLOCK lines before this goes out.",FIX:"Close. Fix the FIX lines and it ships.",PASS:"Ships. Specific, approved, in her voice."};
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  function render(){var t0=performance.now(),r=check(ta.value);verdict.className="verdict "+r.verdict;vword.textContent=r.verdict;vnote.textContent=COPY[r.verdict];
+    lines.innerHTML=r.issues.map(function(i){return '<div class="row"><span class="lvl '+i.level+'">'+i.level+'</span><span><span class="q">'+esc(i.q)+'</span> <span class="d">'+esc(i.d)+'</span></span></div>'}).join("");
+    ms.textContent=Math.max(1,Math.round(performance.now()-t0))+" ms"}
+  var timer;ta.addEventListener("input",function(){clearTimeout(timer);timer=setTimeout(render,150)});
+  document.querySelectorAll("[data-try]").forEach(function(b){b.addEventListener("click",function(){ta.value=b.getAttribute("data-try");render()})});
+  render();
+
+  /* ---- hero: words rise, the room lights up ---- */
+  var hero=document.querySelector(".hero");setTimeout(function(){hero.classList.add("in")},80);
+  var glow=document.getElementById("glow");
+  addEventListener("pointermove",function(e){glow.style.left=e.clientX+"px";glow.style.top=e.clientY+"px"},{passive:true});
+
+  /* ---- reveals ---- */
+  var io="IntersectionObserver" in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.15}):null;
+  document.querySelectorAll(".reveal").forEach(function(el,i){el.style.transitionDelay=((i%4)*90)+"ms";io?io.observe(el):el.classList.add("in")});
+
+  /* ---- scroll motion with GSAP, when it loaded and motion is allowed ---- */
+  var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(window.gsap&&window.ScrollTrigger&&!reduce){
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to(".hero .light",{yPercent:30,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:true}});
+    gsap.to(".coupe",{yPercent:12,rotate:-2,ease:"none",scrollTrigger:{trigger:".glass",start:"top bottom",end:"bottom top",scrub:true}});
+    gsap.fromTo(".frag",{yPercent:6},{yPercent:-6,ease:"none",scrollTrigger:{trigger:".glass",start:"top bottom",end:"bottom top",scrub:true}});
+    document.querySelectorAll(".split .vis").forEach(function(v){gsap.fromTo(v,{yPercent:8,rotate:1.5},{yPercent:-8,rotate:-1.5,ease:"none",scrollTrigger:{trigger:v,start:"top bottom",end:"bottom top",scrub:true}})});
+    document.querySelectorAll(".pcard .big").forEach(function(b){gsap.from(b,{opacity:0,y:30,duration:1,ease:"power3.out",scrollTrigger:{trigger:b,start:"top 85%"}})});
+    gsap.fromTo(".close h2",{scale:.92,opacity:.6},{scale:1,opacity:1,ease:"none",scrollTrigger:{trigger:".close",start:"top 80%",end:"top 20%",scrub:true}});
+  }
+})();
+</script>
+</body>
+</html>
