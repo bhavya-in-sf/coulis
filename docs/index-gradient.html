@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="no-js" data-palette="a">
+<html lang="en" class="no-js" data-palette="d8">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -109,6 +109,11 @@ nav .links .btn{height:38px;padding:0 16px;color:#fff}
 .inside{padding:56px 0 24px}
 .inside .head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
 .inside .head b{color:var(--ink);font-weight:600;font-size:15px}
+.doors{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.door{background:var(--soft);border-radius:16px;padding:20px}
+.door h3{font-size:16px;margin-bottom:6px}
+.door p{font-size:14px;color:var(--muted);margin-bottom:12px;max-width:34ch}
+.door pre{margin:0;background:#111;color:#f3f3f3;border-radius:10px;padding:12px 14px;font:12.5px/1.6 ui-monospace,Menlo,monospace;overflow-x:auto;white-space:pre}
 .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
 .tile{background:var(--soft);border-radius:14px;height:56px;display:flex;align-items:center;justify-content:center;gap:10px;font-weight:600;font-size:14px;color:#333}
 .tile.off{color:#9a9aa0}
@@ -207,6 +212,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
   .hero{padding-top:110px}
   .hero h1{font-size:11vw}
   .tiles{grid-template-columns:1fr 1fr}
+  .doors{grid-template-columns:1fr}
   .intro .top,.bento .head,.why .top,.six .top,.why .two,.six .two{grid-template-columns:1fr}
   .three{grid-template-columns:1fr;gap:24px}
   .grid{grid-template-columns:1fr;grid-auto-rows:auto}
@@ -231,11 +237,11 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 <header class="hero" id="top">
   <div class="light" aria-hidden="true"><span class="l1"></span><span class="l2"></span><span class="l3"></span><span class="l4"></span></div>
   <div class="wrap in">
-    <p class="eyebrow">Your words, in your voice.</p>
-    <h1>Sound like you, <i>even when AI writes it.</i></h1>
-    <p class="lede">sauce is a free editor for AI drafts, not a detector. It checks every draft against your own facts and your own voice before it goes out, quotes each problem, and never writes a word for you. Inside Claude and Cursor.</p>
-    <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Try it for free <span class="ar">→</span></a><a class="btn ghost" href="#frag">See it check a draft</a></div>
-    <p class="fine">No account. No credit card. Your taste file stays on your Mac.</p>
+    <p class="eyebrow">An editor for AI drafts, not a detector.</p>
+    <h1>Stop sounding <i>like ChatGPT.</i></h1>
+    <p class="lede">LinkedIn now cuts the reach of posts that read as AI by about 40%, and 41% of long-form posts already do. sauce reads your draft against your own facts and your own voice before it goes out, quotes every tell, and never writes a word for you.</p>
+    <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Check my first draft, free <span class="ar">→</span></a><a class="btn ghost" href="#frag">Watch it catch one</a></div>
+    <p class="fine">Free. Open source. No account. Two commands in Claude Code or Cursor.</p>
     <div class="held">
       <div class="frag" id="frag" data-ui role="group" aria-label="sauce check, live">
         <div class="bar"><span><b>sauce_check</b> · profile: Bhavya</span><span><span id="same" style="font-weight:600;margin-right:10px"></span><span class="pill" id="ms">4 ms</span></span></div>
@@ -253,22 +259,20 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
   </div>
 </header>
 
-<section class="inside wrap" aria-label="Where it runs">
-  <div class="head"><b>Runs inside</b><span>Two commands. The first check runs within a minute.</span></div>
-  <div class="tiles">
-    <div class="tile"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>Claude Code</div>
-    <div class="tile"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="12" height="9" rx="2"/><path d="M5 14h6"/></svg>Claude Desktop</div>
-    <div class="tile"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3l10 5-10 5z"/></svg>Cursor</div>
-    <div class="tile"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h12M8 2v12"/></svg>Any MCP client</div>
-    <div class="tile off"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="10" height="10" rx="3"/></svg>ChatGPT, via API</div>
-    <div class="tile off"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h10M3 8h10M3 11h6"/></svg>Slack, via API</div>
-    <div class="tile off"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 2h8v12H4z"/></svg>Google Docs, next</div>
-    <div class="tile"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 2l6 4-6 4-6-4z"/></svg>MIT, open source</div>
+<section class="inside wrap" id="where" aria-label="Works where you write">
+  <div class="head"><b>Works where you write</b><span>One check, three doors. The same two files behind all of them.</span></div>
+  <div class="doors">
+    <div class="door"><h3>Claude Code and Claude Desktop</h3><p>Two commands. The hook sends Claude back if it ever skips the check.</p><pre>/plugin marketplace add bhavya-in-sf/sauce
+/plugin install sauce@sauce</pre></div>
+    <div class="door"><h3>Cursor, and any MCP client</h3><p>One block in your MCP config. Same six tools, same profile.</p><pre>"sauce": { "command": "python3",
+  "args": ["~/sauce/mcp/server.py"] }</pre></div>
+    <div class="door"><h3>Agents and apps, via the API</h3><p>One call before anything ships. ChatGPT, Slack and Docs come through here.</p><pre>POST /v1/check
+{ "text": "...", "max_sameness": 50 }</pre></div>
   </div>
 </section>
 
 <section class="intro wrap" id="features">
-  <div class="top reveal"><h2>Designed to keep you <i>sounding like you.</i></h2><p>Humanizers hide the tells. Detectors guess who wrote it. sauce does neither: it reads your draft against your own rules and sends it back with each problem quoted.</p></div>
+  <div class="top reveal"><h2>Building got cheap. <i>Make taste cheap too.</i></h2><p>Five drafts that sound like a model become one that sounds like you. Humanizers hide the tells and detectors guess who wrote it; sauce does neither. It reads your draft against your own rules and sends it back with every problem quoted.</p></div>
   <div class="three">
     <div class="reveal"><h3>The gate</h3><p>Fixed rules, no model call, the same answer every time. Em dashes, banned phrases, filler, unapproved numbers, "10x" claims, a hook you used this week. Four milliseconds.</p></div>
     <div class="reveal"><h3>The critique</h3><p>Eight things scored separately against your own samples: clarity, proof, why you, the ask, hook, voice, boldness, rhythm. Never one number. It rewrites only the weakest line.</p></div>
@@ -277,7 +281,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 </section>
 
 <section class="bento wrap">
-  <div class="head reveal"><div><p class="eyebrow">Make the check work for you</p><h2>Check smarter. Post with <i>confidence.</i></h2></div><p>Four pieces of the product at real size. Every label and number is real.</p></div>
+  <div class="head reveal"><div><p class="eyebrow">What you get back</p><h2>A verdict in 4 ms. <i>Your voice, kept.</i></h2></div><p>Four pieces of the product at real size. Every label and number is real.</p></div>
   <div class="grid">
     <div class="card glow reveal"><div class="ui" data-ui><div class="bar"><span><b>Draft</b> · LinkedIn · 14:02</span><span class="pill">4 ms</span></div><div style="padding:10px 14px">We hit $50k MRR this month. Our AI makes writing effortless for every founder who wants to grow.</div><div class="verdict FIX"><span class="dot"></span>FIX<span class="note">Two lines to settle.</span></div><div class="row"><span class="lvl FIX">FIX</span><span><span class="q">"$50k MRR"</span> <span class="d">Not on your approved list.</span></span></div><div class="row"><span class="lvl FIX">FIX</span><span><span class="q">"effortless"</span> <span class="d">Filler.</span></span></div></div><h3>The gate</h3><p>Every number you have not approved is sent back, quoted, with the fix named.</p></div>
     <div class="card small reveal"><div class="ui" data-ui><div class="bar"><span><b>sauce_critique</b></span><span class="pill">8 axes</span></div><div class="row"><span class="lvl">HOOK</span><span><span class="q">5</span> <span class="d">Opens with a question.</span></span></div><div class="row"><span class="lvl">VOICE</span><span><span class="q">8</span> <span class="d">Your cadence.</span></span></div><div class="row"><span class="lvl">PROOF</span><span><span class="q">4</span> <span class="d">Weakest. No number.</span></span></div></div><h3>The critique</h3><p>Eight scores, never one. Only the weakest line gets a rewrite.</p></div>
@@ -287,7 +291,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 </section>
 
 <section class="why wrap" id="why">
-  <div class="top reveal"><div><p class="eyebrow">Why it works</p><h2>Built for judgment, made for <i>real posts.</i></h2></div><p>sauce is not about writing more. It is the moment before posting, the one a good editor used to do by hand, turned into a check that runs every time.</p></div>
+  <div class="top reveal"><div><p class="eyebrow">Why it works</p><h2>Taste that learns from <i>what you ship.</i></h2></div><p>Not more writing. The moment before posting, the one a good editor did by hand, turned into a check that runs every time and gets sharper with every edit you make.</p></div>
   <div class="two">
     <div class="steps">
       <div class="step on reveal"><div class="n">01</div><h3>It never writes for you</h3><p>A checker cannot make you generic. The words stay yours, including the ones you got wrong.</p></div>
@@ -299,9 +303,9 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 </section>
 
 <section id="proof"><div class="band reveal">
-  <p class="eyebrow">No guesswork. Just numbers.</p>
-  <h2>Ready to taste it <i>before you send it?</i></h2>
-  <p>Tested on real writing: one founder's archive, one startup's Slack, eleven writers' held-out posts. Enough to show the pattern, not an accuracy rate. Every number reruns from the repo.</p>
+  <p class="eyebrow">The cost of sounding like AI</p>
+  <h2>A flagged post loses <i>40% of its reach.</i></h2>
+  <p>LinkedIn's own number. On the founder's account, posts the gate would have blocked already earned about 15% less. Tested on real writing, not examples: one archive, one startup's Slack, eleven writers' held-out posts. Every number reruns from the repo.</p>
   <div class="stats">
     <div class="stat"><b>68%</b><span>of 673 LinkedIn posts pass as written</span></div>
     <div class="stat"><b>46/47</b><span>team drafts pass after one approved fact</span></div>
@@ -312,7 +316,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 </div></section>
 
 <section class="six wrap">
-  <div class="top reveal"><div><h2>Checked <i>every day.</i></h2></div><p>Six things sauce reads before a draft goes out. All quoted back to you. No guess about who wrote it.</p></div>
+  <div class="top reveal"><div><h2>Six tells, caught <i>every time.</i></h2></div><p>Six things sauce reads before a draft goes out. All quoted back to you. No guess about who wrote it.</p></div>
   <div class="two">
     <div class="pic reveal"><div class="ph"><span>Photo: silhouette in violet light · drop into photos/six.jpg</span></div></div>
     <div class="checks">
@@ -329,9 +333,9 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 <section class="final">
   <div class="light" aria-hidden="true"><span class="l1" style="top:auto;bottom:-10%"></span><span class="l2" style="top:auto;bottom:0"></span><span class="l4"></span></div>
   <div class="wrap in">
-    <p class="eyebrow">Your words, in your voice.</p>
+    <p class="eyebrow">Your style guide, enforced inside every AI tool.</p>
     <h2>Sound like you, <i>not like everyone.</i></h2>
-    <p>Two commands in Claude Code or Cursor. The default rules work before you have told it anything about yourself. Your taste file grows from there.</p>
+    <p>Two commands. The default rules catch the tells before you have told it anything about yourself. From the first edit on, it is learning your taste.</p>
     <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Try it for free <span class="ar">→</span></a><a class="btn ghost" href="https://voiceprint-vibe-checker.lovable.app" rel="noopener">Score a draft online</a></div>
     <div class="wm" aria-hidden="true">sauce</div>
   </div>
@@ -347,20 +351,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
   <div class="legal"><span>2026 · sauce · MIT</span><span>Nothing leaves your Mac for the basic check</span></div>
 </div></footer>
 
-<div class="pal" role="group" aria-label="Palette">
-  <button type="button" data-pal="a" aria-pressed="true" title="A Sunset" style="--a1:#7B2FF7;--a2:#E0338F;--a3:#FFD23F"></button>
-  <button type="button" data-pal="b" aria-pressed="false" title="B Sorbet" style="--a1:#5B2A86;--a2:#FF4FA3;--a3:#FFE88A"></button>
-  <button type="button" data-pal="c" aria-pressed="false" title="C Neon dusk" style="--a1:#6C4CFF;--a2:#FF2D95;--a3:#FFF1B8"></button>
-  <span class="lab">Duotone</span>
-  <button type="button" data-pal="d1" aria-pressed="false" title="D1 Ink and coral" style="--a1:#111111;--a2:#111111;--a3:#FF5A3C"></button>
-  <button type="button" data-pal="d2" aria-pressed="false" title="D2 Navy and lime" style="--a1:#14213D;--a2:#14213D;--a3:#C8F560"></button>
-  <button type="button" data-pal="d3" aria-pressed="false" title="D3 Forest and butter" style="--a1:#14532D;--a2:#14532D;--a3:#F5D76E"></button>
-  <button type="button" data-pal="d4" aria-pressed="false" title="D4 Plum and peach" style="--a1:#4A1C40;--a2:#4A1C40;--a3:#FFB27A"></button>
-  <button type="button" data-pal="d5" aria-pressed="false" title="D5 Cobalt and sand" style="--a1:#1F3DFF;--a2:#1F3DFF;--a3:#F1E7D0"></button>
-  <button type="button" data-pal="d6" aria-pressed="false" title="D6 Charcoal and tangerine" style="--a1:#1B1B1F;--a2:#1B1B1F;--a3:#FF8A00"></button>
-  <button type="button" data-pal="d7" aria-pressed="false" title="D7 Teal and cream" style="--a1:#0F6B5B;--a2:#0F6B5B;--a3:#FFF3D6"></button>
-  <button type="button" data-pal="d8" aria-pressed="false" title="D8 Oxblood and canary" style="--a1:#8B1A12;--a2:#8B1A12;--a3:#FFE14D"></button>
-</div>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
