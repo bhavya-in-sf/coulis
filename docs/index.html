@@ -55,6 +55,36 @@ p{margin:0}
 .light .l3{width:40vw;height:40vw;left:30vw;top:40%;background:var(--c2);opacity:.55}
 .light .l4{width:44vw;height:44vw;right:10vw;bottom:-10%;background:var(--c4);opacity:.9}
 .light::after{content:"";position:absolute;inset:0;background:linear-gradient(#fff 0%,rgba(255,255,255,0) 22%,rgba(255,255,255,0) 70%,#fff 100%)}
+
+/* motion layer */
+.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding:.04em .06em .18em;margin:-.04em -.06em -.18em}
+.hero h1 .w span{display:inline-block;transform:translateY(110%);transition:transform .9s var(--ease)}
+.js .hero.in h1 .w span{transform:none}
+.hero .lede,.hero .acts,.hero .fine,.hero .eyebrow{opacity:0;transform:translateY(14px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.js .hero.in .eyebrow{opacity:1;transform:none;transition-delay:.05s}
+.js .hero.in .lede{opacity:1;transform:none;transition-delay:.55s}
+.js .hero.in .acts{opacity:1;transform:none;transition-delay:.7s}
+.js .hero.in .fine{opacity:1;transform:none;transition-delay:.85s}
+.no-js .hero .lede,.no-js .hero .acts,.no-js .hero .fine,.no-js .hero .eyebrow,.no-js .hero h1 .w span{opacity:1;transform:none}
+nav.small .in{height:54px}
+nav .in{transition:height .3s var(--ease)}
+.card{transform-style:preserve-3d;will-change:transform}
+.card .ui{transition:transform .5s var(--ease)}
+.card:hover .ui{transform:rotate(0) translateY(-4px)}
+.step{transition:border-color .3s,transform .4s var(--ease)}
+.step.on{transform:translateX(6px)}
+.check{position:relative;cursor:default}
+.check .ex{display:block;max-height:0;overflow:hidden;opacity:0;margin-top:0;font-size:13px;color:var(--ink);background:var(--soft);border-radius:10px;padding:0 12px;transition:max-height .4s var(--ease),opacity .3s,margin .3s,padding .3s}
+.check:hover .ex,.check:focus-within .ex{max-height:80px;opacity:1;margin-top:10px;padding:8px 12px}
+.check .ex b{color:#c2261c;font-weight:600}
+.typing{position:relative}
+.typing::after{content:"";position:absolute;right:14px;bottom:14px;width:2px;height:16px;background:var(--ink);animation:blink 1s steps(2,end) infinite}
+@keyframes blink{50%{opacity:0}}
+.btn{will-change:transform}
+.cursor{position:fixed;left:0;top:0;width:14px;height:14px;border-radius:50%;background:var(--c2);pointer-events:none;z-index:60;transform:translate(-50%,-50%);opacity:0;transition:opacity .3s,width .25s,height .25s;mix-blend-mode:multiply}
+body.has-cursor .cursor{opacity:.8}
+.cursor.big{width:44px;height:44px;opacity:.35}
+@media (prefers-reduced-motion:reduce){.hero h1 .w span,.hero .lede,.hero .acts,.hero .fine,.hero .eyebrow{opacity:1;transform:none}.cursor,.typing::after{display:none}}
 /* palette switch */
 .pal{position:fixed;right:16px;bottom:16px;z-index:50;display:flex;gap:6px;flex-wrap:wrap;max-width:260px;justify-content:flex-end;background:#fff;border:1px solid var(--line);border-radius:22px;padding:8px}
 .pal .lab{width:100%;font:600 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:right;padding:2px 6px 0}
@@ -229,6 +259,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 <body>
 <script>document.documentElement.classList.replace('no-js','js')</script>
 
+<div class="cursor" id="cursor" aria-hidden="true"></div>
 <nav aria-label="Main"><div class="wrap in">
   <a class="mark" href="#top">sauce</a>
   <div class="links"><a href="#features">Features</a><a href="#why">Why it works</a><a href="#proof">Proof</a><a href="https://github.com/bhavya-in-sf/sauce" rel="noopener">GitHub</a><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Try it for free <span class="ar">→</span></a></div>
@@ -238,7 +269,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
   <div class="light" aria-hidden="true"><span class="l1"></span><span class="l2"></span><span class="l3"></span><span class="l4"></span></div>
   <div class="wrap in">
     <p class="eyebrow">Your words, in your voice.</p>
-    <h1>Sound like you, <i>even when AI writes it.</i></h1>
+    <h1 id="h1"><span class="w"><span>Sound</span></span> <span class="w"><span>like</span></span> <span class="w"><span>you,</span></span><br><span class="w"><span><i>even</i></span></span> <span class="w"><span><i>when</i></span></span> <span class="w"><span><i>AI</i></span></span> <span class="w"><span><i>writes</i></span></span> <span class="w"><span><i>it.</i></span></span></h1>
     <p class="lede">sauce is a free editor for AI drafts, not a detector. It checks every draft against your own facts and your own voice before it goes out, quotes each problem, and never writes a word for you. Inside Claude and Cursor.</p>
     <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Try it for free <span class="ar">→</span></a><a class="btn ghost" href="#frag">See it check a draft</a></div>
     <p class="fine">No account. No credit card. Your taste file stays on your Mac.</p>
@@ -320,12 +351,12 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
   <div class="two">
     <div class="pic reveal"><div class="ph"><span>Photo: silhouette in violet light · drop into photos/six.jpg</span></div></div>
     <div class="checks">
-      <div class="check reveal"><div class="n">01</div><h3>Em dashes and double hyphens</h3><p>The clearest AI tell. Blocked by default; your call to allow.</p></div>
-      <div class="check reveal"><div class="n">02</div><h3>Unapproved numbers</h3><p>Followers, revenue, "10x". Numbers about other people pass; numbers about you must be on your list.</p></div>
-      <div class="check reveal"><div class="n">03</div><h3>Banned phrases and filler</h3><p>"Game-changer", "delve", "in today's fast-paced world", and your own list.</p></div>
-      <div class="check reveal"><div class="n">04</div><h3>The stock hooks</h3><p>"It's not X, it's Y." A question opener. "Comment below." Flagged, with the score it costs.</p></div>
-      <div class="check reveal"><div class="n">05</div><h3>Repeats</h3><p>A format or hook you already used this week.</p></div>
-      <div class="check reveal"><div class="n">06</div><h3>Sameness, 0 to 100</h3><p>How much the draft reads like the average AI post, from quoted tells only. Teams can gate on it.</p></div>
+      <div class="check reveal"><div class="n">01</div><h3>Em dashes and double hyphens</h3><span class="ex">"We shipped — finally." <b>BLOCK</b> em dash</span><p>The clearest AI tell. Blocked by default; your call to allow.</p></div>
+      <div class="check reveal"><div class="n">02</div><h3>Unapproved numbers</h3><span class="ex">"300+ founders trust us" <b>FIX</b> not on your list</span><p>Followers, revenue, "10x". Numbers about other people pass; numbers about you must be on your list.</p></div>
+      <div class="check reveal"><div class="n">03</div><h3>Banned phrases and filler</h3><span class="ex">"a total game-changer" <b>BLOCK</b> banned</span><p>"Game-changer", "delve", "in today's fast-paced world", and your own list.</p></div>
+      <div class="check reveal"><div class="n">04</div><h3>The stock hooks</h3><span class="ex">"It's not about speed, it's about taste." <b>FIX</b> the not-X-but-Y frame</span><p>"It's not X, it's Y." A question opener. "Comment below." Flagged, with the score it costs.</p></div>
+      <div class="check reveal"><div class="n">05</div><h3>Repeats</h3><span class="ex">"7 lessons from…" <b>FIX</b> same skeleton as Tuesday</span><p>A format or hook you already used this week.</p></div>
+      <div class="check reveal"><div class="n">06</div><h3>Sameness, 0 to 100</h3><span class="ex">Sameness 82 <b>reads as AI</b> · 4 tells quoted</span><p>How much the draft reads like the average AI post, from quoted tells only. Teams can gate on it.</p></div>
     </div>
   </div>
 </section>
@@ -385,6 +416,32 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
   var timer;ta.addEventListener("input",function(){clearTimeout(timer);timer=setTimeout(render,150)});
   document.querySelectorAll("[data-try]").forEach(function(b){b.addEventListener("click",function(){ta.value=b.getAttribute("data-try");render()})});
   render();
+
+  /* hero reveal */
+  var hero=document.querySelector(".hero");setTimeout(function(){hero.classList.add("in")},80);
+  /* nav shrinks */
+  var nav=document.querySelector("nav");addEventListener("scroll",function(){nav.classList.toggle("small",scrollY>80)},{passive:true});
+  /* idle demo: the check types sample drafts by itself until you touch it */
+  var SAMPLES=document.querySelectorAll("[data-try]"),si=0,touched=false,typeTimer;
+  ta.addEventListener("focus",function(){touched=true;clearTimeout(typeTimer);ta.parentElement.classList.remove("typing")});
+  SAMPLES.forEach(function(b){b.addEventListener("click",function(){touched=true;clearTimeout(typeTimer);ta.parentElement.classList.remove("typing")})});
+  function typeNext(){if(touched||reduce)return;si=(si+1)%SAMPLES.length;var text=SAMPLES[si].getAttribute("data-try"),i=0;ta.value="";ta.parentElement.classList.add("typing");
+    (function step(){if(touched)return;i+=2;ta.value=text.slice(0,i);render();if(i<text.length){typeTimer=setTimeout(step,22)}else{ta.parentElement.classList.remove("typing");typeTimer=setTimeout(typeNext,3800)}})()}
+  var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  typeTimer=setTimeout(typeNext,3200);
+  /* cursor dot and magnetic buttons */
+  var cur=document.getElementById("cursor");
+  if(matchMedia("(pointer:fine)").matches&&!reduce){document.body.classList.add("has-cursor");
+    addEventListener("pointermove",function(e){cur.style.left=e.clientX+"px";cur.style.top=e.clientY+"px"},{passive:true});
+    document.querySelectorAll("a,button,textarea").forEach(function(el){el.addEventListener("pointerenter",function(){cur.classList.add("big")});el.addEventListener("pointerleave",function(){cur.classList.remove("big")})});
+    document.querySelectorAll(".btn").forEach(function(b){b.addEventListener("pointermove",function(e){var r=b.getBoundingClientRect();b.style.transform="translate("+((e.clientX-r.left-r.width/2)*.18)+"px,"+((e.clientY-r.top-r.height/2)*.3)+"px)"});b.addEventListener("pointerleave",function(){b.style.transform=""})});
+    /* light follows the pointer a little */
+    addEventListener("pointermove",function(e){var dx=(e.clientX/innerWidth-.5),dy=(e.clientY/innerHeight-.5);document.querySelectorAll(".hero .light span").forEach(function(sp,i){sp.style.translate=(dx*(20+i*12))+"px "+(dy*(14+i*8))+"px"})},{passive:true});
+    /* bento tilt */
+    document.querySelectorAll(".card").forEach(function(c){c.addEventListener("pointermove",function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform="perspective(900px) rotateX("+(-y*5)+"deg) rotateY("+(x*6)+"deg) translateY(-4px)"});c.addEventListener("pointerleave",function(){c.style.transform=""})});
+  }
+  /* count-up on the proof numbers */
+  document.querySelectorAll(".stat b").forEach(function(b){var raw=b.textContent,m=raw.match(/^(\d+)(.*)$/);if(!m)return;var n=+m[1],rest=m[2],done=false;var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!done){done=true;var t0=performance.now();(function tick(){var p=Math.min(1,(performance.now()-t0)/1100),v=Math.round(n*(1-Math.pow(1-p,3)));b.textContent=v+rest;if(p<1)requestAnimationFrame(tick)})()}})},{threshold:.5});o.observe(b)});
   /* palette */
   var qp=new URLSearchParams(location.search).get("p");if(qp){document.documentElement.setAttribute("data-palette",qp);document.querySelectorAll(".pal button").forEach(function(x){x.setAttribute("aria-pressed",x.getAttribute("data-pal")===qp)})}
   document.querySelectorAll(".pal button").forEach(function(b){b.addEventListener("click",function(){document.documentElement.setAttribute("data-palette",b.getAttribute("data-pal"));document.querySelectorAll(".pal button").forEach(function(x){x.setAttribute("aria-pressed",x===b)})})});
