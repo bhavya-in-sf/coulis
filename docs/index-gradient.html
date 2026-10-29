@@ -59,10 +59,10 @@ p{margin:0}
 .light::after{content:"";position:absolute;inset:0;background:linear-gradient(#fff 0%,rgba(255,255,255,0) 22%,rgba(255,255,255,0) 70%,#fff 100%)}
 
 /* the stripe: one wide band of light behind the product, fading to white at both ends and above the headline */
-.stripe{position:absolute;left:-6vw;right:-6vw;top:46%;height:52%;pointer-events:none;z-index:0;
+.stripe{position:absolute;left:-4vw;right:-4vw;top:50%;height:58%;pointer-events:none;z-index:0;
   background:linear-gradient(90deg,var(--c2) 0%,color-mix(in srgb,var(--c2) 55%,var(--c1)) 28%,var(--c1) 62%,var(--c4) 100%);
-  filter:blur(54px);opacity:.78;
-  -webkit-mask:radial-gradient(70% 55% at 50% 50%,#000 30%,transparent 100%);mask:radial-gradient(70% 55% at 50% 50%,#000 30%,transparent 100%)}
+  filter:blur(36px);opacity:.95;
+  -webkit-mask:radial-gradient(78% 60% at 50% 50%,#000 40%,transparent 100%);mask:radial-gradient(78% 60% at 50% 50%,#000 40%,transparent 100%)}
 .stripe.low{top:22%;height:70%}
 .hero .in,.final .in{position:relative;z-index:1}
 /* palette switch */
@@ -87,7 +87,7 @@ nav .links .btn{height:38px;padding:0 16px;color:#fff}
 .hero .lede{margin:22px auto 0;max-width:54ch;color:#444;font-size:clamp(16px,1.3vw,19px)}
 .hero .acts{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap}
 .hero .fine{margin-top:12px;font-size:13px;color:var(--muted)}
-.hero .held{position:relative;margin:48px auto 0;width:min(720px,100%)}
+.hero .held{position:relative;margin:56px auto 0;width:min(600px,100%)}
 .hero .held .frag{position:relative;z-index:1;transform:rotate(-2deg);transition:transform .8s var(--ease)}
 .hero .held:hover .frag{transform:rotate(0)}
 .hero .held::before{content:"";position:absolute;left:10%;right:10%;bottom:-30px;height:80px;background:radial-gradient(50% 50% at 50% 50%,color-mix(in srgb,var(--c1) 35%,transparent),transparent 70%);filter:blur(10px)}
