@@ -32,7 +32,7 @@
 :root[data-palette^="d"] .light .l2{background:var(--c1);opacity:.9}
 :root[data-palette^="d"] .light .l3{background:color-mix(in srgb,var(--c2) 45%,var(--c1));opacity:.45;left:18vw;top:35%}
 :root[data-palette^="d"] .light .l4{background:var(--c1);opacity:.8}
-:root[data-palette^="d"] .card.glow,:root[data-palette^="d"] .card.photo,:root[data-palette^="d"] .band,:root[data-palette^="d"] .six .pic{background:linear-gradient(100deg,var(--c2) 0%,#D7261E 35%,#FF7A1A 62%,var(--c1) 100%)}
+:root[data-palette^="d"] .card.glow,:root[data-palette^="d"] .card.photo,:root[data-palette^="d"] .band,:root[data-palette^="d"] .six .pic{background:linear-gradient(135deg,var(--c2),var(--c1))}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
@@ -57,14 +57,6 @@ p{margin:0}
 .light .l3{width:40vw;height:40vw;left:30vw;top:40%;background:var(--c2);opacity:.55}
 .light .l4{width:44vw;height:44vw;right:10vw;bottom:-10%;background:var(--c4);opacity:.9}
 .light::after{content:"";position:absolute;inset:0;background:linear-gradient(#fff 0%,rgba(255,255,255,0) 22%,rgba(255,255,255,0) 70%,#fff 100%)}
-
-/* the stripe: one wide band of light behind the product, fading to white at both ends and above the headline */
-.stripe{position:absolute;left:-4vw;right:-4vw;top:50%;height:58%;pointer-events:none;z-index:0;
-  background:linear-gradient(90deg,var(--c2) 0%,#D7261E 26%,#FF7A1A 48%,var(--c1) 70%,var(--c4) 100%);
-  filter:blur(36px);opacity:.95;
-  -webkit-mask:radial-gradient(78% 60% at 50% 50%,#000 40%,transparent 100%);mask:radial-gradient(78% 60% at 50% 50%,#000 40%,transparent 100%)}
-.stripe.low{top:22%;height:70%}
-.hero .in,.final .in{position:relative;z-index:1}
 /* palette switch */
 .pal{position:fixed;right:16px;bottom:16px;z-index:50;display:flex;gap:6px;flex-wrap:wrap;max-width:260px;justify-content:flex-end;background:#fff;border:1px solid var(--line);border-radius:22px;padding:8px}
 .pal .lab{width:100%;font:600 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:right;padding:2px 6px 0}
@@ -81,13 +73,13 @@ nav .links a:hover{color:var(--ink)}
 nav .links .btn{height:38px;padding:0 16px;color:#fff}
 
 /* hero */
-.hero{position:relative;padding:calc(140px + env(safe-area-inset-top,0px)) 0 60px;text-align:center;overflow:hidden}
+.hero{position:relative;padding:calc(140px + env(safe-area-inset-top,0px)) 0 40px;text-align:center}
 .hero .in{position:relative;z-index:1}
 .hero h1{font-size:clamp(44px,6.8vw,96px);max-width:14ch;margin:14px auto 0}
 .hero .lede{margin:22px auto 0;max-width:54ch;color:#444;font-size:clamp(16px,1.3vw,19px)}
 .hero .acts{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap}
 .hero .fine{margin-top:12px;font-size:13px;color:var(--muted)}
-.hero .held{position:relative;margin:56px auto 0;width:min(600px,100%)}
+.hero .held{position:relative;margin:48px auto 0;width:min(720px,100%)}
 .hero .held .frag{position:relative;z-index:1;transform:rotate(-2deg);transition:transform .8s var(--ease)}
 .hero .held:hover .frag{transform:rotate(0)}
 .hero .held::before{content:"";position:absolute;left:10%;right:10%;bottom:-30px;height:80px;background:radial-gradient(50% 50% at 50% 50%,color-mix(in srgb,var(--c1) 35%,transparent),transparent 70%);filter:blur(10px)}
@@ -196,7 +188,7 @@ section{padding:clamp(80px,10vw,140px) 0;position:relative}
 .check p{font-size:14px;color:var(--muted)}
 
 /* final */
-.final{text-align:center;position:relative;padding-bottom:0;overflow:hidden}
+.final{text-align:center;position:relative;padding-bottom:0}
 .final .in{position:relative;z-index:1}
 .final h2{font-size:clamp(40px,6vw,88px);max-width:12ch;margin:10px auto 0}
 .final p{margin:18px auto 0;max-width:46ch;color:#444}
@@ -245,7 +237,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 </div></nav>
 
 <header class="hero" id="top">
-  <div class="stripe" aria-hidden="true"></div>
+  <div class="light" aria-hidden="true"><span class="l1"></span><span class="l2"></span><span class="l3"></span><span class="l4"></span></div>
   <div class="wrap in">
     <p class="eyebrow">An editor for AI drafts, not a detector.</p>
     <h1>Stop sounding <i>like ChatGPT.</i></h1>
@@ -341,7 +333,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 </section>
 
 <section class="final">
-  <div class="stripe low" aria-hidden="true"></div>
+  <div class="light" aria-hidden="true"><span class="l1" style="top:auto;bottom:-10%"></span><span class="l2" style="top:auto;bottom:0"></span><span class="l4"></span></div>
   <div class="wrap in">
     <p class="eyebrow">Your style guide, enforced inside every AI tool.</p>
     <h2>Sound like you, <i>not like everyone.</i></h2>
@@ -407,11 +399,12 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
   /* motion */
   var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
   if(window.gsap&&!reduce){
-    gsap.to(".hero .stripe",{xPercent:-4,scaleX:1.06,duration:12,yoyo:true,repeat:-1,ease:"sine.inOut"});
-    gsap.to(".final .stripe",{xPercent:4,duration:14,yoyo:true,repeat:-1,ease:"sine.inOut"});
+    gsap.to(".hero .l1",{x:60,y:-40,duration:9,yoyo:true,repeat:-1,ease:"sine.inOut"});
+    gsap.to(".hero .l2",{x:-80,y:50,duration:11,yoyo:true,repeat:-1,ease:"sine.inOut"});
+    gsap.to(".hero .l3",{x:40,y:60,duration:13,yoyo:true,repeat:-1,ease:"sine.inOut"});
+    gsap.to(".hero .l4",{x:-50,y:-30,duration:10,yoyo:true,repeat:-1,ease:"sine.inOut"});
     if(window.ScrollTrigger){gsap.registerPlugin(ScrollTrigger);
       gsap.fromTo(".hero .held",{yPercent:6},{yPercent:-8,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:true}});
-      gsap.to(".hero .stripe",{yPercent:14,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:true}});
       gsap.fromTo(".band",{scale:.96},{scale:1,ease:"none",scrollTrigger:{trigger:".band",start:"top 90%",end:"top 40%",scrub:true}});
       document.querySelectorAll(".stat b").forEach(function(b){gsap.from(b,{opacity:0,y:20,duration:.9,ease:"power3.out",scrollTrigger:{trigger:b,start:"top 85%"}})});
     }
