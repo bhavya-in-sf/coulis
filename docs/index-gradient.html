@@ -27,9 +27,11 @@
 :root[data-palette="d6"]{--c1:#FF8A00;--c2:#1B1B1F;--c3:#FF8A00;--c4:#FFE1BF}
 :root[data-palette="d7"]{--c1:#FFF3D6;--c2:#0F6B5B;--c3:#FFF3D6;--c4:#FFFBF0}
 :root[data-palette="d8"]{--c1:#FFE14D;--c2:#8B1A12;--c3:#FFE14D;--c4:#FFF6C2}
-:root[data-palette^="d"] .light .l2{background:var(--c4)}
-:root[data-palette^="d"] .light .l3{background:var(--c1);opacity:.35}
-:root[data-palette^="d"] .light .l4{background:var(--c4)}
+:root[data-palette^="d"] .light span{mix-blend-mode:normal}
+:root[data-palette^="d"] .light .l1{background:color-mix(in srgb,var(--c2) 75%,var(--c1));opacity:.62;left:-16vw;top:0}
+:root[data-palette^="d"] .light .l2{background:var(--c1);opacity:.9}
+:root[data-palette^="d"] .light .l3{background:color-mix(in srgb,var(--c2) 45%,var(--c1));opacity:.45;left:18vw;top:35%}
+:root[data-palette^="d"] .light .l4{background:var(--c1);opacity:.8}
 :root[data-palette^="d"] .card.glow,:root[data-palette^="d"] .card.photo,:root[data-palette^="d"] .band,:root[data-palette^="d"] .six .pic{background:linear-gradient(135deg,var(--c2),var(--c1))}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
