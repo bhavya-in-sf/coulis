@@ -16,7 +16,7 @@ import learn as _learn  # noqa: E402
 SURFACES = tuple(_gate.MODES)
 
 
-def check(text, profile, surface="linkedin", history=(), max_sameness=None):
+def check(text, profile, surface="linkedin", history=(), max_sameness=None, context=None):
     """Gate a draft. Returns {verdict: Hold|Revise|Send, issues: [...], skeleton: [...]}.
 
     history: optional recent posts on the same surface, each {id, date, title, text},
@@ -27,7 +27,8 @@ def check(text, profile, surface="linkedin", history=(), max_sameness=None):
     hist = [{"id": h.get("id", "?"), "date": h.get("date", ""), "title": h.get("title", "")[:70],
              "skeleton": {k for k, p in _gate.SKELETONS.items() if _gate.re.search(p, _gate.norm(h["text"]))},
              "grams": _gate.ngrams(_gate.norm(h["text"]))} for h in history]
-    r = _gate.check(text, profile.to_persona(), surface, hist)
+    context = {**(context or {}), "surface": surface}
+    r = _gate.check(text, profile.to_persona(context), surface, hist)
     same = r.get("sameness", {"score": 0, "label": "", "hits": []})
     if max_sameness is not None and same["score"] > max_sameness:
         r["issues"].append({"level": "Hold", "check": "sameness_gate",
@@ -36,14 +37,14 @@ def check(text, profile, surface="linkedin", history=(), max_sameness=None):
         r["verdict"] = "Hold"
     mode = _gate.MODES.get(surface, {})
     return {"verdict": r["verdict"], "issues": r["issues"], "skeleton": r["skeleton"], "sameness": same,
-            "mode": surface, "target_score": mode.get("target_score", 70),
+            "mode": surface, "fact_check": r["fact_check"], "summary": r["summary"],
             "counts": {lvl: sum(1 for i in r["issues"] if i["level"] == lvl) for lvl in ("Hold", "Revise")}}
 
 
-def learn(draft, final, profile):
-    """Propose rules from what a human changed. Nothing is applied until approved."""
-    rules = _learn.propose(draft, final, profile.to_persona())
-    return {"proposed_rules": [{"text": r, "source": "learned", "approved": False} for r in rules]}
+def learn(draft, final, profile, context=None):
+    """Propose context-scoped memory; never silently apply or train model weights."""
+    from .memory import propose
+    return propose(draft, final, profile, context or {"surface": "linkedin"})
 
 
 def backtest(persona_dir):

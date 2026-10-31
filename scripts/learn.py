@@ -60,23 +60,21 @@ def main():
     ap.add_argument("--persona", required=True)
     ap.add_argument("draft")
     ap.add_argument("final")
-    ap.add_argument("--apply", action="store_true")
+    ap.add_argument("--apply", action="store_true", help="Approve and save the displayed proposals")
+    ap.add_argument("--surface", required=True, choices=list(gate.MODES))
     a = ap.parse_args()
-    persona = gate.load_persona(a.persona)
-    rules = propose(Path(a.draft).read_text(), Path(a.final).read_text(), persona)
-    if not rules:
-        print("No difference worth learning from.")
-        return
-    print("Proposed rules:")
-    for r in rules:
-        print(" -", r)
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    from coulis_core import profile_from_folder, learn
+    from coulis_core.memory import update
+    import json
+    rules = learn(Path(a.draft).read_text(), Path(a.final).read_text(), profile_from_folder(a.persona),
+                  {"surface": a.surface})["proposed_rules"]
+    print(json.dumps(rules, indent=2))
     if a.apply:
-        taste = Path(a.persona) / "TASTE.md"
-        stamp = dt.date.today().isoformat()
-        with taste.open("a") as f:
-            for r in rules:
-                f.write(f"- ({stamp}, learned) {r}\n")
-        print(f"Appended {len(rules)} rules to {taste}")
+        for rule in rules:
+            rule["approved"] = True
+            update(a.persona, rule=rule)
+        print(f"Saved {len(rules)} approved scoped rules to preferences.json")
 
 
 if __name__ == "__main__":

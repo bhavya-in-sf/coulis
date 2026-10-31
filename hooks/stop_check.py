@@ -18,8 +18,8 @@ from pathlib import Path
 
 
 def debug(event, **kw):
-    """One line per run in ~/.coulis/hook-log.jsonl so you can see the hook fired (COULIS_HOOK_LOG=0 to turn off)."""
-    if os.environ.get("COULIS_HOOK_LOG", "1") == "0":
+    """One line per run in ~/.coulis/hook-log.jsonl so you can see the hook fired (off by default; COULIS_HOOK_LOG=1 to enable)."""
+    if os.environ.get("COULIS_HOOK_LOG", "0") == "0":
         return
     try:
         d = Path.home() / ".coulis"

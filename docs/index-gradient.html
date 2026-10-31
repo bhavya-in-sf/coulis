@@ -343,7 +343,7 @@ body{overflow-x:clip}</style>
   <div class="three">
     <div class="reveal"><h3>Check</h3><p>Fixed rules, no AI model, about 4 ms, the same answer every time. Facts you never approved, the AI tells, a hook you already used. The answer comes in plain words: Send, Revise or Hold, with each problem quoted and an alternative in your own words.</p></div>
     <div class="reveal"><h3>Critique</h3><p>Eight parts scored separately against your own samples: clarity, proof, why you, the ask, hook, voice, boldness, rhythm. Never one number, because one number hides which thing is wrong. You see each score, the weakest part, and one rewritten line.</p></div>
-    <div class="reveal"><h3>Learn</h3><p>Change a draft and it proposes the rule it saw. You approve. The rule joins a taste file you own. Continual learning from the one signal that is never wrong: what you actually sent.</p></div>
+    <div class="reveal"><h3>Learn</h3><p>Change a draft and it proposes the rule it saw. You approve. The rule joins a taste file you own. Continual learning from human edits as provisional evidence, with explicit approval.</p></div>
   </div>
   <div class="reveal" style="margin-top:36px;padding-top:24px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;font-size:15px;color:#444">
     <div><b style="color:var(--ink)">Directions</b><br>/coulis:bolder, quieter, shorter, clearer. One rewrite, checked, used only on your yes.</div>
@@ -530,5 +530,5 @@ body{overflow-x:clip}</style>
   var box=document.getElementById('term');if(box){var list=E('ol'),timer;var play=function(){clearTimeout(timer);list.replaceChildren();var i=0;var next=function(){list.append(E('li','',lines[i++]));if(i<lines.length)timer=setTimeout(next,450)};if(matchMedia('(prefers-reduced-motion: reduce)').matches){lines.forEach(function(s){list.append(E('li','',s))})}else next()};var btn=E('button','','Replay');btn.type='button';btn.onclick=play;box.append(E('div','bar','coulis_check \u00b7 one draft'),list,btn);lines.forEach(function(s){list.append(E('li','',s))});if('IntersectionObserver' in window){var once=false;new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!once){once=true;play()}})},{threshold:.4}).observe(box)}}
 })();
 </script>
-</body>
+<aside style="position:fixed;z-index:99999;bottom:0;left:0;right:0;padding:12px;background:#fff4bd;color:#17120a;font:14px/1.4 system-ui">Archived design preview: figures are historical, not validated outcomes. Enterprise/API/custom models are waitlist only. <a href="index.html">Current research and capability status</a></aside></body>
 </html>

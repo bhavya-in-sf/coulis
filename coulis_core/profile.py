@@ -5,6 +5,7 @@ that can be stored, versioned and sent over an API, and turned back into
 files. Nothing is invented: every field comes from the user's own files or
 samples.
 """
+import json
 import re
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
@@ -18,6 +19,13 @@ class Rule:
     source: str = "user"          # user | learned
     approved: bool = True
     added: str = ""               # YYYY-MM-DD when known
+    id: str = ""
+    scope: dict = field(default_factory=dict)
+    key: str = ""
+    value: str = ""
+    active: bool = True
+    expires: str = ""
+    evidence_ids: list = field(default_factory=list)
 
 
 @dataclass
@@ -39,13 +47,16 @@ class Profile:
     needs_confirm: list = field(default_factory=list)
     banned: list = field(default_factory=list)           # list[Pattern]
     story_checks: list = field(default_factory=list)     # list[Pattern]
+    claims: list = field(default_factory=list)
     schema: str = SCHEMA_VERSION
 
     def to_dict(self):
         return asdict(self)
 
     # The gate engine expects its original persona shape. Build it from the profile.
-    def to_persona(self):
+    def to_persona(self, context=None):
+        from .memory import select
+        rules, conflicts = select(self.rules, context)
         norm = lambda s: re.sub(r"\s+", " ", s.lower().replace("’", "'")).strip()
         return {
             "approved_text": norm("\n".join(f"- {f}" for f in self.approved_facts)),
@@ -54,6 +65,9 @@ class Profile:
             "banned": [(p.why, p.regex) for p in self.banned],
             "owner": norm(self.owner),
             "product": norm(self.product),
+            "claims": self.claims,
+            "preferences": {r.key: r.value for r in rules if r.key},
+            "preference_conflicts": conflicts,
         }
 
     def to_files(self):
@@ -63,15 +77,17 @@ class Profile:
                  f"- What I want readers to do: {self.goal}", "", "## My voice in 3 samples"]
         for i, s in enumerate(self.samples, 1):
             taste += ["", f"### Sample {i}", s]
-        taste += ["", "## My rules"] + [f"- {r.text}" for r in self.rules if r.source == "user"]
+        taste += ["", "## My rules"] + [f"- {r.text}" for r in self.rules if r.source == "user" and not r.id]
         taste += ["", "## Learned from my edits"] + [
-            f"- [{r.added}] {r.text}" for r in self.rules if r.source == "learned" and r.approved]
+            f"- [{r.added}] {r.text}" for r in self.rules if r.source == "learned" and r.approved and not r.id]
         claims = [f"owner: {self.owner}", f"product: {self.product}", "", "## Approved facts"]
         claims += [f"- {f}" for f in self.approved_facts] + ["", "## Needs confirm"]
         claims += [f"- {f}" for f in self.needs_confirm] + ["", "## Banned phrases"]
         claims += [f"- {p.why} :: {p.regex}" for p in self.banned] + ["", "## Story checks"]
         claims += [f"- {p.why} :: {p.regex}" for p in self.story_checks]
-        return {"TASTE.md": "\n".join(taste) + "\n", "claims.md": "\n".join(claims) + "\n"}
+        return {"TASTE.md": "\n".join(taste) + "\n", "claims.md": "\n".join(claims) + "\n",
+                "claims.json": json.dumps(self.claims, indent=2) + "\n",
+                "preferences.json": json.dumps([asdict(r) for r in self.rules if r.id], indent=2) + "\n"}
 
 
 def _section(md, title):
@@ -94,7 +110,7 @@ def _patterns(text):
 
 
 def _field(md, label):
-    m = re.search(r"^-?\s*" + re.escape(label) + r":\s*(.*)$", md, re.M)
+    m = re.search(r"^-?\s*" + re.escape(label) + r":[ \t]*(.*)$", md, re.M)
     return m.group(1).strip() if m else ""
 
 
@@ -126,7 +142,10 @@ def parse_files(taste_md="", claims_md=""):
 def profile_from_folder(folder):
     folder = Path(folder)
     read = lambda n: (folder / n).read_text() if (folder / n).exists() else ""
-    return parse_files(read("TASTE.md"), read("claims.md"))
+    p = parse_files(read("TASTE.md"), read("claims.md"))
+    p.claims = json.loads(read("claims.json") or '[]')
+    p.rules += [Rule(**r) for r in json.loads(read("preferences.json") or '[]')]
+    return p
 
 
 def profile_from_dict(d):

@@ -24,3 +24,6 @@ Goal: create a `TASTE.md` in the user's current folder, so they never have to re
 ## Rules
 - The user's own words go in the file. Don't polish their samples.
 - One TASTE.md per folder. If they write for several brands, suggest one folder each, so styles don't bleed.
+
+## Rights and current behavior
+Confirm the user owns or has permission to process the writing for this profile before import. Use --confirm-rights only after that confirmation. No shared training, public evaluation or cross-client reuse is authorized. Observations are proposals; punctuation is not universally banned. Fact notes require complete structured approval in claims.json before matching. Hosted enterprise/API features are waitlist only.

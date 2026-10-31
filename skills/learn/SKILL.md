@@ -15,10 +15,12 @@ Goal: taste learned from what the user does, not just what they say. Every rule 
    - cites the evidence: "draft said X" → "you posted Y"
    - names the axis it belongs to (from `reference/axes.md` in this plugin's root, two levels up)
 4. Read the current `TASTE.md`. If a proposed rule repeats or contradicts an existing one, say so and propose merging or replacing it instead of adding a duplicate.
-5. Ask the user to approve, edit or reject each rule, numbered. Write only the approved ones to the "Learned from my edits" section, with today's date and the evidence.
+5. Ask the user to approve, edit or reject each rule, numbered. Include surface and, where relevant, audience/purpose. Use coulis_preference to persist each approved proposal in preferences.json. Assign the same key to mutually exclusive choices; more specific scopes override broad rules and same-specificity conflicts remain unresolved. Never append a scoped rule to global TASTE.md. Retire rules by id; do not silently overwrite them.
 6. If "Learned from my edits" has more than 30 rules, suggest which ones to merge or retire, and wait for a yes.
 
 ## Rules
 - Never write to TASTE.md without explicit approval of each rule. Memory created without the user's say is a known failure (EVIDENCE.md, E5).
 - Only learn from this folder's TASTE.md scope. Don't carry rules across brands or clients.
 - Don't infer personal facts about the user. Learn writing choices only.
+
+Continual learning here means approved preference memory, not model-weight training. Do not promise improvement on unseen topics before human evaluation. Sent text is evidence, not permanent approval. Keep raw edits local and do not reuse across clients or for training without separate permission.

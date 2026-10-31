@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict');
+const {assess,validate}=require('../docs/claims.js');
+const r={id:'followers',entity:'Example',metric:'followers',value:'62000',unit:'people',time_period:'2026-10',source:'Synthetic fixture',approved_at:'2020-01-01',valid_until:'2099-12-31',statement:'I have 62K followers.',paraphrases:['My audience includes 62,000 followers.']};
+for(const text of ['I have 62K followers.','I have 62,000 followers.','My audience includes 62,000 followers.'])assert.equal(assess(text,[r]).status,'no_unresolved_detected');
+for(const text of ['We have 62K founders.','We have 63K paying customers.','Another company has 62K followers.','I had 62K followers last year.','I have 62K followers and 100 customers.','62,000 people follow me.'])assert.equal(assess(text,[r]).status,'unresolved');
+assert.equal(assess(r.statement,[{...r,valid_until:'2020-02-01'}]).status,'unresolved');
+assert.equal(assess(r.statement,[r,{...r,id:'conflict',value:'63000'}]).status,'unresolved');
+assert.equal(assess(r.statement,[{id:'broken'}]).status,'unresolved');
+assert.equal(validate({...r,approved_at:'2026-02-31'}),false);
+assert.equal(assess(r.statement,[r]).facts_verified,false);
+console.log('Browser claim regressions passed');
