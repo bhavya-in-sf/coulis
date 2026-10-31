@@ -171,3 +171,10 @@ MIT. Built by Bhavya Goel.
 - Your taste files and the local log stay in `~/.coulis/`. The log records verdicts and tool names, never your drafts.
 - The landing page has no analytics or tracking. The waitlist form keeps a name, an email and your choice, nothing else.
 - Security problems: see [SECURITY.md](SECURITY.md).
+
+
+## Research retrieval and feedback
+
+The existing MCP product now includes `coulis_context` (relevant writing samples and approved contextual preferences) and `coulis_feedback` (explicit, local feedback recording). Set `COULIS_RETRIEVAL=bm25` when starting the server to use relevant-example retrieval in critique; the default remains the original sample order.
+
+[Research setup, dataset adapters, measured retrieval results, and limitations](research/README.md). No model training or paid model calls are performed by the research runner.

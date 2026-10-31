@@ -1,0 +1,9 @@
+{
+  "source": "longmemeval",
+  "version": "longmemeval-cleaned/oracle; downloaded 2026-10-31; exact bytes pinned by report SHA256",
+  "url": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned",
+  "license": "MIT (publisher dataset-card declaration)",
+  "allowed_uses": ["research_evaluation"],
+  "tenant_id": "public-research",
+  "limitations": "Oracle evidence sessions only. Not full-haystack retrieval. Query-scoped identities are not known human identities. Training not enabled by this manifest."
+}
