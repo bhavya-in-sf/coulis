@@ -1,0 +1,9 @@
+{
+  "manifest":{"version":"synthetic-v1","allowed_uses":["research_evaluation"],"synthetic":true},
+  "samples":[
+    {"id":"s1","user_id":"fixture-writer","topic":"hiring","at":"2026-01-01T00:00:00Z","text":"A customer asked how we build. We start with a concrete example and explain the result."},
+    {"id":"s2","user_id":"fixture-writer","topic":"launch","at":"2026-01-02T00:00:00Z","text":"Our launch began with a question about how to build a useful product."}
+  ],
+  "preferences":[{"id":"p1","user_id":"fixture-writer","key":"opener","value":"example","text":"Open with a concrete example.","scope":{"surface":"linkedin"},"approved":true,"approved_at":"2026-01-03T00:00:00Z","evidence_ids":["s1"]}],
+  "tasks":[{"id":"t1","user_id":"fixture-writer","topic":"launch","at":"2026-02-01T00:00:00Z","task":"Write a launch post about how we build.","context":{"surface":"linkedin"},"approved_facts":[],"reference":"This held-out reference must never be sent to the generator."}]
+}

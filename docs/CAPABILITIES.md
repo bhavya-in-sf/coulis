@@ -20,6 +20,8 @@ Updated 31 Oct 2026, v0.10.0. One table, kept honest. If a line moves between co
 | One-command setup from a LinkedIn export | **Available** | `/coulis:extract` or `coulis setup --linkedin export.zip`. Builds TASTE.md and claims.md locally. |
 | Stop hook (Claude is sent back if it skipped the check) | **Available** | Logs each run to ~/.coulis/hook-log.jsonl. |
 | MCP server, Python and TypeScript SDKs | **Available** | Same tool contract and profile memory through MCP, source Python local/remote SDK and source TypeScript HTTP SDK. Packages are not published. |
+| Structural preference extraction | **Experimental** | Proposes scoped, evidence-backed rules from actual style edits. Abstains on unsupported changes. Confidence is uncalibrated; approval required. |
+| Personalization evaluation | **Available runner; effectiveness unmeasured** | Three matched conditions, date/topic filtering and blind human review. Synthetic software tests only so far. |
 | Shared contextual taste workflow | **Available in source** | Context, permitted edits/choices, proposals, explicit approval, revision and disabling across MCP/CLI/API/SDKs. No model-weight training. |
 | REST API | **Experimental** | Self-hosted JSON transport with bearer authentication and server-mapped profiles. Plaintext local storage; explicit learning/choice operations retain text. No managed hosting. |
 | Relevant-example retrieval for the critique | **Experimental** | Opt in with COULIS_RETRIEVAL=bm25 (or tfidf). Picks the samples from your own profile that match the draft instead of the first five. Lexical, not semantic. Off by default. |

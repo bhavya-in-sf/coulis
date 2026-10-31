@@ -11,3 +11,8 @@ assert.deepEqual((await other.context('Another topic','x')).preferences, []);
 await assert.rejects(new Coulis(process.argv[2], 'wrong').workflow('state'), (e:any) => e instanceof CoulisError && e.status===401);
 await api.workflow('purge', {approved:true});
 assert.deepEqual((await api.workflow('state')).preferences, []);
+
+const structural = await api.workflow('edit', {task:'Post',draft:'We build tools — we learn from the people who use them.',final:'We build tools, we learn from the people who use them.',context:{surface:'x'},category:'style',consent:true});
+const extracted = await api.workflow('extract', {comparison_id:structural.id});
+assert.equal(extracted.proposals[0].value, 'avoid');
+assert.equal(extracted.proposals[0].approved, false);

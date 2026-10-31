@@ -90,3 +90,7 @@ Feedback is opt-in and local. Do not include unnecessary private text in the opt
 | TF-IDF | 0.7234 | 0.7723 |
 
 These are local retrieval diagnostics, not QA accuracy or taste scores. No generation calls were made. The no-retrieval condition is a harness control, not a competitive language-model baseline. The current query is matched against the supplied history; no temporal cutoff is applied. Thirteen repeated session-ID occurrences with identical text were collapsed; alternate dates were retained. Some histories recur across query groups; do not use hash splits for training without resolving the duplicate audit. Summary and exact command: `results/longmemeval-s-retrieval-v01.json`. Full private report retains individual outcomes.
+
+## Personalization, distinct from retrieval
+
+The offline [personalization runner](../docs/PERSONALIZATION-EVAL.md) prepares three matched conditions with chronological/topic evidence filtering, randomizes pairwise review packets and reports human preference, correction-effort and factual-review metrics. Source and input hashes preserve provenance. Only synthetic software validation has run; real dated tasks, model outputs and human ballots are still required.
