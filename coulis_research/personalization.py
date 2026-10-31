@@ -1,4 +1,4 @@
-"""Offline personalization evaluation. Host-generated outputs and actual human ballots only.
+"""Offline personalization evaluation. Human review by default; explicitly marked synthetic simulation is separate.
 
 python3 -m coulis_research.personalization prepare|blind|report --help
 """
@@ -136,12 +136,19 @@ def word_distance(a,b):
     return prev[-1]/max(1,len(a))
 
 
-def report(key, ballots):
+def report(key, ballots, *, simulated=False):
+    if simulated and key.get("synthetic") is not True:
+        raise ValueError("Simulated ballots require a synthetic dataset")
     unique(ballots)
     trials={t['id']:t for t in key['trials']}
     groups={};metrics={c:{'factual_errors':0,'fact_reviews':0,'edit_distances':[],'seconds':[]} for c in CONDITIONS}
     for b in ballots:
-        if b['id'] not in trials or b.get('human_confirmed') is not True: raise ValueError('Actual human-confirmed ballot for a known trial required')
+        if b['id'] not in trials: raise ValueError('Unknown trial')
+        if simulated:
+            if b.get('simulated') is not True or b.get('human_confirmed') is True:
+                raise ValueError('Simulation requires explicit simulated ballots, not human attestations')
+        elif b.get('human_confirmed') is not True or b.get('simulated') is True:
+            raise ValueError('Actual human-confirmed ballot required')
         choice=b['choice']
         if not ((type(choice) is int and choice in (0,1)) or (type(choice) is str and choice in ('tie','neither'))):raise ValueError('Invalid choice')
         t=trials[b['id']];pair=tuple(sorted(t['conditions']))
@@ -185,7 +192,9 @@ def report(key, ballots):
             g['person_bootstrap_95_interval']={c:[sorted(v)[49],sorted(v)[1949]] for c,v in draws.items()}
         summaries.append(g)
     average=lambda xs:sum(xs)/len(xs) if xs else None
-    return {'version':VERSION,'synthetic':key['synthetic'],'dataset_version':key['dataset_version'],
+    return {'version':VERSION,'synthetic':key['synthetic'],
+            'evaluation_mode':'simulation' if simulated else 'human_review',
+            'effectiveness_measured':False if simulated else None, 'dataset_version':key['dataset_version'],
             'dataset_sha256':key['dataset_sha256'],'bundle_sha256':key['bundle_sha256'],
             'outputs_sha256':key['outputs_sha256'],'ballots_sha256':digest(ballots),'split':key['split'],
             'expected_pairwise_ballots':len(trials),'received_pairwise_ballots':len(ballots),
@@ -208,7 +217,7 @@ def main():
     sub=parser.add_subparsers(dest='command',required=True)
     p=sub.add_parser('prepare');p.add_argument('--dataset',required=True);p.add_argument('--split',choices=['future','unseen_topic'],default='unseen_topic');p.add_argument('--output',required=True)
     p=sub.add_parser('blind');p.add_argument('--bundle',required=True);p.add_argument('--outputs',required=True);p.add_argument('--packet',required=True);p.add_argument('--key',required=True)
-    p=sub.add_parser('report');p.add_argument('--key',required=True);p.add_argument('--ballots',required=True);p.add_argument('--output',required=True)
+    p=sub.add_parser('report');p.add_argument('--key',required=True);p.add_argument('--ballots',required=True);p.add_argument('--output',required=True);p.add_argument('--simulated',action='store_true',help='Synthetic datasets and explicitly simulated ballots only')
     args=parser.parse_args();read=lambda p:json.loads(Path(p).read_text())
     def write(path,value):
         p=Path(path);p.parent.mkdir(parents=True,exist_ok=True)
@@ -218,6 +227,6 @@ def main():
     elif args.command=='blind':
         if Path(args.packet).resolve()==Path(args.key).resolve() or Path(args.packet).exists() or Path(args.key).exists():raise ValueError('Use separate new packet and private key paths')
         packet,key=blind(read(args.bundle),read(args.outputs));write(args.packet,packet);write(args.key,key)
-    else:write(args.output,report(read(args.key),read(args.ballots)))
+    else:write(args.output,report(read(args.key),read(args.ballots),simulated=args.simulated))
 
 if __name__=='__main__':main()
