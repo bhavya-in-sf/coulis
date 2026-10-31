@@ -74,12 +74,13 @@ textarea:focus{outline:2px solid var(--c2);outline-offset:0;border-color:transpa
 </style>
 </head>
 <body>
+<script src="claims.js"></script>
 <script>document.documentElement.classList.replace('no-js','js')</script>
-<div class="wrap"><nav><a class="mark" href="index.html">coulis</a><div class="links"><a href="index.html#features">Features</a><a href="index.html#proof">Proof</a><a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a><a class="btn" href="https://github.com/bhavya-in-sf/coulis#install" rel="noopener">Install, free →</a></div></nav></div>
+<div class="wrap"><nav><a class="mark" href="index.html">coulis</a><div class="links"><a href="index.html#how">Features</a><a href="index.html#research">Proof</a><a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a><a class="btn" href="https://github.com/bhavya-in-sf/coulis#install" rel="noopener">Install, free →</a></div></nav></div>
 
 <header><div class="light" aria-hidden="true"></div><div class="wrap in">
   <h1>Paste a draft. <i>Watch it get checked.</i></h1>
-  <p class="lede">This is the real gate, ported to your browser. It runs against a taste profile you can edit on the right, returns Send, Revise or Hold with every tell quoted, and scores sameness from those tells only. Nothing you type leaves this page.</p>
+  <p class="lede">This is a browser demonstration of conservative numeric-claim matching and personal bans; it is not the full Python gate. It runs against a taste profile you can edit on the right, returns Send, Revise or Hold with unresolved numeric sentences and configured bans quoted. Nothing you type leaves this page.</p>
   <div class="stage">
     <div data-ui>
       <div class="bar"><span><b>coulis_check</b> · profile: <span id="pname">Bhavya (demo)</span></span><span class="pill" id="ms">4 ms</span></div>
@@ -96,14 +97,14 @@ Comment below if you agree!">Stock hooks</button>
       </div>
       <div class="verdict Hold" id="verdict"><span class="dot"></span><span id="vword">Hold</span><span class="note" id="vnote"></span></div>
       <div id="lines"></div>
-      <div class="same"><div class="lab"><span>Sameness <b id="sscore">0</b> / 100</span><span id="slabel">sounds like a person</span></div><div class="track"><div class="fill" id="sfill"></div></div><div class="lab"><span>From quoted tells only. Not a guess about who wrote it.</span></div></div>
+      <div class="same"><div class="lab"><span>Demo diagnostic <b id="sscore">0</b> unresolved numeric sentences</span><span id="slabel">sounds like a person</span></div><div class="track"><div class="fill" id="sfill"></div></div><div class="lab"><span>This demo does not evaluate your voice or independently verify facts.</span></div></div>
     </div>
     <div class="side">
-      <div class="card"><h3>The profile this runs against</h3><p>Two files on a real machine: how you write, and the numbers you have approved. Here, a demo version of Bhavya's, or an empty one of your own.</p>
+      <div class="card"><h3>The profile this runs against</h3><p>Your installed profile uses TASTE.md, claims.json and preferences.json. Here, a demo version of Bhavya's, or an empty one of your own.</p>
         <div class="tools" style="border:0;background:none;padding:10px 0 0"><button type="button" class="chip" id="pBhavya" aria-pressed="true">Bhavya's demo profile</button><button type="button" class="chip" id="pMine" aria-pressed="false">My own (empty)</button></div></div>
-      <div class="card"><h3>Approved facts</h3><p>Any number not on this list is sent back. Click "approve" on a flagged number to add it, or type one.</p>
+      <div class="card"><h3>Approved facts</h3><p>These legacy notes do not verify claims. Add a complete structured approval below. Unrecognized numeric sentences remain unresolved.</p>
         <ul class="facts" id="facts"></ul>
-        <div class="addfact"><input id="newfact" type="text" placeholder='e.g. "1,200 users"' aria-label="New approved fact"><button type="button" class="chip" id="addfact">Add</button></div></div>
+        <div class="addfact"><textarea id="newfact" rows="7" aria-label="Structured claim approval" placeholder="Paste a claims.json record with entity, metric, value, unit, time_period, source, approved_at, valid_until, statement and id"></textarea><button type="button" class="chip" id="addfact">Approve complete record</button><p id="fact-error" role="status"></p><a href="PRODUCT.md">Approval format and limits</a></div></div>
       <div class="card"><h3>Banned phrases</h3><p>Words you never want to see again.</p><ul class="facts" id="banned"></ul>
         <div class="addfact"><input id="newban" type="text" placeholder='e.g. "synergy"' aria-label="New banned phrase"><button type="button" class="chip" id="addban">Ban</button></div></div>
       <div class="card"><h3>Run the critique in Claude</h3><p>The eight-axis critique needs a model. Copy this and paste it into Claude Code or Claude Desktop with coulis installed.</p>
@@ -112,50 +113,52 @@ Comment below if you agree!">Stock hooks</button>
   </div>
 </div></header>
 
-<div class="wrap foot"><span>Everything on this page runs in your browser. The profile edits live only in this tab's storage.</span><span><a href="index.html">coulis</a> · <a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a> · <a href="waitlist.html">Waitlist</a></span></div>
+<div class="wrap foot"><span>Everything on this page runs in your browser. Profile edits persist in this browser’s local storage.</span><span><a href="index.html">coulis</a> · <a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a> · <a href="waitlist.html">Waitlist</a></span></div>
 
 <script>
 (function(){
   var BHAVYA={name:"Bhavya (demo)",facts:["62K followers","62,000 followers","Top Voice 2024","3,000 newsletter readers","100 investors","673 posts","100+ AI companies","5 years"],banned:["game-changer","delve","in today's fast-paced world"]};
-  var MINE={name:"My own",facts:[],banned:[]};
-  function load(k,d){try{var v=localStorage.getItem("coulis-demo-"+k);return v?JSON.parse(v):d}catch(e){return d}}
-  function save(k,v){try{localStorage.setItem("coulis-demo-"+k,JSON.stringify(v))}catch(e){}}
+  BHAVYA.claims=[];
+  var MINE={name:"My own",facts:[],claims:[],banned:[]};
+  function load(k,d){try{var v=localStorage.getItem("coulis-demo-v2-"+k);return v?JSON.parse(v):d}catch(e){return d}}
+  function save(k,v){try{localStorage.setItem("coulis-demo-v2-"+k,JSON.stringify(v))}catch(e){}}
   var mine=load("mine",MINE), which=load("which","bhavya");
   var FILLER=["streamline","leverage","leveraging","unlock","seamless","empower","in today's fast-paced","elevate your","effortless"];
   var FIRST=/\b(i|i'm|i've|me|my|we|we're|our|us|clients?|customers?|users?|team)\b/;
   function prof(){return which==="bhavya"?BHAVYA:mine}
-  function approved(num){var a=prof().facts.join(" ").toLowerCase(),base=num.toLowerCase().replace(/,/g,"");var forms=[base];if(/k$/.test(base))forms.push(base.slice(0,-1)+"000",base.slice(0,-1)+",000");if(/^\d{4,}$/.test(base))forms.push(Number(base).toLocaleString("en-US"));return forms.some(function(f){return new RegExp("(^|[^\\d,])"+f.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"(?!\\d)").test(a)})}
-  function aboutUs(t,k){var s=t.slice(Math.max(0,t.lastIndexOf(".",k)+1),(t.indexOf(".",k)+1)||t.length);return FIRST.test(s)||!/\b[A-Z][a-z]+/.test(s.replace(/^\s*[A-Z]/,"x"))}
-  var TELLS=[[/\b(it'?s|this is|that'?s) not (just |only |about )?[^.?!]{3,60}?,? (it'?s|this is|but) /,"the not-X-but-Y frame"],[/^\s*[^.!?\n]{8,120}\?\s*(\n|$)/,"a question opener"],[/\b(comment|drop) (below|a |")/,"the stock comment ask"],[/\b(\w+), (\w+),? and (\w+)\b[^.]{0,3}\./,"a three-item cadence"],[/(^[^\n]{10,90}\n\n){4,}/m,"one-line paragraphs in a row"]];
-  function check(text){var t=text.replace(/’/g,"'"),low=t.toLowerCase(),out=[],seen={};function add(l,q,d,k){var key=l+q;if(seen[key])return;seen[key]=1;out.push({level:l,q:q,d:d,kind:k||""})}
-    ["—","–","--"].forEach(function(d){if(t.indexOf(d)>-1)add("Hold",d,"Em dash or double hyphen. The clearest AI tell.")});
-    var m,money=/\$\s?(\d[\d,.]*)\s?(k|m)?\+?\s*(arr|mrr|revenue)?/g;while((m=money.exec(low))){if(!approved(m[1]+(m[2]||""))&&aboutUs(t,m.index))add("Hold",m[0].trim(),"Money claim not on the approved list.","num")}
-    var count=/\b(\d[\d,.]*)\s?(k)?\+?\s*(followers|subscribers|readers|users|customers|founders|companies|posts|investors|leads|clients)\b/g;while((m=count.exec(low))){if(!approved(m[1].replace(/,/g,"")+(m[2]||""))&&aboutUs(t,m.index))add("Revise",m[0].trim(),"Number not on the approved list. Approve it, or cut it.","num")}
-    var mult=/\b(\d+(?:\.\d+)?)\s?x(?![\w\d])/g;while((m=mult.exec(low))){if(aboutUs(t,m.index))add("Revise",m[0].trim(),"A result claim. Prove it, or cut it.")}
-    prof().banned.forEach(function(b){if(low.indexOf(b.toLowerCase())>-1)add("Hold",b,"Banned. Your rule.")});
-    FILLER.forEach(function(f){if(low.indexOf(f)>-1)add("Revise",f,"Filler. Say what actually happened.")});
-    var same=0,hits=[];out.forEach(function(i){same+=i.level==="Hold"?20:10});
-    TELLS.forEach(function(r){if(r[0].test(low)){same+=12;hits.push(r[1]);add("Revise",r[1],"A stock AI pattern.")}});
-    same=Math.min(100,same);var lbl=same<=20?"sounds like a person":same<=50?"some AI tells":same<=80?"reads as AI":"pure slop";
-    var v=out.some(function(i){return i.level==="Hold"})?"Hold":out.length?"Revise":"Send";return{verdict:v,issues:out,sameness:same,label:lbl}}
+  function check(text){
+    var facts=CoulisClaims.assess(text,prof().claims||[]),out=[];
+    facts.claims.forEach(function(c){if(c.status==='unresolved')out.push({level:c.quote.includes('$')?'Hold':'Revise',q:c.quote,d:c.reason})});
+    facts.invalid_approvals.forEach(function(){out.push({level:'Revise',q:'Approval record',d:'Invalid or incomplete metadata.'})});
+    prof().banned.forEach(function(b){if(text.toLowerCase().includes(b.toLowerCase()))out.push({level:'Hold',q:b,d:'Banned by this profile. You can use an empty profile instead.'})});
+    var v=out.some(i=>i.level==='Hold')?'Hold':out.length?'Revise':'Send';
+    return {verdict:v,issues:out,sameness:facts.claims.filter(c=>c.status==='unresolved').length,label:'No voice score in this demo'};
+  }
   var ta=document.getElementById("draft"),verdict=document.getElementById("verdict"),vword=document.getElementById("vword"),vnote=document.getElementById("vnote"),lines=document.getElementById("lines"),ms=document.getElementById("ms"),count=document.getElementById("count");
-  var COPY={Hold:"Sent back. Fix the Hold lines before this goes out.",Revise:"Close. Settle the Revise lines and it ships.",Send:"Ships. Specific, approved, in your voice."};
+  var COPY={Hold:"Review the unresolved issues. Nothing is sent.",Revise:"Unresolved claims or preferences require review.",Send:"No configured rule violations found. Facts are not independently verified; qualitative claims are outside this demo’s coverage."};
   function esc(s){return s.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
   function render(){var t0=performance.now(),r=check(ta.value);verdict.className="verdict "+r.verdict;vword.textContent=r.verdict;vnote.textContent=COPY[r.verdict];
     lines.innerHTML=r.issues.map(function(i,ix){return '<div class="row"><span class="lvl '+i.level+'">'+i.level+'</span><span><span class="q">'+esc(i.q)+'</span> <span class="d">'+esc(i.d)+'</span></span>'+(i.kind==="num"?'<button type="button" class="act" data-approve="'+esc(i.q)+'">approve</button>':'<span></span>')+'</div>'}).join("");
     ms.textContent=Math.max(1,Math.round(performance.now()-t0))+" ms";count.textContent=ta.value.length+" / 2000";
-    document.getElementById("sscore").textContent=r.sameness;document.getElementById("slabel").textContent=r.label;document.getElementById("sfill").style.width=r.sameness+"%";
+    document.getElementById("sscore").textContent=r.sameness;document.getElementById("slabel").textContent=r.label;document.getElementById("sfill").style.width="0%";
     document.getElementById("prompt").textContent="/coulis:critique\n\n"+ta.value;
     lines.querySelectorAll("[data-approve]").forEach(function(b){b.addEventListener("click",function(){addFact(b.getAttribute("data-approve"))})})}
   function renderProfile(){document.getElementById("pname").textContent=prof().name;document.getElementById("pBhavya").setAttribute("aria-pressed",which==="bhavya");document.getElementById("pMine").setAttribute("aria-pressed",which!=="bhavya");
     var ro=which==="bhavya";
-    document.getElementById("facts").innerHTML=prof().facts.map(function(f,i){return '<li>'+esc(f)+(ro?'':' <button type="button" data-rmf="'+i+'" aria-label="remove">×</button>')+'</li>'}).join("")||'<li style="background:none;color:var(--muted)">None yet. Every number gets sent back until you approve it.</li>';
-    document.getElementById("banned").innerHTML=prof().banned.map(function(f,i){return '<li>'+esc(f)+(ro?'':' <button type="button" data-rmb="'+i+'" aria-label="remove">×</button>')+'</li>'}).join("")||'<li style="background:none;color:var(--muted)">None yet.</li>';
-    document.querySelectorAll("[data-rmf]").forEach(function(b){b.addEventListener("click",function(){mine.facts.splice(+b.getAttribute("data-rmf"),1);save("mine",mine);renderProfile();render()})});
+    document.getElementById("facts").innerHTML=prof().facts.map(function(f,i){return '<li>'+esc(typeof f==='string'?f:f.statement)+(ro?'':' <button type="button" data-rmf="'+i+'" aria-label="remove">×</button>')+'</li>'}).join("")||'<li style="background:none;color:var(--muted)">None yet. Every number gets sent back until you approve it.</li>';
+    document.getElementById("banned").innerHTML=prof().banned.map(function(f,i){return '<li>'+esc(typeof f==='string'?f:f.statement)+(ro?'':' <button type="button" data-rmb="'+i+'" aria-label="remove">×</button>')+'</li>'}).join("")||'<li style="background:none;color:var(--muted)">None yet.</li>';
+    document.querySelectorAll("[data-rmf]").forEach(function(b){b.addEventListener("click",function(){var ix=+b.getAttribute("data-rmf"),record=mine.facts[ix];if(record&&record.id)mine.claims=(mine.claims||[]).filter(r=>r.id!==record.id);mine.facts.splice(ix,1);save("mine",mine);renderProfile();render()})});
     document.querySelectorAll("[data-rmb]").forEach(function(b){b.addEventListener("click",function(){mine.banned.splice(+b.getAttribute("data-rmb"),1);save("mine",mine);renderProfile();render()})});
     render()}
-  function addFact(f){f=(f||"").trim();if(!f)return;if(which==="bhavya"){which="mine";mine.facts=mine.facts.length?mine.facts:BHAVYA.facts.slice();mine.banned=mine.banned.length?mine.banned:BHAVYA.banned.slice();save("which",which)}
-    if(mine.facts.indexOf(f)<0)mine.facts.push(f);save("mine",mine);renderProfile()}
+  function addFact(f){
+    var el=document.getElementById('fact-error');
+    try{var record=JSON.parse(f);if(!CoulisClaims.validate(record))throw Error('Include all required fields, valid dates and a numeric value.');
+      if(which==='bhavya'){which='mine';save('which',which)}
+      mine.claims=mine.claims||[];
+      if(mine.claims.some(r=>r.id===record.id))throw Error('Use a new id; existing approvals are not overwritten.');
+      mine.claims.push(record);mine.facts.push(record);save('mine',mine);el.textContent='Approval stored in this browser only. The source was not independently verified.';renderProfile();
+    }catch(e){el.textContent='Not saved: '+e.message;}
+  }
   document.getElementById("addfact").addEventListener("click",function(){addFact(document.getElementById("newfact").value);document.getElementById("newfact").value=""});
   document.getElementById("addban").addEventListener("click",function(){var b=document.getElementById("newban").value.trim();if(!b)return;if(which==="bhavya"){which="mine";mine.facts=BHAVYA.facts.slice();mine.banned=BHAVYA.banned.slice();save("which",which)}if(mine.banned.indexOf(b)<0)mine.banned.push(b);save("mine",mine);document.getElementById("newban").value="";renderProfile()});
   document.getElementById("pBhavya").addEventListener("click",function(){which="bhavya";save("which",which);renderProfile()});

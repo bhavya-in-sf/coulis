@@ -1,3 +1,7 @@
+# Current evidence status (2026-10-31)
+
+No user outcome tests have been completed. Historical diagnostic results below are context, not current performance claims. They do not validate the eight-axis critique, time savings, retention or unseen-topic gains. See [current benchmark protocol](docs/BENCHMARK.md) and [corpus permission policy](docs/DATA-PERMISSIONS.md).
+
 # Evidence ledger
 
 Every rule in Coulis traces back to one of two kinds of source, always labeled:

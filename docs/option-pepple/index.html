@@ -126,5 +126,5 @@ function validate(d){for(const k of ['brand','headline','description','primaryLa
 function _apply(){try{const next=JSON.parse($('json').value);validate(next);data=next;render();text('error','Applied. Download data.js to save these changes.');return true}catch(e){text('error',e.message);return false}}
 $('reveal').addEventListener('input',slide);render();})();//.addEventListener('click',apply);$('reset').addEventListener('click',()=>{$('json').value=original;apply()});$('download').addEventListener('click',()=>{if(!apply())return;const blob=new Blob(['window.PEPPLE_HERO = '+JSON.stringify(data,null,2)+';\n'],{type:'text/javascript'}),url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download='data.js';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});$('json').value=original;$('editor').hidden=!new URLSearchParams(location.search).has('edit');render();})();
 </script>
-</body>
+<aside style="position:fixed;z-index:99999;bottom:0;left:0;right:0;padding:12px;background:#fff4bd;color:#17120a;font:14px/1.4 system-ui">Archived design preview: figures are historical, not validated outcomes. Enterprise/API/custom models are waitlist only. <a href="../index.html">Current research and capability status</a></aside></body>
 </html>

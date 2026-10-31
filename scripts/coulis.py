@@ -26,6 +26,9 @@ def main():
     ap.add_argument("--profile")
     ap.add_argument("--surface", default="linkedin")
     ap.add_argument("--kind", default="")
+    ap.add_argument("--audience")
+    ap.add_argument("--purpose")
+    ap.add_argument("--confirm-rights", action="store_true", help="Confirm ownership or permission for local profiling; no training/public reuse")
     ap.add_argument("--linkedin", help="setup: a LinkedIn data export zip, or its Shares csv")
     ap.add_argument("--out", help="setup: folder to write TASTE.md and claims.md (default ~/.coulis)")
     ap.add_argument("--name", default="", help="setup: name / role line")
@@ -34,9 +37,10 @@ def main():
     a = ap.parse_args()
     read = lambda s: sys.stdin.read() if s == "-" else s
     extra = {"profile_dir": a.profile} if a.profile else {}
+    context = {k: v for k, v in {"audience": a.audience, "purpose": a.purpose}.items() if v}
     if a.cmd == "setup":
         from coulis_core.importers import setup_from_linkedin
-        out = setup_from_linkedin(a.linkedin, a.out or str(server.home_dir()), name=a.name)
+        out = setup_from_linkedin(a.linkedin, a.out or str(server.home_dir()), name=a.name, rights_confirmed=a.confirm_rights)
         print(json.dumps(out, indent=2))
         return
     if a.cmd == "log":
@@ -55,19 +59,20 @@ def main():
         return
     if a.cmd in ("check", "critique"):
         gate_args = {"max_sameness": a.max_sameness} if (a.cmd == "check" and a.max_sameness is not None) else {}
-        out = server.call_tool("coulis_" + a.cmd, {"text": read(a.args[0]), "surface": a.surface, **gate_args, **extra})
+        out = server.call_tool("coulis_" + a.cmd, {"text": read(a.args[0]), "surface": a.surface, "context": context, **gate_args, **extra})
     elif a.cmd == "skip":
         out = server.call_tool("coulis_skip", {"reason": a.args[0], "kind": a.kind, **extra})
     elif a.cmd == "add":
         out = server.call_tool("coulis_add", {"kind": a.args[0], "text": a.args[1], **extra})
     else:
-        out = server.call_tool("coulis_learn", {"draft": read(a.args[0]), "final": read(a.args[1]), **extra})
+        out = server.call_tool("coulis_learn", {"draft": read(a.args[0]), "final": read(a.args[1]), "surface": a.surface, "context": context, **extra})
     if a.cmd == "check":
         if a.json:
             print(json.dumps(out, indent=2, ensure_ascii=False))
         else:
             sm = out.get("sameness", {})
             print(out["verdict"], f"(sameness {sm.get('score')}: {sm.get('label')})" if sm else "")
+            print(out["summary"])
             for i in out["issues"]:
                 print(f"  {i['level']} {i['check']}: {i['quote']!r} {i['detail']}")
         sys.exit({"Hold": 2, "Revise": 1}.get(out["verdict"], 0))  # agents branch on the exit code

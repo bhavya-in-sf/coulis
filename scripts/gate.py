@@ -13,6 +13,7 @@ Verdict: Hold (must fix before posting), Revise (should fix), Send.
 The taste half (hook, voice, boldness, rhythm) is judged by the critique skill,
 not here, because it needs judgment.
 """
+import claims as claim_checker
 import argparse
 import datetime as dt
 import json
@@ -46,8 +47,7 @@ TELLS = [
 
 
 def sameness(text, issues):
-    """0 to 100: how much this draft reads like the statistical average AI post. Built only from
-    quoted, reproducible tells; it is a style score, not a detector of who wrote it."""
+    """Legacy 0–100 pattern diagnostic, not a validated voice/quality score or authorship detector."""
     score, hits = 0, []
     for i in issues:
         if i["check"] == "em_dash": score += 20; hits.append("em dash")
@@ -58,8 +58,7 @@ def sameness(text, issues):
         if re.search(rx, low if name != "emoji_pile" else text, re.M | re.S):
             score += 12; hits.append(name.replace("_", " "))
     score = min(100, score)
-    label = ("sounds like a person" if score <= 20 else "some AI tells" if score <= 50 else
-             "reads as AI" if score <= 80 else "pure slop")
+    label = ("few pattern matches" if score <= 20 else "some pattern matches" if score <= 50 else "many pattern matches")
     return {"score": score, "label": label, "hits": hits[:8]}
 
 
@@ -67,28 +66,12 @@ def norm(s):
     return re.sub(r"\s+", " ", s.lower().replace("’", "'")).strip()
 
 
-def load_persona(folder):
-    folder = Path(folder)
-    claims = (folder / "claims.md").read_text()
-    approved = claims.split("## Needs", 1)[0]
-    stories = []
-    if "## Story checks" in claims:
-        for line in claims.split("## Story checks", 1)[1].split("\n## ", 1)[0].splitlines():
-            if line.startswith("- ") and "::" in line:
-                desc, rx = line[2:].split("::", 1)
-                stories.append((desc.strip(), rx.strip()))
-    banned = []
-    if "## Banned phrases" in claims:
-        for line in claims.split("## Banned phrases", 1)[1].split("\n## ", 1)[0].splitlines():
-            if line.startswith("- ") and "::" in line:
-                desc, rx = line[2:].split("::", 1)
-                banned.append((desc.strip(), rx.strip()))
-
-    def field(name):
-        m = re.search(r"^" + name + r":\s*(.+)$", claims, re.M)
-        return norm(m.group(1)) if m else ""
-    return {"approved_text": norm(approved), "folder": folder, "stories": stories, "banned": banned,
-            "owner": field("owner"), "product": field("product")}
+def load_persona(folder, context=None):
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    from coulis_core.profile import profile_from_folder
+    persona = profile_from_folder(folder).to_persona(context)
+    persona["folder"] = Path(folder)
+    return persona
 
 
 EXAMPLE_CUES = ("words like", "opening with", "openers like", "things like", "like saying", "for example", "e.g.", "such as")
@@ -98,103 +81,23 @@ def is_example(t, start):
     return any(c in t[max(0, start - 60):start] for c in EXAMPLE_CUES)
 
 
-def money_claims(t):
-    """Revenue/money and business-count claims, with the number normalised."""
-    out = []
-    for m in re.finditer(r"\$\s?(\d[\d,.]*)\s?(k|m)?\+?\s*(arr|mrr|in revenue|revenue|a month|/month|per month)?", t):
-        num = (m.group(1).replace(",", "") + (m.group(2) or "")).rstrip(".")
-        if not is_example(t, m.start()):
-            out.append((m.group(0).strip(), num, "money"))
-    for m in re.finditer(r"\b(\d[\d,.]*)\s?(k)?\+?\s*(?:" + CLAIM_NOUNS + r")\b", t):
-        num = m.group(1).replace(",", "") + (m.group(2) or "")
-        if t[max(0, m.start() - 3):m.start()] == "in " or is_example(t, m.start()):
-            continue  # "1 in 6 leads" is a ratio, not a claim
-        out.append((m.group(0).strip(), num, "count"))
-    for m in re.finditer(r"\b(\d+(?:\.\d+)?)\s?%", t):
-        if not is_example(t, m.start()):
-            out.append((m.group(0), m.group(1), "percent"))
-    # multipliers: "10x reach", "3x more leads", "2.5x faster" (not "24x7", "2x2", "4x4")
-    for m in re.finditer(r"\b(\d+(?:\.\d+)?)\s?x(?![\w\d])", t):
-        if not is_example(t, m.start()):
-            out.append((m.group(0), m.group(1) + "x", "percent"))
-    for m in re.finditer(r"\b(\d+)\s?(?:->|→|to)\s?(\d+)\s+meetings", t):
-        out.append((m.group(0), m.group(1) + "->" + m.group(2), "count"))
-    return out
-
-
-def approved_number(num, approved_text):
-    if "->" in num:
-        x, y = num.split("->")
-        return bool(re.search(re.escape(x) + r"\s?(->|→|to)\s?" + re.escape(y), approved_text))
-    base = num.lower()
-    forms = {base}
-    if base.endswith("k"):
-        n = base[:-1]
-        forms |= {n + ",000", n + "000", n + "k"}
-    elif base.isdigit() and len(base) >= 4:
-        forms |= {f"{int(base):,}", base[:-3] + "k" if base.endswith("000") else base}
-    return any(re.search(r"(?<![\d,])" + re.escape(f) + r"(?![\d])", approved_text) for f in forms)
-
-
-FIRST_PERSON = re.compile(r"\b(i|i'm|i've|i'd|me|my|we|we're|we've|our|us|client|clients|customer|customers|"
-                          r"user|users|team|teams)\b")
-STAT_CUES = re.compile(r"\b(of (people|founders|leaders|users|marketers|buyers|readers|posts|companies|women|men)|"
-                       r"most|average|typically|studies|research|survey)\b")
-
-
-def about_us(text, quote, persona):
-    """Is this number a claim about the owner or their business?
-
-    Calibrated on 673 founder posts (Oct 2026). Numbers inside quotation marks
-    are examples. Numbers in a sentence that names someone else (a capitalised
-    name that is not the owner or product) and has no first-person words are
-    about that third party. Everything else stays a claim to check.
-    """
-    flat = text.replace("’", "'").replace("\n", " ")
-    low = flat.lower()
-    k = low.find(quote)
-    if k < 0:
-        return True
-    start = max(low.rfind(c, 0, k) for c in ".!?:•→↳\"“") + 1
-    ends = [low.find(c, k + len(quote)) for c in ".!?\n•"]
-    end = min([e for e in ends if e > 0] or [len(low)])
-    sent, sent_low = flat[start:end], low[start:end]
-    before = low[:k]
-    if before.count("“") > before.count("”") or before.count('"') % 2 == 1:
-        return False  # inside a quotation: an example, not a claim
-    if FIRST_PERSON.search(sent_low):
-        return True
-    own = {persona.get("owner", ""), persona.get("product", "")}
-    starters = {"the", "a", "an", "this", "that", "these", "it", "its", "they", "their", "he", "she", "his", "her",
-                "you", "your", "if", "when", "now", "here", "there", "every", "most", "almost", "around", "about",
-                "over", "only", "just", "then", "so", "and", "but", "one", "in", "on", "at", "for", "with", "by"}
-    words = re.findall(r"[A-Za-z&][\w&']*", sent)
-    names = [w for i, w in enumerate(words) if w[0].isupper() and w.lower() not in own
-             and (i > 0 or w.lower() not in starters)]
-    if names:
-        return False  # names a third party, no first person: their number, not ours
-    if STAT_CUES.search(sent_low):
-        return True  # a general stat: still needs a source in claims.md
-    return True
-
-
 def ngrams(t, n=3):
     w = re.findall(r"[a-z0-9']+", t)
     return {" ".join(w[i:i + n]) for i in range(len(w) - n + 1)}
 
 
-# Modes: each surface has its own length limit, target score and extra rules.
+# Modes: each surface has its own length limit and extra rules.
 MODES = {
-    "linkedin":        { "target_score": 70, "label": "LinkedIn post"},
-    "x":               {  "target_score": 70, "label": "X post"},
-    "reddit":          { "target_score": 70, "label": "Reddit post"},
-    "instagram":       { "target_score": 70, "label": "Instagram caption"},
-    "youtube":         {"target_score": 70, "label": "YouTube description"},
-    "cold_email":      {"max_words": 125, "target_score": 80, "label": "Cold email",
+    "linkedin":        { "label": "LinkedIn post"},
+    "x":               {  "label": "X post"},
+    "reddit":          { "label": "Reddit post"},
+    "instagram":       { "label": "Instagram caption"},
+    "youtube":         {"label": "YouTube description"},
+    "cold_email":      {"max_words": 125, "label": "Cold email",
                         "ask": r"\?|reply|worth a|open to|15 min|call"},
-    "investor_update": {"max_words": 400, "target_score": 85, "label": "Investor update",
+    "investor_update": {"max_words": 400, "label": "Investor update",
                         "needs_number": True},
-    "bio":             {"max_words": 80,  "target_score": 80, "label": "Bio"},
+    "bio":             {"max_words": 80,  "label": "Bio"},
 }
 
 
@@ -205,23 +108,21 @@ def check(text, persona, surface="reddit", history=()):
     def add(level, check_name, detail, quote=""):
         issues.append({"level": level, "check": check_name, "detail": detail, "quote": quote})
 
-    # 1. dashes
-    for d in ("—", "–", "--"):
-        if d in text:
-            add("Hold", "em_dash", "Em dash or double hyphen (house rule).", d)
+    # Style preferences are opt-in and selected for the current context.
+    preferences = persona.get("preferences", {})
+    if preferences.get("em_dash") == "avoid":
+        for d in ("—", "–", "--"):
+            if d in text:
+                add("Hold", "em_dash", "This profile prefers no dashes in this context.", d)
 
-    # 2. claims vs claims.md
-    seen = set()
-    for quote, num, kind in money_claims(t):
-        if (quote, num) in seen:
-            continue
-        seen.add((quote, num))
-        if approved_number(num, persona["approved_text"]):
-            continue
-        if not about_us(text, quote, persona):
-            continue  # a number about someone else, or a quoted example: not our claim
-        level ="Hold" if kind == "money" or "arr" in quote or "mrr" in quote else "Revise"
-        add(level, "unapproved_claim", "Number not in claims.md. Add it to claims.md or cut it.", quote)
+    facts = claim_checker.assess(text, persona.get("claims", []))
+    for item in facts["claims"]:
+        if item["status"] == "unresolved":
+            add("Hold" if "$" in item["quote"] else "Revise", "unapproved_claim", item["reason"], item["quote"])
+    for claim_id in facts["invalid_approvals"]:
+        add("Revise", "invalid_approval", "Repair the incomplete structured approval before relying on it.", claim_id)
+    for conflict in persona.get("preference_conflicts", []):
+        add("Revise", "preference_conflict", "Conflicting preferences: select or retire one before applying it.", conflict)
 
     # 2b. personal stories the owner must confirm they happened
     for desc, rx in persona.get("stories", []):
@@ -235,7 +136,7 @@ def check(text, persona, surface="reddit", history=()):
             add("Hold", "banned_phrase", desc, m.group(0))
 
     # 4. filler
-    for f in FILLER:
+    for f in (FILLER if preferences.get("filler") == "avoid" else []):
         for m in re.finditer(re.escape(f), t):
             if not is_example(t, m.start()):
                 add("Revise", "filler", "Corporate filler word.", f)
@@ -244,7 +145,7 @@ def check(text, persona, surface="reddit", history=()):
     # 5. slang overuse (voice rule: at most once)
     slang_hits = [s.strip() for s in SLANG if re.search(r"\b" + re.escape(s.strip()) + r"\b", t)]
     total = sum(len(re.findall(r"\b" + re.escape(s) + r"\b", t)) for s in slang_hits)
-    if total > 2:
+    if preferences.get("slang") == "limited" and total > 2:
         add("Revise", "slang", f"Slang used {total} times. Voice rule: once, maybe twice.", ", ".join(slang_hits))
 
     # 6. disclosure + self-promo honesty (reddit)
@@ -289,7 +190,8 @@ def check(text, persona, surface="reddit", history=()):
             uniq.append(i)
     issues = uniq
     verdict = "Hold" if any(i["level"] == "Hold" for i in issues) else "Revise" if issues else "Send"
-    return {"verdict": verdict, "issues": issues, "skeleton": sorted(skel), "sameness": sameness(text, issues)}
+    return {"verdict": verdict, "issues": issues, "skeleton": sorted(skel), "sameness": sameness(text, issues), "fact_check": facts,
+            "summary": "No configured rule violations found; facts are not independently verified." if verdict == "Send" else "Review the unresolved issues; this is not publication clearance."}
 
 
 def parse_corpus(path):
@@ -314,7 +216,7 @@ def backtest(persona_dir):
     for p in posts:
         d = dt.date.fromisoformat(p["date"])
         recent = [h for h in history if h["surface"] == p["surface"] and (d - h["d"]).days <= 7]
-        r = check(p["text"], persona, p["surface"], recent)
+        r = check(p["text"], load_persona(persona_dir, {"surface": p["surface"]}), p["surface"], recent)
         rows.append({**p, **r})
         history.append({"id": p["id"], "date": p["date"], "d": d, "surface": p["surface"], "title": p["title"],
                         "skeleton": set(r["skeleton"]), "grams": ngrams(norm(p["text"]))})
@@ -340,7 +242,7 @@ def main():
                     print(f"    {i['level']:5} {i['check']:16} {i['quote'][:50]!r}  {i['detail']}")
         return
     text = sys.stdin.read() if a.file in (None, "-") else Path(a.file).read_text()
-    r = check(text, load_persona(a.persona), a.surface)
+    r = check(text, load_persona(a.persona, {"surface": a.surface}), a.surface)
     print(json.dumps(r, indent=2) if a.json else f"{r['verdict']}\n" + "\n".join(
         f"  {i['level']} {i['check']}: {i['quote']!r} {i['detail']}" for i in r["issues"]))
     sys.exit(2 if r["verdict"] == "Hold" else 0)

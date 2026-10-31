@@ -1,6 +1,6 @@
 # Seed taste (expert defaults)
 
-Used only until the user's TASTE.md says otherwise. Source type: Practitioner (EVIDENCE P1). These rules come from 5 years of editing founder and personal-brand posts. They are experience, not research.
+Optional suggestions only. Do not activate style rules or bans without user approval; a missing profile is not consent to these preferences. Source type: Practitioner (EVIDENCE P1). These rules come from 5 years of editing founder and personal-brand posts. They are experience, not research.
 
 ## Slop to flag
 - Corporate language ("leverage", "synergy", "unlock", "empower", "game-changer")

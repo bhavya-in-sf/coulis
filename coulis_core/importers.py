@@ -65,15 +65,17 @@ def _observe(posts):
     else:
         obs.append("Observed: posts open with a claim, not a question. Keep it that way.")
     if dashes / n > 0.3:
-        obs.append(f"Observed: {dashes} of {n} recent posts use an em dash. coulis blocks them by default; delete this rule if you want them back.")
+        obs.append(f"Observed: {dashes} of {n} recent posts use an em dash. this is an observation, not a ban.")
     else:
-        obs.append("Observed: almost no em dashes. Good; the gate blocks them.")
+        obs.append("Observed: almost no em dashes. Decide whether this should be a preference.")
     short = sum(1 for p in posts if p["words"] < 120)
     obs.append(f"Observed: {short} of {n} recent posts are under 120 words.")
     return obs
 
 
-def setup_from_linkedin(path, out_dir, name=""):
+def setup_from_linkedin(path, out_dir, name="", rights_confirmed=False):
+    if rights_confirmed is not True:
+        raise ValueError("Confirm you own or have permission to process this writing for a local personal profile. Use --confirm-rights. No training or public reuse is granted.")
     if not path:
         raise ValueError("Pass --linkedin <export.zip or Shares.csv>")
     posts = _posts(_rows_from(path))
@@ -88,17 +90,22 @@ def setup_from_linkedin(path, out_dir, name=""):
              "## My voice in samples"]
     for i, p in enumerate(samples, 1):
         taste += ["", f"### Sample {i}", f"<!-- {p['date']}, {p['words']} words -->", p["text"]]
-    taste += ["", "## My rules"] + [f"- {o}" for o in _observe(posts[:40])]
+    taste += ["", "## Observations awaiting approval"] + [f"- {o}" for o in _observe(posts[:40])]
     taste += ["", "## Learned from my edits", "<!-- Added by coulis learn, only after you approve each one. -->", ""]
     claims = ["# claims.md", f"owner: {name}", "product:", "",
-              "## Approved facts", "<!-- Empty on purpose. Every number you post must be added here first. Say 'add 1,200 users as a fact'. -->", "",
+              "## Approved facts", "<!-- Legacy notes only. Use structured approvals in claims.json; nothing is approved by import. -->", "",
               "## Needs confirm", "", "## Banned phrases",
-              "- Generic AI filler :: \\b(game-?changer|delve|in today'?s fast-paced world)\\b", "", "## Story checks", ""]
+              "", "## Story checks", ""]
     tpath, cpath = out / "TASTE.md", out / "claims.md"
     if tpath.exists():
         tpath.rename(out / "TASTE.md.bak")
     if cpath.exists():
         cpath.rename(out / "claims.md.bak")
+    from .memory import save_json
+    import datetime
+    save_json(out / 'permissions.json', {"local_profile": True, "confirmed_at": datetime.date.today().isoformat(),
+        "authority": "user attests ownership or permission", "model_processing": "only when user requests critique under their provider account",
+        "shared_training": False, "public_benchmark": False, "cross_client_reuse": False})
     tpath.write_text("\n".join(taste))
     cpath.write_text("\n".join(claims))
     return {"profile_dir": str(out), "posts_read": len(posts), "samples": len(samples),

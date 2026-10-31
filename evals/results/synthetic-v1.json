@@ -1,0 +1,79 @@
+{
+  "schema": "coulis.rule-diagnostic/v1",
+  "task": "voice",
+  "not_validated": [
+    "eight-axis critique",
+    "voice quality",
+    "time saved",
+    "unseen-topic improvement"
+  ],
+  "dataset_version": "synthetic-v1",
+  "split_description": "Handwritten synthetic samples and distinct held-out sentences; no human study",
+  "public_inputs": true,
+  "command": [
+    "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+    "evals/benchmark.py",
+    "voice",
+    "--personas",
+    "evals/fixtures/voice/a",
+    "evals/fixtures/voice/b",
+    "--heldout",
+    "evals/fixtures/voice/heldout.jsonl",
+    "--dataset-version",
+    "synthetic-v1",
+    "--split-description",
+    "Handwritten synthetic samples and distinct held-out sentences; no human study",
+    "--public-inputs",
+    "--output",
+    "evals/results/synthetic-v1.json"
+  ],
+  "git_commit": "d8c92a780b184839c12aa72e98a3a7d0cfcccadd",
+  "working_tree_dirty": true,
+  "input_sha256": {
+    "evals/fixtures/voice/heldout.jsonl": "5246c18b6116060a51f03a6d3638399371c4d262349686c67547dcb775f1a9b4",
+    "evals/fixtures/voice/a/TASTE.md": "7ab095c9839791c3fbf0b5dc95e9cb4779398221c6798368325a6261de332cb1",
+    "evals/fixtures/voice/b/TASTE.md": "fbcd360fd62639ca6a787bd0eb6fb66bd24e55f541eda9f69d38ed19dcacc8bc"
+  },
+  "code_sha256": {
+    "coulis_core/.!57079!__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "coulis_core/__init__.py": "82341f26a1293983759daaa75336c7ba2d031b0930de28ab2f7398155cbb6b1d",
+    "coulis_core/critique.py": "32ad3336920ea688594ea794a89d9f6045427980c93ecc6713dbb3e3eb8c32b3",
+    "coulis_core/engine.py": "7282c1a9ec1345675722e2cb3522e113f3ea3dfb178d63c671d76cd0509604d3",
+    "coulis_core/importers.py": "93744b9a71f9618478ea042a25fd88edf765c1140e2cd53da3c658db19d24312",
+    "coulis_core/memory.py": "ff434e55c2c6922285aab58b7037f7f11e421efc2857d8095ebc4376d327a53b",
+    "coulis_core/profile.py": "945531e60c72b3dbb1702ba360058225000b06f8cc7c1d00021b999faf333f38",
+    "scripts/claims.py": "cecbb2aac66f8beab57a1c9adca592c4528102cfe8eca9b0a4e31c02845c231f",
+    "scripts/coulis.py": "0d221a9b32368005760f19cf95ff2090a4fd2bf93195ca1bce50ee07f042009f",
+    "scripts/deck_check.py": "be85e267389f5f3c73eb5b918901411ebb23dc983f399b0a250f9f68ffd32c68",
+    "scripts/doctor.py": "cccd07ade1914a02a53cc53bcfc1dcbc9f4d4752ac6b451bb1f7f733d8193f51",
+    "scripts/gate.py": "e93d9b7365cd6cff8782a427ac1706f9e93c8d8b2d864fedc0d1eb1ca4ed96c0",
+    "scripts/learn.py": "2af670ec5ad29e28ee5a4d2a41db0532020af1097c4ab6de63ca4d7a6c130f60",
+    "scripts/replay.py": "73c9553424773ef445b8095212b2850e98ec27a1290456f0eb0722532b0dec6d",
+    "scripts/taste_card.py": "603b864e2c88b59186747f7ba063d65410c9e075cf079bae10d6be67e9f173a8",
+    "evals/benchmark.py": "a21fa505a3a22a894c23d00bffabfba2b663af69827a808b0788ac93e3b302c0"
+  },
+  "rows": 2,
+  "profiles": 2,
+  "comparisons": 2,
+  "wins": 0,
+  "ties": 2,
+  "losses": 0,
+  "strict_winning_rows": 0,
+  "details": [
+    {
+      "row": 0,
+      "comparisons": 1,
+      "wins": 0,
+      "ties": 1,
+      "strict_win_against_all": false
+    },
+    {
+      "row": 1,
+      "comparisons": 1,
+      "wins": 0,
+      "ties": 1,
+      "strict_win_against_all": false
+    }
+  ],
+  "caution": "Comparisons sharing authors/posts are dependent. No accuracy or confidence interval is inferred."
+}

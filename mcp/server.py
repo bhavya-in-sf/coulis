@@ -36,7 +36,7 @@ TOOLS = [
      "inputSchema": {"type": "object", "required": ["draft", "final"], "additionalProperties": False,
                      "properties": {"profile_dir": PROFILE_DIR, "draft": {"type": "string"}, "final": {"type": "string"}}}},
     {"name": "coulis_add",
-     "description": "Add one entry to the user's claims.md (created if missing): an approved fact the gate should allow (e.g. '1,200 users'), or a banned phrase with a reason. Only call this after the user explicitly says to add it.",
+     "description": "Add one entry to the user's claims.md (created if missing): a legacy fact note requiring migration to claims.json (e.g. '1,200 users'), or a banned phrase with a reason. Only call this after the user explicitly says to add it.",
      "inputSchema": {"type": "object", "required": ["kind", "text"], "additionalProperties": False,
                      "properties": {"profile_dir": PROFILE_DIR, "kind": {"type": "string", "enum": ["approved_fact", "banned_phrase"]},
                                     "text": {"type": "string", "description": "The fact, or the phrase to ban"},
@@ -58,6 +58,22 @@ TOOLS = [
     {"name": "coulis_profile",
      "description": "Return the user's taste profile (TASTE.md + claims.md) as structured JSON.",
      "inputSchema": {"type": "object", "properties": {"profile_dir": PROFILE_DIR}, "additionalProperties": False}},
+]
+
+
+CONTEXT = {"type": "object", "additionalProperties": False, "properties": {
+    "audience": {"type": "string"}, "purpose": {"type": "string"}}}
+for tool in TOOLS:
+    if tool['name'] in ('coulis_check', 'coulis_critique', 'coulis_learn'):
+        tool['inputSchema']['properties']['context'] = CONTEXT
+        tool['inputSchema']['properties']['surface'] = SURFACE
+TOOLS += [
+    {"name": "coulis_approve_claim", "description": "Save a structured claim only after the human approves its complete wording, source and validity. Does not verify its truth.",
+     "inputSchema": {"type": "object", "required": ["claim", "approved"], "additionalProperties": False,
+        "properties": {"profile_dir": PROFILE_DIR, "approved": {"type": "boolean"}, "claim": {"type": "object"}}}},
+    {"name": "coulis_preference", "description": "Save one explicitly human-approved scoped preference, or retire an existing id. Never infer approval from sent text. Use the same key for mutually exclusive preferences so conflicts are exposed.",
+     "inputSchema": {"type": "object", "additionalProperties": False,
+        "properties": {"profile_dir": PROFILE_DIR, "rule": {"type": "object"}, "retire_id": {"type": "string"}}}},
 ]
 
 
@@ -113,7 +129,7 @@ def learned_recently(prof, days=7):
 
 CLAIMS_TEMPLATE = """# claims.md
 
-The gate allows only the numbers and claims listed under Approved facts.
+Legacy notes only. Numeric approvals require complete records in claims.json.
 
 owner:
 product:
@@ -154,13 +170,13 @@ def add_entry(kind, text, reason=""):
 
 def log_use(name, args, out):
     """Usage log next to the profile (coulis-log.jsonl): what was used, when, and the outcome.
-    Stores a short preview of the text, never the whole draft. Turn off with COULIS_LOG=0."""
-    if (os.environ.get("COULIS_LOG") or os.environ.get("TASTEE_LOG", "1")) == "0" or name == "coulis_profile":
+    Off by default. COULIS_LOG=1 enables local counts and outcomes, without draft previews."""
+    if (os.environ.get("COULIS_LOG") or os.environ.get("TASTEE_LOG", "0")) == "0" or name == "coulis_profile":
         return
     import datetime
     text = args.get("text") or args.get("draft") or ""
     entry = {"ts": datetime.datetime.now().isoformat(timespec="seconds"), "tool": name,
-             "words": len(text.split()), "preview": " ".join(text.split()[:10])}
+             "words": len(text.split())}
     if isinstance(out, dict):
         for k in ("verdict", "mode", "added"):
             if k in out:
@@ -192,7 +208,7 @@ def call_tool(name, args):
 
 def _call_tool(name, args):
     if name == "coulis_check":
-        out = check(args["text"], profile(), args.get("surface", "linkedin"), max_sameness=args.get("max_sameness"))
+        out = check(args["text"], profile(), args.get("surface", "linkedin"), max_sameness=args.get("max_sameness"), context=args.get("context"))
         d = profile_dir()
         if not ((d / "TASTE.md").exists() or (d / "claims.md").exists()):
             out["profile_status"] = ("default: no profile yet, so every number is unapproved and only the house "
@@ -207,11 +223,30 @@ def _call_tool(name, args):
             return {"mode": "host_model",
                     "instructions": SYSTEM + "\n\nScore the draft below now, in this chat, and reply with JSON "
                                     "matching `output_schema`. Then show the user each axis and the rewrite.",
-                    "task": build_prompt(args["text"], prof, surface),
+                    "task": build_prompt(args["text"], prof, surface, args.get("context")),
                     "output_schema": SCHEMA}
-        return critique(args["text"], prof, surface)
+        return critique(args["text"], prof, surface, context=args.get("context"))
     if name == "coulis_learn":
-        return learn(args["draft"], args["final"], profile())
+        return learn(args["draft"], args["final"], profile(), {**args.get("context", {}), "surface": args.get("surface", "linkedin")})
+    if name == "coulis_preference":
+        from coulis_core.memory import update
+        if bool(args.get("rule")) == bool(args.get("retire_id")):
+            raise ValueError("Supply either rule or retire_id")
+        return update(profile_dir(), args.get("rule"), args.get("retire_id"))
+    if name == "coulis_approve_claim":
+        from claims import validate
+        from coulis_core.memory import save_json
+        if args.get("approved") is not True:
+            raise ValueError("Explicit human approval is required")
+        record = validate(args["claim"])
+        path = profile_dir() / 'claims.json'
+        rows = json.loads(path.read_text()) if path.exists() else []
+        if any(r['id'] == record['id'] and r != record for r in rows):
+            raise ValueError("Use a new approval id for changed facts; do not overwrite history")
+        if record not in rows:
+            rows.append(record)
+            save_json(path, rows)
+        return {"saved": True, "file": str(path), "facts_verified": False}
     if name == "coulis_add":
         return add_entry(args["kind"], args["text"], args.get("reason", ""))
     if name == "coulis_skip":
