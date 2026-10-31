@@ -29,7 +29,7 @@ h1{font-size:clamp(34px,6vw,56px);letter-spacing:-.035em;line-height:1.02;margin
 </style></head><body><div class="wrap">
 <a class="back" href="index.html">← coulis</a>
 <h1>Join the <i>waitlist.</i></h1>
-<p class="lede">Early access to releases, or a seat at one of the dinners in San Francisco. Both free.</p>
+<p class="lede">Early access to releases, and the integration waitlist for coulis 2.0. Both free.</p>
 <form class="wl" id="wl" action="https://formsubmit.co/ac327ff10bcd43f64f6e489f7fb0f09c" method="POST">
       <input type="hidden" name="_captcha" value="true">
       <input type="hidden" name="_subject" value="coulis waitlist">
@@ -37,11 +37,10 @@ h1{font-size:clamp(34px,6vw,56px);letter-spacing:-.035em;line-height:1.02;margin
       <input type="hidden" name="_next" value="https://bhavya-in-sf.github.io/coulis/waitlist.html?sent=1">
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
       <h3>Join the waitlist</h3>
-      <p class="lede">Early access to releases, or a seat at one of the dinners in San Francisco. Both free.</p>
+      <p class="lede">Early access to releases, and the integration waitlist for coulis 2.0. Both free.</p>
       <div class="doors" role="radiogroup" aria-label="What are you joining">
         <label><input type="radio" name="door" value="writing-pilot" checked> The writing pilot</label>
         <label><input type="radio" name="door" value="integration-waitlist"> Integration and API waitlist (coulis 2.0)</label>
-        <label><input type="radio" name="door" value="table"> The dinners</label>
       </div>
       <div class="fields">
         <div><label class="f" for="wl-name">Name</label><input id="wl-name" name="name" type="text" autocomplete="name" placeholder="Your name"></div>
@@ -56,7 +55,7 @@ h1{font-size:clamp(34px,6vw,56px);letter-spacing:-.035em;line-height:1.02;margin
 </div>
 <script>(function(){
   var f=document.getElementById("wl"),msg=document.getElementById("wl-msg");
-  if(new URLSearchParams(location.search).get("sent")){f.hidden=true;document.querySelector("h1").innerHTML="You're on the <i>list.</i>";document.querySelector(".lede").textContent="We'll email you when the next release ships. Dinner invites go out by hand."}
+  if(new URLSearchParams(location.search).get("sent")){f.hidden=true;document.querySelector("h1").innerHTML="You're on the <i>list.</i>";document.querySelector(".lede").textContent="We'll email you when the next release ships."}
   f.addEventListener("submit",function(e){var name=document.getElementById("wl-name").value.trim(),email=document.getElementById("wl-email").value.trim();
     if(!name){e.preventDefault();msg.textContent="Add your name, then try again.";document.getElementById("wl-name").focus();return}
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){e.preventDefault();msg.textContent="That email doesn't look right.";document.getElementById("wl-email").focus();return}

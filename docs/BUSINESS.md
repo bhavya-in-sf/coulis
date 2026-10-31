@@ -6,7 +6,6 @@ No revenue today. This page describes the planned shape, labelled as planned.
 
 **Free, and staying free**
 - The open-source plug-in. That is the distribution.
-- The table: a free, invite-only dinner in San Francisco where founders and investors with taste meet. Never paid.
 
 **Paid, in order of planned arrival**
 1. Enterprise pilots: a company's brand strategy and taste file built from its own data, memory and approved facts, into a custom model that runs coulis, integrated into the systems it already uses (ERP, CRM, content tools). Custom work on their data is what is chargeable. No pilot signed yet.
