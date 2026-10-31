@@ -11,3 +11,6 @@ sdk/typescript/dist/
 .taste-skill/
 .vercel
 docs/brand-options/
+
+# the public deck is published on purpose
+!docs/deck/
