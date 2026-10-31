@@ -25,7 +25,7 @@ Example arguments:
 {"text":"A post about database transactions","surface":"linkedin","context":{"audience":"engineers"},"method":"bm25"}
 ```
 
-Existing `coulis_learn` retains its current workflow. This update preserves the latest main branch, including its opening-pattern, rhythm and sent-history features. The new SQLite versioned preference store is an **experimental research component**, not a replacement for the existing profile files. It supports scope, conflicts, timestamped supersession, evidence IDs, pending proposals and full person deletion. It is not yet wired into the product's preference-write flow. Do not maintain parallel production preference stores. Structured scope fields are supported in in-memory/JSON profiles, but the existing Markdown profile writer does not persist this additional scope metadata.
+Existing `coulis_learn` retains its current workflow. This update preserves the latest main branch, including its opening-pattern, rhythm and sent-history features. The SQLite preference store is now shared with the product through `coulis_core.taste_store`; the research module is a compatibility import. The local taste workspace and `coulis_workflow` write approved contextual preferences, and the existing profile loader exposes them to critique/context. Legacy Markdown rules remain readable; database rules are not duplicated into Markdown exports. See [the taste-loop guide](../docs/TASTE-LOOP.md).
 
 ## Real-data evaluation
 

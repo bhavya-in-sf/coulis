@@ -178,3 +178,14 @@ MIT. Built by Bhavya Goel.
 The existing MCP product now includes `coulis_context` (relevant writing samples and approved contextual preferences) and `coulis_feedback` (explicit, local feedback recording). Set `COULIS_RETRIEVAL=bm25` when starting the server to use relevant-example retrieval in critique; the default remains the original sample order.
 
 [Research setup, dataset adapters, measured retrieval results, and limitations](research/README.md). No model training or paid model calls are performed by the research runner.
+
+
+## The taste feedback loop
+
+Compare drafts, save a human choice or edit, review a contextual preference, and explicitly approve it for the next task. The same approved memory is read by the existing MCP context and critique tools.
+
+```sh
+python3 scripts/taste_loop.py --profile private/my-profile
+```
+
+Open http://127.0.0.1:8767. Or use `coulis_workflow` in your MCP host. [Workflow, setup, model-generation handoff and limitations](docs/TASTE-LOOP.md).

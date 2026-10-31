@@ -75,6 +75,9 @@ TOOLS += [
 ]
 
 
+TOOLS.append({"name":"coulis_workflow", "description":"Local taste loop. Actions: create(task,candidates:[{text,condition},{text,condition}],context:{surface,audience?,purpose?},consent:true); view(comparison_id); decide(comparison_id,choice:0|1|tie|neither,category:style|fact|task|other,reason?,final?); propose(comparison_id,key,value,wording); approve(proposal_id,approved:true,supersedes?); prepare(task,context); state(); disable(preference_id); revise(preference_id,value,wording); reject(proposal_id); purge(approved:true) deletes local workflow data only after explicit user request. Record decisions only from actual user choices. Never infer approval. prepare returns matched baseline/Coulis inputs for you to generate drafts using the same model/settings; no automatic model call.",
+ "inputSchema":{"type":"object","required":["action"],"additionalProperties":False,"properties":{"profile_dir":PROFILE_DIR,"action":{"type":"string","enum":["create","view","decide","propose","approve","prepare","state","disable","revise","reject","purge"]},"arguments":{"type":"object"}}}})
+
 for tool in TOOLS:
     if tool["name"] == "coulis_critique":
         tool["inputSchema"]["properties"]["context"] = CONTEXT
@@ -221,7 +224,7 @@ def add_entry(kind, text, reason=""):
 def log_use(name, args, out):
     """Usage log next to the profile (coulis-log.jsonl): what was used, when, and the outcome.
     Stores a short preview of the text, never the whole draft. Turn off with COULIS_LOG=0."""
-    if (os.environ.get("COULIS_LOG") or os.environ.get("TASTEE_LOG", "1")) == "0" or name in ("coulis_profile", "coulis_context", "coulis_feedback"):
+    if (os.environ.get("COULIS_LOG") or os.environ.get("TASTEE_LOG", "1")) == "0" or name in ("coulis_profile", "coulis_context", "coulis_feedback", "coulis_workflow"):
         return
     import datetime
     text = args.get("text") or args.get("draft") or ""
@@ -257,6 +260,13 @@ def call_tool(name, args):
 
 
 def _call_tool(name, args):
+    if name == "coulis_workflow":
+        from coulis_core.workflow import Workflow
+        workflow = Workflow(profile_dir())
+        try:
+            return workflow.dispatch(args['action'], args.get('arguments', {}))
+        finally:
+            workflow.close()
     if name == "coulis_context":
         from coulis_core.context import build_context
         return build_context(args["text"], profile(), args.get("surface", "linkedin"), args.get("context"), args.get("method", "bm25"))
