@@ -60,3 +60,9 @@ The ambition now directly overlaps with better writing models. Coulis's proposed
 ## Commercial and funding strategy
 
 **B2B2C. VC-first. Paid from the first commercial engagement.** AI product companies are the buyers; their end users receive personalized taste capabilities. Raise venture capital for the model research and infrastructure while selling scoped integrations/evaluations of the existing prototype. These paid pilots are distinct from future hosted taste-LLM/API access, which remains waitlist only. No revenue or funding amount is claimed without verification. See [business model and initial paid offer](BUSINESS.md).
+
+### Photographic website direction — October 31, 2026
+
+The current homepage uses licensed editorial sauce photography, warm off-white backgrounds, near-black type, a restrained red accent, square image crops, thin rules, and generous whitespace. Real food photography grounds the literal Coulis metaphor; the main headline and research architecture establish the AI lab. Technical diagrams explain proposed systems, never fabricated performance. OpenAI, Anthropic, and Taste Labs inform the requested research-led visual direction; their logos, assets, and page layouts are not reused.
+
+The primary journey is research → local prototype → paid B2B2C design partnership. Hosted model/API and enterprise offerings remain clearly marked as waitlist. Photo provenance and license boundaries are documented in `assets/CREDITS.md`.
