@@ -12,3 +12,4 @@ sdk/typescript/dist/
 .vercel
 docs/brand-options/
 
+.!*
