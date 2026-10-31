@@ -7,6 +7,9 @@
 
 A free, open-source check that runs inside Claude Code, Claude Desktop and Cursor today, and behind an API for everything else. It starts with founder writing: launch posts, LinkedIn and X posts, cold emails, bios, investor updates.
 
+## What is usable today, what is being tested, what is planned
+[docs/CAPABILITIES.md](docs/CAPABILITIES.md) is the one table. The research question and how it will be tested: [docs/RESEARCH-AGENDA.md](docs/RESEARCH-AGENDA.md). What signup and use do and do not permit: [docs/DATA-PERMISSIONS.md](docs/DATA-PERMISSIONS.md). Business shape, labelled planned: [docs/BUSINESS.md](docs/BUSINESS.md).
+
 ## What it does, on a real draft
 A typical AI draft, checked against a real founder's profile ([personas/bhavya](personas/bhavya)):
 

@@ -39,9 +39,9 @@ h1{font-size:clamp(34px,6vw,56px);letter-spacing:-.035em;line-height:1.02;margin
       <h3>Join the waitlist</h3>
       <p class="lede">Early access to releases, or a seat at one of the dinners in San Francisco. Both free.</p>
       <div class="doors" role="radiogroup" aria-label="What are you joining">
-        <label><input type="radio" name="door" value="plugin" checked> The plug-in</label>
+        <label><input type="radio" name="door" value="writing-pilot" checked> The writing pilot</label>
+        <label><input type="radio" name="door" value="integration-waitlist"> Integration and API waitlist (coulis 2.0)</label>
         <label><input type="radio" name="door" value="table"> The dinners</label>
-        <label><input type="radio" name="door" value="both"> Both</label>
       </div>
       <div class="fields">
         <div><label class="f" for="wl-name">Name</label><input id="wl-name" name="name" type="text" autocomplete="name" placeholder="Your name"></div>
@@ -49,6 +49,7 @@ h1{font-size:clamp(34px,6vw,56px);letter-spacing:-.035em;line-height:1.02;margin
         <div><label class="f" for="wl-role">You are</label><select id="wl-role" name="role"><option>A founder</option><option>A marketer</option><option>A writer or ghostwriter</option><option>An engineer</option><option>An investor</option><option>Curious</option></select></div>
         <div><label class="f" for="wl-pain">The last draft that went out wrong (optional)</label><input id="wl-pain" name="pain" type="text" placeholder="One line"></div>
       </div>
+      <p class="fine" style="font-size:13px;color:#6b6b6b;margin:0 0 12px">Signing up records your name, email, role and what you asked for. It does not guarantee access, and it grants no permission to process, keep or train on your writing; those are separate and explained in <a href="DATA-PERMISSIONS.md">data and permissions</a>.</p>
       <div class="act"><button class="btn" id="wl-submit" type="submit">Join the waitlist</button><span class="msg" id="wl-msg" role="status" aria-live="polite"></span></div>
     </form>
 <p class="privacy">We keep your name, email and what you picked, nothing else. No tracking. A one-click check on the next page keeps robots out. Ask to be removed any time by replying to the first email.</p>

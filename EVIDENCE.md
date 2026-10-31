@@ -9,6 +9,17 @@ No rule ships without one. If you find a claim here that's wrong or overstated, 
 
 ---
 
+## Four kinds of evidence, never mixed
+| Kind | What it is | Where |
+|---|---|---|
+| Archive counts | 2,437 real posts, 38 voices, 673 public | docs/RESEARCH-AGENDA.md, "The data" |
+| Software tests | 21 golden-file tests before every release | tests/, evals/ |
+| User results | Four held-out tests on real writing (2 in 3; 46 of 47; 41 of 44; 15%) | docs/RESEARCH-AGENDA.md, "What has been measured" |
+| Model results | None. No coulis model exists. | docs/RESEARCH-AGENDA.md, "How the rest will be tested" |
+Unmeasured so far: user preference for the drafts, edit reduction, retention, unseen-topic transfer.
+
+---
+
 ### E1. PAM∃LA: personal taste beats the average
 - Source: [Personalizing Text-to-Image Generation to Individual Taste](https://arxiv.org/html/2604.07427v1) (arXiv 2604.07427, preprint)
 - Finding: most existing datasets "treat user variation as noise, averaging away subjective preference." About 200 people rated 5,077 images, 15 people per image. A model of each person's taste predicted that person better than the best population model (per-user SROCC 0.45 vs 0.40 for HPSv3).
