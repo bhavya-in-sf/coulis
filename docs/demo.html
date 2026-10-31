@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>coulis demo</title>
+<meta name="description" content="Paste a draft. coulis checks it against a taste profile in your browser: Send, Revise or Hold, every tell quoted, a sameness score. Nothing is sent anywhere.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* the native demo: the real browser port of the gate, on a profile you can edit, nothing leaves the page */
+:root{--bg:#fff;--ink:#111;--muted:#6b6b70;--line:#ececef;--soft:#f6f6f8;--c1:#FFE14D;--c2:#8B1A12;--c4:#FFF6C2;
+  --sans:'Instrument Sans','Helvetica Neue',Arial,sans-serif;--serif:'Instrument Serif',Georgia,serif;--m:clamp(20px,4vw,64px);--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.035em;line-height:1.05;text-wrap:balance}
+h1 i,h2 i{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0}
+p{margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(var(--m),env(safe-area-inset-left,0px));padding-right:max(var(--m),env(safe-area-inset-right,0px))}
+nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+nav .mark{font-weight:600;font-size:20px;letter-spacing:-.03em;text-decoration:none}
+nav .links{display:flex;gap:22px;font-size:14px}
+nav .links a{text-decoration:none;color:#444}
+.btn{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 20px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font:500 14px var(--sans);border:0;cursor:pointer}
+.btn.ghost{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.btn:disabled{opacity:.5;cursor:default}
+header{position:relative;padding:48px 0 24px;overflow:hidden}
+header .light{position:absolute;left:-10vw;right:-10vw;top:-20%;height:120%;background:radial-gradient(60% 50% at 50% 30%,var(--c1),transparent 70%);opacity:.55;filter:blur(40px);pointer-events:none}
+header .in{position:relative}
+header h1{font-size:clamp(34px,5vw,64px);max-width:16ch}
+header .lede{margin-top:14px;max-width:60ch;color:#444}
+.stage{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;margin-top:28px;align-items:start}
+[data-ui]{background:#fff;border:1px solid var(--line);border-radius:18px;font:14px/20px var(--sans);box-shadow:0 30px 70px -40px rgba(20,10,40,.3);overflow:hidden}
+[data-ui] .bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);color:var(--muted);font-size:13px}
+[data-ui] .bar b{color:var(--ink);font-weight:600}
+.pill{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:999px;background:var(--soft);color:#444;font-size:12px;font-weight:600}
+textarea{width:100%;border:1px solid var(--line);border-radius:12px;background:#fafafa;padding:12px;font:15px/1.5 var(--sans);color:var(--ink);resize:vertical;min-height:170px}
+textarea:focus{outline:2px solid var(--c2);outline-offset:0;border-color:transparent}
+.tools{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--line);flex-wrap:wrap;background:#fafafa;align-items:center}
+.chip{height:30px;padding:0 12px;border:1px solid var(--line);border-radius:999px;background:#fff;font:13px/28px var(--sans);color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.count{margin-left:auto;font-size:12px;color:var(--muted)}
+.verdict{display:flex;align-items:center;gap:10px;padding:14px;border-top:1px solid var(--line);font-weight:600;font-size:17px}
+.verdict .dot{width:12px;height:12px;border-radius:50%;background:currentColor}
+.verdict.Hold{color:#c2261c}.verdict.Revise{color:#8a5a00}.verdict.Send{color:#1f6b3a}
+.verdict .note{color:var(--muted);font-weight:400;font-size:13px}
+.row{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:baseline;padding:10px 14px;border-top:1px solid var(--line)}
+.lvl{font-size:11px;font-weight:700;letter-spacing:.04em}
+.lvl.Hold{color:#c2261c}.lvl.Revise{color:#8a5a00}
+.q{font-weight:600}.d{color:var(--muted)}
+.row .act{height:26px;padding:0 10px;border:1px solid var(--line);border-radius:999px;background:#fff;font:12px/24px var(--sans);cursor:pointer;white-space:nowrap}
+.row .act:hover{border-color:var(--ink)}
+.same{padding:12px 14px;border-top:1px solid var(--line);display:grid;gap:6px}
+.same .track{height:8px;border-radius:999px;background:var(--soft);overflow:hidden}
+.same .fill{height:100%;background:linear-gradient(90deg,#1f6b3a,#8a5a00 50%,#c2261c);width:0;transition:width .5s var(--ease)}
+.same .lab{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.same .lab b{color:var(--ink)}
+.side{display:grid;gap:16px}
+.card{border:1px solid var(--line);border-radius:18px;padding:18px}
+.card h3{font-size:15px;margin-bottom:8px}
+.card p{font-size:14px;color:var(--muted)}
+.facts{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.facts li{background:var(--soft);border-radius:999px;padding:4px 10px;font-size:13px;display:flex;gap:6px;align-items:center}
+.facts li button{border:0;background:none;cursor:pointer;color:var(--muted);font-size:13px;padding:0}
+.addfact{display:flex;gap:8px;margin-top:10px}
+.addfact input{flex:1;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font:14px var(--sans)}
+.card pre{margin:10px 0 0;background:#111;color:#f3f3f3;border-radius:10px;padding:12px 14px;font:12.5px/1.6 ui-monospace,Menlo,monospace;white-space:pre-wrap}
+.card .copy{margin-top:10px}
+.foot{padding:40px 0 48px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:900px){.stage{grid-template-columns:1fr}nav .links a:not(.btn){display:none}}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.replace('no-js','js')</script>
+<div class="wrap"><nav><a class="mark" href="index.html">coulis</a><div class="links"><a href="index.html#features">Features</a><a href="index.html#proof">Proof</a><a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a><a class="btn" href="https://github.com/bhavya-in-sf/coulis#install" rel="noopener">Install, free →</a></div></nav></div>
+
+<header><div class="light" aria-hidden="true"></div><div class="wrap in">
+  <h1>Paste a draft. <i>Watch it get checked.</i></h1>
+  <p class="lede">This is the real gate, ported to your browser. It runs against a taste profile you can edit on the right, returns Send, Revise or Hold with every tell quoted, and scores sameness from those tells only. Nothing you type leaves this page.</p>
+  <div class="stage">
+    <div data-ui>
+      <div class="bar"><span><b>coulis_check</b> · profile: <span id="pname">Bhavya (demo)</span></span><span class="pill" id="ms">4 ms</span></div>
+      <div style="padding:12px 14px"><textarea id="draft" maxlength="2000" spellcheck="false" aria-label="Your draft">Excited to share that we're leveraging AI to 10x your workflow — a total game-changer. 300+ founders already trust us. Comment below!</textarea></div>
+      <div class="tools" aria-label="Examples">
+        <button type="button" class="chip" data-try="Excited to share that we're leveraging AI to 10x your workflow — a total game-changer. 300+ founders already trust us. Comment below!">The AI draft</button>
+        <button type="button" class="chip" data-try="100 investors who back women building AI. One list. Comment INVESTORS and I'll send it.">Her real post</button>
+        <button type="button" class="chip" data-try="It's not about working harder, it's about working smarter. Fast, cheap, and good.
+
+Here are 7 lessons I learned this year.
+
+Comment below if you agree!">Stock hooks</button>
+        <span class="count" id="count">0 / 2000</span>
+      </div>
+      <div class="verdict Hold" id="verdict"><span class="dot"></span><span id="vword">Hold</span><span class="note" id="vnote"></span></div>
+      <div id="lines"></div>
+      <div class="same"><div class="lab"><span>Sameness <b id="sscore">0</b> / 100</span><span id="slabel">sounds like a person</span></div><div class="track"><div class="fill" id="sfill"></div></div><div class="lab"><span>From quoted tells only. Not a guess about who wrote it.</span></div></div>
+    </div>
+    <div class="side">
+      <div class="card"><h3>The profile this runs against</h3><p>Two files on a real machine: how you write, and the numbers you have approved. Here, a demo version of Bhavya's, or an empty one of your own.</p>
+        <div class="tools" style="border:0;background:none;padding:10px 0 0"><button type="button" class="chip" id="pBhavya" aria-pressed="true">Bhavya's demo profile</button><button type="button" class="chip" id="pMine" aria-pressed="false">My own (empty)</button></div></div>
+      <div class="card"><h3>Approved facts</h3><p>Any number not on this list is sent back. Click "approve" on a flagged number to add it, or type one.</p>
+        <ul class="facts" id="facts"></ul>
+        <div class="addfact"><input id="newfact" type="text" placeholder='e.g. "1,200 users"' aria-label="New approved fact"><button type="button" class="chip" id="addfact">Add</button></div></div>
+      <div class="card"><h3>Banned phrases</h3><p>Words you never want to see again.</p><ul class="facts" id="banned"></ul>
+        <div class="addfact"><input id="newban" type="text" placeholder='e.g. "synergy"' aria-label="New banned phrase"><button type="button" class="chip" id="addban">Ban</button></div></div>
+      <div class="card"><h3>Run the critique in Claude</h3><p>The eight-axis critique needs a model. Copy this and paste it into Claude Code or Claude Desktop with coulis installed.</p>
+        <pre id="prompt">/coulis:critique</pre><button type="button" class="btn ghost copy" id="copy">Copy the command and your draft</button></div>
+    </div>
+  </div>
+</div></header>
+
+<div class="wrap foot"><span>Everything on this page runs in your browser. The profile edits live only in this tab's storage.</span><span><a href="index.html">coulis</a> · <a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a> · <a href="waitlist.html">Waitlist</a></span></div>
+
+<script>
+(function(){
+  var BHAVYA={name:"Bhavya (demo)",facts:["62K followers","62,000 followers","Top Voice 2024","3,000 newsletter readers","100 investors","673 posts","100+ AI companies","5 years"],banned:["game-changer","delve","in today's fast-paced world"]};
+  var MINE={name:"My own",facts:[],banned:[]};
+  function load(k,d){try{var v=localStorage.getItem("coulis-demo-"+k);return v?JSON.parse(v):d}catch(e){return d}}
+  function save(k,v){try{localStorage.setItem("coulis-demo-"+k,JSON.stringify(v))}catch(e){}}
+  var mine=load("mine",MINE), which=load("which","bhavya");
+  var FILLER=["streamline","leverage","leveraging","unlock","seamless","empower","in today's fast-paced","elevate your","effortless"];
+  var FIRST=/\b(i|i'm|i've|me|my|we|we're|our|us|clients?|customers?|users?|team)\b/;
+  function prof(){return which==="bhavya"?BHAVYA:mine}
+  function approved(num){var a=prof().facts.join(" ").toLowerCase(),base=num.toLowerCase().replace(/,/g,"");var forms=[base];if(/k$/.test(base))forms.push(base.slice(0,-1)+"000",base.slice(0,-1)+",000");if(/^\d{4,}$/.test(base))forms.push(Number(base).toLocaleString("en-US"));return forms.some(function(f){return new RegExp("(^|[^\\d,])"+f.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"(?!\\d)").test(a)})}
+  function aboutUs(t,k){var s=t.slice(Math.max(0,t.lastIndexOf(".",k)+1),(t.indexOf(".",k)+1)||t.length);return FIRST.test(s)||!/\b[A-Z][a-z]+/.test(s.replace(/^\s*[A-Z]/,"x"))}
+  var TELLS=[[/\b(it'?s|this is|that'?s) not (just |only |about )?[^.?!]{3,60}?,? (it'?s|this is|but) /,"the not-X-but-Y frame"],[/^\s*[^.!?\n]{8,120}\?\s*(\n|$)/,"a question opener"],[/\b(comment|drop) (below|a |")/,"the stock comment ask"],[/\b(\w+), (\w+),? and (\w+)\b[^.]{0,3}\./,"a three-item cadence"],[/(^[^\n]{10,90}\n\n){4,}/m,"one-line paragraphs in a row"]];
+  function check(text){var t=text.replace(/’/g,"'"),low=t.toLowerCase(),out=[],seen={};function add(l,q,d,k){var key=l+q;if(seen[key])return;seen[key]=1;out.push({level:l,q:q,d:d,kind:k||""})}
+    ["—","–","--"].forEach(function(d){if(t.indexOf(d)>-1)add("Hold",d,"Em dash or double hyphen. The clearest AI tell.")});
+    var m,money=/\$\s?(\d[\d,.]*)\s?(k|m)?\+?\s*(arr|mrr|revenue)?/g;while((m=money.exec(low))){if(!approved(m[1]+(m[2]||""))&&aboutUs(t,m.index))add("Hold",m[0].trim(),"Money claim not on the approved list.","num")}
+    var count=/\b(\d[\d,.]*)\s?(k)?\+?\s*(followers|subscribers|readers|users|customers|founders|companies|posts|investors|leads|clients)\b/g;while((m=count.exec(low))){if(!approved(m[1].replace(/,/g,"")+(m[2]||""))&&aboutUs(t,m.index))add("Revise",m[0].trim(),"Number not on the approved list. Approve it, or cut it.","num")}
+    var mult=/\b(\d+(?:\.\d+)?)\s?x(?![\w\d])/g;while((m=mult.exec(low))){if(aboutUs(t,m.index))add("Revise",m[0].trim(),"A result claim. Prove it, or cut it.")}
+    prof().banned.forEach(function(b){if(low.indexOf(b.toLowerCase())>-1)add("Hold",b,"Banned. Your rule.")});
+    FILLER.forEach(function(f){if(low.indexOf(f)>-1)add("Revise",f,"Filler. Say what actually happened.")});
+    var same=0,hits=[];out.forEach(function(i){same+=i.level==="Hold"?20:10});
+    TELLS.forEach(function(r){if(r[0].test(low)){same+=12;hits.push(r[1]);add("Revise",r[1],"A stock AI pattern.")}});
+    same=Math.min(100,same);var lbl=same<=20?"sounds like a person":same<=50?"some AI tells":same<=80?"reads as AI":"pure slop";
+    var v=out.some(function(i){return i.level==="Hold"})?"Hold":out.length?"Revise":"Send";return{verdict:v,issues:out,sameness:same,label:lbl}}
+  var ta=document.getElementById("draft"),verdict=document.getElementById("verdict"),vword=document.getElementById("vword"),vnote=document.getElementById("vnote"),lines=document.getElementById("lines"),ms=document.getElementById("ms"),count=document.getElementById("count");
+  var COPY={Hold:"Sent back. Fix the Hold lines before this goes out.",Revise:"Close. Settle the Revise lines and it ships.",Send:"Ships. Specific, approved, in your voice."};
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  function render(){var t0=performance.now(),r=check(ta.value);verdict.className="verdict "+r.verdict;vword.textContent=r.verdict;vnote.textContent=COPY[r.verdict];
+    lines.innerHTML=r.issues.map(function(i,ix){return '<div class="row"><span class="lvl '+i.level+'">'+i.level+'</span><span><span class="q">'+esc(i.q)+'</span> <span class="d">'+esc(i.d)+'</span></span>'+(i.kind==="num"?'<button type="button" class="act" data-approve="'+esc(i.q)+'">approve</button>':'<span></span>')+'</div>'}).join("");
+    ms.textContent=Math.max(1,Math.round(performance.now()-t0))+" ms";count.textContent=ta.value.length+" / 2000";
+    document.getElementById("sscore").textContent=r.sameness;document.getElementById("slabel").textContent=r.label;document.getElementById("sfill").style.width=r.sameness+"%";
+    document.getElementById("prompt").textContent="/coulis:critique\n\n"+ta.value;
+    lines.querySelectorAll("[data-approve]").forEach(function(b){b.addEventListener("click",function(){addFact(b.getAttribute("data-approve"))})})}
+  function renderProfile(){document.getElementById("pname").textContent=prof().name;document.getElementById("pBhavya").setAttribute("aria-pressed",which==="bhavya");document.getElementById("pMine").setAttribute("aria-pressed",which!=="bhavya");
+    var ro=which==="bhavya";
+    document.getElementById("facts").innerHTML=prof().facts.map(function(f,i){return '<li>'+esc(f)+(ro?'':' <button type="button" data-rmf="'+i+'" aria-label="remove">×</button>')+'</li>'}).join("")||'<li style="background:none;color:var(--muted)">None yet. Every number gets sent back until you approve it.</li>';
+    document.getElementById("banned").innerHTML=prof().banned.map(function(f,i){return '<li>'+esc(f)+(ro?'':' <button type="button" data-rmb="'+i+'" aria-label="remove">×</button>')+'</li>'}).join("")||'<li style="background:none;color:var(--muted)">None yet.</li>';
+    document.querySelectorAll("[data-rmf]").forEach(function(b){b.addEventListener("click",function(){mine.facts.splice(+b.getAttribute("data-rmf"),1);save("mine",mine);renderProfile();render()})});
+    document.querySelectorAll("[data-rmb]").forEach(function(b){b.addEventListener("click",function(){mine.banned.splice(+b.getAttribute("data-rmb"),1);save("mine",mine);renderProfile();render()})});
+    render()}
+  function addFact(f){f=(f||"").trim();if(!f)return;if(which==="bhavya"){which="mine";mine.facts=mine.facts.length?mine.facts:BHAVYA.facts.slice();mine.banned=mine.banned.length?mine.banned:BHAVYA.banned.slice();save("which",which)}
+    if(mine.facts.indexOf(f)<0)mine.facts.push(f);save("mine",mine);renderProfile()}
+  document.getElementById("addfact").addEventListener("click",function(){addFact(document.getElementById("newfact").value);document.getElementById("newfact").value=""});
+  document.getElementById("addban").addEventListener("click",function(){var b=document.getElementById("newban").value.trim();if(!b)return;if(which==="bhavya"){which="mine";mine.facts=BHAVYA.facts.slice();mine.banned=BHAVYA.banned.slice();save("which",which)}if(mine.banned.indexOf(b)<0)mine.banned.push(b);save("mine",mine);document.getElementById("newban").value="";renderProfile()});
+  document.getElementById("pBhavya").addEventListener("click",function(){which="bhavya";save("which",which);renderProfile()});
+  document.getElementById("pMine").addEventListener("click",function(){which="mine";save("which",which);renderProfile()});
+  var timer;ta.addEventListener("input",function(){clearTimeout(timer);timer=setTimeout(render,150)});
+  document.querySelectorAll("[data-try]").forEach(function(b){b.addEventListener("click",function(){ta.value=b.getAttribute("data-try");render()})});
+  document.getElementById("copy").addEventListener("click",function(){var t=document.getElementById("prompt").textContent;var done=function(){var b=document.getElementById("copy");b.textContent="Copied. Paste it into Claude.";setTimeout(function(){b.textContent="Copy the command and your draft"},2500)};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,done)}else{done()}});
+  renderProfile();
+})();
+</script>
+</body>
+</html>

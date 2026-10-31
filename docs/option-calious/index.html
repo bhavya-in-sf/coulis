@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>calious · taste infrastructure for AI</title>
+<meta name="description" content="calious is the layer every AI calls before it speaks for you. It checks each draft against your facts and your voice, critiques it, and learns from your edits. Open source, inside Claude and Cursor.">
+<style>
+@font-face{font-family:"Instrument Sans";src:url(../brand-options/fonts/InstrumentSans-Regular.ttf);font-weight:400}
+@font-face{font-family:"Instrument Sans";src:url(../brand-options/fonts/InstrumentSans-Bold.ttf);font-weight:600 800}
+@font-face{font-family:"Instrument Serif";src:url(../brand-options/fonts/InstrumentSerif-Regular.ttf);font-weight:400}
+@font-face{font-family:"Instrument Serif";src:url(../brand-options/fonts/InstrumentSerif-Italic.ttf);font-style:italic}
+:root{--ink:#111;--white:#fff;--deep:#8B1A12;--deep2:#B3241C;--canary:#FFE14D;--tint:#FFF6C2;--soft:#F6F6F8;--muted:#6b6b6b;--line:#e6e6e6;--night:#120807;--night2:#2A0D0A}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--white);color:var(--ink);font-family:"Instrument Sans",system-ui,sans-serif;font-size:17px;line-height:1.5;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+i{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:0}
+.serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:-.01em}
+.wrap{max-width:1200px;margin:0 auto;padding:0 max(20px,4vw)}
+::selection{background:var(--canary);color:var(--ink)}
+/* nav */
+.nav{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:16px max(20px,4vw);color:#fff;mix-blend-mode:normal}
+.nav.light{color:var(--ink)}
+.mark{font-weight:700;font-size:22px;letter-spacing:-.04em;text-decoration:none;display:flex;align-items:center;gap:9px}
+.mark svg{width:26px;height:26px}
+.nav nav{display:flex;gap:26px;font-size:14px}.nav nav a{text-decoration:none;opacity:.78}.nav nav a:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--ink);text-decoration:none;font-weight:600;padding:12px 20px;border-radius:999px;border:0;font:inherit;font-weight:600;cursor:pointer;transition:transform .25s cubic-bezier(.2,.7,.2,1),background .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn.deep{background:var(--deep);color:#fff}.btn.deep:hover{background:var(--deep2)}
+.btn.ghost{background:transparent;color:inherit;border:1px solid currentColor}
+.btn.ghost:hover{background:rgba(255,255,255,.08)}
+/* hero */
+.hero{position:relative;background:var(--night);color:#fff;overflow:hidden;padding:110px 0 0;min-height:100svh}
+.sky{position:absolute;inset:0;background:
+ radial-gradient(60% 45% at 50% 100%, rgba(255,225,77,.35) 0%, rgba(179,36,28,.28) 35%, rgba(18,8,7,0) 70%),
+ radial-gradient(80% 60% at 50% 110%, #4A1518 0%, #2A0D0A 40%, #120807 75%);}
+.grain{position:absolute;inset:0;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.9'/></svg>");mix-blend-mode:screen;pointer-events:none}
+.stars{position:absolute;inset:0;pointer-events:none}
+.stars circle{fill:#fff;opacity:.0;animation:tw 4s ease-in-out infinite}
+.stars line{stroke:rgba(255,225,77,.35);stroke-width:1;stroke-dasharray:400;stroke-dashoffset:400;animation:draw 3s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes tw{0%,100%{opacity:.25}50%{opacity:.9}}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hero .wrap{position:relative;text-align:center}
+.pill{display:inline-block;font-size:13px;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.85);margin-bottom:26px}
+h1{margin:0 auto;font-weight:400;font-family:"Instrument Serif",Georgia,serif;letter-spacing:-.025em;line-height:1.02;font-size:clamp(44px,7vw,96px);max-width:14ch}
+h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
+h1 .w span{display:inline-block;transform:translateY(110%);transition:transform .9s cubic-bezier(.2,.7,.1,1)}
+.in h1 .w span{transform:none}
+.sub{font-size:clamp(16px,1.5vw,20px);color:rgba(255,255,255,.78);max-width:52ch;margin:22px auto 30px;opacity:0;transform:translateY(10px);transition:all .8s .5s cubic-bezier(.2,.7,.2,1)}
+.in .sub{opacity:1;transform:none}
+.cta{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;opacity:0;transition:opacity .8s .7s}
+.in .cta{opacity:1}
+.cta small{font-size:13px;color:rgba(255,255,255,.6);width:100%;margin-top:8px}
+/* floating product */
+.stage{perspective:1600px;margin:64px auto 0;max-width:1040px;opacity:0;transform:translateY(40px);transition:all 1.1s .8s cubic-bezier(.2,.7,.2,1)}
+.in .stage{opacity:1;transform:none}
+.app{background:#fff;color:var(--ink);border-radius:16px;box-shadow:0 60px 120px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.12);display:grid;grid-template-columns:220px 1fr 300px;min-height:420px;text-align:left;transform:rotateX(8deg);transform-origin:50% 100%;transition:transform .6s cubic-bezier(.2,.7,.2,1);overflow:hidden}
+.app:hover{transform:rotateX(0)}
+.side{background:var(--soft);border-right:1px solid var(--line);padding:16px;font-size:13px}
+.side b{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px}
+.side div{padding:7px 10px;border-radius:8px;color:#333}.side div.on{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08);font-weight:600}
+.main{padding:18px 22px}
+.crumb{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+.crumb span:last-child{background:var(--tint);color:var(--deep);font-weight:600;padding:4px 10px;border-radius:999px}
+.draft{margin-top:18px;border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-size:15px;line-height:1.55}
+.draft mark{background:transparent;padding:0 2px;border-radius:3px;transition:background .3s,color .3s}
+.marked .draft mark{background:var(--tint);color:var(--deep);box-shadow:inset 0 -2px 0 var(--deep)}
+.row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.chip{font-size:12px;padding:6px 10px;border-radius:999px;background:var(--soft);color:#333;opacity:0;transform:translateY(6px);transition:all .4s}
+.marked .chip{opacity:1;transform:none}
+.marked .chip:nth-child(2){transition-delay:.12s}.marked .chip:nth-child(3){transition-delay:.24s}.marked .chip:nth-child(4){transition-delay:.36s}
+.panel{border-left:1px solid var(--line);padding:18px;background:#fff}
+.panel h4{margin:0 0 12px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.verdict{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.verdict b{background:var(--deep);color:#fff;padding:7px 12px;border-radius:999px;font-size:13px;letter-spacing:.04em}
+.verdict span{font-size:13px;color:#333}
+.axis{display:grid;grid-template-columns:70px 1fr 26px;gap:10px;align-items:center;font-size:12px;margin:8px 0;color:#333}
+.axis i{font-style:normal;font-family:inherit;height:6px;border-radius:3px;background:var(--soft);overflow:hidden;display:block}
+.axis i::after{content:"";display:block;height:100%;width:0;background:var(--deep);transition:width 1s cubic-bezier(.2,.7,.2,1)}
+.marked .axis i::after{width:var(--v)}
+.axis.weak{color:var(--deep);font-weight:600}
+.fix{margin-top:14px;font-size:13px;line-height:1.5;border-top:1px dashed var(--line);padding-top:12px}
+.fix b{color:var(--deep)}
+/* inside strip */
+.inside{background:var(--night);color:rgba(255,255,255,.7);padding:40px 0 60px;font-size:14px}
+.inside .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.inside .logos{display:flex;gap:34px;flex-wrap:wrap;font-weight:600;font-size:16px;color:#fff}
+/* sections */
+section.light{padding:110px 0 0}
+.label{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;border:1px solid var(--line);margin-bottom:22px}
+.label::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--deep)}
+h2{margin:0;font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:-.02em;line-height:1.02;font-size:clamp(36px,5vw,68px);max-width:16ch}
+.center{text-align:center}.center h2{margin:0 auto}
+.reveal{opacity:0;transform:translateY(24px);transition:all .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.on{opacity:1;transform:none}
+/* dark why block */
+.why{margin-top:46px;background:var(--night);color:#fff;border-radius:24px;padding:clamp(24px,4vw,56px);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;position:relative;overflow:hidden}
+.why::after{content:"";position:absolute;right:-20%;bottom:-40%;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(255,225,77,.18),rgba(18,8,7,0));pointer-events:none}
+.why h3{margin:0 0 14px;font-size:clamp(26px,3vw,40px);letter-spacing:-.03em;font-weight:600}
+.why p{margin:0 0 18px;color:rgba(255,255,255,.78);font-size:17px}
+.card{background:#fff;color:var(--ink);border-radius:16px;padding:18px;box-shadow:0 30px 60px rgba(0,0,0,.4);font-size:14px;transform:rotate(-1.5deg);transition:transform .5s}
+.why:hover .card{transform:rotate(0)}
+.card .hd{display:flex;justify-content:space-between;font-weight:600;margin-bottom:12px}
+.card .hd span:last-child{color:var(--deep);font-weight:600}
+.diff{line-height:1.7}
+.diff del{color:#999;text-decoration:line-through}
+.diff ins{text-decoration:none;background:var(--tint);color:var(--deep);padding:0 3px;border-radius:3px}
+.rule{margin-top:12px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.rule small{color:var(--muted)}
+.rule button{font:inherit;font-size:12px;font-weight:600;padding:6px 10px;border-radius:999px;border:0;background:var(--ink);color:#fff;cursor:pointer}
+.rule button.ok{background:var(--deep)}
+/* feature cards */
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px}
+.feat{background:var(--soft);border-radius:20px;padding:22px;min-height:360px;display:flex;flex-direction:column;gap:14px;transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s}
+.feat:hover{transform:translateY(-4px);box-shadow:0 24px 50px rgba(0,0,0,.08)}
+.feat .ui{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;font-size:13px;line-height:1.5;flex:1}
+.feat b{font-size:20px;letter-spacing:-.02em}
+.feat p{margin:0;color:#333;font-size:15px}
+.ui .t{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.ui .q{border-left:3px solid var(--deep);padding-left:10px;margin:8px 0;color:#333}
+.ui .ok{color:#2E6B3A;font-weight:600}
+.ui .file{font:12.5px/1.6 ui-monospace,Menlo,monospace;color:#333;white-space:pre}
+/* proof */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:46px}
+.stat{border-top:2px solid var(--deep);padding-top:16px}
+.stat b{display:block;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(40px,5vw,72px);line-height:1;letter-spacing:-.02em}
+.stat span{display:block;margin-top:8px;font-size:15px;color:#333}
+.fine{font-size:13px;color:var(--muted);margin-top:18px}
+/* final */
+.final{margin:110px 0 0;background:var(--night);color:#fff;text-align:center;padding:110px 0 90px;position:relative;overflow:hidden}
+.final .sky{opacity:.8}
+.final h2{margin:0 auto 24px;max-width:16ch;position:relative}
+.final .wrap{position:relative}
+footer{padding:28px max(20px,4vw);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+@media(max-width:900px){.app{grid-template-columns:1fr;transform:none}.side,.panel{display:none}.why,.feats,.stats{grid-template-columns:1fr}.nav nav{display:none}.hero{padding-top:90px}.inside .logos{gap:18px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}h1 .w span{transform:none}.sub,.cta,.stage,.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<section class="hero" id="top">
+  <div class="sky"></div>
+  <div class="grain"></div>
+  <svg class="stars" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <line x1="180" y1="140" x2="330" y2="90"/><line x1="330" y1="90" x2="470" y2="170"/><line x1="470" y1="170" x2="610" y2="120"/>
+    <line x1="980" y1="110" x2="1100" y2="180"/><line x1="1100" y1="180" x2="1260" y2="130"/><line x1="1260" y1="130" x2="1330" y2="230"/>
+    <circle cx="180" cy="140" r="2" style="animation-delay:.2s"/><circle cx="330" cy="90" r="2.5" style="animation-delay:1s"/><circle cx="470" cy="170" r="1.8" style="animation-delay:.6s"/><circle cx="610" cy="120" r="2.2" style="animation-delay:1.6s"/>
+    <circle cx="980" cy="110" r="2" style="animation-delay:.4s"/><circle cx="1100" cy="180" r="2.6" style="animation-delay:1.2s"/><circle cx="1260" cy="130" r="1.8" style="animation-delay:.9s"/><circle cx="1330" cy="230" r="2.2" style="animation-delay:2s"/>
+    <circle cx="720" cy="60" r="1.5" style="animation-delay:.3s"/><circle cx="860" cy="240" r="1.5" style="animation-delay:1.4s"/><circle cx="90" cy="300" r="1.5" style="animation-delay:.8s"/><circle cx="1400" cy="60" r="1.5" style="animation-delay:1.9s"/>
+  </svg>
+  <div class="nav">
+    <a class="mark" href="#top" aria-label="calious"><svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="11" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="13" r="4" fill="#FFE14D"/></svg>calious</a>
+    <nav><a href="#how">How it works</a><a href="#proof">Proof</a><a href="../API.md">API</a><a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a></nav>
+    <a class="btn" href="#install">Try it for free</a>
+  </div>
+  <div class="wrap">
+    <span class="pill">Taste infrastructure for AI</span>
+    <h1><span class="w"><span>Sound like you,</span></span> <span class="w"><span>even when</span></span> <span class="w"><span>AI writes it.</span></span></h1>
+    <p class="sub">calious is the layer every AI calls before it speaks for you. It checks each draft against your facts and your voice, critiques it, and learns from your edits. Nothing goes out without your yes.</p>
+    <div class="cta">
+      <a class="btn" href="#install">Try it for free</a>
+      <a class="btn ghost" href="#how">See it check a draft</a>
+      <small>Open source. Inside Claude Code, Claude Desktop and Cursor today. Your taste file stays on your machine.</small>
+    </div>
+    <div class="stage">
+      <div class="app" id="app">
+        <div class="side">
+          <b>Profile</b><div class="on">Bhavya</div><div>PumpGTM team</div>
+          <b>Modes</b><div>LinkedIn</div><div>Cold email</div><div>Investor update</div><div>Bio</div>
+          <b>Taste file</b><div>TASTE.md</div><div>claims.md · 33 facts</div>
+        </div>
+        <div class="main">
+          <div class="crumb"><span>Draft · LinkedIn · 14:02</span><span>checked in 4 ms</span></div>
+          <div class="draft">Excited to share that we're leveraging AI to <mark>10x</mark> your workflow <mark>—</mark> a total <mark>game-changer</mark>. <mark>300+ founders</mark> already trust us. Comment below!</div>
+          <div class="row"><span class="chip">em dash · house rule</span><span class="chip">"game-changer" · banned</span><span class="chip">"300+ founders" · not on your list</span><span class="chip">"10x" · not on your list</span></div>
+        </div>
+        <div class="panel">
+          <h4>Verdict</h4>
+          <div class="verdict"><b>HOLD</b><span>Four lines to settle before this goes out.</span></div>
+          <h4>Critique · 8 parts</h4>
+          <div class="axis"><span>Clarity</span><i style="--v:70%"></i><span>7</span></div>
+          <div class="axis weak"><span>Proof</span><i style="--v:20%"></i><span>2</span></div>
+          <div class="axis"><span>Why you</span><i style="--v:30%"></i><span>3</span></div>
+          <div class="axis"><span>Hook</span><i style="--v:40%"></i><span>4</span></div>
+          <div class="axis"><span>Voice</span><i style="--v:30%"></i><span>3</span></div>
+          <div class="axis"><span>Rhythm</span><i style="--v:60%"></i><span>6</span></div>
+          <div class="fix"><b>Weakest: proof.</b> Swap "300+ founders" for a number on your list: one startup team uses it daily.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="inside">
+  <div class="wrap">
+    <span>Works where you already write</span>
+    <div class="logos"><span>Claude Code</span><span>Claude Desktop</span><span>Cursor</span><span>Any MCP client</span><span>REST API</span></div>
+  </div>
+</div>
+
+<section class="light center" id="why">
+  <div class="wrap">
+    <span class="label reveal">Why calious</span>
+    <h2 class="reveal">As AI writes more, <i>it sounds like everyone.</i></h2>
+    <div class="why reveal">
+      <div class="card">
+        <div class="hd"><span>Your edit, 14:06</span><span>1 rule proposed</span></div>
+        <div class="diff"><del>Excited to share that we're leveraging AI to 10x your workflow.</del><br><ins>We built a check for AI drafts. One startup team uses it daily.</ins></div>
+        <div class="rule"><div><b>Open with the thing you built, not with excitement.</b><br><small>Seen in 3 of your last 5 edits</small></div><button type="button" id="approve">Approve</button></div>
+      </div>
+      <div>
+        <h3>It learns from what you actually sent.</h3>
+        <p>Every tool that writes for you averages everyone's taste into one voice. calious judges what was written, against your approved facts and your own posts, and turns each edit you make into a rule you approve. The file is yours.</p>
+        <a class="btn" href="#how">How it works</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="light" id="how">
+  <div class="wrap">
+    <span class="label reveal">How it works</span>
+    <h2 class="reveal">Three steps. <i>Cheapest first, most personal last.</i></h2>
+    <div class="feats">
+      <div class="feat reveal">
+        <div class="ui"><div class="t"><span>Check</span><span>4 ms · no model</span></div><div class="q">"300+ founders" is not on your approved list.</div><div class="q">Em dash. House rule.</div><div class="ok">Revise. Two lines to settle.</div></div>
+        <b>Check</b><p>Fixed rules, the same answer every time. Facts you never approved, the AI tells, a hook you already used. Send, Revise or Hold, each problem quoted.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ui"><div class="t"><span>Critique</span><span>8 parts</span></div><div class="axis"><span>Clarity</span><i style="--v:70%"></i><span>7</span></div><div class="axis weak"><span>Proof</span><i style="--v:20%"></i><span>2</span></div><div class="axis"><span>Voice</span><i style="--v:30%"></i><span>3</span></div><div class="fix"><b>Weakest: proof.</b> One rewritten line.</div></div>
+        <b>Critique</b><p>Eight parts scored separately against your own samples. Never one number, because one number hides which thing is wrong.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ui"><div class="t"><span>Learn</span><span>TASTE.md</span></div><div class="file"># Learned from my edits
+- Open with the thing built, not excitement.
+- Lead with a number, not a question.
++ Never "excited to share".</div></div>
+        <b>Learn</b><p>Change a draft and it proposes the rule it saw. You approve. The rule joins a taste file you own.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="light" id="proof">
+  <div class="wrap">
+    <span class="label reveal">Proof</span>
+    <h2 class="reveal">Real writing, <i>real numbers.</i></h2>
+    <div class="stats">
+      <div class="stat reveal"><b data-n="2 in 3">2 in 3</b><span>of 673 published posts pass untouched</span></div>
+      <div class="stat reveal"><b>46/47</b><span>team drafts fixed by one approved fact</span></div>
+      <div class="stat reveal"><b>41/44</b><span>held-out posts from 11 writers score higher on their own profile</span></div>
+      <div class="stat reveal"><b>15%</b><span>less engagement on posts the check would have held</span></div>
+    </div>
+    <p class="fine reveal">2,437 real posts across 38 voices, 2022 to 2026. Every number reruns from <a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">the repo</a>.</p>
+  </div>
+</section>
+
+<section class="final" id="install">
+  <div class="sky"></div><div class="grain"></div>
+  <div class="wrap">
+    <h2 class="reveal">AI learned everyone. <i>We bring you back.</i></h2>
+    <div class="cta" style="opacity:1">
+      <a class="btn" href="https://github.com/bhavya-in-sf/coulis" rel="noopener">Install from GitHub</a>
+      <a class="btn ghost" href="../waitlist.html">Request an invitation to the table</a>
+      <small>/plugin marketplace add bhavya-in-sf/coulis · /plugin install coulis@coulis</small>
+    </div>
+  </div>
+</section>
+<footer><span>calious · Taste infrastructure for AI · San Francisco</span><span><a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a> · <a href="../API.md">API</a> · MIT</span></footer>
+
+<script>
+(function(){
+  var hero=document.getElementById('top');
+  setTimeout(function(){hero.classList.add('in')},80);window.addEventListener('load',function(){hero.classList.add('in')});
+  setTimeout(function(){document.getElementById('app').classList.add('marked')},1900);
+  var app=document.getElementById('app');
+  app.addEventListener('mousemove',function(e){var r=app.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;app.style.transform='rotateX('+(-y*6)+'deg) rotateY('+(x*8)+'deg)'});
+  app.addEventListener('mouseleave',function(){app.style.transform=''});
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.15}):null;
+  document.querySelectorAll('.reveal').forEach(function(el,i){el.style.transitionDelay=(i%4)*90+'ms';io?io.observe(el):el.classList.add('on')});
+  var ap=document.getElementById('approve');ap.addEventListener('click',function(){ap.textContent='Added to TASTE.md';ap.classList.add('ok');ap.disabled=true});
+})();
+</script>
+</body>
+</html>

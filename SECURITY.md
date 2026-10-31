@@ -8,4 +8,4 @@ The optional REST API (`api/`) stores profiles encrypted at rest, keeps API keys
 Email 4goelbhavya@gmail.com with "coulis security" in the subject, or open a private security advisory on GitHub (Security tab → Report a vulnerability). Please include steps to reproduce. You will get a reply within 72 hours. Please do not open a public issue for a security problem.
 
 ## Scope
-This repository, the published plug-in, and the landing page at bhavya-in-sf.github.io/coulis. The online checker at voiceprint-vibe-checker.lovable.app is a separate app; it stores an email and scores, never the draft.
+This repository, the published plug-in, and the landing page at bhavya-in-sf.github.io/coulis.
