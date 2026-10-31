@@ -1,13 +1,14 @@
 ---
 name: variants
-description: Variants that teach. Show 3 alternative hooks (or openings, subject lines, closing asks) for a draft, let the user pick one, and save the pick as taste data with coulis_pick. Use when the user says "give me options", "3 hooks", "alternatives", "which opener", or runs /coulis:variants.
+description: Offer alternative hooks or drafts using shared contextual taste memory, capture a real choice with permission, and propose preferences for explicit approval.
 ---
 
-# Coulis: variants (every pick teaches the profile)
+# Coulis: variants
 
-1. Take the draft and what to vary (default: the hook / first line). Read TASTE.md via coulis_profile.
-2. Write 3 alternatives that are genuinely different in approach (e.g. a number-led line, a short story line, a contrarian line), all in the user's voice, using only facts in the draft or claims.md.
-3. Run coulis_check on each (same surface). Drop or fix any that come back Hold.
-4. Show them numbered A, B, C with the check verdict on each, and ask: "Which one? (A, B, C, or none)".
-5. When the user picks, call coulis_pick with picked = the chosen line, rejected = the other two, context = what they were for. If they pick none, ask what was wrong and offer one more round.
-6. Then give the full draft with the chosen line in place. Picks are pairwise taste data: they build the profile and the "sounds like you" benchmark.
+Follow `reference/workflow.md` in the plugin root (two levels up).
+
+1. Call `coulis_context` for the task, surface and known audience/purpose, then generate three distinct alternatives using approved facts and applicable taste preferences.
+2. Check each with `coulis_check`. Fix Hold issues without inventing facts.
+3. If the user permits retaining the alternatives, use `coulis_workflow` action `create` with task, candidates `[{text,condition}]`, context, consent:true. Use descriptive condition labels; do not label all candidates as an experiment against a baseline. Display returned positions as A/B/C, mapping A to position 0. Conditions are hidden until a decision.
+4. Capture their actual choice with `decide`, including the category and reason if known. Allow tie/neither. Do not assume an unchosen candidate was judged bad. Without retention permission, show options normally and do not persist them.
+5. Provide the chosen wording in the draft. When a style preference is worth retaining, propose it with its evidence through the shared workflow and ask for per-rule approval. A pick alone does not update the profile or prove quality.

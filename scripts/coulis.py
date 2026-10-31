@@ -21,7 +21,7 @@ import server  # noqa: E402
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["check", "critique", "skip", "add", "learn", "log", "setup"])
+    ap.add_argument("cmd", choices=["check", "critique", "skip", "add", "learn", "log", "setup", "workflow", "context", "feedback", "call"])
     ap.add_argument("args", nargs="*")
     ap.add_argument("--profile")
     ap.add_argument("--surface", default="linkedin")
@@ -53,7 +53,17 @@ def main():
             if r["tool"] == "coulis_skip":
                 print(f"  skip {r['ts']}: {r.get('kind') or '?'}: {r['reason']}")
         return
-    if a.cmd in ("check", "critique"):
+    if a.cmd in ("workflow", "context", "feedback", "call"):
+        from sdk.python.coulis_client import LocalClient
+        client = LocalClient(a.profile or server.profile_dir())
+        if a.cmd in ("workflow", "call"):
+            if not a.args: ap.error("provide an action or operation, followed by JSON or - for stdin")
+            payload = json.loads(read(a.args[1])) if len(a.args)>1 else {}
+            out = client.workflow(a.args[0], **payload) if a.cmd == "workflow" else client.call(a.args[0], **payload)
+        else:
+            payload = json.loads(read(a.args[0])) if a.args else {}
+            out = client.call(a.cmd, **payload)
+    elif a.cmd in ("check", "critique"):
         gate_args = {"max_sameness": a.max_sameness} if (a.cmd == "check" and a.max_sameness is not None) else {}
         out = server.call_tool("coulis_" + a.cmd, {"text": read(a.args[0]), "surface": a.surface, **gate_args, **extra})
     elif a.cmd == "skip":

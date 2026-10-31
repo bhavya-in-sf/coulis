@@ -180,12 +180,13 @@ The existing MCP product now includes `coulis_context` (relevant writing samples
 [Research setup, dataset adapters, measured retrieval results, and limitations](research/README.md). No model training or paid model calls are performed by the research runner.
 
 
-## The taste feedback loop
+## Taste memory in every workflow
 
-Compare drafts, save a human choice or edit, review a contextual preference, and explicitly approve it for the next task. The same approved memory is read by the existing MCP context and critique tools.
+The same profile memory is used by MCP, the Claude plugin, CLI, OpenClaw, REST and source Python/TypeScript SDKs. Retrieve context before drafting; capture actual permitted edits or choices; approve a preference; apply it to the next task. No separate web workspace.
 
 ```sh
-python3 scripts/taste_loop.py --profile private/my-profile
+python3 scripts/coulis.py workflow state --profile private/my-profile
+python3 scripts/coulis.py context '{"text":"Launch post","surface":"linkedin"}' --profile private/my-profile
 ```
 
-Open http://127.0.0.1:8767. Or use `coulis_workflow` in your MCP host. [Workflow, setup, model-generation handoff and limitations](docs/TASTE-LOOP.md).
+[Workflow and approval contract](docs/TASTE-LOOP.md) · [API and SDK setup](docs/API.md). The API is self-hosted preview code, not a managed service. Preference memory updates context, not model weights.

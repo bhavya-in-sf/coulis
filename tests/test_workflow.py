@@ -85,20 +85,3 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(result['preferences'][0]['id'],p['id'])
         state=m.call_tool('coulis_workflow',{'profile_dir':self.tmp.name,'action':'state'})
         self.assertEqual(state['preferences'][0]['id'],p['id'])
-
-class LocalServerTests(unittest.TestCase):
-    def test_token_origin_and_workflow(self):
-        spec=importlib.util.spec_from_file_location('loop_server',ROOT/'scripts/taste_loop.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
-        with tempfile.TemporaryDirectory() as folder:
-            server=HTTPServer(('127.0.0.1',0),m.make_handler(folder,'test-secret'));thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
-            url=f'http://127.0.0.1:{server.server_port}'
-            try:
-                with urllib.request.urlopen(url) as r:self.assertIn(b'test-secret',r.read())
-                for headers in ({},{'X-Coulis-Token':'test-secret','Origin':'https://evil.example'}):
-                    req=urllib.request.Request(url+'/api',data=b'{"action":"state"}',headers=headers)
-                    with self.assertRaises(urllib.error.HTTPError) as e:urllib.request.urlopen(req)
-                    self.assertEqual(e.exception.code,403)
-                    e.exception.close()
-                req=urllib.request.Request(url+'/api',data=b'{"action":"state"}',headers={'X-Coulis-Token':'test-secret'})
-                with urllib.request.urlopen(req) as r:self.assertEqual(json.load(r)['preferences'],[])
-            finally:server.shutdown();server.server_close();thread.join()

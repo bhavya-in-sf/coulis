@@ -1,6 +1,6 @@
 # What coulis can do today, what is being tested, and what is planned
 
-Updated 31 Oct 2026, v0.9.0. One table, kept honest. If a line moves between columns, the commit says why.
+Updated 31 Oct 2026, v0.10.0. One table, kept honest. If a line moves between columns, the commit says why.
 
 | Capability | Status | What it means in practice |
 |---|---|---|
@@ -19,11 +19,12 @@ Updated 31 Oct 2026, v0.9.0. One table, kept honest. If a line moves between col
 | Modes: linkedin, x, cold_email, investor_update, bio | **Available** | Word limit, the one thing the draft must contain, and a target score per surface. |
 | One-command setup from a LinkedIn export | **Available** | `/coulis:extract` or `coulis setup --linkedin export.zip`. Builds TASTE.md and claims.md locally. |
 | Stop hook (Claude is sent back if it skipped the check) | **Available** | Logs each run to ~/.coulis/hook-log.jsonl. |
-| MCP server, Python and TypeScript SDKs | **Available** | Same tools, same profile, in Cursor and any MCP client. |
+| MCP server, Python and TypeScript SDKs | **Available** | Same tool contract and profile memory through MCP, source Python local/remote SDK and source TypeScript HTTP SDK. Packages are not published. |
+| Shared contextual taste workflow | **Available in source** | Context, permitted edits/choices, proposals, explicit approval, revision and disabling across MCP/CLI/API/SDKs. No model-weight training. |
+| REST API | **Experimental** | Self-hosted JSON transport with bearer authentication and server-mapped profiles. Plaintext local storage; explicit learning/choice operations retain text. No managed hosting. |
 | Relevant-example retrieval for the critique | **Experimental** | Opt in with COULIS_RETRIEVAL=bm25 (or tfidf). Picks the samples from your own profile that match the draft instead of the first five. Lexical, not semantic. Off by default. |
 | coulis_context and coulis_feedback tools | **Experimental** | Context returns the retrieved samples, approved preferences and conflicts for a draft, no model call. Feedback records accepted, edited, removed, not_selected or explicit_preference next to the profile. Records only; nothing trains. |
 | Research runner on public datasets | **Experimental** | LongMemEval, LaMP, PRISM and CoAuthor adapters with licence manifests. First run: session retrieval on 500 LongMemEval queries, BM25 recall@3 0.86. Retrieval diagnostics, not taste or model scores. |
-| REST API | **Experimental** | Code and tests exist (keys hashed, profiles encrypted, drafts never logged). Not hosted yet. |
 | Team profiles and the team score gate | **Planned** | One taste file and one approved-facts list shared across a team; a sameness ceiling as a gate. |
 | Blind taste test with human raters | **Planned** | Does the critique agree with people more often than chance? Not yet run. |
 | A trained taste model | **Planned, research direction** | No coulis model exists. The hypothesis and the test are in RESEARCH-AGENDA.md. |

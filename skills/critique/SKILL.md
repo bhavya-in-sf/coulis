@@ -5,10 +5,13 @@ description: The critic step. Score a piece of writing (post, launch announcemen
 
 # Coulis: critique (the critic step)
 
+Follow `reference/workflow.md` in the plugin root (two levels up). Before writing or critique, use `coulis_context` with the current profile, surface and known audience/purpose. Use its approved contextual preferences, not just TASTE.md; expose unresolved conflicts. Capture edits and approvals through `coulis_workflow` when the user wants learning.
+
+
 Goal: check a draft against what good looks like for this user, and send it back if it's off.
 
 ## Before scoring
-1. Read `TASTE.md` in the current folder. If there is none, say so and offer `/coulis:setup`. You can still critique using the seed defaults, but say that you are.
+1. Load `coulis_profile` and `coulis_context` for the current profile. If both samples and preferences are absent, say you are using seed defaults and offer `/coulis:setup`. Pass the same context to `coulis_critique`.
 2. Read `reference/axes.md` and `reference/seed-taste.md` in this plugin's root folder (two levels up from this skill). TASTE.md wins over the seed whenever they disagree.
 
 ## Output format

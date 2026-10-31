@@ -1,24 +1,15 @@
 ---
 name: learn
-description: Learn the user's taste from their edits. Compare an AI draft with the version the user actually published, propose taste rules from the differences, and add the ones the user approves to TASTE.md. Use when the user says "learn from this", "here's what I actually posted", "update my taste", or runs /coulis:learn.
+description: Learn from a user-supplied draft and final edit, propose contextual taste preferences, and save only rules the user explicitly approves through the shared Coulis workflow.
 ---
 
 # Coulis: learn
 
-Goal: taste learned from what the user does, not just what they say. Every rule needs the user's approval.
+Follow `reference/workflow.md` in the plugin root (two levels up). Use the same profile as the current writing task.
 
-## Steps
-1. Ask for two things if not given: the draft (what the AI wrote) and the final (what the user actually posted or sent).
-2. Compare them. List each meaningful change: cut, added, reworded, reordered. Ignore typo fixes.
-3. Propose at most 3 rules that explain the changes. Each rule:
-   - is written as an instruction ("Lead the hook with the number")
-   - cites the evidence: "draft said X" → "you posted Y"
-   - names the axis it belongs to (from `reference/axes.md` in this plugin's root, two levels up)
-4. Read the current `TASTE.md`. If a proposed rule repeats or contradicts an existing one, say so and propose merging or replacing it instead of adding a duplicate.
-5. Ask the user to approve, edit or reject each rule, numbered. Write only the approved ones to the "Learned from my edits" section, with today's date and the evidence.
-6. If "Learned from my edits" has more than 30 rules, suggest which ones to merge or retire, and wait for a yes.
-
-## Rules
-- Never write to TASTE.md without explicit approval of each rule. Memory created without the user's say is a known failure (EVIDENCE.md, E5).
-- Only learn from this folder's TASTE.md scope. Don't carry rules across brands or clients.
-- Don't infer personal facts about the user. Learn writing choices only.
+1. Obtain the actual original and final text, task, surface, and known audience/purpose. If unchanged, there is no preference evidence to record.
+2. Explain the meaningful changes. Separate style from factual corrections and task changes. If mixed or unclear, ask which style change should become a preference; do not label the whole edit style without justification.
+3. With permission to retain the pair, call `coulis_workflow` action `edit`, arguments `{task,draft,final,context,category,consent:true,reason}`. This records the supplied final, not an invented blind test.
+4. Load `state` to check existing preferences. Propose at most three style rules using action `propose` with the returned comparison_id, key, value and wording. Cite the before/after evidence and scope. For an existing rule that needs replacing, use `revise` instead.
+5. Show each pending rule for approval/edit/rejection. Use `approve` with `approved:true` only after explicit approval, or `reject` for rejected proposals. Do not write these rules into TASTE.md: the shared database is read by every interface.
+6. Confirm what will apply next time and where. This updates contextual memory, not model weights. Never infer personal facts or carry rules across clients.

@@ -5,6 +5,9 @@ description: Make a draft shorter without losing its point or voice. Proposes ON
 
 # Coulis: shorter (a direction, with approval)
 
+Follow `reference/workflow.md` in the plugin root (two levels up). Before writing or critique, use `coulis_context` with the current profile, surface and known audience/purpose. Use its approved contextual preferences, not just TASTE.md; expose unresolved conflicts. Capture edits and approvals through `coulis_workflow` when the user wants learning.
+
+
 1. Take the draft (from the message or the last draft in the chat) and the surface (linkedin, x, cold_email, investor_update, bio; default linkedin).
 2. Write ONE rewrite in the user's voice (read TASTE.md via coulis_profile). Cut length by about a third: drop repeated ideas, filler and setup sentences; keep the hook, the proof and the ask.
 3. Never add a number, name or claim that is not in the draft or in claims.md.

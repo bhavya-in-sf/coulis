@@ -68,4 +68,4 @@ Just ask in plain words:
 - **`python3` not found:** install Python from python.org, or use the full path (`which python3`).
 
 ### ChatGPT, Slack, Google Docs, anything else
-These can't run a local MCP server. They call the hosted API instead (see `HOSTING.md` and `API.md`): one `POST /v1/check` with the draft and your profile id. The Chrome extension for LinkedIn and Gmail compose boxes is next.
+These can't run a local MCP server. They can call the self-hosted API preview (see [hosting status](HOSTING.md) and [API contract](API.md)). There is no managed hosted endpoint. Use the authenticated request envelope for check, context and workflow. The Chrome extension for LinkedIn and Gmail compose boxes is next.
