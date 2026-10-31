@@ -94,9 +94,9 @@ class Profile:
                  f"- What I want readers to do: {self.goal}", "", "## My voice in 3 samples"]
         for i, s in enumerate(self.samples, 1):
             taste += ["", f"### Sample {i}", s]
-        taste += ["", "## My rules"] + [f"- {r.text}" for r in self.rules if r.source == "user"]
+        taste += ["", "## My rules"] + [f"- {r.text}" for r in self.rules if r.source == "user" and not r.id]
         taste += ["", "## Learned from my edits"] + [
-            f"- [{r.added}] {r.text}" for r in self.rules if r.source == "learned" and r.approved]
+            f"- [{r.added}] {r.text}" for r in self.rules if r.source == "learned" and r.approved and not r.id]
         claims = [f"owner: {self.owner}", f"product: {self.product}", "", "## Approved facts"]
         claims += [f"- {f}" for f in self.approved_facts] + ["", "## Needs confirm"]
         claims += [f"- {f}" for f in self.needs_confirm] + ["", "## Banned phrases"]
@@ -157,7 +157,19 @@ def parse_files(taste_md="", claims_md=""):
 def profile_from_folder(folder):
     folder = Path(folder)
     read = lambda n: (folder / n).read_text() if (folder / n).exists() else ""
-    return parse_files(read("TASTE.md"), read("claims.md"))
+    p = parse_files(read("TASTE.md"), read("claims.md"))
+    database = folder / 'coulis-research.db'
+    if database.exists():
+        from .taste_store import Store
+        store = Store(database)
+        try:
+            for row in store.active('local', 'profile'):
+                p.rules.append(Rule(text=row['text'], source='learned', approved=True,
+                                    id=row['id'], scope=row['scope'], key=row['key'], value=row['value'],
+                                    added=row['effective_at'][:10], evidence_ids=row['evidence_ids']))
+        finally:
+            store.close()
+    return p
 
 
 def profile_from_dict(d):
