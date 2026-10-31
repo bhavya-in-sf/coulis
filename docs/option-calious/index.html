@@ -4,59 +4,50 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>calious · taste infrastructure for AI</title>
-<meta name="description" content="calious is the layer every AI calls before it speaks for you. It checks each draft against your facts and your voice, critiques it, and learns from your edits. Open source, inside Claude and Cursor.">
+<meta name="description" content="calious is the layer every AI calls before it speaks for you. It checks each draft against your facts and your voice, critiques it on eight parts, and learns from your edits. Open source, inside Claude and Cursor.">
 <style>
 @font-face{font-family:"Instrument Sans";src:url(../brand-options/fonts/InstrumentSans-Regular.ttf);font-weight:400}
 @font-face{font-family:"Instrument Sans";src:url(../brand-options/fonts/InstrumentSans-Bold.ttf);font-weight:600 800}
 @font-face{font-family:"Instrument Serif";src:url(../brand-options/fonts/InstrumentSerif-Regular.ttf);font-weight:400}
 @font-face{font-family:"Instrument Serif";src:url(../brand-options/fonts/InstrumentSerif-Italic.ttf);font-style:italic}
-:root{--ink:#111;--white:#fff;--deep:#8B1A12;--deep2:#B3241C;--canary:#FFE14D;--tint:#FFF6C2;--soft:#F6F6F8;--muted:#6b6b6b;--line:#e6e6e6;--night:#120807;--night2:#2A0D0A}
+:root{--ink:#111;--white:#fff;--deep:#8B1A12;--deep2:#B3241C;--canary:#FFE14D;--tint:#FFF6C2;--soft:#F6F6F8;--muted:#6b6b6b;--line:#e6e6e6;--night:#120807;--night2:#2A0D0A;--pass:#2E6B3A}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--white);color:var(--ink);font-family:"Instrument Sans",system-ui,sans-serif;font-size:17px;line-height:1.5;overflow-x:clip;-webkit-font-smoothing:antialiased}
 a{color:inherit}
 i{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:0}
-.serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:-.01em}
 .wrap{max-width:1200px;margin:0 auto;padding:0 max(20px,4vw)}
 ::selection{background:var(--canary);color:var(--ink)}
+button{font:inherit}
 /* nav */
-.nav{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:16px max(20px,4vw);color:#fff;mix-blend-mode:normal}
-.nav.light{color:var(--ink)}
+.nav{position:absolute;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:16px max(20px,4vw);color:#fff}
 .mark{font-weight:700;font-size:22px;letter-spacing:-.04em;text-decoration:none;display:flex;align-items:center;gap:9px}
 .mark svg{width:26px;height:26px}
-.nav nav{display:flex;gap:26px;font-size:14px}.nav nav a{text-decoration:none;opacity:.78}.nav nav a:hover{opacity:1}
-.btn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--ink);text-decoration:none;font-weight:600;padding:12px 20px;border-radius:999px;border:0;font:inherit;font-weight:600;cursor:pointer;transition:transform .25s cubic-bezier(.2,.7,.2,1),background .2s}
-.btn:hover{transform:translateY(-1px)}
+.nav nav{display:flex;gap:24px;font-size:14px}.nav nav a{text-decoration:none;opacity:.8}.nav nav a:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--ink);text-decoration:none;font-weight:600;padding:12px 20px;border-radius:999px;border:0;cursor:pointer;transition:transform .25s cubic-bezier(.2,.7,.2,1),background .2s,box-shadow .25s;white-space:nowrap}
+.btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,.18)}
 .btn.deep{background:var(--deep);color:#fff}.btn.deep:hover{background:var(--deep2)}
 .btn.ghost{background:transparent;color:inherit;border:1px solid currentColor}
 .btn.ghost:hover{background:rgba(255,255,255,.08)}
-/* hero */
-.hero{position:relative;background:var(--night);color:#fff;overflow:hidden;padding:110px 0 0;min-height:100svh}
-.sky{position:absolute;inset:0;background:
- radial-gradient(60% 45% at 50% 100%, rgba(255,225,77,.35) 0%, rgba(179,36,28,.28) 35%, rgba(18,8,7,0) 70%),
- radial-gradient(80% 60% at 50% 110%, #4A1518 0%, #2A0D0A 40%, #120807 75%);}
-.grain{position:absolute;inset:0;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.9'/></svg>");mix-blend-mode:screen;pointer-events:none}
-.stars{position:absolute;inset:0;pointer-events:none}
-.stars circle{fill:#fff;opacity:.0;animation:tw 4s ease-in-out infinite}
-.stars line{stroke:rgba(255,225,77,.35);stroke-width:1;stroke-dasharray:400;stroke-dashoffset:400;animation:draw 3s cubic-bezier(.2,.7,.2,1) forwards}
-@keyframes tw{0%,100%{opacity:.25}50%{opacity:.9}}
-@keyframes draw{to{stroke-dashoffset:0}}
+.light .btn.ghost:hover{background:var(--soft)}
+/* hero with live landscape */
+.hero{position:relative;color:#fff;overflow:hidden;padding:120px 0 0;min-height:100svh;background:var(--night)}
+#land{position:absolute;inset:0;width:100%;height:100%;display:block}
+.grain{position:absolute;inset:0;opacity:.06;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.9'/></svg>");mix-blend-mode:screen;pointer-events:none}
 .hero .wrap{position:relative;text-align:center}
-.pill{display:inline-block;font-size:13px;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.85);margin-bottom:26px}
-h1{margin:0 auto;font-weight:400;font-family:"Instrument Serif",Georgia,serif;letter-spacing:-.025em;line-height:1.02;font-size:clamp(44px,7vw,96px);max-width:14ch}
-h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
+.pill{display:inline-block;font-size:13px;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.88);margin-bottom:26px;backdrop-filter:blur(6px)}
+h1{margin:0 auto;font-weight:400;font-family:"Instrument Serif",Georgia,serif;letter-spacing:-.025em;line-height:1.02;font-size:clamp(44px,7vw,96px);max-width:14ch;text-shadow:0 2px 30px rgba(0,0,0,.35)}
+h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.06em}
 h1 .w span{display:inline-block;transform:translateY(110%);transition:transform .9s cubic-bezier(.2,.7,.1,1)}
 .in h1 .w span{transform:none}
-.sub{font-size:clamp(16px,1.5vw,20px);color:rgba(255,255,255,.78);max-width:52ch;margin:22px auto 30px;opacity:0;transform:translateY(10px);transition:all .8s .5s cubic-bezier(.2,.7,.2,1)}
+.sub{font-size:clamp(16px,1.5vw,20px);color:rgba(255,255,255,.82);max-width:54ch;margin:22px auto 30px;opacity:0;transform:translateY(10px);transition:all .8s .5s cubic-bezier(.2,.7,.2,1)}
 .in .sub{opacity:1;transform:none}
 .cta{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;opacity:0;transition:opacity .8s .7s}
 .in .cta{opacity:1}
-.cta small{font-size:13px;color:rgba(255,255,255,.6);width:100%;margin-top:8px}
-/* floating product */
+.cta small{font-size:13px;color:rgba(255,255,255,.65);width:100%;margin-top:8px}
 .stage{perspective:1600px;margin:64px auto 0;max-width:1040px;opacity:0;transform:translateY(40px);transition:all 1.1s .8s cubic-bezier(.2,.7,.2,1)}
 .in .stage{opacity:1;transform:none}
-.app{background:#fff;color:var(--ink);border-radius:16px;box-shadow:0 60px 120px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.12);display:grid;grid-template-columns:220px 1fr 300px;min-height:420px;text-align:left;transform:rotateX(8deg);transform-origin:50% 100%;transition:transform .6s cubic-bezier(.2,.7,.2,1);overflow:hidden}
-.app:hover{transform:rotateX(0)}
+.app{background:#fff;color:var(--ink);border-radius:16px;box-shadow:0 60px 120px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.14);display:grid;grid-template-columns:220px 1fr 300px;min-height:420px;text-align:left;transform:rotateX(8deg);transform-origin:50% 100%;transition:transform .6s cubic-bezier(.2,.7,.2,1);overflow:hidden}
 .side{background:var(--soft);border-right:1px solid var(--line);padding:16px;font-size:13px}
 .side b{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px}
 .side div{padding:7px 10px;border-radius:8px;color:#333}.side div.on{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08);font-weight:600}
@@ -71,45 +62,47 @@ h1 .w span{display:inline-block;transform:translateY(110%);transition:transform 
 .marked .chip{opacity:1;transform:none}
 .marked .chip:nth-child(2){transition-delay:.12s}.marked .chip:nth-child(3){transition-delay:.24s}.marked .chip:nth-child(4){transition-delay:.36s}
 .panel{border-left:1px solid var(--line);padding:18px;background:#fff}
-.panel h4{margin:0 0 12px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.panel h4{margin:0 0 12px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .verdict{display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .verdict b{background:var(--deep);color:#fff;padding:7px 12px;border-radius:999px;font-size:13px;letter-spacing:.04em}
 .verdict span{font-size:13px;color:#333}
 .axis{display:grid;grid-template-columns:70px 1fr 26px;gap:10px;align-items:center;font-size:12px;margin:8px 0;color:#333}
 .axis i{font-style:normal;font-family:inherit;height:6px;border-radius:3px;background:var(--soft);overflow:hidden;display:block}
 .axis i::after{content:"";display:block;height:100%;width:0;background:var(--deep);transition:width 1s cubic-bezier(.2,.7,.2,1)}
-.marked .axis i::after{width:var(--v)}
+.marked .axis i::after,.on .axis i::after{width:var(--v)}
 .axis.weak{color:var(--deep);font-weight:600}
 .fix{margin-top:14px;font-size:13px;line-height:1.5;border-top:1px dashed var(--line);padding-top:12px}
 .fix b{color:var(--deep)}
-/* inside strip */
-.inside{background:var(--night);color:rgba(255,255,255,.7);padding:40px 0 60px;font-size:14px}
-.inside .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
-.inside .logos{display:flex;gap:34px;flex-wrap:wrap;font-weight:600;font-size:16px;color:#fff}
+/* inside marquee */
+.inside{background:var(--night);color:#fff;padding:26px 0;overflow:hidden;border-top:1px solid rgba(255,255,255,.08)}
+.inside .lab{text-align:center;font-size:13px;color:rgba(255,255,255,.6);margin-bottom:14px}
+.track{display:flex;gap:48px;width:max-content;animation:slide 28s linear infinite;font-weight:600;font-size:18px;white-space:nowrap}
+.track span{opacity:.9}.track span::before{content:"✦";color:var(--canary);margin-right:12px;font-size:14px}
+@keyframes slide{to{transform:translateX(-50%)}}
 /* sections */
 section.light{padding:110px 0 0}
 .label{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;border:1px solid var(--line);margin-bottom:22px}
 .label::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--deep)}
 h2{margin:0;font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:-.02em;line-height:1.02;font-size:clamp(36px,5vw,68px);max-width:16ch}
 .center{text-align:center}.center h2{margin:0 auto}
+.lede{font-size:clamp(16px,1.3vw,19px);color:#333;max-width:60ch;margin:18px 0 0}
+.center .lede{margin:18px auto 0}
 .reveal{opacity:0;transform:translateY(24px);transition:all .9s cubic-bezier(.2,.7,.2,1)}
 .reveal.on{opacity:1;transform:none}
 /* dark why block */
-.why{margin-top:46px;background:var(--night);color:#fff;border-radius:24px;padding:clamp(24px,4vw,56px);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;position:relative;overflow:hidden}
+.why{margin-top:46px;background:var(--night);color:#fff;border-radius:24px;padding:clamp(24px,4vw,56px);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;position:relative;overflow:hidden;text-align:left}
 .why::after{content:"";position:absolute;right:-20%;bottom:-40%;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(255,225,77,.18),rgba(18,8,7,0));pointer-events:none}
 .why h3{margin:0 0 14px;font-size:clamp(26px,3vw,40px);letter-spacing:-.03em;font-weight:600}
-.why p{margin:0 0 18px;color:rgba(255,255,255,.78);font-size:17px}
+.why p{margin:0 0 18px;color:rgba(255,255,255,.8);font-size:17px}
 .card{background:#fff;color:var(--ink);border-radius:16px;padding:18px;box-shadow:0 30px 60px rgba(0,0,0,.4);font-size:14px;transform:rotate(-1.5deg);transition:transform .5s}
 .why:hover .card{transform:rotate(0)}
 .card .hd{display:flex;justify-content:space-between;font-weight:600;margin-bottom:12px}
-.card .hd span:last-child{color:var(--deep);font-weight:600}
-.diff{line-height:1.7}
-.diff del{color:#999;text-decoration:line-through}
-.diff ins{text-decoration:none;background:var(--tint);color:var(--deep);padding:0 3px;border-radius:3px}
+.card .hd span:last-child{color:var(--deep)}
+.diff{line-height:1.7}.diff del{color:#999}.diff ins{text-decoration:none;background:var(--tint);color:var(--deep);padding:0 3px;border-radius:3px}
 .rule{margin-top:12px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
 .rule small{color:var(--muted)}
-.rule button{font:inherit;font-size:12px;font-weight:600;padding:6px 10px;border-radius:999px;border:0;background:var(--ink);color:#fff;cursor:pointer}
-.rule button.ok{background:var(--deep)}
+.rule button{font-size:12px;font-weight:600;padding:6px 10px;border-radius:999px;border:0;background:var(--ink);color:#fff;cursor:pointer}
+.rule button.ok{background:var(--pass)}
 /* feature cards */
 .feats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px}
 .feat{background:var(--soft);border-radius:20px;padding:22px;min-height:360px;display:flex;flex-direction:column;gap:14px;transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s}
@@ -119,53 +112,92 @@ h2{margin:0;font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-
 .feat p{margin:0;color:#333;font-size:15px}
 .ui .t{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
 .ui .q{border-left:3px solid var(--deep);padding-left:10px;margin:8px 0;color:#333}
-.ui .ok{color:#2E6B3A;font-weight:600}
+.ui .ok{color:var(--pass);font-weight:600}
 .ui .file{font:12.5px/1.6 ui-monospace,Menlo,monospace;color:#333;white-space:pre}
-/* proof */
+/* eight parts */
+.eight{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:46px;align-items:start}
+.axes{display:grid;gap:8px}
+.ax{display:grid;grid-template-columns:120px 1fr 40px;gap:14px;align-items:center;padding:12px 14px;border-radius:12px;border:1px solid var(--line);cursor:pointer;transition:background .25s,transform .25s}
+.ax:hover,.ax.sel{background:var(--tint);transform:translateX(4px)}
+.ax b{font-size:15px}.ax i{display:block;height:8px;border-radius:4px;background:var(--soft);overflow:hidden;font-style:normal}
+.ax i::after{content:"";display:block;height:100%;width:var(--v);background:var(--deep)}
+.ax span{font-size:14px;text-align:right}
+.axq{background:var(--night);color:#fff;border-radius:20px;padding:28px;min-height:280px;position:sticky;top:20px}
+.axq small{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.axq h3{margin:8px 0 10px;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:38px;letter-spacing:-.02em}
+.axq p{margin:0 0 14px;color:rgba(255,255,255,.82)}
+.axq .ex{border-left:2px solid var(--canary);padding-left:12px;font-size:14px;color:rgba(255,255,255,.9)}
+/* modes */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:36px;justify-content:center}
+.tab{padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:600;font-size:14px}
+.tab.sel{background:var(--ink);color:#fff;border-color:var(--ink)}
+.mode{margin:22px auto 0;max-width:820px;background:var(--soft);border-radius:20px;padding:26px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;text-align:left}
+.mode div b{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.mode div span{font-size:22px;letter-spacing:-.02em;font-weight:600}
+.mode p{grid-column:1/-1;margin:6px 0 0;color:#333;font-size:15px}
+/* demo embed */
+.demo{margin-top:40px;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.08);background:#fff}
+.demo iframe{display:block;width:100%;height:860px;border:0}
+/* research */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:46px}
 .stat{border-top:2px solid var(--deep);padding-top:16px}
 .stat b{display:block;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(40px,5vw,72px);line-height:1;letter-spacing:-.02em}
 .stat span{display:block;margin-top:8px;font-size:15px;color:#333}
+.papers{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.papers a{font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid var(--line);text-decoration:none;color:#333;transition:background .2s}
+.papers a:hover{background:var(--tint);border-color:var(--canary)}
 .fine{font-size:13px;color:var(--muted);margin-top:18px}
+/* why now */
+.now{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px}
+.now div{background:var(--soft);border-radius:20px;padding:24px}
+.now div:first-child{background:var(--tint)}
+.now b{display:block;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:52px;line-height:1;letter-spacing:-.02em;color:var(--deep)}
+.now p{margin:10px 0 0;color:#333;font-size:15px}
+.now small{display:block;margin-top:10px;font-size:12px;color:var(--muted)}
+/* trust */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px}
+.trust div{border:1px solid var(--line);border-radius:20px;padding:24px}
+.trust b{display:block;font-size:20px;letter-spacing:-.02em;margin-bottom:8px}
+.trust p{margin:0;color:#333;font-size:15px}
+/* enterprise */
+.ent{margin-top:110px;background:var(--night);color:#fff;border-radius:28px;padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;position:relative;overflow:hidden}
+.ent::before{content:"";position:absolute;left:-10%;top:-60%;width:60%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(139,26,18,.55),rgba(18,8,7,0));pointer-events:none}
+.ent h2{color:#fff;position:relative}
+.ent p{color:rgba(255,255,255,.82);position:relative;margin:16px 0 22px;max-width:52ch}
+.ent .list{position:relative;display:grid;gap:10px}
+.ent .list div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px 16px;font-size:15px}
+.ent .list div b{display:block;color:var(--canary);font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
 /* final */
 .final{margin:110px 0 0;background:var(--night);color:#fff;text-align:center;padding:110px 0 90px;position:relative;overflow:hidden}
-.final .sky{opacity:.8}
 .final h2{margin:0 auto 24px;max-width:16ch;position:relative}
 .final .wrap{position:relative}
 footer{padding:28px max(20px,4vw);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
-@media(max-width:900px){.app{grid-template-columns:1fr;transform:none}.side,.panel{display:none}.why,.feats,.stats{grid-template-columns:1fr}.nav nav{display:none}.hero{padding-top:90px}.inside .logos{gap:18px}}
+@media(max-width:900px){.app{grid-template-columns:1fr;transform:none}.side,.panel{display:none}.why,.feats,.stats,.eight,.now,.trust,.ent,.mode{grid-template-columns:1fr}.nav nav{display:none}.hero{padding-top:90px}.axq{position:static}.demo iframe{height:1100px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}h1 .w span{transform:none}.sub,.cta,.stage,.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 <section class="hero" id="top">
-  <div class="sky"></div>
+  <canvas id="land" aria-hidden="true"></canvas>
   <div class="grain"></div>
-  <svg class="stars" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <line x1="180" y1="140" x2="330" y2="90"/><line x1="330" y1="90" x2="470" y2="170"/><line x1="470" y1="170" x2="610" y2="120"/>
-    <line x1="980" y1="110" x2="1100" y2="180"/><line x1="1100" y1="180" x2="1260" y2="130"/><line x1="1260" y1="130" x2="1330" y2="230"/>
-    <circle cx="180" cy="140" r="2" style="animation-delay:.2s"/><circle cx="330" cy="90" r="2.5" style="animation-delay:1s"/><circle cx="470" cy="170" r="1.8" style="animation-delay:.6s"/><circle cx="610" cy="120" r="2.2" style="animation-delay:1.6s"/>
-    <circle cx="980" cy="110" r="2" style="animation-delay:.4s"/><circle cx="1100" cy="180" r="2.6" style="animation-delay:1.2s"/><circle cx="1260" cy="130" r="1.8" style="animation-delay:.9s"/><circle cx="1330" cy="230" r="2.2" style="animation-delay:2s"/>
-    <circle cx="720" cy="60" r="1.5" style="animation-delay:.3s"/><circle cx="860" cy="240" r="1.5" style="animation-delay:1.4s"/><circle cx="90" cy="300" r="1.5" style="animation-delay:.8s"/><circle cx="1400" cy="60" r="1.5" style="animation-delay:1.9s"/>
-  </svg>
   <div class="nav">
     <a class="mark" href="#top" aria-label="calious"><svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="11" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="13" r="4" fill="#FFE14D"/></svg>calious</a>
-    <nav><a href="#how">How it works</a><a href="#proof">Proof</a><a href="../API.md">API</a><a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a></nav>
-    <a class="btn" href="#install">Try it for free</a>
+    <nav><a href="#how">How it works</a><a href="#eight">Critique</a><a href="#try">Try it</a><a href="#research">Research</a><a href="#enterprise">Enterprise</a></nav>
+    <a class="btn" href="https://github.com/bhavya-in-sf/coulis" rel="noopener">Install on GitHub</a>
   </div>
   <div class="wrap">
     <span class="pill">Taste infrastructure for AI</span>
-    <h1><span class="w"><span>Sound like you,</span></span> <span class="w"><span>even when</span></span> <span class="w"><span>AI writes it.</span></span></h1>
-    <p class="sub">calious is the layer every AI calls before it speaks for you. It checks each draft against your facts and your voice, critiques it, and learns from your edits. Nothing goes out without your yes.</p>
+    <h1><span class="w"><span>The layer every AI</span></span> <span class="w"><span>calls before it</span></span> <span class="w"><span>speaks for you.</span></span></h1>
+    <p class="sub">AI learned everyone. calious adds your facts, your voice and your taste as a layer every AI runs through. It does not write for you. It revises and rewrites with your approval, your permission and an explanation.</p>
     <div class="cta">
-      <a class="btn" href="#install">Try it for free</a>
-      <a class="btn ghost" href="#how">See it check a draft</a>
+      <a class="btn" href="https://github.com/bhavya-in-sf/coulis" rel="noopener">Install on GitHub</a>
+      <a class="btn ghost" href="../waitlist.html">Join the waitlist for calious 2.0</a>
       <small>Open source. Inside Claude Code, Claude Desktop and Cursor today. Your taste file stays on your machine.</small>
     </div>
     <div class="stage">
       <div class="app" id="app">
         <div class="side">
-          <b>Profile</b><div class="on">Bhavya</div><div>PumpGTM team</div>
+          <b>Profile</b><div class="on">Bhavya</div><div>Startup team</div>
           <b>Modes</b><div>LinkedIn</div><div>Cold email</div><div>Investor update</div><div>Bio</div>
           <b>Taste file</b><div>TASTE.md</div><div>claims.md · 33 facts</div>
         </div>
@@ -192,16 +224,18 @@ footer{padding:28px max(20px,4vw);display:flex;justify-content:space-between;gap
 </section>
 
 <div class="inside">
-  <div class="wrap">
-    <span>Works where you already write</span>
-    <div class="logos"><span>Claude Code</span><span>Claude Desktop</span><span>Cursor</span><span>Any MCP client</span><span>REST API</span></div>
+  <div class="lab">Works where you already write. People, machines and enterprises, the same taste file behind all of them.</div>
+  <div class="track" aria-hidden="true">
+    <span>Claude Code</span><span>Claude Desktop</span><span>Cursor</span><span>Any MCP client</span><span>REST API</span><span>Python SDK</span><span>TypeScript SDK</span><span>Slack, next</span>
+    <span>Claude Code</span><span>Claude Desktop</span><span>Cursor</span><span>Any MCP client</span><span>REST API</span><span>Python SDK</span><span>TypeScript SDK</span><span>Slack, next</span>
   </div>
 </div>
 
 <section class="light center" id="why">
   <div class="wrap">
-    <span class="label reveal">Why calious</span>
-    <h2 class="reveal">As AI writes more, <i>it sounds like everyone.</i></h2>
+    <span class="label reveal">The problem</span>
+    <h2 class="reveal">AI sounds like everyone. <i>It cannot express you.</i></h2>
+    <p class="lede reveal">Your creativity, your individuality, your taste. You explain yourself every time. It still comes out average. Judgment is the one thing the labs are not optimising for: as models got better at code, their writing got worse.</p>
     <div class="why reveal">
       <div class="card">
         <div class="hd"><span>Your edit, 14:06</span><span>1 rule proposed</span></div>
@@ -209,8 +243,8 @@ footer{padding:28px max(20px,4vw);display:flex;justify-content:space-between;gap
         <div class="rule"><div><b>Open with the thing you built, not with excitement.</b><br><small>Seen in 3 of your last 5 edits</small></div><button type="button" id="approve">Approve</button></div>
       </div>
       <div>
-        <h3>It learns from what you actually sent.</h3>
-        <p>Every tool that writes for you averages everyone's taste into one voice. calious judges what was written, against your approved facts and your own posts, and turns each edit you make into a rule you approve. The file is yours.</p>
+        <h3>We bring you back.</h3>
+        <p>Everyone else writes for you. calious judges what was written: against your approved facts, your voice and your own recent posts. Then it learns from the one signal that is never wrong, what you actually sent, with your yes on every rule.</p>
         <a class="btn" href="#how">How it works</a>
       </div>
     </div>
@@ -224,61 +258,200 @@ footer{padding:28px max(20px,4vw);display:flex;justify-content:space-between;gap
     <div class="feats">
       <div class="feat reveal">
         <div class="ui"><div class="t"><span>Check</span><span>4 ms · no model</span></div><div class="q">"300+ founders" is not on your approved list.</div><div class="q">Em dash. House rule.</div><div class="ok">Revise. Two lines to settle.</div></div>
-        <b>Check</b><p>Fixed rules, the same answer every time. Facts you never approved, the AI tells, a hook you already used. Send, Revise or Hold, each problem quoted.</p>
+        <b>Check</b><p>Fixed rules, no AI model, about 4 ms, the same answer every time. Facts you never approved, the AI tells, a hook you already used. Send, Revise or Hold, with each problem quoted and an alternative in your own words.</p>
       </div>
       <div class="feat reveal">
         <div class="ui"><div class="t"><span>Critique</span><span>8 parts</span></div><div class="axis"><span>Clarity</span><i style="--v:70%"></i><span>7</span></div><div class="axis weak"><span>Proof</span><i style="--v:20%"></i><span>2</span></div><div class="axis"><span>Voice</span><i style="--v:30%"></i><span>3</span></div><div class="fix"><b>Weakest: proof.</b> One rewritten line.</div></div>
-        <b>Critique</b><p>Eight parts scored separately against your own samples. Never one number, because one number hides which thing is wrong.</p>
+        <b>Critique</b><p>Eight parts scored separately against your own samples. Never one number, because one number hides which thing is wrong. You see each score, the weakest part, and one rewritten line.</p>
       </div>
       <div class="feat reveal">
         <div class="ui"><div class="t"><span>Learn</span><span>TASTE.md</span></div><div class="file"># Learned from my edits
 - Open with the thing built, not excitement.
 - Lead with a number, not a question.
 + Never "excited to share".</div></div>
-        <b>Learn</b><p>Change a draft and it proposes the rule it saw. You approve. The rule joins a taste file you own.</p>
+        <b>Learn</b><p>Change a draft and it proposes the rule it saw. You approve. The rule joins a taste file you own. Continual learning from the one signal that is never wrong: what you actually sent.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="light" id="proof">
+<section class="light" id="eight">
   <div class="wrap">
-    <span class="label reveal">Proof</span>
-    <h2 class="reveal">Real writing, <i>real numbers.</i></h2>
-    <div class="stats">
-      <div class="stat reveal"><b data-n="2 in 3">2 in 3</b><span>of 673 published posts pass untouched</span></div>
-      <div class="stat reveal"><b>46/47</b><span>team drafts fixed by one approved fact</span></div>
-      <div class="stat reveal"><b>41/44</b><span>held-out posts from 11 writers score higher on their own profile</span></div>
-      <div class="stat reveal"><b>15%</b><span>less engagement on posts the check would have held</span></div>
+    <span class="label reveal">The critique</span>
+    <h2 class="reveal">Eight parts. <i>Never one number.</i></h2>
+    <p class="lede reveal">Four are checkable and judged the same for everyone. Four are taste, judged against your own samples and rules. Hover a part to see the question it asks.</p>
+    <div class="eight reveal">
+      <div class="axes" id="axes"></div>
+      <div class="axq" id="axq"><small>Part 2 of 8 · checkable</small><h3>Proof</h3><p>Is every claim backed by something specific: a number, a name, a result?</p><div class="ex">"300+ founders already trust us" is not on your approved list. One startup team uses it daily is.</div></div>
     </div>
-    <p class="fine reveal">2,437 real posts across 38 voices, 2022 to 2026. Every number reruns from <a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">the repo</a>.</p>
+  </div>
+</section>
+
+<section class="light center" id="modes">
+  <div class="wrap">
+    <span class="label reveal">Written for the moment</span>
+    <h2 class="reveal">A cold email <i>is not a launch post.</i></h2>
+    <p class="lede reveal">Each surface has its own rules: a word limit, the one thing the draft must contain, and the score it has to reach.</p>
+    <div class="tabs reveal" id="tabs"></div>
+    <div class="mode reveal" id="mode"></div>
+  </div>
+</section>
+
+<section class="light center" id="try">
+  <div class="wrap">
+    <span class="label reveal">Try it</span>
+    <h2 class="reveal">Paste a draft. <i>Watch it get checked.</i></h2>
+    <p class="lede reveal">The real check, ported to your browser, on a profile you can edit. Nothing you type leaves this page.</p>
+    <div class="demo reveal"><iframe src="../demo.html" title="calious live demo: paste a draft and watch it get checked" loading="lazy"></iframe></div>
+  </div>
+</section>
+
+<section class="light" id="research">
+  <div class="wrap">
+    <span class="label reveal">Our research</span>
+    <h2 class="reveal">What we used. <i>What it showed.</i></h2>
+    <p class="lede reveal">2,437 real posts across 38 voices, 2022 to 2026, from two companies the founder ran. One method every time: run the real writing through calious, compare with what the writer actually did.</p>
+    <div class="stats">
+      <div class="stat reveal"><b>2 in 3</b><span>of 673 published posts pass untouched. The rest carry the tells that read as AI.</span></div>
+      <div class="stat reveal"><b>46/47</b><span>team drafts fixed by one approved fact. The one unsupported number was still caught.</span></div>
+      <div class="stat reveal"><b>41/44</b><span>held-out posts from 11 writers score higher on their own profile than on a stranger's.</span></div>
+      <div class="stat reveal"><b>15%</b><span>less engagement on posts the check would have held, across 211 posts.</span></div>
+    </div>
+    <div class="papers reveal">
+      <a href="https://arxiv.org/abs/2306.05685" rel="noopener">Zheng 2023 · LLM as judge</a>
+      <a href="https://arxiv.org/abs/2309.05196" rel="noopener">Padmakumar and He 2024 · co-writing reduces diversity</a>
+      <a href="https://www.science.org/doi/10.1126/sciadv.adn5290" rel="noopener">Doshi and Hauser 2024 · Science Advances</a>
+      <a href="https://arxiv.org/abs/2409.14509" rel="noopener">Chakrabarty 2025 · 8,000 edits of AI text</a>
+      <a href="https://arxiv.org/abs/2304.11406" rel="noopener">Salemi 2024 · LaMP personalization</a>
+      <a href="https://arxiv.org/abs/2406.07016" rel="noopener">Kobak 2024 · excess vocabulary</a>
+      <a href="https://arxiv.org/abs/2305.14251" rel="noopener">Min 2023 · FActScore</a>
+    </div>
+    <p class="fine reveal">Every number reruns from <a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">the repo</a>.</p>
+  </div>
+</section>
+
+<section class="light" id="now">
+  <div class="wrap">
+    <span class="label reveal">Why now</span>
+    <h2 class="reveal">Taste is being funded. <i>Writing is the open seat.</i></h2>
+    <div class="now">
+      <div class="reveal"><b>40%</b><p>LinkedIn cuts the reach of posts that read as AI by about 40%. Posting under your own name now has a measurable AI penalty.</p><small>CNN, Oct 2026</small></div>
+      <div class="reveal"><b>880K</b><p>Writing got less varied as AI spread, measured across 880,000 texts. Sameness is measured, and human writing still wins the ranking.</p><small>Nature Human Behaviour, 2026</small></div>
+      <div class="reveal"><b>$18.5M</b><p>Taste Labs raised a seed to end AI slop at the model layer. Investors fund taste; writing has no funded leader inside the tools.</p><small>June 2026</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="light" id="trust">
+  <div class="wrap">
+    <span class="label reveal">How we keep it honest</span>
+    <h2 class="reveal">Approval first. <i>Private by default.</i></h2>
+    <div class="trust">
+      <div class="reveal"><b>Approval first</b><p>It never sends or rewrites without your yes. Every change comes with an explanation. Nothing is added to your taste file without a yes.</p></div>
+      <div class="reveal"><b>Privacy and security</b><p>Your taste file stays on your machine. The basic check never calls a model. The API hashes keys, encrypts profiles and never logs drafts.</p></div>
+      <div class="reveal"><b>Benchmarking and validation</b><p>Known drafts with known answers before every release, and posts the system has never seen. 21 automated tests run before anything ships.</p></div>
+    </div>
+
+    <div class="ent reveal" id="enterprise">
+      <div>
+        <span class="label" style="border-color:rgba(255,255,255,.2);color:#fff">calious 2.0 · enterprise</span>
+        <h2>Your data. Your memory. <i>Your taste model.</i></h2>
+        <p>The paid door. We build a company's brand strategy and taste file from its own data, memory and approved facts, into a custom model that runs calious, and integrate it into the systems it already uses: ERP, CRM, content tools. The same check your team runs today, inside every system the company already has.</p>
+        <a class="btn" href="../waitlist.html">Join the waitlist for calious 2.0</a>
+      </div>
+      <div class="list">
+        <div><b>People</b>Founders and teams: launch posts, LinkedIn and X posts, cold emails, bios, investor updates. Agencies and ghostwriters running many voices.</div>
+        <div><b>Machines</b>Every AI app, agent and assistant, through the API, the SDKs and MCP. The person behind the account is who the reader hears.</div>
+        <div><b>Enterprise</b>One taste file for the whole company, approved facts shared across the team, the team score gate, and a custom model wired into your systems.</div>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="final" id="install">
-  <div class="sky"></div><div class="grain"></div>
   <div class="wrap">
     <h2 class="reveal">AI learned everyone. <i>We bring you back.</i></h2>
     <div class="cta" style="opacity:1">
-      <a class="btn" href="https://github.com/bhavya-in-sf/coulis" rel="noopener">Install from GitHub</a>
-      <a class="btn ghost" href="../waitlist.html">Request an invitation to the table</a>
-      <small>/plugin marketplace add bhavya-in-sf/coulis · /plugin install coulis@coulis</small>
+      <a class="btn" href="https://github.com/bhavya-in-sf/coulis" rel="noopener">Install on GitHub</a>
+      <a class="btn ghost" href="../waitlist.html">Join the waitlist for calious 2.0</a>
+      <small>/plugin marketplace add bhavya-in-sf/coulis · /plugin install coulis@coulis · then /coulis:extract with your LinkedIn export</small>
     </div>
   </div>
 </section>
-<footer><span>calious · Taste infrastructure for AI · San Francisco</span><span><a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a> · <a href="../API.md">API</a> · MIT</span></footer>
+<footer><span>calious · Taste infrastructure for AI · San Francisco</span><span><a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a> · <a href="../API.md">API</a> · <a href="../BENCHMARK.md">Benchmark</a> · MIT</span></footer>
 
 <script>
 (function(){
+  /* live landscape: layered ridges at dusk, drifting slowly. Drawn in code; no footage. */
+  var c=document.getElementById('land'),x=c.getContext('2d'),W,H,t=0,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){W=c.width=innerWidth;H=c.height=c.parentNode.offsetHeight;}
+  size();addEventListener('resize',size);
+  function noise(n){return Math.sin(n*1.7)*.5+Math.sin(n*.53+1.3)*.3+Math.sin(n*3.1+.7)*.15+Math.sin(n*7.3)*.05}
+  var layers=[
+    {y:.50,amp:.08,f:1.3,sp:.010,col:'#3A1210'},
+    {y:.58,amp:.09,f:2.0,sp:.018,col:'#2C0E0C'},
+    {y:.66,amp:.10,f:2.9,sp:.028,col:'#200B09'},
+    {y:.76,amp:.12,f:3.8,sp:.040,col:'#170908'},
+    {y:.88,amp:.10,f:5.2,sp:.055,col:'#120807'}
+  ];
+  function draw(){
+    var g=x.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'#120807');g.addColorStop(.42,'#2A0D0A');g.addColorStop(.58,'#8B1A12');g.addColorStop(.66,'#E9A93A');g.addColorStop(.72,'#FFE14D');g.addColorStop(.78,'#3A1210');
+    x.fillStyle=g;x.fillRect(0,0,W,H);
+    var glow=x.createRadialGradient(W*.5,H*.7,0,W*.5,H*.7,W*.5);
+    glow.addColorStop(0,'rgba(255,225,77,.45)');glow.addColorStop(1,'rgba(255,225,77,0)');
+    x.fillStyle=glow;x.fillRect(0,0,W,H);
+    layers.forEach(function(L,i){
+      x.beginPath();x.moveTo(0,H);
+      for(var px=0;px<=W;px+=6){var n=noise(px/W*L.f*3+t*L.sp+i*9);var y=H*L.y+n*H*L.amp;x.lineTo(px,y)}
+      x.lineTo(W,H);x.closePath();x.fillStyle=L.col;x.fill();
+      /* mist */
+      var m=x.createLinearGradient(0,H*L.y-H*.06,0,H*L.y+H*.12);m.addColorStop(0,'rgba(255,225,77,0)');m.addColorStop(1,'rgba(255,225,77,'+(0.06-i*0.01)+')');x.fillStyle=m;x.fillRect(0,H*L.y-H*.06,W,H*.18);
+    });
+    t+=1;
+    if(!reduce)requestAnimationFrame(draw);
+  }
+  draw();if(reduce)draw();
+
   var hero=document.getElementById('top');
-  setTimeout(function(){hero.classList.add('in')},80);window.addEventListener('load',function(){hero.classList.add('in')});
+  setTimeout(function(){hero.classList.add('in')},80);addEventListener('load',function(){hero.classList.add('in')});
   setTimeout(function(){document.getElementById('app').classList.add('marked')},1900);
   var app=document.getElementById('app');
-  app.addEventListener('mousemove',function(e){var r=app.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;app.style.transform='rotateX('+(-y*6)+'deg) rotateY('+(x*8)+'deg)'});
+  app.addEventListener('mousemove',function(e){var r=app.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;app.style.transform='rotateX('+(-py*6)+'deg) rotateY('+(px*8)+'deg)'});
   app.addEventListener('mouseleave',function(){app.style.transform=''});
-  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.15}):null;
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.12}):null;
   document.querySelectorAll('.reveal').forEach(function(el,i){el.style.transitionDelay=(i%4)*90+'ms';io?io.observe(el):el.classList.add('on')});
+  var fr=document.querySelector('.demo iframe');function trim(){try{var d=fr.contentDocument;if(!d||!d.body)return;var st=d.createElement('style');st.textContent='nav,header h1,header .lede,.foot{display:none!important}header{padding-top:10px!important}';d.head.appendChild(st)}catch(e){}}fr.addEventListener('load',trim);trim();
   var ap=document.getElementById('approve');ap.addEventListener('click',function(){ap.textContent='Added to TASTE.md';ap.classList.add('ok');ap.disabled=true});
+
+  /* eight parts */
+  var AX=[
+    ['Clarity',7,'checkable','Can a stranger say what this is about after one read?','"We help teams unlock synergies" fails. "A check for AI drafts" passes.'],
+    ['Proof',2,'checkable','Is every claim backed by something specific: a number, a name, a result?','"300+ founders already trust us" is not on your approved list. One startup team uses it daily is.'],
+    ['Why you',3,'checkable','Does it say something only this person or company could say?','Five years making founders sound like themselves. Nobody else can open with that.'],
+    ['The ask',5,'checkable','Does the reader know the one next action?','One ask per post, named. Never two.'],
+    ['Hook',4,'taste','Does line one earn line two, the way this person opens?','Line one is a pain, a punch or a promise. Never a warm-up.'],
+    ['Voice',3,'taste','Does it sound like this person on their best day, compared with their samples?','Short lines. A number up front. "Excited to share" is not in any of your samples.'],
+    ['Boldness',5,'taste','Does it take the position this person would take?','You say the thing. "Some might argue" is not you.'],
+    ['Rhythm',6,'taste','Do sentence length and cadence match this person?','Median 8 words per line. One sentence per line. Break where a reader breathes.']
+  ];
+  var axes=document.getElementById('axes'),axq=document.getElementById('axq');
+  AX.forEach(function(a,i){var d=document.createElement('div');d.className='ax'+(i===1?' sel':'');d.innerHTML='<b>'+a[0]+'</b><i style="--v:'+(a[1]*10)+'%"></i><span>'+a[1]+'</span>';
+    function sel(){document.querySelectorAll('.ax').forEach(function(x){x.classList.remove('sel')});d.classList.add('sel');axq.innerHTML='<small>Part '+(i+1)+' of 8 · '+a[2]+'</small><h3>'+a[0]+'</h3><p>'+a[3]+'</p><div class="ex">'+a[4]+'</div>'}
+    d.addEventListener('mouseenter',sel);d.addEventListener('click',sel);axes.appendChild(d)});
+
+  /* modes */
+  var MODES=[
+    ['Launch post',['Words','About 180','Must contain','What you built','Target score','70'],'Open with the thing you built. A number in the first line when it is a resource. One ask, named.'],
+    ['Cold email',['Words','125','Must contain','One ask','Target score','80'],'Why this person, in the first line. No warm-up. The ask is the last sentence.'],
+    ['Investor update',['Words','400','Must contain','A number','Target score','85'],'What changed, in numbers. Wins, misses, asks. Every figure on your approved list.'],
+    ['Bio',['Words','80','Must contain','Who you are, in one line','Target score','80'],'One line a stranger can repeat. No adjectives that need proof.']
+  ];
+  var tabs=document.getElementById('tabs'),mode=document.getElementById('mode');
+  MODES.forEach(function(m,i){var b=document.createElement('button');b.type='button';b.className='tab'+(i===0?' sel':'');b.textContent=m[0];
+    b.addEventListener('click',function(){document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('sel')});b.classList.add('sel');show(i)});tabs.appendChild(b)});
+  function show(i){var m=MODES[i],r=m[1];mode.innerHTML='<div><b>'+r[0]+'</b><span>'+r[1]+'</span></div><div><b>'+r[2]+'</b><span>'+r[3]+'</span></div><div><b>'+r[4]+'</b><span>'+r[5]+'</span></div><p>'+m[2]+'</p>'}
+  show(0);
 })();
 </script>
 </body>
