@@ -94,3 +94,5 @@ These are local retrieval diagnostics, not QA accuracy or taste scores. No gener
 ## Personalization, distinct from retrieval
 
 The offline [personalization runner](../docs/PERSONALIZATION-EVAL.md) prepares three matched conditions with chronological/topic evidence filtering, randomizes pairwise review packets and reports human preference, correction-effort and factual-review metrics. Source and input hashes preserve provenance. Only synthetic software validation has run; real dated tasks, model outputs and human ballots are still required.
+
+Run `python3 -m coulis_research.mock_personalization --output private/mock-run` for the full scripted six-writer exercise (zero paid calls or human judgments). Results are explicitly simulations, not quality evidence. See the [evaluation guide](../docs/PERSONALIZATION-EVAL.md).

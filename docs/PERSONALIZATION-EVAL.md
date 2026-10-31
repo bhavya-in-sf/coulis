@@ -95,3 +95,15 @@ The same action works through REST, MCP, CLI, Python and TypeScript. Repeated/co
 Version 1 conservatively handles em-dash addition/removal, lowercase, paragraph breaks and sentence shortening when lexical content is unchanged. Numeric changes, non-style decisions, variant-only choices and unsupported semantic edits abstain. Confidence is explicitly null/uncalibrated with a tentative-single-edit label; there is no invented probability. Semantic preferences can still be supplied by a human/host model through `propose` and reviewed normally.
 
 This is approved contextual memory. It does not train weights. Candidate ranking and a trained taste scorer remain later work, dependent on actual labeled comparisons.
+
+## Run the full mock exercise
+
+```sh
+python3 -m coulis_research.mock_personalization --output private/mock-run
+```
+
+Use a new output directory. This runs real local workflow calls on disposable profiles, then both benchmark splits on six fictional writers and 24 tasks per split. It writes all bundles, scripted output fixtures, blinded packets, condition keys, simulated ballots, reports and a summary. It deliberately includes conflicts, future evidence, duplicate references, unapproved/expired/disabled preferences, factual regressions, ties, neither, and missing judgments/reviews. It makes zero model calls and collects zero human judgments.
+
+The mock runner uses `report(..., simulated=True)`. The equivalent CLI flag is `report --simulated`. This requires a synthetic dataset and ballots with `simulated:true` and no true human confirmation. The default human-review report rejects simulated ballots. Simulation reports are labeled `evaluation_mode: simulation` and `effectiveness_measured: false`. Scripted preference shares, edit times and factual-error rates are not product measurements. Randomized presentation and opaque trial IDs vary per run; retain that run's key and packet together.
+
+The first run passed 199 software checks. The committed summary is `research/results/mock-personalization-v1.json`; software tests rerun the complete exercise in CI.

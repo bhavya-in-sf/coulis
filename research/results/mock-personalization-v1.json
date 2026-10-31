@@ -1,0 +1,838 @@
+{
+  "version": "mock-run-v1",
+  "synthetic": true,
+  "model_calls": 0,
+  "human_judgments": 0,
+  "writers": 6,
+  "dataset_sha256": "8cc426b24cd664a7c83bc42c2fe6c92cf099cb0a28bc7f11c255e6634d80b908",
+  "splits": [
+    {
+      "split": "unseen_topic",
+      "tasks": 24,
+      "mock_outputs": 72,
+      "pairwise_trials": 72,
+      "simulated_ballots": 66,
+      "intentionally_missing": 6,
+      "ties": 17,
+      "neither": 17
+    },
+    {
+      "split": "future",
+      "tasks": 24,
+      "mock_outputs": 72,
+      "pairwise_trials": 72,
+      "simulated_ballots": 66,
+      "intentionally_missing": 6,
+      "ties": 17,
+      "neither": 17
+    }
+  ],
+  "checks_passed": 199,
+  "checks": [
+    {
+      "check": "writer_0_pending_has_no_effect",
+      "passed": true
+    },
+    {
+      "check": "writer_0_approval_applies",
+      "passed": true
+    },
+    {
+      "check": "writer_0_surface_isolation",
+      "passed": true
+    },
+    {
+      "check": "writer_0_resolved_not_reproposed",
+      "passed": true
+    },
+    {
+      "check": "writer_1_pending_has_no_effect",
+      "passed": true
+    },
+    {
+      "check": "writer_1_approval_applies",
+      "passed": true
+    },
+    {
+      "check": "writer_1_surface_isolation",
+      "passed": true
+    },
+    {
+      "check": "writer_1_resolved_not_reproposed",
+      "passed": true
+    },
+    {
+      "check": "writer_2_pending_has_no_effect",
+      "passed": true
+    },
+    {
+      "check": "writer_2_approval_applies",
+      "passed": true
+    },
+    {
+      "check": "writer_2_surface_isolation",
+      "passed": true
+    },
+    {
+      "check": "writer_2_resolved_not_reproposed",
+      "passed": true
+    },
+    {
+      "check": "writer_3_pending_has_no_effect",
+      "passed": true
+    },
+    {
+      "check": "writer_3_approval_applies",
+      "passed": true
+    },
+    {
+      "check": "writer_3_surface_isolation",
+      "passed": true
+    },
+    {
+      "check": "writer_3_resolved_not_reproposed",
+      "passed": true
+    },
+    {
+      "check": "writer_4_pending_has_no_effect",
+      "passed": true
+    },
+    {
+      "check": "writer_4_approval_applies",
+      "passed": true
+    },
+    {
+      "check": "writer_4_surface_isolation",
+      "passed": true
+    },
+    {
+      "check": "writer_4_resolved_not_reproposed",
+      "passed": true
+    },
+    {
+      "check": "writer_5_pending_has_no_effect",
+      "passed": true
+    },
+    {
+      "check": "writer_5_approval_applies",
+      "passed": true
+    },
+    {
+      "check": "writer_5_surface_isolation",
+      "passed": true
+    },
+    {
+      "check": "writer_5_resolved_not_reproposed",
+      "passed": true
+    },
+    {
+      "check": "revision_retires_old_preference",
+      "passed": true
+    },
+    {
+      "check": "disable_removes_preference",
+      "passed": true
+    },
+    {
+      "check": "other_writer_unaffected",
+      "passed": true
+    },
+    {
+      "check": "numeric_change_abstains",
+      "passed": true
+    },
+    {
+      "check": "purge_clears_workflow",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-0-task-0:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-0-task-0:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-0-task-0:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-0-task-0:topic_holdout",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-0-task-1:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-0-task-1:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-0-task-1:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-0-task-2:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-0-task-2:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-0-task-2:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-0-task-3:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-0-task-3:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-0-task-3:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-1-task-0:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-1-task-0:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-1-task-0:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-1-task-0:conflict_visible",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-1-task-0:topic_holdout",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-1-task-1:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-1-task-1:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-1-task-1:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-1-task-1:conflict_visible",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-1-task-2:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-1-task-2:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-1-task-2:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-1-task-2:conflict_visible",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-1-task-3:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-1-task-3:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-1-task-3:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-1-task-3:conflict_visible",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-2-task-0:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-2-task-0:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-2-task-0:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-2-task-0:topic_holdout",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-2-task-1:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-2-task-1:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-2-task-1:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-2-task-2:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-2-task-2:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-2-task-2:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-2-task-3:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-2-task-3:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-2-task-3:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-3-task-0:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-3-task-0:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-3-task-0:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-3-task-0:topic_holdout",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-3-task-1:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-3-task-1:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-3-task-1:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-3-task-2:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-3-task-2:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-3-task-2:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-3-task-3:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-3-task-3:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-3-task-3:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-4-task-0:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-4-task-0:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-4-task-0:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-4-task-0:topic_holdout",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-4-task-1:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-4-task-1:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-4-task-1:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-4-task-2:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-4-task-2:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-4-task-2:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-4-task-3:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-4-task-3:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-4-task-3:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-5-task-0:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-5-task-0:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-5-task-0:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-5-task-0:topic_holdout",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-5-task-1:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-5-task-1:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-5-task-1:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-5-task-2:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-5-task-2:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-5-task-2:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-5-task-3:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-5-task-3:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:mock-writer-5-task-3:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:condition_labels_hidden",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:missing_ballots_preserved",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:ties_and_neither_preserved",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:simulated_factual_regressions_visible",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:unknown_fact_reviews_not_counted",
+      "passed": true
+    },
+    {
+      "check": "unseen_topic:simulation_cannot_be_human_results",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-0-task-0:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-0-task-0:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-0-task-0:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-0-task-1:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-0-task-1:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-0-task-1:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-0-task-2:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-0-task-2:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-0-task-2:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-0-task-3:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-0-task-3:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-0-task-3:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-1-task-0:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-1-task-0:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-1-task-0:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-1-task-0:conflict_visible",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-1-task-1:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-1-task-1:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-1-task-1:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-1-task-1:conflict_visible",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-1-task-2:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-1-task-2:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-1-task-2:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-1-task-2:conflict_visible",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-1-task-3:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-1-task-3:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-1-task-3:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-1-task-3:conflict_visible",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-2-task-0:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-2-task-0:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-2-task-0:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-2-task-1:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-2-task-1:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-2-task-1:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-2-task-2:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-2-task-2:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-2-task-2:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-2-task-3:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-2-task-3:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-2-task-3:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-3-task-0:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-3-task-0:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-3-task-0:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-3-task-1:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-3-task-1:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-3-task-1:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-3-task-2:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-3-task-2:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-3-task-2:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-3-task-3:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-3-task-3:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-3-task-3:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-4-task-0:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-4-task-0:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-4-task-0:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-4-task-1:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-4-task-1:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-4-task-1:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-4-task-2:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-4-task-2:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-4-task-2:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-4-task-3:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-4-task-3:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-4-task-3:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-5-task-0:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-5-task-0:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-5-task-0:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-5-task-1:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-5-task-1:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-5-task-1:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-5-task-2:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-5-task-2:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-5-task-2:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-5-task-3:no_future_or_reference_leak",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-5-task-3:no_cross_writer_samples",
+      "passed": true
+    },
+    {
+      "check": "future:mock-writer-5-task-3:context_and_status_filter",
+      "passed": true
+    },
+    {
+      "check": "future:condition_labels_hidden",
+      "passed": true
+    },
+    {
+      "check": "future:missing_ballots_preserved",
+      "passed": true
+    },
+    {
+      "check": "future:ties_and_neither_preserved",
+      "passed": true
+    },
+    {
+      "check": "future:simulated_factual_regressions_visible",
+      "passed": true
+    },
+    {
+      "check": "future:unknown_fact_reviews_not_counted",
+      "passed": true
+    },
+    {
+      "check": "future:simulation_cannot_be_human_results",
+      "passed": true
+    }
+  ],
+  "effectiveness_measured": false,
+  "conclusion": "Software exercise passed. Outputs, choices, editing times and fact reviews are scripted. No product-quality or time-saving claim follows.",
+  "command": "python3 -m coulis_research.mock_personalization --output private/mock-personalization-verified",
+  "source_sha256": {
+    "coulis_research/mock_personalization.py": "437049fee7a9edc8c27af0547042786e953b0acc79c5385e75c1ff0cf33a8ee3",
+    "coulis_research/personalization.py": "9c322ffb4294924527b606e01c572c4ed611cc5e577c7e1c62c719c7897aae60",
+    "coulis_core/workflow.py": "3803acc6a26b60db2b4b37d93ae182d4259d27f1bf30a04c0dc7fee52ed805c5",
+    "coulis_core/extraction.py": "22a7dda694a2e7963211a9d31761268e7b97b9c609b87be43566bf47589b07c5"
+  }
+}
