@@ -102,3 +102,15 @@ Unmeasured so far: user preference for the drafts, edit reduction, retention, un
 - Source: Bhavya Goel's editing practice: 5 years, 50+ brands, 62K LinkedIn followers built from zero.
 - Used for: the seed slop list and the default directions for the taste axes (`reference/seed-taste.md`).
 - Label: experience, not research. Your TASTE.md overrides all of it.
+
+### E9. Kirk et al.: RLHF reduces output diversity
+- Source: [Understanding the Effects of RLHF on LLM Generalisation and Diversity](https://arxiv.org/abs/2310.06452) (ICLR 2024)
+- Finding: RLHF generalises better than supervised fine-tuning but "significantly reduces output diversity", both across samples for one prompt and across prompts.
+- Used for: the problem statement, "AI sounds like everyone", has a mechanism: the step that makes a model pleasant narrows what it says.
+- Does NOT prove: anything about a specific person's voice, or that a check restores diversity.
+
+### E10. OpenAI sycophancy postmortem: approval is not quality
+- Source: [Expanding on what we missed with sycophancy](https://openai.com/index/expanding-on-sycophancy/) (OpenAI, May 2025)
+- Finding: a reward signal from thumbs-up data favoured agreeable responses; offline evals and A/B tests looked good; expert testers said it "felt" off; shipped, rolled back in days.
+- Used for: the insight slide. Approval signals and judgment diverge; the people who noticed used judgment.
+- Does NOT prove: that edits are a better signal than ratings. That is our hypothesis, tested in RESEARCH-AGENDA.md.
