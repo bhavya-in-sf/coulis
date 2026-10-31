@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>pepple · We bring you back</title>
+<meta name="description" content="Pepple checks AI drafts against your facts and your voice before they go out under your name. Building the taste layer for AI.">
+<link rel="stylesheet" href="styles.css">
+<style>
+  body{background:#f7f7f7}
+  .top{display:flex;justify-content:space-between;align-items:center;padding:18px 5%;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(247,247,247,.92);backdrop-filter:blur(6px);z-index:5}
+  .top .brand{font-weight:900;font-size:26px;letter-spacing:-1.5px;text-decoration:none}
+  .top nav{display:flex;gap:22px;font-size:14px}.top nav a{text-decoration:none;color:var(--muted)}.top nav a:hover{color:var(--ink)}
+  .hero-wrap iframe{display:block;width:100%;height:860px;border:0;background:#f7f7f7}
+  @media(max-width:800px){.hero-wrap iframe{height:1180px}.top nav{display:none}}
+  .sec{max-width:1240px;margin:0 auto;padding:96px 5% 24px}
+  .sec .eyebrow{font:12px var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--muted)}
+  .sec h2{font-size:clamp(34px,4.6vw,62px);line-height:1;letter-spacing:-2px;margin:12px 0 14px;max-width:16ch}
+  .sec .lead{font-size:19px;max-width:58ch;color:#3a3a3a;margin:0 0 34px}
+  .sec .caption{display:none}
+  mark{background:var(--yellow);padding:0 .15em}
+  .proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .proof div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+  .proof b{display:block;font-size:44px;letter-spacing:-2px;line-height:1}
+  .proof span{display:block;margin-top:10px;font-size:15px;color:#3a3a3a}
+  .proof small{display:block;margin-top:8px;font:11px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
+  .doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+  .doors article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px}
+  .doors h3{margin:0 0 8px;font-size:24px;letter-spacing:-.5px}
+  .btn{display:inline-block;margin-top:16px;padding:13px 20px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-weight:700}
+  .btn.alt{background:var(--yellow);color:var(--ink)}
+  .foot{max-width:1240px;margin:80px auto 0;padding:0 5% 40px}
+  .foot .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:18px;margin-top:30px}
+</style>
+</head>
+<body>
+<header class="top"><a class="brand" href="#">pepple</a><nav aria-label="Main"><a href="#how">How it works</a><a href="#proof">Research</a><a href="#install">Try the plug-in</a><a href="#table">The table</a></nav></header>
+
+<div class="hero-wrap"><iframe id="hero" src="hero/index.html" title="Pepple: a draft before and after, with quoted issues"></iframe></div>
+
+<section class="sec" aria-labelledby="t1">
+  <span class="eyebrow">The problem</span>
+  <h2 id="t1">AI sounds like everyone else.</h2>
+  <p class="lead">It does not reliably express your creativity, individuality or taste. You re-explain yourself, and it still comes out average. These are the patterns Pepple quotes back to you.</p>
+  <div data-module="detector"></div>
+</section>
+
+<section class="sec" id="how" aria-labelledby="t2">
+  <span class="eyebrow">How it works</span>
+  <h2 id="t2">Three steps. <mark>You approve</mark> every one.</h2>
+  <p class="lead"><b>The gate:</b> fixed rules, no AI model, the same answer every time, about 4 ms. <b>The critique:</b> 8 things scored separately (clarity, proof, why you, the ask, hook, voice, boldness, rhythm), never one overall number, and only the weakest line is rewritten. <b>The learning:</b> edit a draft, it proposes a rule, you approve it.</p>
+  <div data-module="pipeline"></div>
+  <div style="height:28px"></div>
+  <div data-module="console"></div>
+</section>
+
+<section class="sec" aria-labelledby="t3">
+  <span class="eyebrow">Your taste, in a file you own</span>
+  <h2 id="t3">Your facts. Your voice. <mark>Your file.</mark></h2>
+  <p class="lead">Approved facts and voice rules live in a plain file on your machine. It grows only when you say yes.</p>
+  <div data-module="file"></div>
+  <div style="height:28px"></div>
+  <div data-module="terminal"></div>
+</section>
+
+<section class="sec" aria-labelledby="t4">
+  <span class="eyebrow">Written for the moment</span>
+  <h2 id="t4">A cold email is not a launch post.</h2>
+  <p class="lead">Founders and teams write launch posts, LinkedIn and X posts, cold emails, bios and investor updates. Each is checked with its own rules.</p>
+  <div data-module="modes"></div>
+</section>
+
+<section class="sec" id="proof" aria-labelledby="t5">
+  <span class="eyebrow">Research</span>
+  <h2 id="t5">What we used. What it showed.</h2>
+  <p class="lead">2,437 real posts across 38 voices are behind the rules. Each number keeps its scope; a pattern, not an accuracy rate.</p>
+  <div class="proof">
+    <div><b>68%</b><span>of one founder's 673 LinkedIn posts pass as written.</span><small>One archive</small></div>
+    <div><b>46/47</b><span>team drafts pass after one approved fact; the one unsupported number is still caught.</span><small>One team</small></div>
+    <div><b>16/24</b><span>held-out posts scored higher with their own author's profile.</span><small>6 founder voices</small></div>
+    <div><b>15%</b><span>less engagement on posts the gate would have held, across 211 posts.</span><small>Association, not cause</small></div>
+  </div>
+</section>
+
+<section class="sec" id="install" aria-labelledby="t6">
+  <span class="eyebrow">Try it</span>
+  <h2 id="t6">Inside the tools you already write in.</h2>
+  <div data-module="integrations"></div>
+  <div style="height:22px"></div>
+  <div data-module="install"></div>
+</section>
+
+<section class="sec" id="table" aria-labelledby="t7">
+  <span class="eyebrow">Two doors</span>
+  <h2 id="t7">A plug-in, and a table.</h2>
+  <div class="doors">
+    <article><h3>The plug-in</h3><p>Open source. Checks your drafts inside Claude Code, Claude Desktop and Cursor.</p><a class="btn" href="https://github.com/bhavya-in-sf/sauce" rel="noopener">Try the plug-in</a></article>
+    <article><h3>The table</h3><p>Invite-only dinners where founders and investors with taste meet, in San Francisco.</p><a class="btn alt" href="../index.html#waitlist">Request an invitation</a></article>
+  </div>
+</section>
+
+<footer class="foot">
+  <div data-module="footer"></div>
+  <div class="legal"><span>Building the taste layer for AI. Bhavya Goel, San Francisco.</span><span><a href="https://github.com/bhavya-in-sf/sauce">GitHub</a> · <a href="https://bhavyainsf.substack.com">Newsletter</a></span></div>
+</footer>
+
+<script src="data.js"></script>
+<script src="page.js"></script>
+<script>
+  // hero links should move this page, not the frame
+  document.getElementById('hero').addEventListener('load',function(){try{var d=this.contentDocument;d.querySelectorAll('a[href^="#"]').forEach(function(a){a.target='_top';a.href='#'+a.getAttribute('href').slice(1)});}catch(e){}});
+</script>
+</body>
+</html>
