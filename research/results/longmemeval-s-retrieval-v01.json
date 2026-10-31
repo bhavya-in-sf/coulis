@@ -1,0 +1,60 @@
+{
+  "schema": "coulis.research/report-v1",
+  "dataset": {
+    "source": "longmemeval",
+    "version": "longmemeval-cleaned/S; downloaded 2026-10-31; exact bytes pinned by report SHA256",
+    "url": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned",
+    "license": "MIT (publisher dataset-card declaration)",
+    "allowed_uses": [
+      "research_evaluation"
+    ],
+    "tenant_id": "public-research",
+    "limitations": "Session retrieval diagnostics on full supplied histories, not official answer-generation scores. Query-scoped identities are not known human identities. Training not enabled by this manifest."
+  },
+  "input_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+  "manifest_sha256": "79ea0ecb5af319d3518c0b190740009fee0c258129e4248e5a34e6b8b9ed47e3",
+  "code_sha256": "0df7d036e81dc435b5706393aeec70d91ad598c7f8fdc57d645216e82dde56e1",
+  "git_revision": "5035fee843f60e9c1a727f5948543fa832dba7cc",
+  "git_dirty": true,
+  "python": "3.14.7",
+  "scope": "Retrieval diagnostics only. Not an official benchmark score, generation quality, or evidence of personal taste.",
+  "audit": {
+    "examples": 500,
+    "unique_users": 500,
+    "near_duplicate_detection": "not implemented; review before training",
+    "duplicate_cross_group_document_count": 5394
+  },
+  "conditions": [
+    {
+      "method": "none",
+      "k": 3,
+      "queries": 500,
+      "scored_queries": 500,
+      "unscored_queries": 0,
+      "mean_recall_at_k": 0.0,
+      "macro_user_recall_at_k": 0.0,
+      "mean_reciprocal_rank": 0.0
+    },
+    {
+      "method": "bm25",
+      "k": 3,
+      "queries": 500,
+      "scored_queries": 500,
+      "unscored_queries": 0,
+      "mean_recall_at_k": 0.8618333333333333,
+      "macro_user_recall_at_k": 0.8618333333333333,
+      "mean_reciprocal_rank": 0.8986666666666666
+    },
+    {
+      "method": "tfidf",
+      "k": 3,
+      "queries": 500,
+      "scored_queries": 500,
+      "unscored_queries": 0,
+      "mean_recall_at_k": 0.7233666666666667,
+      "macro_user_recall_at_k": 0.7233666666666667,
+      "mean_reciprocal_rank": 0.7723333333333333
+    }
+  ],
+  "command": "python3 -m coulis_research evaluate --input private/research/longmemeval_s_cleaned.json --manifest research/longmemeval-s.manifest.json --output private/research/s-report.json --k 3"
+}

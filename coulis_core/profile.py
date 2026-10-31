@@ -39,6 +39,14 @@ class Rule:
     source: str = "user"          # user | learned
     approved: bool = True
     added: str = ""               # YYYY-MM-DD when known
+    id: str = ""
+    scope: dict = field(default_factory=dict)
+    key: str = ""
+    value: str = ""
+    active: bool = True
+    expires: str = ""
+    evidence_ids: list = field(default_factory=list)
+
 
 
 @dataclass

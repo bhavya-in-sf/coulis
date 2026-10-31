@@ -61,6 +61,23 @@ TOOLS = [
      "inputSchema": {"type": "object", "properties": {"profile_dir": PROFILE_DIR}, "additionalProperties": False}},
 ]
 
+CONTEXT = {"type":"object","additionalProperties":False,"properties":{"audience":{"type":"string"},"purpose":{"type":"string"}}}
+TOOLS += [
+    {"name":"coulis_context", "description":"Retrieve this profile's relevant writing examples and approved contextual preferences. No model call; no factual verification.",
+     "inputSchema":{"type":"object","required":["text"],"additionalProperties":False,"properties":{
+        "profile_dir":PROFILE_DIR,"text":{"type":"string"},"surface":SURFACE,"context":CONTEXT,
+        "method":{"type":"string","enum":["original","bm25","tfidf"],"default":"bm25"}}}},
+    {"name":"coulis_feedback", "description":"Record explicit user feedback locally for research. Requires permission to store this event. Does not train a model or approve a preference.",
+     "inputSchema":{"type":"object","required":["approved","example_id","action"],"additionalProperties":False,"properties":{
+        "profile_dir":PROFILE_DIR,"approved":{"type":"boolean"},"example_id":{"type":"string"},
+        "action":{"type":"string","enum":["accepted","edited","removed","not_selected","explicit_preference"]},
+        "reason":{"type":"string"}}}},
+]
+
+
+for tool in TOOLS:
+    if tool["name"] == "coulis_critique":
+        tool["inputSchema"]["properties"]["context"] = CONTEXT
 
 _ARG_DIR = {"dir": None}  # per-call override from the optional profile_dir argument
 
@@ -204,7 +221,7 @@ def add_entry(kind, text, reason=""):
 def log_use(name, args, out):
     """Usage log next to the profile (coulis-log.jsonl): what was used, when, and the outcome.
     Stores a short preview of the text, never the whole draft. Turn off with COULIS_LOG=0."""
-    if (os.environ.get("COULIS_LOG") or os.environ.get("TASTEE_LOG", "1")) == "0" or name == "coulis_profile":
+    if (os.environ.get("COULIS_LOG") or os.environ.get("TASTEE_LOG", "1")) == "0" or name in ("coulis_profile", "coulis_context", "coulis_feedback"):
         return
     import datetime
     text = args.get("text") or args.get("draft") or ""
@@ -240,6 +257,21 @@ def call_tool(name, args):
 
 
 def _call_tool(name, args):
+    if name == "coulis_context":
+        from coulis_core.context import build_context
+        return build_context(args["text"], profile(), args.get("surface", "linkedin"), args.get("context"), args.get("method", "bm25"))
+    if name == "coulis_feedback":
+        from coulis_research.store import Store
+        if args.get("approved") is not True:
+            raise ValueError("Explicit permission to store feedback is required")
+        folder = profile_dir()
+        folder.mkdir(parents=True, exist_ok=True)
+        store = Store(folder / 'coulis-research.db')
+        try:
+            store.feedback('local', 'profile', {k:v for k,v in args.items() if k != 'approved'})
+        finally:
+            store.close()
+        return {"saved":True,"model_trained":False,"preference_approved":False}
     if name == "coulis_check":
         out = check(args["text"], profile(), args.get("surface", "linkedin"), history=recent_sent(args.get("surface", "linkedin")),
                     max_sameness=args.get("max_sameness"))
@@ -257,9 +289,9 @@ def _call_tool(name, args):
             return {"mode": "host_model",
                     "instructions": SYSTEM + "\n\nScore the draft below now, in this chat, and reply with JSON "
                                     "matching `output_schema`. Then show the user each axis and the rewrite.",
-                    "task": build_prompt(args["text"], prof, surface),
+                    "task": build_prompt(args["text"], prof, surface, args.get("context")),
                     "output_schema": SCHEMA}
-        return critique(args["text"], prof, surface)
+        return critique(args["text"], prof, surface, context=args.get("context"))
     if name == "coulis_learn":
         out = learn(args["draft"], args["final"], profile())
         record_edit_pair(args["draft"], args["final"], args.get("surface", "linkedin"), out.get("proposed_rules", []))
