@@ -80,6 +80,20 @@ class InterfaceTests(unittest.TestCase):
         row = self.client.workflow('edit', task='Fix fact', draft='10 customers', final='20 customers', context={'surface':'x'},category='fact',consent=True)
         with self.assertRaises(CoulisError):
             self.client.workflow('propose',comparison_id=row['id'],key='numbers',value='larger',wording='Use larger numbers')
+    def test_concurrent_approval_is_atomic(self):
+        row = self.local.workflow('edit',task='Task',draft='a',final='b',context={'surface':'x'},category='style',consent=True)
+        p = self.local.workflow('propose',comparison_id=row['id'],key='tone',value='direct',wording='Be direct')
+        def approve(_):
+            try:
+                self.client.workflow('approve',proposal_id=p['id'],approved=True)
+                return 200
+            except CoulisError as e: return e.status
+        with ThreadPoolExecutor(2) as pool: results = list(pool.map(approve, range(2)))
+        self.assertEqual(sorted(results),[200,400])
+        state = self.local.workflow('state')
+        self.assertEqual(len(state['preferences']),1)
+        self.assertEqual(state['proposals'],[])
+
     def test_typescript_against_real_http_server(self):
         node = os.environ.get('COULIS_TEST_NODE')
         if not node: self.skipTest('Set COULIS_TEST_NODE to run TypeScript against the real HTTP API')

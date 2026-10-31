@@ -102,13 +102,15 @@ class Workflow:
 
     def approve(self, proposal_id, approved=False, supersedes=None):
         if approved is not True: raise ValueError('Explicit preference approval required')
-        record=self.db.execute('SELECT payload,resolved FROM proposals WHERE id=?',(proposal_id,)).fetchone()
-        if not record or record[1]: raise ValueError('Unknown or resolved proposal')
-        p=json.loads(record[0]);p.update(approved=True,effective_at=now())
-        if supersedes: p['supersedes']=supersedes
-        # Single local process: preference insertion itself is unique and prevents duplicate approval.
-        result=self.store.add('local','profile',p)
-        with self.db: self.db.execute('UPDATE proposals SET resolved=1 WHERE id=?',(proposal_id,))
+        # Lock before reading so approval/rejection/purge cannot race across transports.
+        with self.db:
+            self.db.execute('BEGIN IMMEDIATE')
+            record=self.db.execute('SELECT payload,resolved FROM proposals WHERE id=?',(proposal_id,)).fetchone()
+            if not record or record[1]: raise ValueError('Unknown or resolved proposal')
+            p=json.loads(record[0]);p.update(approved=True,effective_at=now())
+            if supersedes: p['supersedes']=supersedes
+            result=self.store.add('local','profile',p)
+            self.db.execute('UPDATE proposals SET resolved=1 WHERE id=?',(proposal_id,))
         return result
 
     def revise(self, preference_id, value, wording):
@@ -169,7 +171,9 @@ class Workflow:
         if action=='prepare':return self.prepare(**args)
         if action=='revise':return self.revise(**args)
         if action=='reject':
-            with self.db:self.db.execute('UPDATE proposals SET resolved=1 WHERE id=?',(args['proposal_id'],))
+            with self.db:
+                changed=self.db.execute('UPDATE proposals SET resolved=1 WHERE id=? AND resolved=0',(args['proposal_id'],)).rowcount
+                if changed != 1: raise ValueError('Unknown or resolved proposal')
             return {'rejected':True}
         if action=='disable':
             self.store.disable('local','profile',args['preference_id']);return {'disabled':True}

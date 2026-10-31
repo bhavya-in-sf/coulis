@@ -1,4 +1,5 @@
 """Local SQLite research store. Tenant arguments are isolation filters, NOT authentication."""
+from contextlib import nullcontext
 import datetime as dt
 import json
 import sqlite3
@@ -64,7 +65,7 @@ class Store:
                 raise ValueError('Supersession must use the same key and scope')
             if timestamp(p['effective_at']) < timestamp(old['effective_at']):
                 raise ValueError('Supersession cannot predate the original')
-        with self.db:
+        with (nullcontext() if self.db.in_transaction else self.db):
             self.db.execute('INSERT INTO preferences VALUES(?,?,?,?)', (tenant, person, p['id'], json.dumps(p)))
             # Audit metadata only: deleted preference text is not retained here.
             self.event(tenant, person, 'preference_added', {'id': p['id'], 'approved':p['approved']})
