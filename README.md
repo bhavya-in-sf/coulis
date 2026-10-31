@@ -48,7 +48,7 @@ Then `/sauce:critique` scores the draft on 8 separate axes against her own sampl
 - **Directions, with approval:** `/sauce:bolder`, `/sauce:quieter`, `/sauce:shorter`, `/sauce:clearer`. One rewrite, checked, and nothing changes until you say yes.
 - **Variants that teach:** `/sauce:variants` shows 3 hooks; your pick is saved as taste data (`sauce_pick`).
 - **Modes by surface:** `linkedin`, `x`, `cold_email`, `investor_update`, `bio` (plus reddit, instagram, youtube), each with its own rules and target score.
-- **`/sauce:extract`:** turn your past posts or LinkedIn export into a starter TASTE.md and claims.md.
+- **`/sauce:extract`:** turn your past posts or LinkedIn export into a starter TASTE.md and claims.md. To get the export: LinkedIn > Me > Settings & Privacy > Data privacy > Get a copy of your data > tick Posts > Request archive. The zip arrives by email in about 10 minutes.
 - **`/sauce:doctor`:** checks your profile is complete and up to date.
 - **Always on:** the Stop hook now waits for the last reply before checking, and logs each run to `~/.sauce/hook-log.jsonl`.
 - **Benchmark:** a public "sounds like you" test for AI writing apps. See [docs/BENCHMARK.md](docs/BENCHMARK.md).
@@ -61,7 +61,7 @@ git clone https://github.com/bhavya-in-sf/sauce && cd sauce
 echo "We just hit \$50k MRR — a total game-changer." | python3 scripts/gate.py --persona personas/bhavya -
 ```
 
-Python 3.10+ only, nothing to install. Then make it yours with `/sauce:setup`.
+Python 3.10+ only, nothing to install. Then make it yours: `/sauce:extract` with your LinkedIn export (Me > Settings & Privacy > Data privacy > Get a copy of your data > Posts; about 10 minutes), or `/sauce:setup` to answer 5 questions and paste 3 posts.
 
 ## Why
 AI writing sounds like everyone else. Memory tools help the AI know who you are, but nothing checks the finished draft against your taste. Sauce adds that check, the critic step, and learns from what you actually change.
@@ -157,5 +157,5 @@ MIT. Built by Bhavya Goel.
 ## Also in the box
 - `python3 scripts/deck_check.py deck.pdf` checks a deck slide by slide and flags the same noun with different numbers across slides ("300 customers" on slide 3, "350" on slide 9). Also .pptx and .md.
 - `python3 scripts/taste_card.py --out card.html` renders a shareable one-page card of how you write, measured from your own samples. Nothing invented.
-- `sauce setup --linkedin export.zip` builds your TASTE.md and claims.md from your own posts in one command.
+- `sauce setup --linkedin export.zip` builds your TASTE.md and claims.md from your own posts in one command (the export: LinkedIn > Me > Settings & Privacy > Data privacy > Get a copy of your data > Posts).
 - `sauce check --max-sameness 50` turns the sameness score into a team gate.

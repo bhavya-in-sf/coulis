@@ -6,6 +6,9 @@ description: Build a starter taste profile from someone's past writing: a Linked
 # Sauce: extract (your past posts become your taste file)
 
 1. Ask for the source if not given: a LinkedIn data export (.zip or its Shares csv), a file or folder of posts, or posts pasted in the chat.
+   If they do not have the export yet, give them these exact steps and wait:
+   "On LinkedIn: click Me > Settings & Privacy > Data privacy > Get a copy of your data. Choose 'Want something in particular?' and tick Posts (or Shares). Click Request archive. LinkedIn emails a download link in about 10 minutes. Download the zip and give me its path, or drag it into this chat."
+   If they would rather not wait: ask them to paste 3 to 5 posts they are proud of, and go to step 3.
 2. LinkedIn export: run from the plug-in root
    `python3 scripts/sauce.py setup --linkedin <export.zip or Shares.csv> --out <profile folder, default ~/.sauce> --name "<name, role>"`
    This writes TASTE.md and claims.md from the person's own posts, locally. Nothing is uploaded.

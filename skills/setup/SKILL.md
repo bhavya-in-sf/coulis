@@ -9,7 +9,7 @@ Goal: create a `TASTE.md` in the user's current folder, so they never have to re
 
 ## Steps
 1. Check whether `TASTE.md` already exists in the current folder. If it does, show it and ask whether to update it or start fresh. Never overwrite without a yes.
-2. Ask these 5 questions, one message, numbered. Keep it short.
+2. Offer the fast route first: "If you have your LinkedIn data export, run /sauce:extract and I will build this from your real posts. To get it: Me > Settings & Privacy > Data privacy > Get a copy of your data > tick Posts > Request archive (about 10 minutes by email)." If they want to continue without it, ask these 5 questions, one message, numbered. Keep it short.
    1. Who are you and what do you do, in one line?
    2. Who do you write for?
    3. What do you want readers to do after reading?
