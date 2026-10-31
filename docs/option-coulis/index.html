@@ -36,7 +36,7 @@ button{font:inherit}
 .grain{position:absolute;inset:0;opacity:.06;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.9'/></svg>");mix-blend-mode:screen;pointer-events:none}
 .hero .wrap{position:relative;text-align:center}
 .pill{display:inline-block;font-size:13px;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.88);margin-bottom:26px;backdrop-filter:blur(6px)}
-h1{margin:0 auto;font-weight:400;font-family:"Instrument Serif",Georgia,serif;letter-spacing:-.025em;line-height:1.02;font-size:clamp(44px,7vw,96px);max-width:14ch;text-shadow:0 2px 30px rgba(0,0,0,.35)}
+h1{margin:0 auto;font-weight:600;font-family:"Instrument Sans",system-ui,sans-serif;letter-spacing:-.035em;line-height:1.02;font-size:clamp(40px,6.4vw,88px);max-width:14ch;text-shadow:0 2px 30px rgba(0,0,0,.35)}
 h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.06em}
 h1 .w span{display:inline-block;transform:translateY(110%);transition:transform .9s cubic-bezier(.2,.7,.1,1)}
 .in h1 .w span{transform:none}
@@ -83,7 +83,7 @@ h1 .w span{display:inline-block;transform:translateY(110%);transition:transform 
 section.light{padding:110px 0 0}
 .label{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;border:1px solid var(--line);margin-bottom:22px}
 .label::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--deep)}
-h2{margin:0;font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:-.02em;line-height:1.02;font-size:clamp(36px,5vw,68px);max-width:16ch}
+h2{margin:0;font-family:"Instrument Sans",system-ui,sans-serif;font-weight:600;letter-spacing:-.035em;line-height:1.02;font-size:clamp(34px,4.6vw,62px);max-width:16ch}
 .center{text-align:center}.center h2{margin:0 auto}
 .lede{font-size:clamp(16px,1.3vw,19px);color:#333;max-width:60ch;margin:18px 0 0}
 .center .lede{margin:18px auto 0}
@@ -124,7 +124,7 @@ h2{margin:0;font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-
 .ax span{font-size:14px;text-align:right}
 .axq{background:var(--night);color:#fff;border-radius:20px;padding:28px;min-height:280px;position:sticky;top:20px}
 .axq small{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6)}
-.axq h3{margin:8px 0 10px;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:38px;letter-spacing:-.02em}
+.axq h3{margin:8px 0 10px;font-weight:600;font-size:36px;letter-spacing:-.03em}
 .axq p{margin:0 0 14px;color:rgba(255,255,255,.82)}
 .axq .ex{border-left:2px solid var(--canary);padding-left:12px;font-size:14px;color:rgba(255,255,255,.9)}
 /* modes */
@@ -141,7 +141,7 @@ h2{margin:0;font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-
 /* research */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:46px}
 .stat{border-top:2px solid var(--deep);padding-top:16px}
-.stat b{display:block;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(40px,5vw,72px);line-height:1;letter-spacing:-.02em}
+.stat b{display:block;font-weight:600;font-size:clamp(36px,4.6vw,64px);line-height:1;letter-spacing:-.03em;color:var(--deep)}
 .stat span{display:block;margin-top:8px;font-size:15px;color:#333}
 .papers{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
 .papers a{font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid var(--line);text-decoration:none;color:#333;transition:background .2s}
@@ -151,7 +151,7 @@ h2{margin:0;font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-
 .now{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px}
 .now div{background:var(--soft);border-radius:20px;padding:24px}
 .now div:first-child{background:var(--tint)}
-.now b{display:block;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:52px;line-height:1;letter-spacing:-.02em;color:var(--deep)}
+.now b{display:block;font-weight:600;font-size:48px;line-height:1;letter-spacing:-.03em;color:var(--deep)}
 .now p{margin:10px 0 0;color:#333;font-size:15px}
 .now small{display:block;margin-top:10px;font-size:12px;color:var(--muted)}
 /* trust */
@@ -186,8 +186,8 @@ footer{padding:28px max(20px,4vw);display:flex;justify-content:space-between;gap
     <a class="btn" href="https://github.com/bhavya-in-sf/coulis" rel="noopener">Install on GitHub</a>
   </div>
   <div class="wrap">
-    <span class="pill">Taste infrastructure for AI</span>
-    <h1><span class="w"><span>The layer every AI</span></span> <span class="w"><span>calls before it</span></span> <span class="w"><span>speaks for you.</span></span></h1>
+    <span class="pill">We bring you back.</span>
+    <h1><span class="w"><span>Taste infrastructure for AI.</span></span><br><span class="w"><span><i>The layer every AI calls</i></span></span> <span class="w"><span><i>before it speaks for you.</i></span></span></h1>
     <p class="sub">AI learned everyone. coulis adds your facts, your voice and your taste as a layer every AI runs through. It does not write for you. It revises and rewrites with your approval, your permission and an explanation.</p>
     <div class="cta">
       <a class="btn" href="https://github.com/bhavya-in-sf/coulis" rel="noopener">Install on GitHub</a>
