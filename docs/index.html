@@ -10,14 +10,14 @@
 @font-face{font-family:"Instrument Sans";src:url(fonts/InstrumentSans-Bold.ttf);font-weight:600 800}
 @font-face{font-family:"Instrument Serif";src:url(fonts/InstrumentSerif-Regular.ttf);font-weight:400}
 @font-face{font-family:"Instrument Serif";src:url(fonts/InstrumentSerif-Italic.ttf);font-style:italic}
-:root{--ink:#111;--white:#fff;--deep:#8B1A12;--deep2:#B3241C;--canary:#FFE14D;--tint:#FFF6C2;--soft:#F6F6F8;--muted:#6b6b6b;--line:#e6e6e6;--night:#120807;--night2:#2A0D0A;--pass:#2E6B3A}
+:root{--ink:#111;--white:#fff;--deep:#8B1A12;--deep2:#B3241C;--canary:#F3E3E1;--tint:#F6F6F8;--soft:#F6F6F8;--muted:#6b6b6b;--line:#e6e6e6;--night:#120807;--night2:#2A0D0A;--pass:#2E6B3A}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--white);color:var(--ink);font-family:"Instrument Sans",system-ui,sans-serif;font-size:17px;line-height:1.5;overflow-x:clip;-webkit-font-smoothing:antialiased}
 a{color:inherit}
 i{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:0}
 .wrap{max-width:1200px;margin:0 auto;padding:0 max(20px,4vw)}
-::selection{background:var(--canary);color:var(--ink)}
+::selection{background:#F3E3E1;color:var(--ink)}
 button{font:inherit}
 /* nav */
 .nav{position:absolute;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:16px max(20px,4vw);color:var(--ink)}
@@ -53,10 +53,10 @@ h1 .w span{display:inline-block;transform:translateY(110%);transition:transform 
 .side div{padding:7px 10px;border-radius:8px;color:#333}.side div.on{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08);font-weight:600}
 .main{padding:18px 22px}
 .crumb{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
-.crumb span:last-child{background:var(--tint);color:var(--deep);font-weight:600;padding:4px 10px;border-radius:999px}
+.crumb span:last-child{background:#F3E3E1;color:var(--deep);font-weight:600;padding:4px 10px;border-radius:999px}
 .draft{margin-top:18px;border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-size:15px;line-height:1.55}
 .draft mark{background:transparent;padding:0 2px;border-radius:3px;transition:background .3s,color .3s}
-.marked .draft mark{background:var(--tint);color:var(--deep);box-shadow:inset 0 -2px 0 var(--deep)}
+.marked .draft mark{background:#F3E3E1;color:var(--deep);box-shadow:inset 0 -2px 0 var(--deep)}
 .row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
 .chip{font-size:12px;padding:6px 10px;border-radius:999px;background:var(--soft);color:#333;opacity:0;transform:translateY(6px);transition:all .4s}
 .marked .chip{opacity:1;transform:none}
@@ -97,7 +97,7 @@ h2{margin:0;font-family:"Instrument Sans",system-ui,sans-serif;font-weight:600;l
 .why:hover .card{transform:rotate(0)}
 .card .hd{display:flex;justify-content:space-between;font-weight:600;margin-bottom:12px}
 .card .hd span:last-child{color:var(--deep)}
-.diff{line-height:1.7}.diff del{color:#999}.diff ins{text-decoration:none;background:var(--tint);color:var(--deep);padding:0 3px;border-radius:3px}
+.diff{line-height:1.7}.diff del{color:#999}.diff ins{text-decoration:none;background:#F3E3E1;color:var(--deep);padding:0 3px;border-radius:3px}
 .rule{margin-top:12px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
 .rule small{color:var(--muted)}
 .rule button{font-size:12px;font-weight:600;padding:6px 10px;border-radius:999px;border:0;background:var(--ink);color:#fff;cursor:pointer}
@@ -117,7 +117,7 @@ h2{margin:0;font-family:"Instrument Sans",system-ui,sans-serif;font-weight:600;l
 .eight{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:46px;align-items:start}
 .axes{display:grid;gap:8px}
 .ax{display:grid;grid-template-columns:120px 1fr 40px;gap:14px;align-items:center;padding:12px 14px;border-radius:12px;border:1px solid var(--line);cursor:pointer;transition:background .25s,transform .25s}
-.ax:hover,.ax.sel{background:var(--tint);transform:translateX(4px)}
+.ax:hover,.ax.sel{background:#F3E3E1;transform:translateX(4px)}
 .ax b{font-size:15px}.ax i{display:block;height:8px;border-radius:4px;background:var(--soft);overflow:hidden;font-style:normal}
 .ax i::after{content:"";display:block;height:100%;width:var(--v);background:var(--deep)}
 .ax span{font-size:14px;text-align:right}
@@ -144,7 +144,7 @@ h2{margin:0;font-family:"Instrument Sans",system-ui,sans-serif;font-weight:600;l
 .stat span{display:block;margin-top:8px;font-size:15px;color:#333}
 .papers{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
 .papers a{font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid var(--line);text-decoration:none;color:#333;transition:background .2s}
-.papers a:hover{background:var(--tint);border-color:var(--canary)}
+.papers a:hover{background:#F3E3E1;border-color:var(--deep)}
 .fine{font-size:13px;color:var(--muted);margin-top:18px}
 /* why now */
 .now{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px}
@@ -165,12 +165,12 @@ h2{margin:0;font-family:"Instrument Sans",system-ui,sans-serif;font-weight:600;l
 .ent p{color:rgba(255,255,255,.82);position:relative;margin:16px 0 22px;max-width:52ch}
 .ent .list{position:relative;display:grid;gap:10px}
 .ent .list div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px 16px;font-size:15px}
-.ent .list div b{display:block;color:var(--canary);font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.ent .list div b{display:block;color:#fff;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
 /* final */
 .final{margin:110px 0 0;background:var(--deep);color:#fff;text-align:center;padding:110px 0 90px;position:relative;overflow:hidden}
 .final h2{margin:0 auto 24px;max-width:16ch;position:relative}
 .final .wrap{position:relative}
-.ent .btn,.final .btn{background:#fff;color:var(--ink)}.ent .btn:hover,.final .btn:hover{background:var(--tint)}.final .btn.ghost{color:#fff;border-color:#fff}.final .btn.ghost:hover{background:rgba(255,255,255,.1)}
+.ent .btn,.final .btn:not(.ghost){background:#fff;color:var(--ink)}.ent .btn:hover,.final .btn:hover{background:#F3E3E1}.final .btn.ghost{background:transparent!important;color:#fff!important;border:1px solid #fff}.final .cta small{color:rgba(255,255,255,.8)}.final .btn.ghost:hover{background:rgba(255,255,255,.1)}
 footer{padding:28px max(20px,4vw);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
 @media(max-width:900px){.app{grid-template-columns:1fr;transform:none}.side,.panel{display:none}.why,.feats,.stats,.eight,.now,.trust,.ent,.mode{grid-template-columns:1fr}.nav nav{display:none}.hero{padding-top:90px}.axq{position:static}.demo iframe{height:1100px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}h1 .w span{transform:none}.sub,.cta,.stage,.reveal{opacity:1;transform:none}}
@@ -296,15 +296,15 @@ body.has-cursor .cursor{opacity:.85}
 <section class="light" id="how">
   <div class="wrap">
     <span class="label reveal">How it works</span>
-    <h2 class="reveal">Three steps. <i>Cheapest first, most personal last.</i></h2>
+    <h2 class="reveal">The check is free. <i>The critique is yours.</i></h2>
     <div class="feats">
       <div class="feat reveal">
         <div class="ui"><div class="t"><span>Check</span><span>4 ms · no model</span></div><div class="q">"300+ founders" is not on your approved list.</div><div class="q">Em dash. House rule.</div><div class="ok">Revise. Two lines to settle.</div></div>
-        <b>Check</b><p>Fixed rules, no AI model, about 4 ms. Facts you never approved, the AI tells, a hook you already used. Send, Revise or Hold, each problem quoted.</p>
+        <b>Check</b><p>Runs on every draft, free. Fixed rules, no AI model, about 4 ms. Facts you never approved, the AI tells, a hook you already used. Send, Revise or Hold, each problem quoted.</p>
       </div>
       <div class="feat reveal">
         <div class="ui"><div class="t"><span>Critique</span><span>8 parts</span></div><div class="axis"><span>Clarity</span><i style="--v:70%"></i><span>7</span></div><div class="axis weak"><span>Proof</span><i style="--v:20%"></i><span>2</span></div><div class="axis"><span>Voice</span><i style="--v:30%"></i><span>3</span></div><div class="fix"><b>Weakest: proof.</b> One rewritten line.</div></div>
-        <b>Critique</b><p>Eight parts scored separately against your own samples. Never one number. You see the weakest part and one rewritten line.</p>
+        <b>Critique</b><p>Runs when you ask, or when your agent calls it through the API. Eight parts scored separately against your own samples. Never one number. You see the weakest part and one rewritten line.</p>
       </div>
       <div class="feat reveal">
         <div class="ui"><div class="t"><span>Learn</span><span>TASTE.md</span></div><div class="file"># Learned from my edits
@@ -352,7 +352,7 @@ body.has-cursor .cursor{opacity:.85}
   <div class="wrap">
     <span class="label reveal">Our research</span>
     <h2 class="reveal">What we used. <i>What it showed.</i></h2>
-    <p class="lede reveal">2,437 real posts across 38 voices, 2022 to 2026. One method: run the real writing through coulis, compare with what the writer actually did.</p>
+    <p class="lede reveal">2,437 real posts across 38 voices, 2022 to 2026: 673 of the founder's own posts, 380 ghostwritten for founder clients, 1,384 from 29 client content sheets, a 211-post engagement export, 47 team drafts. One method: run the real writing through coulis, compare with what the writer actually did.</p>
     <div class="stats">
       <div class="stat reveal"><b>2 in 3</b><span>of 673 published posts pass untouched. The rest carry the tells that read as AI.</span></div>
       <div class="stat reveal"><b>46/47</b><span>team drafts fixed by one approved fact. The one unsupported number was still caught.</span></div>
@@ -373,18 +373,6 @@ body.has-cursor .cursor{opacity:.85}
   </div>
 </section>
 
-<section class="light" id="now">
-  <div class="wrap">
-    <span class="label reveal">Why now</span>
-    <h2 class="reveal">Taste is being funded. <i>Writing is the open seat.</i></h2>
-    <div class="now">
-      <div class="reveal"><b>1M</b><p>LinkedIn's "seems like AI slop" button passed 1 million clicks in two weeks. Posting under your own name now has a measurable AI penalty.</p><small>CNN, Oct 2026</small></div>
-      <div class="reveal"><b>880K</b><p>Writing got less varied as AI spread, across 880,000 texts. Sameness is measured.</p><small>Nature Human Behaviour, 2026</small></div>
-      <div class="reveal"><b>$18.5M</b><p>Taste Labs raised a seed for taste at the model layer. Investors fund taste. Writing has no funded leader inside the tools.</p><small>June 2026</small></div>
-    </div>
-  </div>
-</section>
-
 <section class="light" id="trust">
   <div class="wrap">
     <span class="label reveal">How we keep it honest</span>
@@ -399,7 +387,7 @@ body.has-cursor .cursor{opacity:.85}
       <div>
         <span class="label" style="border-color:rgba(255,255,255,.2);color:#fff">coulis 2.0 · enterprise</span>
         <h2>Your data. Your memory. <i>Your taste model.</i></h2>
-        <p>The paid door. We build a company's brand strategy and taste file from its own data, memory and approved facts, into a custom model that runs coulis, and integrate it into the systems it already uses: ERP, CRM, content tools. The same check your team runs today, inside every system the company already has.</p>
+        <p>The paid door. Brand strategy and a taste file from the company's own data, memory and approved facts, into a custom model that runs coulis, wired into ERP, CRM and content tools.</p>
         <a class="btn" href="waitlist.html">Join the waitlist for coulis 2.0</a>
       </div>
       <div class="list">
