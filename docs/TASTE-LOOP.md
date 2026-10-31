@@ -1,86 +1,62 @@
-# The Coulis taste loop
+# Taste memory inside the product
 
-Compare two drafts → record a human choice/edit → propose a contextual preference → explicitly approve → use on a new topic.
+One profile, one workflow database, all interfaces. The loop is **context → draft → human edit/choice → proposed preference → explicit approval → next draft**. No separate website.
 
-This extends the existing Python/MCP product. It does not train model weights. The GitHub Pages checker remains a browser checker; the new workflow runs locally with your profile.
+| Interface | Entry point |
+|---|---|
+| MCP and Claude plugin | coulis_context, coulis_workflow, coulis_critique |
+| CLI and OpenClaw | scripts/coulis.py context / workflow / call |
+| Python local | LocalClient(profile_dir) |
+| REST | POST /v1/context and /v1/workflow |
+| Python remote | Client(base_url, api_key, profile_id) |
+| TypeScript | new Coulis(baseUrl, apiKey, profileId) |
 
-## Open the local workspace
+Every path reads the same profile folder, including TASTE.md, claims.md and coulis-research.db. REST selects the folder through a server-controlled mapping; remote users cannot choose filesystem paths. Different machines do not automatically synchronize folders. [API/SDK setup](API.md).
 
-From the repository root:
+## Normal writing
 
-```sh
-python3 scripts/taste_loop.py --profile /absolute/path/to/your/profile
-```
+Retrieve context for the task and known surface/audience/purpose. The host model uses the returned relevant examples and approved preferences; unresolved conflicts remain visible. Run the existing check and critique. Contextual preferences guide generation and critique, but arbitrary preferences are not all enforced by deterministic checks.
 
-Open http://127.0.0.1:8767. No new packages or credentials are needed for this workspace. It binds only to loopback and requires a per-process token for API calls. The single local profile folder is the authority boundary; this is not a hosted multi-user service.
+On a user-supplied edit, ask for retention permission if not already granted. Record it through `edit`, with category style/fact/task/other. Propose a rule only from an explicit style choice and approve only with per-rule authorization. No automatic weight updates, fabricated preferences or inferred approvals.
 
-For an empty sandbox profile:
+## Workflow actions
 
-```sh
-python3 scripts/taste_loop.py --profile private/my-profile
-```
+All use the same arguments in MCP, CLI and SDKs:
 
-Use the same folder in your MCP configuration (`COULIS_PROFILE_DIR`) or tool `profile_dir` argument. Update and restart the MCP server to discover `coulis_workflow`.
+| Action | Arguments |
+|---|---|
+| prepare | task, context, method? — returns matched baseline/Coulis generation inputs, not drafts |
+| create | task, candidates (2–8 distinct text/condition objects), context, consent:true |
+| view | comparison_id — returns randomized positions; conditions hidden until decision |
+| decide | comparison_id, choice (displayed integer position, tie, neither), category, reason?, final?, active_edit_seconds? |
+| edit | task, draft, final, context, category, consent:true, reason? — records the actual supplied final |
+| propose | comparison_id, key, value, wording — style evidence required |
+| approve | proposal_id, approved:true, supersedes? |
+| revise | preference_id, value, wording — pending replacement until approved |
+| reject | proposal_id |
+| disable | preference_id |
+| state | none — preferences, pending proposals, comparisons, descriptive summary |
+| purge | approved:true — explicit deletion request required |
 
-## First session
-
-1. Paste two candidate drafts for the same task. Identify their conditions, such as `baseline` and `coulis`, and supply surface/audience/purpose. Confirm local storage.
-2. The workspace shuffles A/B and hides condition labels until a decision. A person who supplied the text may recognize it; this is not a fully blind study.
-3. Choose A, B, tie, or neither. Optionally edit the selected draft. Classify the main reason as style, fact, task, or other.
-4. Only a selected **style** choice can support a reusable preference proposal. Write the proposed preference, category and value. These structured fields allow contradictory preferences in the same category to be detected.
-5. Review and explicitly approve. Fact/task edits are preserved as observations but are not automatically generalized into style preferences.
-6. Give a new task with the appropriate context. The workspace prepares matched baseline/Coulis inputs with identical writing samples. Only the Coulis input includes applicable approved preferences.
-7. Ask the model in your MCP host to produce one draft for each condition, then compare those outputs. No model is invoked by the local HTTP page. For a controlled experiment, use separate generation calls with the same model/settings and avoid showing either response to the other condition.
-
-## MCP usage
-
-`coulis_workflow` takes `action` and `arguments` (plus optional `profile_dir`).
-
-Prepare a new task:
-
-```json
-{"action":"prepare","arguments":{"task":"Write a post about a customer interview","context":{"surface":"linkedin","audience":"founders","purpose":"share a lesson"}}}
-```
-
-The result includes matched generation inputs, selected preferences, evidence IDs and conflicts. The host model should generate the two candidates. Conflicts require resolution, not a silent choice. It must not claim a preference outcome until the user chooses.
-
-Create a comparison from those outputs:
-
-```json
-{"action":"create","arguments":{"task":"Write a post about a customer interview","context":{"surface":"linkedin","audience":"founders","purpose":"share a lesson"},"consent":true,"candidates":[{"condition":"baseline","text":"FIRST ACTUAL OUTPUT"},{"condition":"coulis","text":"SECOND ACTUAL OUTPUT"}]}}
-```
-
-Remaining actions:
-
-- `view(comparison_id)`: retrieve randomized candidates; source conditions stay hidden until the decision.
-- `decide(comparison_id, choice, category, reason?, final?)`: user choice is 0, 1, `tie` or `neither`. Saved decisions cannot be overwritten.
-- `propose(comparison_id, key, value, wording)`: reviewable wording supplied by a human or host model, not an automatically established preference.
-- `approve(proposal_id, approved:true, supersedes?)`: save only after human approval.
-- `revise(preference_id, value, wording)`: create a new pending revision; the original remains active until approved.
-- `reject(proposal_id)`: dismiss a pending proposal.
-- `disable(preference_id)`: remove it from future context without deleting its history.
-- `state()`: inspect active/inactive preferences, pending proposals, comparisons and counts.
-- `purge(approved:true)`: after an explicit deletion request, remove local workflow drafts, decisions, proposals, preferences and events. Legacy Markdown and backups are not deleted; logical deletion is not a secure-erasure guarantee.
-
-## One store shared with the product
-
-`coulis_core.taste_store` is the canonical implementation. `coulis_research.store` is a compatibility import, not another database. New preferences and feedback use the existing `coulis-research.db` beside the profile.
-
-`profile_from_folder` loads effective approved preferences from that store alongside legacy Markdown rules. Both `coulis_context` and `coulis_critique` see them. Database-backed rules are not copied into TASTE.md during export, avoiding duplicate stale rules. Keep the database with the profile when transferring it. Existing `coulis_learn` remains available and is not changed to silently approve or migrate old rules.
-
-Scope matches exactly. Preferences for LinkedIn/founders do not apply to email/customers. Same-key, equally specific contradictory values are surfaced as conflicts. Supersession and disabling take effect in subsequent profile loads. Legacy free-text rules without a shared structured key cannot have arbitrary semantic contradictions automatically detected.
-
-## What results mean
-
-The summary groups decisions by the actual pair of condition labels and reports wins, ties and neither. It does not infer preference from clicks, generate rejected examples, calculate a universal taste score, or claim causal improvement. No ranker or model training is added. Active editing time is optional client-reported metadata; the UI does not present it as a verified savings metric.
-
-A research study still needs independent participants, model/configuration provenance, fixed held-out tasks, leakage control and uncertainty estimates. Agent-generated UI checks use a disposable synthetic profile and are not human research evidence.
-
-## Tests
+Context requires surface, optionally audience/purpose. A condition label describes how a draft was created; descriptive choice counts do not prove model quality. Before/after edits are observational, not blind experiments. Durations are optional client reports, not measured time savings.
 
 ```sh
-COULIS_LOG=0 python3 -m unittest discover -s tests -v
-node --check docs/taste-loop.js
+python3 scripts/coulis.py context '{"text":"Launch post","surface":"linkedin","context":{"audience":"founders"}}' --profile private/my-profile
+python3 scripts/coulis.py workflow state --profile private/my-profile
+# JSON can be supplied on stdin with -:
+python3 scripts/coulis.py workflow edit - --profile private/my-profile < permitted-edit.json
 ```
 
-Tests cover approval boundaries, fact/tie exclusions, scope matching, revisions, disabling, conflicts, profile isolation, MCP integration, deletion, and local HTTP token/origin checks.
+```python
+from sdk.python.coulis_client import LocalClient
+c = LocalClient('private/my-profile')
+# Only after permission to retain these actual user-provided texts:
+edit = c.workflow('edit', task='Launch post', draft=original, final=user_final,
+                  context={'surface':'linkedin'}, category='style', consent=True)
+p = c.workflow('propose', comparison_id=edit['id'], key='opener', value='example', wording='Open with an example')
+# Only after the user approves this exact preference:
+c.workflow('approve', proposal_id=p['id'], approved=True)
+next_context = c.context('A different topic', surface='linkedin')
+```
+
+Approved memory is loaded automatically by profile/context/critique. DB-backed rules are not duplicated into Markdown. Legacy learn/pick capture remains compatible but does not itself approve contextual preferences. Purge affects workflow data only; legacy files and backups need separate deletion. This is contextual continual memory, not a trained taste model or evidence of performance gains.

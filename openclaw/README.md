@@ -11,3 +11,6 @@ or copy `openclaw/coulis/` into `~/.openclaw/skills/coulis/` and clone this repo
 The skill tells the agent to run `scripts/coulis.py check` before any post, email or message that goes out under the owner's name, and what to do with BLOCK, FIX and PASS. See `coulis/SKILL.md`.
 
 Publishing to ClawHub (owner only): `clawhub publish openclaw/coulis`.
+
+
+Taste memory now runs inside the existing CLI and agent workflow: retrieve context before drafting, record permitted edits or choices, and approve preferences explicitly. See [shared workflow](../docs/TASTE-LOOP.md). No separate web workspace is needed.

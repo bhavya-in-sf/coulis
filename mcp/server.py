@@ -9,6 +9,7 @@ the same TASTE.md + claims.md the Claude plug-in uses.
     claude mcp add coulis -- python3 /path/to/coulis/mcp/server.py
 """
 import json
+from contextvars import ContextVar
 import os
 import sys
 import traceback
@@ -75,21 +76,21 @@ TOOLS += [
 ]
 
 
-TOOLS.append({"name":"coulis_workflow", "description":"Local taste loop. Actions: create(task,candidates:[{text,condition},{text,condition}],context:{surface,audience?,purpose?},consent:true); view(comparison_id); decide(comparison_id,choice:0|1|tie|neither,category:style|fact|task|other,reason?,final?); propose(comparison_id,key,value,wording); approve(proposal_id,approved:true,supersedes?); prepare(task,context); state(); disable(preference_id); revise(preference_id,value,wording); reject(proposal_id); purge(approved:true) deletes local workflow data only after explicit user request. Record decisions only from actual user choices. Never infer approval. prepare returns matched baseline/Coulis inputs for you to generate drafts using the same model/settings; no automatic model call.",
- "inputSchema":{"type":"object","required":["action"],"additionalProperties":False,"properties":{"profile_dir":PROFILE_DIR,"action":{"type":"string","enum":["create","view","decide","propose","approve","prepare","state","disable","revise","reject","purge"]},"arguments":{"type":"object"}}}})
+TOOLS.append({"name":"coulis_workflow", "description":"Shared taste workflow. Actions: edit(task,draft,final,context,category,consent:true,reason?) records a user-supplied final; create(task,candidates:2–8 distinct {text,condition} objects,context:{surface,audience?,purpose?},consent:true); view(comparison_id); decide(comparison_id,choice:displayed position|tie|neither,category:style|fact|task|other,reason?,final?); propose(comparison_id,key,value,wording); approve(proposal_id,approved:true,supersedes?); prepare(task,context); state(); disable(preference_id); revise(preference_id,value,wording); reject(proposal_id); purge(approved:true) deletes local workflow data only after explicit user request. Record decisions only from actual user choices. Never infer approval. prepare returns matched baseline/Coulis inputs for you to generate drafts using the same model/settings; no automatic model call.",
+ "inputSchema":{"type":"object","required":["action"],"additionalProperties":False,"properties":{"profile_dir":PROFILE_DIR,"action":{"type":"string","enum":["create","edit","view","decide","propose","approve","prepare","state","disable","revise","reject","purge"]},"arguments":{"type":"object"}}}})
 
 for tool in TOOLS:
     if tool["name"] == "coulis_critique":
         tool["inputSchema"]["properties"]["context"] = CONTEXT
 
-_ARG_DIR = {"dir": None}  # per-call override from the optional profile_dir argument
+_ARG_DIR = ContextVar("profile_directory", default=None)  # per-call override from the optional profile_dir argument
 
 
 def profile_dir():
     """profile_dir argument if given; else COULIS_PROFILE_DIR; else the current folder if it has a profile;
     else ~/.coulis (global)."""
-    if _ARG_DIR["dir"]:
-        return Path(os.path.expanduser(_ARG_DIR["dir"]))
+    if _ARG_DIR.get():
+        return Path(os.path.expanduser(_ARG_DIR.get()))
     env = os.environ.get("COULIS_PROFILE_DIR") or os.environ.get("SAUCE_PROFILE_DIR") or os.environ.get("TASTEE_PROFILE_DIR")
     if env:
         return Path(env)
@@ -241,8 +242,8 @@ def log_use(name, args, out):
     try:
         home = home_dir()  # one log for every profile, so the record isn't split
         path = (home if home.is_dir() else profile_dir()) / "coulis-log.jsonl"
-        if _ARG_DIR["dir"]:
-            entry["profile"] = _ARG_DIR["dir"]
+        if _ARG_DIR.get():
+            entry["profile"] = _ARG_DIR.get()
         with path.open("a") as f:
             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
     except OSError:
@@ -250,13 +251,14 @@ def log_use(name, args, out):
 
 
 def call_tool(name, args):
-    _ARG_DIR["dir"] = args.pop("profile_dir", None)
+    args = dict(args)
+    token = _ARG_DIR.set(args.pop("profile_dir", None))
     try:
         out = _call_tool(name, args)
         log_use(name, args, out)
         return out
     finally:
-        _ARG_DIR["dir"] = None
+        _ARG_DIR.reset(token)
 
 
 def _call_tool(name, args):

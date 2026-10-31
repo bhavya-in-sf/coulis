@@ -25,7 +25,7 @@ Example arguments:
 {"text":"A post about database transactions","surface":"linkedin","context":{"audience":"engineers"},"method":"bm25"}
 ```
 
-Existing `coulis_learn` retains its current workflow. This update preserves the latest main branch, including its opening-pattern, rhythm and sent-history features. The SQLite preference store is now shared with the product through `coulis_core.taste_store`; the research module is a compatibility import. The local taste workspace and `coulis_workflow` write approved contextual preferences, and the existing profile loader exposes them to critique/context. Legacy Markdown rules remain readable; database rules are not duplicated into Markdown exports. See [the taste-loop guide](../docs/TASTE-LOOP.md).
+Existing `coulis_learn` retains its current workflow. This update preserves the latest main branch, including its opening-pattern, rhythm and sent-history features. The SQLite preference store is now shared with the product through `coulis_core.taste_store`; the research module is a compatibility import. The CLI, API, SDKs and `coulis_workflow` write approved contextual preferences, and the existing profile loader exposes them to critique/context. Legacy Markdown rules remain readable; database rules are not duplicated into Markdown exports. See [the taste-loop guide](../docs/TASTE-LOOP.md).
 
 ## Real-data evaluation
 
@@ -73,7 +73,7 @@ Imports assign stable source/user hash splits. LaMP records without explicit use
 3. Compare a personalized ranker with a population evaluator; fit only on eligible training data.
 4. Add semantic retrieval and measure its gain over BM25/TF-IDF.
 5. Run supervised LoRA and then DPO only if data coverage and baseline results justify them.
-6. Add authenticated HTTP service, PostgreSQL/pgvector, remote deployment and monitoring when integrations need them. Current transport is local stdio MCP; the caller's profile directory is trusted, not a hosted authorization boundary.
+6. Add PostgreSQL/pgvector, managed deployment and monitoring when integration load needs them. An authenticated self-hosted HTTP preview now maps keys to server-selected profile folders; local stdio MCP continues to trust its caller. See docs/API.md for limits.
 
 ## Local data handling
 
