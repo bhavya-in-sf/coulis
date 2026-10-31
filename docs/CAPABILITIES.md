@@ -20,6 +20,9 @@ Updated 31 Oct 2026, v0.9.0. One table, kept honest. If a line moves between col
 | One-command setup from a LinkedIn export | **Available** | `/coulis:extract` or `coulis setup --linkedin export.zip`. Builds TASTE.md and claims.md locally. |
 | Stop hook (Claude is sent back if it skipped the check) | **Available** | Logs each run to ~/.coulis/hook-log.jsonl. |
 | MCP server, Python and TypeScript SDKs | **Available** | Same tools, same profile, in Cursor and any MCP client. |
+| Relevant-example retrieval for the critique | **Experimental** | Opt in with COULIS_RETRIEVAL=bm25 (or tfidf). Picks the samples from your own profile that match the draft instead of the first five. Lexical, not semantic. Off by default. |
+| coulis_context and coulis_feedback tools | **Experimental** | Context returns the retrieved samples, approved preferences and conflicts for a draft, no model call. Feedback records accepted, edited, removed, not_selected or explicit_preference next to the profile. Records only; nothing trains. |
+| Research runner on public datasets | **Experimental** | LongMemEval, LaMP, PRISM and CoAuthor adapters with licence manifests. First run: session retrieval on 500 LongMemEval queries, BM25 recall@3 0.86. Retrieval diagnostics, not taste or model scores. |
 | REST API | **Experimental** | Code and tests exist (keys hashed, profiles encrypted, drafts never logged). Not hosted yet. |
 | Team profiles and the team score gate | **Planned** | One taste file and one approved-facts list shared across a team; a sameness ceiling as a gate. |
 | Blind taste test with human raters | **Planned** | Does the critique agree with people more often than chance? Not yet run. |
