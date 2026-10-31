@@ -22,8 +22,6 @@ product: Coulis
 - 135,153 impressions on one post, 99% out-of-network, 113 followers gained
 
 ## Needs confirm
-- 4,221% impression spike for an AI founder
-- A coach closed a $4,000 deal in 14 days
 
 ## Banned phrases
 - Generic AI filler she cuts from every draft :: \b(game-changer|delve|in today's fast-paced world)\b
