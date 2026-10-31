@@ -420,8 +420,10 @@
   },
   {
     "id": "B081",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:Ever wondered why build your personal brand? Why does everyone keep emphasisng on it? \ud83d\udc40"
+    ]
   },
   {
     "id": "B082",
@@ -687,8 +689,10 @@
   },
   {
     "id": "B126",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:\ud83d\udcaa\ud83c\udffb Are you struggling to show up for yourself?"
+    ]
   },
   {
     "id": "B127",
@@ -723,7 +727,8 @@
     "id": "B132",
     "verdict": "Hold",
     "issues": [
-      "Hold:em_dash:\u2014"
+      "Hold:em_dash:\u2014",
+      "Revise:opening:Hey coaches, don\u2019t have your Instagram optimized?"
     ]
   },
   {
@@ -795,8 +800,10 @@
   },
   {
     "id": "B144",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:Are you optimising your stories on Instagram?"
+    ]
   },
   {
     "id": "B145",
@@ -879,8 +886,10 @@
   },
   {
     "id": "B158",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:Who said having a business with a co-founder is better?"
+    ]
   },
   {
     "id": "B159",
@@ -889,13 +898,16 @@
   },
   {
     "id": "B160",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:Which brand made India fall in love with their curly hair?"
+    ]
   },
   {
     "id": "B161",
     "verdict": "Revise",
     "issues": [
+      "Revise:opening:Sharks' opinions and questions grab your attention more or the brand owner\u2019s pitch?",
       "Revise:sameness:"
     ]
   },
@@ -904,6 +916,7 @@
     "verdict": "Revise",
     "issues": [
       "Revise:filler:empower",
+      "Revise:opening:Wondering how you can empower people to dress more expressively?",
       "Revise:sameness:"
     ]
   },
@@ -930,6 +943,7 @@
     "id": "B166",
     "verdict": "Revise",
     "issues": [
+      "Revise:opening:Have you been binging on Vineeta Singh\u2019s interviews as I have?",
       "Revise:sameness:"
     ]
   },
@@ -944,6 +958,7 @@
     "id": "B168",
     "verdict": "Revise",
     "issues": [
+      "Revise:opening:Wondering how this brand made the entire India say YesMadam?",
       "Revise:sameness:"
     ]
   },
@@ -1047,8 +1062,10 @@
   },
   {
     "id": "B185",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:Do I go overboard for my clients?"
+    ]
   },
   {
     "id": "B186",
@@ -1218,7 +1235,8 @@
     "id": "B213",
     "verdict": "Hold",
     "issues": [
-      "Hold:em_dash:\u2014"
+      "Hold:em_dash:\u2014",
+      "Revise:opening:Did you know that UGC content generates 2x conversions as compared to influencer collabora"
     ]
   },
   {
@@ -1246,7 +1264,8 @@
     "verdict": "Hold",
     "issues": [
       "Hold:em_dash:\u2013",
-      "Hold:em_dash:\u2014"
+      "Hold:em_dash:\u2014",
+      "Revise:opening:I often get asked \u2013 Why did I start a social media agency at 20?"
     ]
   },
   {
@@ -1326,7 +1345,8 @@
     "id": "B228",
     "verdict": "Hold",
     "issues": [
-      "Hold:em_dash:\u2014"
+      "Hold:em_dash:\u2014",
+      "Revise:opening:Do you sometimes doubt yourself while scrolling on LinkedIn?"
     ]
   },
   {
@@ -1347,7 +1367,8 @@
     "id": "B231",
     "verdict": "Hold",
     "issues": [
-      "Hold:em_dash:\u2014"
+      "Hold:em_dash:\u2014",
+      "Revise:opening:Do you check out the vibes on Instagram of a hotel before booking?"
     ]
   },
   {
@@ -1361,7 +1382,8 @@
     "id": "B233",
     "verdict": "Hold",
     "issues": [
-      "Hold:em_dash:\u2014"
+      "Hold:em_dash:\u2014",
+      "Revise:opening:Are you a business owner building your brand on social media?"
     ]
   },
   {
@@ -1377,6 +1399,7 @@
     "verdict": "Hold",
     "issues": [
       "Hold:em_dash:\u2014",
+      "Revise:opening:Life Coaches, are you out of content ideas?",
       "Revise:sameness:"
     ]
   },
@@ -1401,6 +1424,7 @@
     "verdict": "Hold",
     "issues": [
       "Hold:em_dash:\u2014",
+      "Revise:opening:Should you post videos on LinkedIn?",
       "Revise:sameness:"
     ]
   },
@@ -1408,7 +1432,8 @@
     "id": "B239",
     "verdict": "Hold",
     "issues": [
-      "Hold:em_dash:\u2014"
+      "Hold:em_dash:\u2014",
+      "Revise:opening:Does your money make more money for you?"
     ]
   },
   {
@@ -1423,7 +1448,8 @@
     "id": "B241",
     "verdict": "Hold",
     "issues": [
-      "Hold:em_dash:\u2014"
+      "Hold:em_dash:\u2014",
+      "Revise:opening:Do you also buy footwear according to specific outfits that you created in your mind?"
     ]
   },
   {
@@ -1445,7 +1471,8 @@
     "id": "B244",
     "verdict": "Hold",
     "issues": [
-      "Hold:em_dash:\u2014"
+      "Hold:em_dash:\u2014",
+      "Revise:opening:Not getting enough engagement on your posts?"
     ]
   },
   {
@@ -1492,6 +1519,7 @@
     "verdict": "Hold",
     "issues": [
       "Hold:em_dash:\u2014",
+      "Revise:opening:What do I even write about on LinkedIn?",
       "Revise:sameness:"
     ]
   },
@@ -1507,6 +1535,7 @@
     "verdict": "Hold",
     "issues": [
       "Hold:em_dash:\u2014",
+      "Revise:opening:Are you also looking for your next ethnic look?",
       "Revise:sameness:"
     ]
   },
@@ -1522,26 +1551,31 @@
     "verdict": "Hold",
     "issues": [
       "Hold:em_dash:\u2014",
-      "Revise:filler:seamless"
+      "Revise:filler:seamless",
+      "Revise:opening:Should you invest in influencer marketing?"
     ]
   },
   {
     "id": "B255",
     "verdict": "Hold",
     "issues": [
-      "Hold:em_dash:\u2014"
+      "Hold:em_dash:\u2014",
+      "Revise:opening:What is UGC & should you invest in it?"
     ]
   },
   {
     "id": "B256",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:Do you believe in manifestations?"
+    ]
   },
   {
     "id": "B257",
     "verdict": "Hold",
     "issues": [
-      "Hold:em_dash:\u2014"
+      "Hold:em_dash:\u2014",
+      "Revise:opening:Wondering what your next post should be, realtors?"
     ]
   },
   {
@@ -1553,7 +1587,8 @@
     "id": "B259",
     "verdict": "Hold",
     "issues": [
-      "Hold:em_dash:\u2014"
+      "Hold:em_dash:\u2014",
+      "Revise:opening:Who doesn\u2019t love using Canva?"
     ]
   },
   {
@@ -1570,13 +1605,16 @@
   },
   {
     "id": "B261",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:Want to 4X your LinkedIn growth?"
+    ]
   },
   {
     "id": "B262",
     "verdict": "Revise",
     "issues": [
+      "Revise:opening:Want to 4X your LinkedIn growth?",
       "Revise:sameness:"
     ]
   },
@@ -1584,6 +1622,7 @@
     "id": "B263",
     "verdict": "Revise",
     "issues": [
+      "Revise:opening:Want to 4X your LinkedIn growth?",
       "Revise:sameness:"
     ]
   },
@@ -1591,6 +1630,7 @@
     "id": "B264",
     "verdict": "Revise",
     "issues": [
+      "Revise:opening:Want to 4X your LinkedIn growth?",
       "Revise:sameness:"
     ]
   },
@@ -1598,6 +1638,7 @@
     "id": "B265",
     "verdict": "Revise",
     "issues": [
+      "Revise:opening:Want to 4X your LinkedIn growth?",
       "Revise:sameness:"
     ]
   },
@@ -1605,6 +1646,7 @@
     "id": "B266",
     "verdict": "Revise",
     "issues": [
+      "Revise:opening:Want to 4X your LinkedIn growth?",
       "Revise:sameness:"
     ]
   },
@@ -1612,19 +1654,23 @@
     "id": "B267",
     "verdict": "Revise",
     "issues": [
+      "Revise:opening:Want to 4X your LinkedIn growth?",
       "Revise:sameness:"
     ]
   },
   {
     "id": "B268",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:What\u2019s the ONE thing your Instagram is missing?"
+    ]
   },
   {
     "id": "B269",
     "verdict": "Hold",
     "issues": [
       "Hold:em_dash:\u2014",
+      "Revise:opening:FinTech founders - are you optimising LinkedIn yet?",
       "Revise:sameness:"
     ]
   },
@@ -1663,7 +1709,8 @@
     "id": "B274",
     "verdict": "Hold",
     "issues": [
-      "Hold:em_dash:\u2014"
+      "Hold:em_dash:\u2014",
+      "Revise:opening:Do you see stress as your enemy?"
     ]
   },
   {
@@ -1707,7 +1754,8 @@
     "id": "B280",
     "verdict": "Hold",
     "issues": [
-      "Hold:em_dash:\u2014"
+      "Hold:em_dash:\u2014",
+      "Revise:opening:A collaboration with Salim Merchant?"
     ]
   },
   {
@@ -1722,14 +1770,16 @@
     "id": "B282",
     "verdict": "Hold",
     "issues": [
-      "Hold:em_dash:\u2014"
+      "Hold:em_dash:\u2014",
+      "Revise:opening:Chasing the top voice badge on LinkedIn?"
     ]
   },
   {
     "id": "B283",
     "verdict": "Hold",
     "issues": [
-      "Hold:em_dash:\u2014"
+      "Hold:em_dash:\u2014",
+      "Revise:opening:Are you nervous when you walk in for a sales call?"
     ]
   },
   {
@@ -1767,8 +1817,10 @@
   },
   {
     "id": "B289",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:Why did I start working right in college?"
+    ]
   },
   {
     "id": "B290",
@@ -1852,8 +1904,10 @@
   },
   {
     "id": "B303",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:Are you ready for another social media deep dive?"
+    ]
   },
   {
     "id": "B304",
@@ -1908,6 +1962,7 @@
     "id": "B311",
     "verdict": "Revise",
     "issues": [
+      "Revise:opening:Who hasn\u2019t gifted The Sass Bar to their family & friends?",
       "Revise:sameness:"
     ]
   },
@@ -1925,6 +1980,7 @@
     "id": "B314",
     "verdict": "Revise",
     "issues": [
+      "Revise:opening:What if your favorite snacks got a cool, creamy twist?",
       "Revise:sameness:"
     ]
   },
@@ -1932,6 +1988,7 @@
     "id": "B315",
     "verdict": "Revise",
     "issues": [
+      "Revise:opening:What if luxury felt like a celebration in your hands?",
       "Revise:sameness:"
     ]
   },
@@ -1940,6 +1997,7 @@
     "verdict": "Hold",
     "issues": [
       "Hold:em_dash:\u2014",
+      "Revise:opening:What if travel essentials became fun and vibrant?",
       "Revise:sameness:"
     ]
   },
@@ -1948,6 +2006,7 @@
     "verdict": "Hold",
     "issues": [
       "Hold:em_dash:\u2014",
+      "Revise:opening:What if your stay felt like a handcrafted masterpiece?",
       "Revise:sameness:"
     ]
   },
@@ -1956,6 +2015,7 @@
     "verdict": "Hold",
     "issues": [
       "Hold:em_dash:\u2014",
+      "Revise:opening:What if travel essentials became fun and vibrant?",
       "Revise:sameness:"
     ]
   },
@@ -1975,6 +2035,7 @@
     "id": "B321",
     "verdict": "Revise",
     "issues": [
+      "Revise:opening:What if your home felt like a tropical retreat in the city?",
       "Revise:sameness:"
     ]
   },
@@ -1983,6 +2044,7 @@
     "verdict": "Hold",
     "issues": [
       "Hold:em_dash:\u2013",
+      "Revise:opening:What if eyewear became your boldest fashion statement?",
       "Revise:sameness:"
     ]
   },
@@ -2019,13 +2081,16 @@
     "id": "B328",
     "verdict": "Revise",
     "issues": [
+      "Revise:opening:Does your personal brand pass the visibility test?",
       "Revise:sameness:"
     ]
   },
   {
     "id": "B329",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:Are you a successful founder but feel like your personal brand isn\u2019t doing justice to your"
+    ]
   },
   {
     "id": "B330",
@@ -2033,6 +2098,7 @@
     "issues": [
       "Hold:em_dash:\u2014",
       "Revise:filler:leverage",
+      "Revise:opening:What makes Aman Gupta a household name?",
       "Revise:sameness:"
     ]
   },
@@ -2043,8 +2109,10 @@
   },
   {
     "id": "B332",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:Why Do Some Founders Dominate Their Industry While Others Stay Stuck?"
+    ]
   },
   {
     "id": "B333",
@@ -2118,6 +2186,7 @@
     "id": "B344",
     "verdict": "Revise",
     "issues": [
+      "Revise:opening:As a Web3/AI founder, you're building the future, but does anyone beyond your team know it",
       "Revise:sameness:"
     ]
   },
@@ -2177,8 +2246,10 @@
   },
   {
     "id": "B353",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:Have you ever met someone who analyzes the ROI of feeding milk & bread to a dog?"
+    ]
   },
   {
     "id": "B354",
@@ -2238,7 +2309,8 @@
     "id": "B364",
     "verdict": "Revise",
     "issues": [
-      "Revise:filler:leverage"
+      "Revise:filler:leverage",
+      "Revise:opening:Is LinkedIn your new business card?"
     ]
   },
   {
@@ -2315,6 +2387,7 @@
     "issues": [
       "Hold:banned_phrase:game-changer",
       "Revise:filler:game-changer",
+      "Revise:opening:Did you know that 72% of consumers prefer to engage with brands through niche communities?",
       "Revise:unapproved_claim:63%"
     ]
   },
@@ -2344,8 +2417,10 @@
   },
   {
     "id": "B382",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:Did you know that 89% of consumers say they\u2019ll buy from a brand they feel connected to?"
+    ]
   },
   {
     "id": "B383",
@@ -2393,13 +2468,17 @@
   },
   {
     "id": "B391",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:90% of marketing tasks?"
+    ]
   },
   {
     "id": "B392",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:\u20b980,000 to post your wedding live on Instagram?"
+    ]
   },
   {
     "id": "B393",
@@ -2425,8 +2504,10 @@
   },
   {
     "id": "B397",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:Your product-centric Reels?"
+    ]
   },
   {
     "id": "B398",
@@ -2482,8 +2563,10 @@
   },
   {
     "id": "B407",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:Is ghostwriting inauthentic?"
+    ]
   },
   {
     "id": "B408",
@@ -2785,8 +2868,10 @@
   },
   {
     "id": "B454",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:Started posting, what now?"
+    ]
   },
   {
     "id": "B455",
@@ -3291,8 +3376,10 @@
   },
   {
     "id": "B542",
-    "verdict": "Send",
-    "issues": []
+    "verdict": "Revise",
+    "issues": [
+      "Revise:opening:Can ChatGPT write DMs that get replies?"
+    ]
   },
   {
     "id": "B543",

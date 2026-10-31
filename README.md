@@ -54,6 +54,8 @@ Then `/coulis:critique` scores the draft on 8 separate axes against her own samp
 - **Modes by surface:** `linkedin`, `x`, `cold_email`, `investor_update`, `bio` (plus reddit, instagram, youtube), each with its own rules and target score.
 - **`/coulis:extract`:** turn your past posts or LinkedIn export into a starter TASTE.md and claims.md. To get the export: LinkedIn > Me > Settings & Privacy > Data privacy > Get a copy of your data > tick Posts > Request archive. The zip arrives by email in about 10 minutes.
 - **`/coulis:doctor`:** checks your profile is complete and up to date.
+- **v0.9, three more checks, no model:** the opening pattern (question openers, "Excited to share", "In today's", the not-X-but-Y frame, with one of your own openers quoted back), a rhythm fingerprint measured from your samples, and repeated six-word phrases across your last 20 sent posts.
+- **v0.9, the data that improves it:** every `coulis_learn` writes the edit pair (original, revision, surface, proposed rules) to `edit-pairs.jsonl`, flagged lines you kept to `overrides.jsonl`, and the final to `sent.jsonl`, all next to your profile, never uploaded. `coulis_pick` takes a `why` tag.
 - **Always on:** the Stop hook now waits for the last reply before checking, and logs each run to `~/.coulis/hook-log.jsonl`.
 - **Benchmark:** a public "sounds like you" test for AI writing apps. See [docs/BENCHMARK.md](docs/BENCHMARK.md).
 

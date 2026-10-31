@@ -1,10 +1,16 @@
 # What coulis can do today, what is being tested, and what is planned
 
-Updated 31 Oct 2026, v0.8.0. One table, kept honest. If a line moves between columns, the commit says why.
+Updated 31 Oct 2026, v0.9.0. One table, kept honest. If a line moves between columns, the commit says why.
 
 | Capability | Status | What it means in practice |
 |---|---|---|
 | Check: fixed rules, no model, about 4 ms | **Available** | Em dashes, banned phrases, filler, numbers not on your approved list, stock hooks, repeated hooks. Returns Send, Revise or Hold with each problem quoted. Same answer every time. |
+| Opening-pattern check | **Available** | Line one is a pain, a punch or a promise. Question openers, "Excited to share", "In today's", "I'm thrilled", "ever wondered" and the not-X-but-Y frame get a Revise, with one of your own openers quoted as the alternative. |
+| Rhythm fingerprint | **Available** | Words per sentence and lines per post measured from your TASTE.md samples at load. A draft more than two standard deviations away gets a Revise with the numbers. Makes part of the rhythm axis checkable, no model. |
+| Repeated phrases across your last 20 posts | **Available** | Any exact six-word run already used in a post you sent (sent.jsonl) is quoted back. Hooks and skeletons were already checked; this catches closers and list bones. |
+| Edit-pair capture | **Available** | When coulis_learn runs, the original, your revision, the surface and the proposed rules are written to edit-pairs.jsonl next to your profile. Local only. Research use needs the separate permission in DATA-PERMISSIONS.md. |
+| Override log | **Available** | Flagged lines you kept, and passed drafts you changed anyway, go to overrides.jsonl. The calibration set for the critique. |
+| Pick reasons | **Available** | coulis_pick takes a why tag: clearer, bolder, truer, more_me, shorter, other. Preference data per axis. |
 | Sameness score 0 to 100 | **Available** | Counted from the tells the check found. It is not a detector and not a measure of your voice. |
 | Critique: eight parts, never one number | **Available** | Clarity, proof, why you, the ask, hook, voice, boldness, rhythm, scored against your own samples by Claude. Rewrites only the weakest line. Needs a model call. |
 | Learn from your edits | **Available** | Compares the draft with what you actually sent and proposes a rule. Nothing joins your taste file without your yes. |

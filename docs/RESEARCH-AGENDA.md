@@ -21,7 +21,7 @@ What these do not show: that users prefer the drafts, edit less, or come back; t
 |---|---|---|---|
 | Blind taste test | Does the critique agree with human readers more than chance? | 20 raters, pairs of drafts, critique verdict hidden; agreement vs chance and vs inter-rater agreement (Zheng et al. 2023 framing). | Planned, Dec 2026 |
 | Unseen-topic transfer | Do learned rules help on a new topic? | For each writer: hold out topics, learn rules from the rest, generate with and without rules, score with their profile and with raters. | Planned |
-| Edit-pair benchmark | Which rules are learnable from real edits? | Build the edit-pair set from the archive (original, revision, context), with permission; measure how often the proposed rule matches the editor's stated reason. | In progress: archive organised, usable pairs to be identified |
+| Edit-pair benchmark | Which rules are learnable from real edits? | Build the edit-pair set from the archive (original, revision, context), with permission; measure how often the proposed rule matches the editor's stated reason. | In progress: archive organised; from v0.9 every learn call captures a live pair locally (edit-pairs.jsonl) |
 | Prompting vs retrieval vs training | Does training add value? | Same examples and context for each condition; a trained taste model is the last condition, run only if the first two leave headroom. | Research direction, no model yet |
 | User outcomes | Better drafts, less editing, return visits? | Writing pilot: edit distance per draft, drafts per week, retention, against a no-coulis baseline. | Planned with the writing pilot |
 
