@@ -69,7 +69,7 @@ def build_prompt(text, profile, surface, context=None, retrieval_method=None):
              f"Goal: {profile.goal or 'unknown'}",
              "Rules (theirs, these win):"] + [f"- {r}" for r in rules] + ["Samples of their writing:"]
     lines += [f"<sample>{json.dumps(s['text'])}</sample>" for s in bundle['samples']]
-    lines += ["Approved facts (the only numbers they may use):"] + [f"- {f}" for f in profile.approved_facts]
+    lines += ["Approved facts (the only numbers they may use):"] + [f"- {f}" for f in bundle.get('facts', profile.approved_facts)]
     lines += ["</profile>", "", "<axes>"] + [f"{a}: {q}" for a, q in _AXIS_HELP.items()] + ["</axes>", "",
               f"<surface>{surface}</surface>", f"<draft>{text}</draft>"]
     return "\n".join(lines)
