@@ -12,5 +12,3 @@ sdk/typescript/dist/
 .vercel
 docs/brand-options/
 
-# the public deck is published on purpose
-!docs/deck/
