@@ -82,6 +82,11 @@ def profile_dir():
 def home_dir():
     """~/.sauce, or ~/.tastee for installs made before the rename."""
     new, old = Path.home() / ".sauce", Path.home() / ".tastee"
+    has = lambda d: (d / "TASTE.md").exists() or (d / "claims.md").exists()
+    if has(new):
+        return new
+    if has(old):
+        return old
     return new if new.is_dir() or not old.is_dir() else old
 
 
