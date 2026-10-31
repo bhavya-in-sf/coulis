@@ -12,7 +12,7 @@ python3 -m unittest discover -s tests -v
 COULIS_RETRIEVAL=bm25 python3 mcp/server.py
 ```
 
-`COULIS_RETRIEVAL=original` (the default) retains first-five-example selection. `bm25` and `tfidf` are opt-in baselines. TF-IDF is lexical, not semantic embeddings. No-overlap retrieval abstains instead of selecting irrelevant examples. Only the active profile's samples are candidates; the research corpus is never automatically inserted into customer prompts.
+`COULIS_RETRIEVAL=bm25` is the default since v0.9.1: the critic sees the samples that match the draft, and falls back to the first examples when nothing matches. `COULIS_RETRIEVAL=original` restores first-five selection; `tfidf` is the other baseline. TF-IDF is lexical, not semantic embeddings. No-overlap retrieval abstains instead of selecting irrelevant examples. Only the active profile's samples are candidates; the research corpus is never automatically inserted into customer prompts.
 
 New tools on the **existing MCP server**:
 
