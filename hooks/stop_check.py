@@ -144,7 +144,7 @@ def main():
             "decision": "block",
             "reason": (f"Coulis: this reply has {len(drafts)} draft(s) the user may post or send, and none were "
                        "checked. Run coulis_check on each draft (use profile_dir if it's written for a company "
-                       "or client), fix any BLOCK issues, then give the reply again. If a block isn't something "
+                       "or client), fix any Hold issues, then give the reply again. If a block isn't something "
                        "the user will post or send, call coulis_skip with the reason instead."),
         }))
 

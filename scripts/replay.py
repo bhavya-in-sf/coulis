@@ -41,8 +41,8 @@ def main():
     L = [f"# Shadow replay: {Path(a.persona).name}", "",
          f"Read-only replay of {len(rows)} drafts in time order. Nothing was posted or sent.", "",
          "## Headline", "",
-         f"- Would have stopped **{counts['BLOCK']}** drafts before anyone saw them (BLOCK).",
-         f"- Would have sent **{counts['FIX']}** back for a quick fix, and passed **{counts['PASS']}**.",
+         f"- Would have stopped **{counts['Hold']}** drafts before anyone saw them (Hold).",
+         f"- Would have sent **{counts['Revise']}** back for a quick fix, and passed **{counts['Send']}**.",
          "- Issues found: " + ", ".join(f"{k} {v}" for k, v in checks.most_common()), "",
          "## Questions the owner would have been asked (plain English, once each)", ""]
     money = {k: v for k, v in asks.items() if k.startswith("$")}
@@ -54,7 +54,7 @@ def main():
     L += [f"- {q} (in {', '.join(ids)})" for q, ids in asks.values()] or (["- None."] if len(money) <= 1 else [])
     L += ["", "## Timeline", "", "| Draft | Date | Surface | Verdict | What shadow mode does |", "|---|---|---|---|---|"]
     for r in rows:
-        act = "Sends to owner" if r["verdict"] == "PASS" else "; ".join(
+        act = "Sends to owner" if r["verdict"] == "Send" else "; ".join(
             sorted({f"{i['level']} {i['check']}" for i in r["issues"]}))
         L.append(f"| {r['id']} {r['title'][:45]} | {r['date']} | {r['surface']} | {r['verdict']} | {act} |")
     L += ["", "## Weekly digest the owner would have received", ""]
@@ -66,12 +66,12 @@ def main():
         c = collections.Counter(i["check"] for r in rs for i in r["issues"])
         top = ", ".join(f"{k} x{v}" for k, v in c.most_common(3)) or "nothing"
         L.append(f"- **{wk}:** {len(rs)} drafts. Caught: {top}. "
-                 f"Passed: {', '.join(r['id'] for r in rs if r['verdict'] == 'PASS') or 'none'}.")
+                 f"Passed: {', '.join(r['id'] for r in rs if r['verdict'] == 'Send') or 'none'}.")
     L += ["", "## Learning from edits", "",
           "This replay has drafts only, no matching final versions, so no rules were learned. "
           "In live shadow mode each draft is saved next to the version actually posted, and learn.py proposes rules from the difference."]
     Path(a.out).write_text("\n".join(L) + "\n")
-    print(f"{counts['BLOCK']} BLOCK / {counts['FIX']} FIX / {counts['PASS']} PASS -> {a.out}")
+    print(f"{counts['Hold']} Hold / {counts['Revise']} Revise / {counts['Send']} Send -> {a.out}")
 
 
 if __name__ == "__main__":

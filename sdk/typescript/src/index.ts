@@ -5,10 +5,10 @@
 //   const { verdict, issues } = await t.check(profileId, "Notely hit $20k MRR");
 
 export type Surface = "linkedin" | "x" | "reddit" | "instagram" | "youtube";
-export type Verdict = "BLOCK" | "FIX" | "PASS";
+export type Verdict = "Hold" | "Revise" | "Send";
 
-export interface Issue { level: "BLOCK" | "FIX"; check: string; detail: string; quote: string }
-export interface CheckResult { verdict: Verdict; issues: Issue[]; skeleton: string[]; counts: { BLOCK: number; FIX: number } }
+export interface Issue { level: "Hold" | "Revise"; check: string; detail: string; quote: string }
+export interface CheckResult { verdict: Verdict; issues: Issue[]; skeleton: string[]; counts: { Hold: number; Revise: number } }
 
 export const CHECKABLE = ["clarity", "proof", "why_you", "ask"] as const;
 export const TASTE = ["hook", "voice", "boldness", "rhythm"] as const;

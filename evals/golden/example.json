@@ -1,18 +1,18 @@
 [
   {
     "id": "E1",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "E2",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:banned_phrase:the first",
-      "BLOCK:em_dash:—",
-      "BLOCK:unapproved_claim:$20k mrr",
-      "FIX:filler:leverage",
-      "FIX:unapproved_claim:5,000 users"
+      "Hold:banned_phrase:the first",
+      "Hold:em_dash:—",
+      "Hold:unapproved_claim:$20k mrr",
+      "Revise:filler:leverage",
+      "Revise:unapproved_claim:5,000 users"
     ]
   }
 ]

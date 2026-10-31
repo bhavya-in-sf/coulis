@@ -24,7 +24,7 @@ Every call except `/v1/health` needs `Authorization: Bearer tst_...`. Keys are s
 | POST | `/v1/profiles` | Create a profile from `samples` (your own writing) or upload a full `profile` | No |
 | GET | `/v1/profiles/{id}` | Read a profile | No |
 | DELETE | `/v1/profiles/{id}` | Delete a profile and its pending rules | No |
-| POST | `/v1/check` | The gate. `BLOCK`, `FIX` or `PASS`, every issue quoted | **No**, deterministic |
+| POST | `/v1/check` | The gate. `Hold`, `Revise` or `Send`, every issue quoted | **No**, deterministic |
 | POST | `/v1/critique` | 8 axes scored separately, weakest part rewritten. **No overall score** | Yes, one |
 | POST | `/v1/learn` | Proposes rules from `draft` vs `final`. Saved as pending, not applied | No |
 | POST | `/v1/rules/{id}/approve` | A human approves one rule; it joins the profile | No |
@@ -37,10 +37,10 @@ curl -X POST localhost:8787/v1/check -H "Authorization: Bearer $KEY" \
   -d '{"profile_id":"prf_...","text":"Notely is the first app to hit $20k MRR","surface":"x"}'
 ```
 ```json
-{"verdict": "BLOCK",
- "issues": [{"level": "BLOCK", "check": "unapproved_claim", "quote": "$20k mrr",
+{"verdict": "Hold",
+ "issues": [{"level": "Hold", "check": "unapproved_claim", "quote": "$20k mrr",
              "detail": "Number not in claims.md. Add it to claims.md or cut it."}],
- "counts": {"BLOCK": 2, "FIX": 0}}
+ "counts": {"Hold": 2, "Revise": 0}}
 ```
 
 ### Critique response shape
@@ -77,4 +77,4 @@ The regression suite fails on any verdict drift. The edits suite measures how of
 
 ## Sameness score and team gates (v0.6)
 Every `/v1/check` response carries `sameness`: `{score 0..100, label, hits}`, built only from quoted tells (em dash, banned phrase, filler, "it's not X, it's Y", question opener, "comment below", tricolon, emoji pile, one-line paragraphs). It is a style score, not a detector of who wrote the text.
-Pass `max_sameness` (0 to 100) in the body to turn it into a gate: the verdict becomes BLOCK with a `sameness_gate` issue when the score is above the limit. Teams set one number ("nothing ships above 50") and CI can fail on it.
+Pass `max_sameness` (0 to 100) in the body to turn it into a gate: the verdict becomes Hold with a `sameness_gate` issue when the score is above the limit. Teams set one number ("nothing ships above 50") and CI can fail on it.

@@ -4,7 +4,7 @@
     t = Coulis(api_key="tst_...", base_url="http://localhost:8787")
     prof = t.create_profile(samples=["a post I'm proud of", "another"], owner="Sam", approved_facts=["1,200 users"])
     result = t.check(prof["id"], "Notely hit $20k MRR")
-    if result["verdict"] == "BLOCK": ...
+    if result["verdict"] == "Hold": ...
 """
 import json
 import os

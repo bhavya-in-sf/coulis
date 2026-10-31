@@ -37,7 +37,7 @@ def main():
 
     text = draft(claude, brief)
     result = coulis.check(profile_id, text)
-    if result["verdict"] == "BLOCK":
+    if result["verdict"] == "Hold":
         issues = "\n".join(f"- {i['check']}: \"{i['quote']}\" ({i['detail']})" for i in result["issues"])
         text = draft(claude, brief, issues)
         result = coulis.check(profile_id, text)
@@ -46,7 +46,7 @@ def main():
     print(f"Coulis verdict: {result['verdict']}")
     for i in result["issues"]:
         print(f"  {i['level']} {i['check']}: {i['quote']!r}  {i['detail']}")
-    if result["verdict"] != "PASS":
+    if result["verdict"] != "Send":
         print("\nNeeds a human before posting.")
 
 

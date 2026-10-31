@@ -1,3360 +1,3360 @@
 [
   {
     "id": "B001",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B002",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B003",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B004",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B005",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:unapproved_claim:$1,000"
+      "Hold:unapproved_claim:$1,000"
     ]
   },
   {
     "id": "B006",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B007",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B008",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B009",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B010",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B011",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B012",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B013",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B014",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B015",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B016",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B017",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B018",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B019",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B020",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:80%"
+      "Revise:unapproved_claim:80%"
     ]
   },
   {
     "id": "B021",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B022",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B023",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B024",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B025",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B026",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B027",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B028",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B029",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B030",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B031",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B032",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:2 members"
+      "Revise:unapproved_claim:2 members"
     ]
   },
   {
     "id": "B033",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B034",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B035",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B036",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B037",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B038",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B039",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B040",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B041",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:filler:empower"
+      "Revise:filler:empower"
     ]
   },
   {
     "id": "B042",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B043",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B044",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B045",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B046",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B047",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B048",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B049",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B050",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B051",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B052",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B053",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B054",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B055",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B056",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B057",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B058",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B059",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B060",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B061",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B062",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B063",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B064",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B065",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B066",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B067",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B068",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B069",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B070",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B071",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B072",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B073",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B074",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B075",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:20%",
-      "FIX:unapproved_claim:80%"
+      "Revise:unapproved_claim:20%",
+      "Revise:unapproved_claim:80%"
     ]
   },
   {
     "id": "B076",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B077",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B078",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B079",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B080",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B081",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B082",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B083",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B084",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B085",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B086",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B087",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B088",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B089",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B090",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B091",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B092",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B093",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B094",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B095",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B096",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B097",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B098",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B099",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B100",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:filler:empower"
+      "Revise:filler:empower"
     ]
   },
   {
     "id": "B101",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B102",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B103",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B104",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B105",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B106",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B107",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B108",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:filler:game changer"
+      "Revise:filler:game changer"
     ]
   },
   {
     "id": "B109",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B110",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B111",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B112",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B113",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B114",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013"
+      "Hold:em_dash:\u2013"
     ]
   },
   {
     "id": "B115",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B116",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B117",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013"
+      "Hold:em_dash:\u2013"
     ]
   },
   {
     "id": "B118",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:1000 subscribers",
-      "FIX:unapproved_claim:2500 impressions"
+      "Revise:unapproved_claim:1000 subscribers",
+      "Revise:unapproved_claim:2500 impressions"
     ]
   },
   {
     "id": "B119",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013"
+      "Hold:em_dash:\u2013"
     ]
   },
   {
     "id": "B120",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B121",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B122",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B123",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B124",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B125",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:30,000+ views"
+      "Revise:unapproved_claim:30,000+ views"
     ]
   },
   {
     "id": "B126",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B127",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:80%"
+      "Revise:unapproved_claim:80%"
     ]
   },
   {
     "id": "B128",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B129",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B130",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B131",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B132",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B133",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B134",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B135",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B136",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B137",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B138",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B139",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B140",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B141",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B142",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B143",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B144",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B145",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B146",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:unapproved_claim:$299",
-      "BLOCK:unapproved_claim:$449/month"
+      "Hold:unapproved_claim:$299",
+      "Hold:unapproved_claim:$449/month"
     ]
   },
   {
     "id": "B147",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B148",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B149",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B150",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B151",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B152",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B153",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:20 clients"
+      "Revise:unapproved_claim:20 clients"
     ]
   },
   {
     "id": "B154",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B155",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:20%"
+      "Revise:unapproved_claim:20%"
     ]
   },
   {
     "id": "B156",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:filler:empower",
-      "FIX:unapproved_claim:2 companies"
+      "Revise:filler:empower",
+      "Revise:unapproved_claim:2 companies"
     ]
   },
   {
     "id": "B157",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B158",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B159",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B160",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B161",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B162",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:filler:empower",
-      "FIX:sameness:"
+      "Revise:filler:empower",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B163",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B164",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B165",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B166",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B167",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B168",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B169",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B170",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B171",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B172",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B173",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B174",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:filler:empower"
+      "Revise:filler:empower"
     ]
   },
   {
     "id": "B175",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B176",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B177",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B178",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B179",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B180",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:filler:game changer",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:filler:game changer",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B181",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B182",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B183",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B184",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:filler:empower"
+      "Revise:filler:empower"
     ]
   },
   {
     "id": "B185",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B186",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B187",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B188",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B189",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:2x"
+      "Revise:unapproved_claim:2x"
     ]
   },
   {
     "id": "B190",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B191",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:363%"
+      "Revise:unapproved_claim:363%"
     ]
   },
   {
     "id": "B192",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B193",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B194",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B195",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:2x"
+      "Revise:unapproved_claim:2x"
     ]
   },
   {
     "id": "B196",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B197",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B198",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B199",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B200",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B201",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B202",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B203",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B204",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:72,000 views"
+      "Revise:unapproved_claim:72,000 views"
     ]
   },
   {
     "id": "B205",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B206",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B207",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:20,000 followers"
+      "Revise:unapproved_claim:20,000 followers"
     ]
   },
   {
     "id": "B208",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B209",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:banned_phrase:delve",
-      "FIX:filler:delve",
-      "FIX:unapproved_claim:4x"
+      "Hold:banned_phrase:delve",
+      "Revise:filler:delve",
+      "Revise:unapproved_claim:4x"
     ]
   },
   {
     "id": "B210",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B211",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B212",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:unapproved_claim:5x"
+      "Hold:em_dash:\u2014",
+      "Revise:unapproved_claim:5x"
     ]
   },
   {
     "id": "B213",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B214",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013"
+      "Hold:em_dash:\u2013"
     ]
   },
   {
     "id": "B215",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2013",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B216",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B217",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013",
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2013",
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B218",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B219",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B220",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B221",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:unapproved_claim:2800 views"
+      "Hold:em_dash:\u2014",
+      "Revise:unapproved_claim:2800 views"
     ]
   },
   {
     "id": "B222",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:unapproved_claim:80%"
+      "Hold:em_dash:\u2014",
+      "Revise:unapproved_claim:80%"
     ]
   },
   {
     "id": "B223",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:unapproved_claim:7 members"
+      "Hold:em_dash:\u2014",
+      "Revise:unapproved_claim:7 members"
     ]
   },
   {
     "id": "B224",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:unapproved_claim:2000 followers",
-      "FIX:unapproved_claim:3x"
+      "Hold:em_dash:\u2014",
+      "Revise:unapproved_claim:2000 followers",
+      "Revise:unapproved_claim:3x"
     ]
   },
   {
     "id": "B225",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B226",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B227",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B228",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B229",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B230",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B231",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B232",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B233",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B234",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B235",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B236",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B237",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:",
-      "FIX:unapproved_claim:3x"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:",
+      "Revise:unapproved_claim:3x"
     ]
   },
   {
     "id": "B238",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B239",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B240",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:unapproved_claim:2 clients"
+      "Hold:em_dash:\u2014",
+      "Revise:unapproved_claim:2 clients"
     ]
   },
   {
     "id": "B241",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B242",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B243",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:filler:elevate your"
+      "Hold:em_dash:\u2014",
+      "Revise:filler:elevate your"
     ]
   },
   {
     "id": "B244",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B245",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B246",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B247",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B248",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B249",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013",
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2013",
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B250",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B251",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:filler:empower"
+      "Revise:filler:empower"
     ]
   },
   {
     "id": "B252",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B253",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B254",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:filler:seamless"
+      "Hold:em_dash:\u2014",
+      "Revise:filler:seamless"
     ]
   },
   {
     "id": "B255",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B256",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B257",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B258",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B259",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B260",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:unapproved_claim:290k impressions",
-      "FIX:unapproved_claim:2k impressions",
-      "FIX:unapproved_claim:3x",
-      "FIX:unapproved_claim:50x",
-      "FIX:unapproved_claim:90k impressions"
+      "Hold:em_dash:\u2014",
+      "Revise:unapproved_claim:290k impressions",
+      "Revise:unapproved_claim:2k impressions",
+      "Revise:unapproved_claim:3x",
+      "Revise:unapproved_claim:50x",
+      "Revise:unapproved_claim:90k impressions"
     ]
   },
   {
     "id": "B261",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B262",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B263",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B264",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B265",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B266",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B267",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B268",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B269",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B270",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B271",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:",
-      "FIX:unapproved_claim:100k views",
-      "FIX:unapproved_claim:100x",
-      "FIX:unapproved_claim:210k impressions",
-      "FIX:unapproved_claim:95k views"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:",
+      "Revise:unapproved_claim:100k views",
+      "Revise:unapproved_claim:100x",
+      "Revise:unapproved_claim:210k impressions",
+      "Revise:unapproved_claim:95k views"
     ]
   },
   {
     "id": "B272",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B273",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B274",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B275",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:unapproved_claim:3,00,000 impressions",
-      "FIX:unapproved_claim:30,000 impressions"
+      "Hold:em_dash:\u2014",
+      "Revise:unapproved_claim:3,00,000 impressions",
+      "Revise:unapproved_claim:30,000 impressions"
     ]
   },
   {
     "id": "B276",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:1000 views",
-      "FIX:unapproved_claim:1100 followers",
-      "FIX:unapproved_claim:700 followers"
+      "Revise:unapproved_claim:1000 views",
+      "Revise:unapproved_claim:1100 followers",
+      "Revise:unapproved_claim:700 followers"
     ]
   },
   {
     "id": "B277",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B278",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B279",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B280",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B281",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B282",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B283",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B284",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:80%"
+      "Revise:unapproved_claim:80%"
     ]
   },
   {
     "id": "B285",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:unapproved_claim:$ 2."
+      "Hold:unapproved_claim:$ 2."
     ]
   },
   {
     "id": "B286",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B287",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B288",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:unapproved_claim:0 followers",
-      "FIX:unapproved_claim:8,000 followers"
+      "Hold:em_dash:\u2014",
+      "Revise:unapproved_claim:0 followers",
+      "Revise:unapproved_claim:8,000 followers"
     ]
   },
   {
     "id": "B289",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B290",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B291",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B292",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B293",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B294",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:250 followers"
+      "Revise:unapproved_claim:250 followers"
     ]
   },
   {
     "id": "B295",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B296",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B297",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B298",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B299",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B300",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B301",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:filler:leverage"
+      "Revise:filler:leverage"
     ]
   },
   {
     "id": "B302",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:unapproved_claim:15 leads",
-      "FIX:unapproved_claim:426 followers",
-      "FIX:unapproved_claim:46 followers"
+      "Hold:em_dash:\u2014",
+      "Revise:unapproved_claim:15 leads",
+      "Revise:unapproved_claim:426 followers",
+      "Revise:unapproved_claim:46 followers"
     ]
   },
   {
     "id": "B303",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B304",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2013",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B305",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B306",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B307",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B308",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B309",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B310",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:filler:empower"
+      "Revise:filler:empower"
     ]
   },
   {
     "id": "B311",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B312",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B313",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B314",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B315",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B316",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B317",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B318",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B319",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B320",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B321",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B322",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2013",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B323",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B324",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B325",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B326",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B327",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B328",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B329",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B330",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:filler:leverage",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:filler:leverage",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B331",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B332",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B333",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B334",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B335",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B336",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B337",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B338",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B339",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B340",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B341",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B342",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:filler:unlock",
-      "FIX:sameness:"
+      "Revise:filler:unlock",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B343",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B344",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B345",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B346",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B347",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B348",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2013",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B349",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B350",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B351",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B352",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B353",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B354",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B355",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B356",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:3x"
+      "Revise:unapproved_claim:3x"
     ]
   },
   {
     "id": "B357",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B358",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B359",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B360",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B361",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:4x"
+      "Revise:unapproved_claim:4x"
     ]
   },
   {
     "id": "B362",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B363",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B364",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:filler:leverage"
+      "Revise:filler:leverage"
     ]
   },
   {
     "id": "B365",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B366",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B367",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B368",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B369",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013"
+      "Hold:em_dash:\u2013"
     ]
   },
   {
     "id": "B370",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B371",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B372",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2013",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B373",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:unapproved_claim:$100 m",
-      "BLOCK:unapproved_claim:$3.95"
+      "Hold:unapproved_claim:$100 m",
+      "Hold:unapproved_claim:$3.95"
     ]
   },
   {
     "id": "B374",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B375",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B376",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B377",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:banned_phrase:game-changer",
-      "FIX:filler:game-changer",
-      "FIX:unapproved_claim:63%"
+      "Hold:banned_phrase:game-changer",
+      "Revise:filler:game-changer",
+      "Revise:unapproved_claim:63%"
     ]
   },
   {
     "id": "B378",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B379",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:filler:empower"
+      "Revise:filler:empower"
     ]
   },
   {
     "id": "B380",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B381",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B382",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B383",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B384",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B385",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B386",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:2x"
+      "Revise:unapproved_claim:2x"
     ]
   },
   {
     "id": "B387",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B388",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:95%"
+      "Revise:unapproved_claim:95%"
     ]
   },
   {
     "id": "B389",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B390",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B391",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B392",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B393",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013"
+      "Hold:em_dash:\u2013"
     ]
   },
   {
     "id": "B394",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B395",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B396",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B397",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B398",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013",
-      "FIX:unapproved_claim:30%",
-      "FIX:unapproved_claim:70%",
-      "FIX:unapproved_claim:80%"
+      "Hold:em_dash:\u2013",
+      "Revise:unapproved_claim:30%",
+      "Revise:unapproved_claim:70%",
+      "Revise:unapproved_claim:80%"
     ]
   },
   {
     "id": "B399",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B400",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B401",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B402",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B403",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B404",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B405",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:50,000 followers"
+      "Revise:unapproved_claim:50,000 followers"
     ]
   },
   {
     "id": "B406",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B407",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B408",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B409",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B410",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:115,276 impressions"
+      "Revise:unapproved_claim:115,276 impressions"
     ]
   },
   {
     "id": "B411",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B412",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B413",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B414",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B415",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B416",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B417",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B418",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:filler:game changer"
+      "Revise:filler:game changer"
     ]
   },
   {
     "id": "B419",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013",
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2013",
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B420",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B421",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B422",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B423",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B424",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B425",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B426",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B427",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B428",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013",
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2013",
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B429",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B430",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B431",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:",
-      "FIX:unapproved_claim:3x"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:",
+      "Revise:unapproved_claim:3x"
     ]
   },
   {
     "id": "B432",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B433",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:unapproved_claim:3x"
+      "Hold:em_dash:\u2014",
+      "Revise:unapproved_claim:3x"
     ]
   },
   {
     "id": "B434",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:",
-      "FIX:unapproved_claim:12+ leads"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:",
+      "Revise:unapproved_claim:12+ leads"
     ]
   },
   {
     "id": "B435",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:filler:leverage",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:filler:leverage",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B436",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "BLOCK:unapproved_claim:$10k/month",
-      "FIX:sameness:",
-      "FIX:unapproved_claim:3x"
+      "Hold:em_dash:\u2014",
+      "Hold:unapproved_claim:$10k/month",
+      "Revise:sameness:",
+      "Revise:unapproved_claim:3x"
     ]
   },
   {
     "id": "B437",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B438",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B439",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B440",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B441",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B442",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B443",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B444",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B445",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:unapproved_claim:$50m",
-      "FIX:unapproved_claim:10+ founders",
-      "FIX:unapproved_claim:3,200 followers"
+      "Hold:unapproved_claim:$50m",
+      "Revise:unapproved_claim:10+ founders",
+      "Revise:unapproved_claim:3,200 followers"
     ]
   },
   {
     "id": "B446",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B447",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:4x"
+      "Revise:unapproved_claim:4x"
     ]
   },
   {
     "id": "B448",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B449",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B450",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:2x"
+      "Revise:unapproved_claim:2x"
     ]
   },
   {
     "id": "B451",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B452",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:4,000 followers",
-      "FIX:unapproved_claim:6,000 followers"
+      "Revise:unapproved_claim:4,000 followers",
+      "Revise:unapproved_claim:6,000 followers"
     ]
   },
   {
     "id": "B453",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B454",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B455",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B456",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B457",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:2x"
+      "Revise:unapproved_claim:2x"
     ]
   },
   {
     "id": "B458",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B459",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B460",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B461",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B462",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013"
+      "Hold:em_dash:\u2013"
     ]
   },
   {
     "id": "B463",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B464",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013"
+      "Hold:em_dash:\u2013"
     ]
   },
   {
     "id": "B465",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B466",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B467",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:",
-      "FIX:unapproved_claim:12 leads"
+      "Revise:sameness:",
+      "Revise:unapproved_claim:12 leads"
     ]
   },
   {
     "id": "B468",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B469",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B470",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2013",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B471",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013"
+      "Hold:em_dash:\u2013"
     ]
   },
   {
     "id": "B472",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013"
+      "Hold:em_dash:\u2013"
     ]
   },
   {
     "id": "B473",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B474",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B475",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B476",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:10 posts"
+      "Revise:unapproved_claim:10 posts"
     ]
   },
   {
     "id": "B477",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B478",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:",
-      "FIX:unapproved_claim:100k+ impressions"
+      "Revise:sameness:",
+      "Revise:unapproved_claim:100k+ impressions"
     ]
   },
   {
     "id": "B479",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B480",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013"
+      "Hold:em_dash:\u2013"
     ]
   },
   {
     "id": "B481",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013",
-      "FIX:filler:leverage"
+      "Hold:em_dash:\u2013",
+      "Revise:filler:leverage"
     ]
   },
   {
     "id": "B482",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B483",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:filler:leverage"
+      "Revise:filler:leverage"
     ]
   },
   {
     "id": "B484",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B485",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013"
+      "Hold:em_dash:\u2013"
     ]
   },
   {
     "id": "B486",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2013"
+      "Hold:em_dash:\u2013"
     ]
   },
   {
     "id": "B487",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B488",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B489",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B490",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:unapproved_claim:$2,000/month"
+      "Hold:unapproved_claim:$2,000/month"
     ]
   },
   {
     "id": "B491",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B492",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B493",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B494",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B495",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B496",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:unapproved_claim:$2300 a month"
+      "Hold:unapproved_claim:$2300 a month"
     ]
   },
   {
     "id": "B497",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B498",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B499",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B500",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B501",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B502",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B503",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014"
+      "Hold:em_dash:\u2014"
     ]
   },
   {
     "id": "B504",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:em_dash:\u2014",
-      "FIX:sameness:"
+      "Hold:em_dash:\u2014",
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B505",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B506",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B507",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:400 followers"
+      "Revise:unapproved_claim:400 followers"
     ]
   },
   {
     "id": "B508",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:sameness:"
+      "Revise:sameness:"
     ]
   },
   {
     "id": "B509",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B510",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B511",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B512",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:10x"
+      "Revise:unapproved_claim:10x"
     ]
   },
   {
     "id": "B513",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B514",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:80%"
+      "Revise:unapproved_claim:80%"
     ]
   },
   {
     "id": "B515",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B516",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B517",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B518",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:211 posts",
-      "FIX:unapproved_claim:61,997 followers"
+      "Revise:unapproved_claim:211 posts",
+      "Revise:unapproved_claim:61,997 followers"
     ]
   },
   {
     "id": "B519",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B520",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B521",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B522",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B523",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B524",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B525",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:unapproved_claim:$400k"
+      "Hold:unapproved_claim:$400k"
     ]
   },
   {
     "id": "B526",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:17,000 followers"
+      "Revise:unapproved_claim:17,000 followers"
     ]
   },
   {
     "id": "B527",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B528",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B529",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B530",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B531",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B532",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B533",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B534",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B535",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B536",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B537",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B538",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:300k followers"
+      "Revise:unapproved_claim:300k followers"
     ]
   },
   {
     "id": "B539",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:4.5x"
+      "Revise:unapproved_claim:4.5x"
     ]
   },
   {
     "id": "B540",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:138,566 impressions"
+      "Revise:unapproved_claim:138,566 impressions"
     ]
   },
   {
     "id": "B541",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:unapproved_claim:$5m+"
+      "Hold:unapproved_claim:$5m+"
     ]
   },
   {
     "id": "B542",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B543",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:80%"
+      "Revise:unapproved_claim:80%"
     ]
   },
   {
     "id": "B544",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:664 companies"
+      "Revise:unapproved_claim:664 companies"
     ]
   },
   {
     "id": "B545",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B546",
-    "verdict": "FIX",
+    "verdict": "Revise",
     "issues": [
-      "FIX:unapproved_claim:80%"
+      "Revise:unapproved_claim:80%"
     ]
   },
   {
     "id": "B547",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B548",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B549",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B550",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B551",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B552",
-    "verdict": "PASS",
+    "verdict": "Send",
     "issues": []
   },
   {
     "id": "B553",
-    "verdict": "BLOCK",
+    "verdict": "Hold",
     "issues": [
-      "BLOCK:unapproved_claim:$7500"
+      "Hold:unapproved_claim:$7500"
     ]
   }
 ]

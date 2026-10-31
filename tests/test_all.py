@@ -46,38 +46,38 @@ class Core(unittest.TestCase):
                   "## Banned phrases\n- no firsts :: \\bthe first\\b\n")
         p = parse_files("", claims)
         self.assertEqual(p.approved_facts, ["$100 a month plan", "2 to 17 meetings in a month"])
-        self.assertEqual(check("Our plan is $100 a month.", p)["verdict"], "PASS")
+        self.assertEqual(check("Our plan is $100 a month.", p)["verdict"], "Send")
 
     def test_check_is_deterministic(self):
         p = profile_from_folder(EXAMPLE)
         text = "Notely is the first app to hit $20k MRR"
         a, b = check(text, p, "x"), check(text, p, "x")
         self.assertEqual(a, b)
-        self.assertEqual(a["verdict"], "BLOCK")
-        self.assertEqual(check("We hit 1,200 users", p)["verdict"], "PASS")
+        self.assertEqual(a["verdict"], "Hold")
+        self.assertEqual(check("We hit 1,200 users", p)["verdict"], "Send")
 
     def test_numbers_about_others_pass(self):
         # calibrated on real founder posts: third-party numbers and quoted examples are not our claims
         p = profile_from_folder(EXAMPLE)
-        self.assertEqual(check("Capital F closed a $17M fund last month.", p)["verdict"], "PASS")
-        self.assertEqual(check("RB2B scaled from $0 to $5M ARR in 12 months.", p)["verdict"], "PASS")
-        self.assertEqual(check('Try an opener like “I lost $2M in 48 hours.”', p)["verdict"], "PASS")
-        self.assertEqual(check("We hit $50k MRR last month.", p)["verdict"], "BLOCK")
-        self.assertEqual(check("A coach we work with closed a $4,000 deal.", p)["verdict"], "BLOCK")
+        self.assertEqual(check("Capital F closed a $17M fund last month.", p)["verdict"], "Send")
+        self.assertEqual(check("RB2B scaled from $0 to $5M ARR in 12 months.", p)["verdict"], "Send")
+        self.assertEqual(check('Try an opener like “I lost $2M in 48 hours.”', p)["verdict"], "Send")
+        self.assertEqual(check("We hit $50k MRR last month.", p)["verdict"], "Hold")
+        self.assertEqual(check("A coach we work with closed a $4,000 deal.", p)["verdict"], "Hold")
 
     def test_audience_claims(self):
         # found dogfooding: "673 of my posts" and follower counts slipped through
         p = profile_from_folder(EXAMPLE)
-        self.assertEqual(check("I have 90K followers.", p)["verdict"], "FIX")
-        self.assertEqual(check("We got 72,000 views in 30 days.", p)["verdict"], "FIX")
-        self.assertEqual(check("We hit 1,200 users.", p)["verdict"], "PASS")  # approved
+        self.assertEqual(check("I have 90K followers.", p)["verdict"], "Revise")
+        self.assertEqual(check("We got 72,000 views in 30 days.", p)["verdict"], "Revise")
+        self.assertEqual(check("We hit 1,200 users.", p)["verdict"], "Send")  # approved
 
     def test_multiplier_claims(self):
         p = profile_from_folder(EXAMPLE)
-        self.assertEqual(check("Our clients see 10x reach in 30 days.", p)["verdict"], "FIX")
-        self.assertEqual(check("We got 2.5x more leads.", p)["verdict"], "FIX")
+        self.assertEqual(check("Our clients see 10x reach in 30 days.", p)["verdict"], "Revise")
+        self.assertEqual(check("We got 2.5x more leads.", p)["verdict"], "Revise")
         for ok in ("Support is open 24x7.", "Use a 2x2 matrix.", "Notion grew 10x after launch."):
-            self.assertEqual(check(ok, p)["verdict"], "PASS", ok)
+            self.assertEqual(check(ok, p)["verdict"], "Send", ok)
 
     def test_learn_proposes_not_applies(self):
         p = profile_from_folder(EXAMPLE)
@@ -116,7 +116,7 @@ class ApiFlow(unittest.TestCase):
         self.assertEqual(s, 200)
         pid = out["id"]
         s, out = self.call("POST", "/v1/check", {"profile_id": pid, "text": "Notely is the first, $20k MRR"})
-        self.assertEqual((s, out["verdict"]), (200, "BLOCK"))
+        self.assertEqual((s, out["verdict"]), (200, "Hold"))
         s, out = self.call("POST", "/v1/critique", {"profile_id": pid, "text": "We hit 1,200 users"})
         self.assertEqual(s, 200)
         self.assertNotIn("overall", json.dumps(out).lower())
@@ -186,12 +186,12 @@ class Mcp(unittest.TestCase):
 
     def test_new_user_flow(self):
         text = "We now have 1,200 users."
-        self.assertEqual(self.call("coulis_check", {"text": text})["verdict"], "FIX")
+        self.assertEqual(self.call("coulis_check", {"text": text})["verdict"], "Revise")
         self.assertTrue(self.call("coulis_add", {"kind": "approved_fact", "text": "1,200 users"})["added"])
         self.assertFalse(self.call("coulis_add", {"kind": "approved_fact", "text": "1,200 users"})["added"])
-        self.assertEqual(self.call("coulis_check", {"text": text})["verdict"], "PASS")
+        self.assertEqual(self.call("coulis_check", {"text": text})["verdict"], "Send")
         self.call("coulis_add", {"kind": "banned_phrase", "text": "game-changer", "reason": "generic"})
-        self.assertEqual(self.call("coulis_check", {"text": "A game-changer."})["verdict"], "BLOCK")
+        self.assertEqual(self.call("coulis_check", {"text": "A game-changer."})["verdict"], "Hold")
 
     def test_critique_without_key_uses_host_model(self):
         out = self.call("coulis_critique", {"text": "We now have 1,200 users."})
@@ -257,8 +257,8 @@ class PythonSdk(unittest.TestCase):
         try:
             t = coulis_client.Coulis(key, "http://localhost:8787")
             p = t.create_profile(samples=["We launched in March."], approved_facts=["1,200 users"])
-            self.assertEqual(t.check(p["id"], "We have 1,200 users.")["verdict"], "PASS")
-            self.assertEqual(t.check(p["id"], "We hit $20k MRR")["verdict"], "BLOCK")
+            self.assertEqual(t.check(p["id"], "We have 1,200 users.")["verdict"], "Send")
+            self.assertEqual(t.check(p["id"], "We hit $20k MRR")["verdict"], "Hold")
             self.assertEqual(set(t.critique(p["id"], "hello")["axes"]), set(AXES))
             r = t.learn(p["id"], "We leverage AI. Great.", "Great.")
             self.assertTrue(t.approve_rule(r["proposed_rules"][0]["id"])["approved"])
@@ -277,7 +277,7 @@ class Sameness(unittest.TestCase):
         slop = "It's not about speed, it's about taste. Fast, cheap, and good. Comment below!"
         r = check(slop, prof, "linkedin")
         self.assertGreater(r["sameness"]["score"], 20)
-        self.assertEqual(check(slop, prof, "linkedin", max_sameness=10)["verdict"], "BLOCK")
+        self.assertEqual(check(slop, prof, "linkedin", max_sameness=10)["verdict"], "Hold")
         clean = check("Three months ago we had no customers. Today we signed our 300th.", prof, "linkedin", max_sameness=100)
         self.assertNotIn("sameness_gate", [i["check"] for i in clean["issues"]])
 

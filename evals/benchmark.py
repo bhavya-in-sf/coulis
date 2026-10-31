@@ -29,7 +29,7 @@ from coulis_core import check, profile_from_folder  # noqa: E402
 
 def score(text, prof, surface="linkedin"):
     r = check(text, prof, surface if surface else "linkedin")
-    s = 100 - r["sameness"]["score"] - 15 * r["counts"]["BLOCK"] - 5 * r["counts"]["FIX"]
+    s = 100 - r["sameness"]["score"] - 15 * r["counts"]["Hold"] - 5 * r["counts"]["Revise"]
     return max(0, s)
 
 

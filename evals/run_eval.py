@@ -45,7 +45,7 @@ def regression(persona, golden_path):
             drift.append(f"{r['id']}: not in golden file")
         elif g["verdict"] != r["verdict"]:
             drift.append(f"{r['id']}: golden {g['verdict']} -> now {r['verdict']}")
-    tally = lambda vs: {v: sum(1 for x in vs if x == v) for v in ("BLOCK", "FIX", "PASS")}
+    tally = lambda vs: {v: sum(1 for x in vs if x == v) for v in ("Hold", "Revise", "Send")}
     report = {"suite": "regression", "cases": len(rows),
               "golden": tally([g["verdict"] for g in golden.values()]),
               "now": tally([r["verdict"] for r in rows]), "drift": drift, "pass": not drift}

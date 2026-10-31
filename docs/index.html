@@ -330,7 +330,7 @@ body{overflow-x:clip}</style>
     <div class="door"><h3>Cursor, and any MCP client</h3><p>One block in your MCP config. Same six tools, same profile.</p><pre>"coulis": { "command": "python3",
   "args": ["~/coulis/mcp/server.py"] }</pre></div>
     <div class="door"><h3>Agents and apps, via the API</h3><p>One call before anything ships. ChatGPT, Slack and Docs come through here. Key-authenticated; <a href="https://github.com/bhavya-in-sf/coulis/blob/main/docs/API.md" rel="noopener">API docs</a>.</p><pre>POST /v1/check
-{ "text": "...", "min_score": 70 }</pre></div>
+{ "text": "...", "max_sameness": 50 }</pre></div>
   </div>
 </section>
 
@@ -343,13 +343,13 @@ body{overflow-x:clip}</style>
   <div class="top reveal"><h2>Three steps. <i>Cheapest first, most personal last.</i></h2><p>Everyone else writes for you. coulis judges what was written: against your facts, your voice and your own recent posts.</p></div>
   <div class="three">
     <div class="reveal"><h3>Check</h3><p>Fixed rules, no AI model, about 4 ms, the same answer every time. Facts you never approved, the AI tells, a hook you already used. The answer comes in plain words: Send, Revise or Hold, with each problem quoted and an alternative in your own words.</p></div>
-    <div class="reveal"><h3>Score</h3><p>One number, 0 to 100: how much this draft sounds like you. Eight parts measured in the backend and averaged. You see the score, the weakest part, and one rewritten line.</p></div>
+    <div class="reveal"><h3>Critique</h3><p>Eight parts scored separately against your own samples: clarity, proof, why you, the ask, hook, voice, boldness, rhythm. Never one number, because one number hides which thing is wrong. You see each score, the weakest part, and one rewritten line.</p></div>
     <div class="reveal"><h3>Learn</h3><p>Change a draft and it proposes the rule it saw. You approve. The rule joins a taste file you own. Continual learning from the one signal that is never wrong: what you actually sent.</p></div>
   </div>
   <div class="reveal" style="margin-top:36px;padding-top:24px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;font-size:15px;color:#444">
     <div><b style="color:var(--ink)">Directions</b><br>/coulis:bolder, quieter, shorter, clearer. One rewrite, checked, used only on your yes.</div>
     <div><b style="color:var(--ink)">Variants that teach</b><br>Three hooks, you pick one. Every pick grows your taste file.</div>
-    <div><b style="color:var(--ink)">Modes</b><br>LinkedIn, X, cold email, investor update, bio. Each with its own rules and target score.</div>
+    <div><b style="color:var(--ink)">Modes</b><br>LinkedIn, X, cold email, investor update, bio. Each with its own rules and its own sameness limit.</div>
     <div><b style="color:var(--ink)">Extract and doctor</b><br>Your past posts become your starting profile. Doctor tells you what is missing.</div>
   </div>
 </section>
@@ -358,7 +358,7 @@ body{overflow-x:clip}</style>
   <div class="head reveal"><div><p class="eyebrow">The product</p><h2>Everyone else writes for you. <i>We judge what was written.</i></h2></div><p>Four pieces of the product at real size. Every label and number is real.</p></div>
   <div class="grid">
     <div class="card glow reveal"><div class="ui" data-ui><div class="bar"><span><b>Draft</b> · LinkedIn · 14:02</span><span class="pill">4 ms</span></div><div style="padding:10px 14px">We hit $50k MRR this month. Our AI makes writing effortless for every founder who wants to grow.</div><div class="verdict FIX"><span class="dot"></span>Revise<span class="note">Two lines to settle before you send.</span></div><div class="row"><span class="lvl FIX">Revise</span><span><span class="q">"$50k MRR"</span> <span class="d">Not on your approved list.</span></span></div><div class="row"><span class="lvl FIX">Revise</span><span><span class="q">"effortless"</span> <span class="d">Filler.</span></span></div></div><h3>The gate</h3><p>Every number you have not approved is sent back, quoted, with the fix named.</p></div>
-    <div class="card small reveal"><div class="ui" data-ui><div class="bar"><span><b>coulis score</b></span><span class="pill">71 · weakest 3 of 8 parts</span></div><div class="row"><span class="lvl">HOOK</span><span><span class="q">5</span> <span class="d">Opens with a question.</span></span></div><div class="row"><span class="lvl">VOICE</span><span><span class="q">8</span> <span class="d">Your cadence.</span></span></div><div class="row"><span class="lvl">PROOF</span><span><span class="q">4</span> <span class="d">Weakest. No number.</span></span></div></div><h3>The score</h3><p>One number for people and for agents. Only the weakest line gets a rewrite.</p></div>
+    <div class="card small reveal"><div class="ui" data-ui><div class="bar"><span><b>coulis_critique</b></span><span class="pill">8 parts · weakest: proof</span></div><div class="row"><span class="lvl">HOOK</span><span><span class="q">5</span> <span class="d">Opens with a question.</span></span></div><div class="row"><span class="lvl">VOICE</span><span><span class="q">8</span> <span class="d">Your cadence.</span></span></div><div class="row"><span class="lvl">PROOF</span><span><span class="q">4</span> <span class="d">Weakest. No number.</span></span></div></div><h3>The score</h3><p>Eight scores, never one. Only the weakest line gets a rewrite.</p></div>
     <div class="card small reveal"><div class="faces"><span>62K</span><span>TV</span><span>3K</span><span>100</span><span>673</span></div><h3>Approved facts</h3><p>One file of numbers you stand behind. Approve a fact once, in plain English. Teams share one list.</p></div>
     <div class="card photo reveal"><div class="ui" data-ui style="margin-bottom:16px"><div class="bar"><span><b>coulis_learn</b></span><span class="pill">1 rule proposed</span></div><div style="padding:10px 14px">You cut "excited to share" again. Add <b>no "excited to share" openers</b> to your taste file?</div><div style="padding:0 14px 12px;display:flex;gap:8px"><span class="pill">Approve</span><span class="pill">Not now</span></div></div><h3>Learns from your edits</h3><p>Change a draft and coulis proposes the rule it saw. You approve each one. Your taste file grows by one line.</p></div>
   </div>
@@ -383,7 +383,7 @@ body{overflow-x:clip}</style>
   <div class="stats">
     <div class="stat"><b>2 in 3</b><span>of 673 published posts pass untouched</span></div>
     <div class="stat"><b>46/47</b><span>team drafts fixed by one approved fact</span></div>
-    <div class="stat"><b>16/24</b><span>held-out posts score higher on their own profile</span></div>
+    <div class="stat"><b>41/44</b><span>held-out posts from 11 writers score higher on their own profile</span></div>
     <div class="stat"><b>15%</b><span>less engagement on posts the check would have held</span></div>
   </div>
   <a class="btn" href="https://github.com/bhavya-in-sf/coulis#install" rel="noopener">Try it for free <span class="ar">→</span></a>
@@ -392,26 +392,26 @@ body{overflow-x:clip}</style>
 <section class="six wrap">
   <div class="top reveal"><div><h2>Checked <i>every day.</i></h2></div><p>Six things coulis reads before a draft goes out. Each one quoted back to you, with a way to fix it.</p></div>
   <div class="two">
-    <div class="pic reveal" style="display:flex;align-items:center;justify-content:center;padding:28px;color:#fff;text-align:center"><div><div style="font:600 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;opacity:.85">coulis score</div><div style="font:italic 400 clamp(90px,12vw,150px)/1 var(--serif);color:var(--c1)">82</div><div style="font-size:18px">Sounds like you.</div></div></div>
+    <div class="pic reveal" style="display:flex;align-items:center;justify-content:center;padding:28px;color:#fff;text-align:center"><div><div style="font:600 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;opacity:.85">sameness</div><div style="font:italic 400 clamp(90px,12vw,150px)/1 var(--serif);color:var(--c1)">82</div><div style="font-size:18px">Sounds like you.</div></div></div>
     <div class="checks">
       <div class="check reveal"><div class="n">01</div><h3>Em dashes and double hyphens</h3><span class="ex">"We shipped — finally." <b>Hold</b> em dash</span><p>The clearest AI tell. Held by default; your call to allow.</p></div>
       <div class="check reveal"><div class="n">02</div><h3>Unapproved numbers</h3><span class="ex">"300+ founders trust us" <b>Revise</b> not on your list</span><p>Followers, revenue, "10x". Numbers about other people pass; numbers about you must be on your list.</p></div>
       <div class="check reveal"><div class="n">03</div><h3>Banned phrases and filler</h3><span class="ex">"a total game-changer" <b>Hold</b> banned</span><p>"Game-changer", "delve", "in today's fast-paced world", and your own list.</p></div>
       <div class="check reveal"><div class="n">04</div><h3>The stock hooks</h3><span class="ex">"It's not about speed, it's about taste." <b>Revise</b> the not-X-but-Y frame</span><p>"It's not X, it's Y." A question opener. "Comment below." Flagged, with the score it costs.</p></div>
       <div class="check reveal"><div class="n">05</div><h3>Repeats</h3><span class="ex">"7 lessons from…" <b>Revise</b> same skeleton as Tuesday</span><p>A format or hook you already used this week.</p></div>
-      <div class="check reveal"><div class="n">06</div><h3>The score, 0 to 100</h3><span class="ex">Score 18 <b>sounds like AI</b> · 4 tells quoted</span><p>Under 40 sounds like AI. 40 to 70 getting there. 70 and up sounds like you; 90 and up, ready to send. One number for people and for agents.</p></div>
+      <div class="check reveal"><div class="n">06</div><h3>Sameness, 0 to 100</h3><span class="ex">Score 18 <b>sounds like AI</b> · 4 tells quoted</span><p>How much the draft reads like the average AI post, from quoted tells only. Not a guess about who wrote it. Teams can set a limit; agents can gate on it.</p></div>
     </div>
   </div>
 </section>
 
 
 <section class="lib wrap" id="modes" aria-labelledby="hm">
-  <div class="top reveal"><div><p class="eyebrow">Written for the moment</p><h2 id="hm">A cold email <i>is not a launch post.</i></h2></div><p>Launch posts, cold emails, investor updates and bios each get their own rules: a word limit, the one thing the draft must contain, and the score it has to reach.</p></div>
+  <div class="top reveal"><div><p class="eyebrow">Written for the moment</p><h2 id="hm">A cold email <i>is not a launch post.</i></h2></div><p>Launch posts, cold emails, investor updates and bios each get their own rules: a word limit, the one thing the draft must contain, and the sameness limit it must stay under.</p></div>
   <div id="modegrid" class="modes-grid reveal"></div>
 </section>
 
 <section class="lib wrap" id="onecheck" aria-labelledby="ho">
-  <div class="top reveal"><div><p class="eyebrow">One check</p><h2 id="ho">What one check looks like, <i>line by line.</i></h2></div><p>The whole sequence runs on your machine. The gate never calls a model; the score does, only when you ask for it.</p></div>
+  <div class="top reveal"><div><p class="eyebrow">One check</p><h2 id="ho">What one check looks like, <i>line by line.</i></h2></div><p>The whole sequence runs on your machine. The gate never calls a model; the critique does, only when you ask for it.</p></div>
   <div id="term" class="term reveal"></div>
 </section>
 <section class="final">

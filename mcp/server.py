@@ -23,10 +23,10 @@ SURFACE = {"type": "string", "enum": ["linkedin", "x", "reddit", "instagram", "y
 
 TOOLS = [
     {"name": "coulis_check",
-     "description": "The gate. Check a draft against the user's approved facts, banned phrases and house rules before it is shown or posted. Deterministic, no model call. Returns BLOCK, FIX or PASS with each issue quoted.",
+     "description": "The gate. Check a draft against the user's approved facts, banned phrases and house rules before it is shown or posted. Deterministic, no model call. Returns Hold, Revise or Send with each issue quoted.",
      "inputSchema": {"type": "object", "required": ["text"], "additionalProperties": False,
                      "properties": {"profile_dir": PROFILE_DIR, "text": {"type": "string"}, "surface": SURFACE,
-                                    "max_sameness": {"type": "integer", "minimum": 0, "maximum": 100, "description": "Optional team gate: BLOCK when the sameness score is above this."}}}},
+                                    "max_sameness": {"type": "integer", "minimum": 0, "maximum": 100, "description": "Optional team gate: Hold when the sameness score is above this."}}}},
     {"name": "coulis_critique",
      "description": "The critic step. Score a draft on 8 separate axes (clarity, proof, why_you, ask, hook, voice, boldness, rhythm) against the user's taste profile, and rewrite only the weakest part. Never one overall score. With ANTHROPIC_API_KEY set it scores via the API; otherwise it returns the rubric and profile (mode: host_model) for you to score in this chat.",
      "inputSchema": {"type": "object", "required": ["text"], "additionalProperties": False,

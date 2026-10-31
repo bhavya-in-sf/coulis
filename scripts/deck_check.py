@@ -76,7 +76,7 @@ def main():
         r = gate.check(s, persona, "linkedin")
         report["per_slide"].append({"slide": i, "verdict": r["verdict"], "sameness": r["sameness"]["score"],
                                     "issues": [{"level": x["level"], "check": x["check"], "quote": x["quote"]} for x in r["issues"]]})
-    worst = "BLOCK" if any(x["verdict"] == "BLOCK" for x in report["per_slide"]) else "FIX" if any(x["verdict"] == "FIX" for x in report["per_slide"]) or report["cross_slide"] else "PASS"
+    worst = "Hold" if any(x["verdict"] == "Hold" for x in report["per_slide"]) else "Revise" if any(x["verdict"] == "Revise" for x in report["per_slide"]) or report["cross_slide"] else "Send"
     report["verdict"] = worst
     if a.json:
         print(json.dumps(report, indent=2))

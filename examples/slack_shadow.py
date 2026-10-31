@@ -73,13 +73,13 @@ def main():
     if a.digest:
         by_day = {}
         for r in rows:
-            d = by_day.setdefault(r["date"], {"drafts": 0, "BLOCK": 0, "FIX": 0, "PASS": 0, "issues": {}})
+            d = by_day.setdefault(r["date"], {"drafts": 0, "Hold": 0, "Revise": 0, "Send": 0, "issues": {}})
             d["drafts"] += 1
             d[r["verdict"]] += 1
             for i in r["issues"]:
                 d["issues"][i["check"]] = d["issues"].get(i["check"], 0) + 1
         for day, d in sorted(by_day.items()):
-            print(f"{day}: {d['drafts']} drafts, {d['BLOCK']} would be stopped, {d['FIX']} sent back, {d['PASS']} passed. Caught: {d['issues']}")
+            print(f"{day}: {d['drafts']} drafts, {d['Hold']} would be stopped, {d['Revise']} sent back, {d['Send']} passed. Caught: {d['issues']}")
         pairs = pairs_path.read_text().count("\n") if pairs_path.exists() else 0
         print(f"{len(rows)} drafts checked in total, {pairs} draft/edit pairs saved for learn.")
         return

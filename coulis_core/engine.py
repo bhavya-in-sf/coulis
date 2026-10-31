@@ -17,7 +17,7 @@ SURFACES = tuple(_gate.MODES)
 
 
 def check(text, profile, surface="linkedin", history=(), max_sameness=None):
-    """Gate a draft. Returns {verdict: BLOCK|FIX|PASS, issues: [...], skeleton: [...]}.
+    """Gate a draft. Returns {verdict: Hold|Revise|Send, issues: [...], skeleton: [...]}.
 
     history: optional recent posts on the same surface, each {id, date, title, text},
     used for the sameness check.
@@ -30,14 +30,14 @@ def check(text, profile, surface="linkedin", history=(), max_sameness=None):
     r = _gate.check(text, profile.to_persona(), surface, hist)
     same = r.get("sameness", {"score": 0, "label": "", "hits": []})
     if max_sameness is not None and same["score"] > max_sameness:
-        r["issues"].append({"level": "BLOCK", "check": "sameness_gate",
+        r["issues"].append({"level": "Hold", "check": "sameness_gate",
                             "detail": f"Sameness {same['score']} is over this profile's limit of {max_sameness}.",
                             "quote": ", ".join(same["hits"][:3])})
-        r["verdict"] = "BLOCK"
+        r["verdict"] = "Hold"
     mode = _gate.MODES.get(surface, {})
     return {"verdict": r["verdict"], "issues": r["issues"], "skeleton": r["skeleton"], "sameness": same,
             "mode": surface, "target_score": mode.get("target_score", 70),
-            "counts": {lvl: sum(1 for i in r["issues"] if i["level"] == lvl) for lvl in ("BLOCK", "FIX")}}
+            "counts": {lvl: sum(1 for i in r["issues"] if i["level"] == lvl) for lvl in ("Hold", "Revise")}}
 
 
 def learn(draft, final, profile):

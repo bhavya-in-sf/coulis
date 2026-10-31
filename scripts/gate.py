@@ -9,7 +9,7 @@ can call it as a hard gate and a human can trust it.
     echo "text" | python3 gate.py --persona ../personas/example --surface x -
     python3 gate.py --persona ../personas/example --backtest   # runs on corpus/posts.md
 
-Verdict: BLOCK (must fix before posting), FIX (should fix), PASS.
+Verdict: Hold (must fix before posting), Revise (should fix), Send.
 The taste half (hook, voice, boldness, rhythm) is judged by the critique skill,
 not here, because it needs judgment.
 """
@@ -208,7 +208,7 @@ def check(text, persona, surface="reddit", history=()):
     # 1. dashes
     for d in ("—", "–", "--"):
         if d in text:
-            add("BLOCK", "em_dash", "Em dash or double hyphen (house rule).", d)
+            add("Hold", "em_dash", "Em dash or double hyphen (house rule).", d)
 
     # 2. claims vs claims.md
     seen = set()
@@ -220,32 +220,32 @@ def check(text, persona, surface="reddit", history=()):
             continue
         if not about_us(text, quote, persona):
             continue  # a number about someone else, or a quoted example: not our claim
-        level ="BLOCK" if kind == "money" or "arr" in quote or "mrr" in quote else "FIX"
+        level ="Hold" if kind == "money" or "arr" in quote or "mrr" in quote else "Revise"
         add(level, "unapproved_claim", "Number not in claims.md. Add it to claims.md or cut it.", quote)
 
     # 2b. personal stories the owner must confirm they happened
     for desc, rx in persona.get("stories", []):
         m = re.search(rx, t)
         if m:
-            add("FIX", "unconfirmed_story", f"Story not confirmed by the owner: {desc}.", m.group(0))
+            add("Revise", "unconfirmed_story", f"Story not confirmed by the owner: {desc}.", m.group(0))
 
     # 3. banned phrases from claims.md ("## Banned phrases": "- why :: regex")
     for desc, rx in persona.get("banned", []):
         for m in re.finditer(rx, t):
-            add("BLOCK", "banned_phrase", desc, m.group(0))
+            add("Hold", "banned_phrase", desc, m.group(0))
 
     # 4. filler
     for f in FILLER:
         for m in re.finditer(re.escape(f), t):
             if not is_example(t, m.start()):
-                add("FIX", "filler", "Corporate filler word.", f)
+                add("Revise", "filler", "Corporate filler word.", f)
                 break
 
     # 5. slang overuse (voice rule: at most once)
     slang_hits = [s.strip() for s in SLANG if re.search(r"\b" + re.escape(s.strip()) + r"\b", t)]
     total = sum(len(re.findall(r"\b" + re.escape(s) + r"\b", t)) for s in slang_hits)
     if total > 2:
-        add("FIX", "slang", f"Slang used {total} times. Voice rule: once, maybe twice.", ", ".join(slang_hits))
+        add("Revise", "slang", f"Slang used {total} times. Voice rule: once, maybe twice.", ", ".join(slang_hits))
 
     # 6. disclosure + self-promo honesty (reddit)
     prod, owner = persona.get("product"), persona.get("owner")
@@ -253,19 +253,19 @@ def check(text, persona, surface="reddit", history=()):
     if surface == "reddit":
         disclosed = re.search(r"(i (run|founded|built|am building)|i'm building|founder of|my (startup|company|product))", t)
         if names_product and not disclosed and not (owner and owner in t):
-            add("FIX", "disclosure", "Names the product without saying you built it.")
+            add("Revise", "disclosure", "Names the product without saying you built it.")
         if "i will not promote" in t and names_product:
-            add("BLOCK", "promo_honesty", "Says 'I will not promote' but names the product.", "i will not promote")
+            add("Hold", "promo_honesty", "Says 'I will not promote' but names the product.", "i will not promote")
 
     # 6b. mode rules (length, the ask, numbers) per surface
     mode = MODES.get(surface, {})
     words = len(text.split())
     if mode.get("max_words") and words > mode["max_words"]:
-        add("FIX", "mode_length", f"{words} words. {mode['label']}: keep it under {mode['max_words']}.")
+        add("Revise", "mode_length", f"{words} words. {mode['label']}: keep it under {mode['max_words']}.")
     if mode.get("ask") and not re.search(mode["ask"], t):
-        add("FIX", "mode_ask", f"{mode['label']}: needs one clear ask.")
+        add("Revise", "mode_ask", f"{mode['label']}: needs one clear ask.")
     if mode.get("needs_number") and not re.search(r"\d", t):
-        add("FIX", "mode_numbers", f"{mode['label']}: carry at least one real number.")
+        add("Revise", "mode_numbers", f"{mode['label']}: carry at least one real number.")
 
     # 7. sameness vs recent posts on the same surface
     skel = {k for k, p in SKELETONS.items() if re.search(p, t)}
@@ -279,7 +279,7 @@ def check(text, persona, surface="reddit", history=()):
                 why.append("same skeleton: " + ", ".join(sorted(hskel)))
             if overlap > 0.12:
                 why.append(f"{overlap:.0%} shared phrasing")
-            add("FIX", "sameness", f"Too close to {h['id']} ({h['date']}): " + "; ".join(why), h["title"][:70])
+            add("Revise", "sameness", f"Too close to {h['id']} ({h['date']}): " + "; ".join(why), h["title"][:70])
 
     uniq, keys = [], set()
     for i in issues:
@@ -288,7 +288,7 @@ def check(text, persona, surface="reddit", history=()):
             keys.add(k)
             uniq.append(i)
     issues = uniq
-    verdict = "BLOCK" if any(i["level"] == "BLOCK" for i in issues) else "FIX" if issues else "PASS"
+    verdict = "Hold" if any(i["level"] == "Hold" for i in issues) else "Revise" if issues else "Send"
     return {"verdict": verdict, "issues": issues, "skeleton": sorted(skel), "sameness": sameness(text, issues)}
 
 
@@ -343,7 +343,7 @@ def main():
     r = check(text, load_persona(a.persona), a.surface)
     print(json.dumps(r, indent=2) if a.json else f"{r['verdict']}\n" + "\n".join(
         f"  {i['level']} {i['check']}: {i['quote']!r} {i['detail']}" for i in r["issues"]))
-    sys.exit(2 if r["verdict"] == "BLOCK" else 0)
+    sys.exit(2 if r["verdict"] == "Hold" else 0)
 
 
 if __name__ == "__main__":

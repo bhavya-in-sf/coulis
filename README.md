@@ -19,12 +19,12 @@ Want to know how? Comment below!
 What coulis sends back, in under a second, with no model call:
 
 ```
-BLOCK
-  BLOCK em_dash: '—' Em dash or double hyphen (house rule).
-  FIX unapproved_claim: '300+ founders' Number not in claims.md. Add it to claims.md or cut it.
-  FIX unapproved_claim: '10x' Number not in claims.md. Add it to claims.md or cut it.
-  BLOCK banned_phrase: "in today's fast-paced world" Generic AI filler she cuts from every draft
-  BLOCK banned_phrase: 'game-changer' Generic AI filler she cuts from every draft
+Hold
+  Hold em_dash: '—' Em dash or double hyphen (house rule).
+  Revise unapproved_claim: '300+ founders' Number not in claims.md. Add it to claims.md or cut it.
+  Revise unapproved_claim: '10x' Number not in claims.md. Add it to claims.md or cut it.
+  Hold banned_phrase: "in today's fast-paced world" Generic AI filler she cuts from every draft
+  Hold banned_phrase: 'game-changer' Generic AI filler she cuts from every draft
 ```
 
 And a post in her own voice, with only approved numbers:
@@ -37,7 +37,7 @@ Comment "INVESTORS" and I'll send you the list.
 ```
 
 ```
-PASS
+Send
 ```
 
 Then `/coulis:critique` scores the draft on 8 separate axes against her own samples, and rewrites only the weakest line.
@@ -117,8 +117,8 @@ from coulis_core import check, profile_from_folder
 
 profile = profile_from_folder("~/.coulis")              # the owner's TASTE.md + claims.md
 r = check("We're leveraging AI to 10x your workflow. 300+ founders trust us.", profile, surface="linkedin")
-r["verdict"]        # "FIX"
-r["issues"][0]      # {"level": "FIX", "check": "unapproved_claim", "quote": "10x", "detail": "Number not in claims.md. Add it to claims.md or cut it."}
+r["verdict"]        # "Revise"
+r["issues"][0]      # {"level": "Revise", "check": "unapproved_claim", "quote": "10x", "detail": "Number not in claims.md. Add it to claims.md or cut it."}
 ```
 
 From a shell or any language:
@@ -127,9 +127,9 @@ python3 scripts/coulis.py check - --json <<'DRAFT'
 the draft
 DRAFT
 ```
-Exit code 2 = BLOCK (do not send), 1 = FIX (fix the quoted lines, then send), 0 = PASS. `--profile <folder>` checks as a client or a company instead of the owner.
+Exit code 2 = Hold (do not send), 1 = Revise (fix the quoted lines, then send), 0 = Send. `--profile <folder>` checks as a client or a company instead of the owner.
 
-Rules for an agent: never send on BLOCK; never invent a number to satisfy a claim check (cut it or ask the owner to approve it); add facts only after the owner says yes (`coulis.py add approved_fact "..."`); when the owner edits your draft, run `coulis.py learn draft.txt final.txt` and propose the rules it finds.
+Rules for an agent: never send on Hold; never invent a number to satisfy a claim check (cut it or ask the owner to approve it); add facts only after the owner says yes (`coulis.py add approved_fact "..."`); when the owner edits your draft, run `coulis.py learn draft.txt final.txt` and propose the rules it finds.
 
 - OpenClaw skill: [`openclaw/`](openclaw/) (`clawhub install coulis`).
 - Claude Code and Claude Desktop: the plug-in above (MCP tools `coulis_check`, `coulis_add`, `coulis_learn`).

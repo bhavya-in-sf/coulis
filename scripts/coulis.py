@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Coulis from the command line: the same tools as the MCP server, logging included.
 
-    python3 scripts/coulis.py check "your draft"            # or: echo "draft" | ... check -   (exit 2 BLOCK, 1 FIX, 0 PASS; --json for agents)
+    python3 scripts/coulis.py check "your draft"            # or: echo "draft" | ... check -   (exit 2 Hold, 1 Revise, 0 Send; --json for agents)
     python3 scripts/coulis.py critique "your draft"
     python3 scripts/coulis.py skip "why it didn't fit" --kind "Slack reply"
     python3 scripts/coulis.py add approved_fact "1,200 users"
@@ -29,7 +29,7 @@ def main():
     ap.add_argument("--linkedin", help="setup: a LinkedIn data export zip, or its Shares csv")
     ap.add_argument("--out", help="setup: folder to write TASTE.md and claims.md (default ~/.coulis)")
     ap.add_argument("--name", default="", help="setup: name / role line")
-    ap.add_argument("--max-sameness", type=int, help="check: BLOCK when the sameness score is above this (team gate)")
+    ap.add_argument("--max-sameness", type=int, help="check: Hold when the sameness score is above this (team gate)")
     ap.add_argument("--json", action="store_true", help="check: print the verdict as JSON (for agents)")
     a = ap.parse_args()
     read = lambda s: sys.stdin.read() if s == "-" else s
@@ -70,7 +70,7 @@ def main():
             print(out["verdict"], f"(sameness {sm.get('score')}: {sm.get('label')})" if sm else "")
             for i in out["issues"]:
                 print(f"  {i['level']} {i['check']}: {i['quote']!r} {i['detail']}")
-        sys.exit({"BLOCK": 2, "FIX": 1}.get(out["verdict"], 0))  # agents branch on the exit code
+        sys.exit({"Hold": 2, "Revise": 1}.get(out["verdict"], 0))  # agents branch on the exit code
     elif a.cmd == "critique" and out.get("mode") == "host_model":
         print(out["task"])
     else:
