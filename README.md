@@ -190,3 +190,7 @@ python3 scripts/coulis.py context '{"text":"Launch post","surface":"linkedin"}' 
 ```
 
 [Workflow and approval contract](docs/TASTE-LOOP.md) · [API and SDK setup](docs/API.md). The API is self-hosted preview code, not a managed service. Preference memory updates context, not model weights.
+
+## Personalization evaluation and edit extraction
+
+`workflow extract` proposes conservative, evidence-backed structural preferences from an actual style edit, with explicit approval still required. The [personalization benchmark](docs/PERSONALIZATION-EVAL.md) compares no profile, samples only, and samples plus preferences on time/topic-held-out tasks. It creates blind review packets and reports actual human ballots; no live personalization gain has been measured yet.

@@ -30,6 +30,7 @@ All use the same arguments in MCP, CLI and SDKs:
 | view | comparison_id — returns randomized positions; conditions hidden until decision |
 | decide | comparison_id, choice (displayed integer position, tie, neither), category, reason?, final?, active_edit_seconds? |
 | edit | task, draft, final, context, category, consent:true, reason? — records the actual supplied final |
+| extract | comparison_id — conservative edit-feature proposals with before/after evidence; may abstain; confidence uncalibrated |
 | propose | comparison_id, key, value, wording — style evidence required |
 | approve | proposal_id, approved:true, supersedes? |
 | revise | preference_id, value, wording — pending replacement until approved |
@@ -60,3 +61,7 @@ next_context = c.context('A different topic', surface='linkedin')
 ```
 
 Approved memory is loaded automatically by profile/context/critique. DB-backed rules are not duplicated into Markdown. Legacy learn/pick capture remains compatible but does not itself approve contextual preferences. Purge affects workflow data only; legacy files and backups need separate deletion. This is contextual continual memory, not a trained taste model or evidence of performance gains.
+
+## Personalization evaluation
+
+Use the separate offline [personalization benchmark](PERSONALIZATION-EVAL.md) to compare no profile, samples only, and approved preferences on dated held-out tasks. Ordinary workflow summaries are not that experiment.

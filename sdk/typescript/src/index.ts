@@ -1,7 +1,7 @@
 /** Source SDK for the self-hosted Coulis API. Uses the platform fetch implementation. */
 export type Arguments = Record<string, unknown>;
 export type Context = {surface: string; audience?: string; purpose?: string};
-export type WorkflowAction = 'state' | 'edit' | 'create' | 'view' | 'decide' | 'propose' | 'approve' | 'prepare' | 'revise' | 'reject' | 'disable' | 'purge';
+export type WorkflowAction = 'state' | 'extract' | 'edit' | 'create' | 'view' | 'decide' | 'propose' | 'approve' | 'prepare' | 'revise' | 'reject' | 'disable' | 'purge';
 export class CoulisError extends Error {
   status: number;
   payload: any;

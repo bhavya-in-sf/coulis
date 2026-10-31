@@ -1,5 +1,6 @@
 """Choice -> proposal -> explicit approval -> contextual reuse. Local, no automatic model calls."""
 import json
+from contextlib import nullcontext
 import random
 import uuid
 from pathlib import Path
@@ -96,9 +97,42 @@ class Workflow:
         p={'id':str(uuid.uuid4()),'key':text(key,'key',100),'value':text(value,'value',300),
            'text':text(wording,'preference',1000),'scope':row['context'],'evidence_ids':[comparison_id],
            'approved':False,'confidence':None,'proposal_source':'reviewable wording supplied by human or host model'}
-        with self.db:
+        with (nullcontext() if self.db.in_transaction else self.db):
             self.db.execute('INSERT INTO proposals(id,payload) VALUES(?,?)',(p['id'],json.dumps(p)))
         return p
+
+    def extract(self, comparison_id):
+        with self.db:
+            self.db.execute('BEGIN IMMEDIATE')
+            return self._extract(comparison_id)
+
+    def _extract(self, comparison_id):
+        from .extraction import extract, VERSION
+        row, decision = self.get(comparison_id)
+        if not decision or decision['category']!='style' or type(decision['choice']) is not int:
+            return {'proposals':[], 'abstained':True, 'reason':'Requires an explicit style decision.', 'extractor':VERSION}
+        # An edit has a known before/after. A variant pick alone has no causal edit.
+        original = next((c['text'] for c in row['candidates'] if c['condition']=='original'), None)
+        is_edit = any(c['condition']=='human_final' for c in row['candidates'])
+        if not is_edit or original is None:
+            return {'proposals':[], 'abstained':True, 'reason':'Use a recorded before/after edit, not a variant pick.', 'extractor':VERSION}
+        candidates, reason = extract(original, decision['final'])
+        existing = [{**json.loads(p), 'resolved':bool(r)} for p,r in self.db.execute('SELECT payload,resolved FROM proposals')]
+        output = []
+        for candidate in candidates:
+            duplicate = next((p for p in existing if p.get('extractor')==VERSION and p['evidence_ids']==[comparison_id]
+                              and p['key']==candidate['key'] and p['value']==candidate['value']), None)
+            if duplicate:
+                if not duplicate['resolved']:output.append(duplicate)
+                continue
+            p = self.propose(comparison_id,candidate['key'],candidate['value'],candidate['wording'])
+            p.update(extractor=VERSION, proposal_source='conservative edit-feature heuristic',
+                     observation=candidate['observation'], confidence_label=candidate['confidence_label'],
+                     warning=candidate['warning'], evidence_quotes={'before':original,'after':decision['final']})
+            self.db.execute('UPDATE proposals SET payload=? WHERE id=?',(json.dumps(p),p['id']))
+            output.append(p)
+        return {'proposals':output, 'abstained':not output, 'reason':reason or ('All extracted proposals were already resolved.' if not output else None), 'extractor':VERSION,
+                'note':'Pending proposals only. Confidence is uncalibrated; approval is always required.'}
 
     def approve(self, proposal_id, approved=False, supersedes=None):
         if approved is not True: raise ValueError('Explicit preference approval required')
@@ -164,6 +198,7 @@ class Workflow:
             return {'deleted':True,'scope':'Local workflow database only; legacy Markdown and backups are unchanged'}
         if action=='create':return self.create(**args)
         if action=='edit':return self.edit(**args)
+        if action=='extract':return self.extract(**args)
         if action=='view':return self.view(**args)
         if action=='decide':return self.decide(**args)
         if action=='propose':return self.propose(**args)

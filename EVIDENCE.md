@@ -13,7 +13,7 @@ No rule ships without one. If you find a claim here that's wrong or overstated, 
 | Kind | What it is | Where |
 |---|---|---|
 | Archive counts | 2,437 real posts, 38 voices, 673 public | docs/RESEARCH-AGENDA.md, "The data" |
-| Software tests | 45 product, research, workflow and interface tests in CI (including both SDKs against HTTP) | tests/, evals/ |
+| Software tests | 58 product, research, workflow and interface tests in CI (including both SDKs against HTTP) | tests/, evals/ |
 | User results | Four held-out tests on real writing (2 in 3; 46 of 47; 41 of 44; 15%) | docs/RESEARCH-AGENDA.md, "What has been measured" |
 | Model results | None. No coulis model exists. | docs/RESEARCH-AGENDA.md, "How the rest will be tested" |
 Unmeasured so far: user preference for the drafts, edit reduction, retention, unseen-topic transfer.

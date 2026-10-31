@@ -94,6 +94,13 @@ class InterfaceTests(unittest.TestCase):
         self.assertEqual(len(state['preferences']),1)
         self.assertEqual(state['proposals'],[])
 
+    def test_concurrent_extraction_does_not_duplicate_proposals(self):
+        row=self.client.workflow('edit',task='Post',draft='We build tools — we learn from the people who use them.',final='We build tools, we learn from the people who use them.',context={'surface':'x'},category='style',consent=True)
+        with ThreadPoolExecutor(2) as pool:
+            results=list(pool.map(lambda _:self.client.workflow('extract',comparison_id=row['id']),range(2)))
+        self.assertEqual(results[0]['proposals'][0]['id'],results[1]['proposals'][0]['id'])
+        self.assertEqual(len(self.local.workflow('state')['proposals']),1)
+
     def test_typescript_against_real_http_server(self):
         node = os.environ.get('COULIS_TEST_NODE')
         if not node: self.skipTest('Set COULIS_TEST_NODE to run TypeScript against the real HTTP API')

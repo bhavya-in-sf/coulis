@@ -1,0 +1,33 @@
+{
+  "version": "personalization-v1",
+  "dataset_version": "synthetic-v1",
+  "dataset_sha256": "b5137f59728378de5cce93c2095ec730563ba7cce806d392d2c38a07504023f9",
+  "code_sha256": "04fb480ffd9ca0dfb5bee83d4bb297b6bbf8d45c56fea8f43ba01deb04814519",
+  "source_hashes": {
+    "coulis_core/retrieval.py": "31cffd055a503096a56ccd37f705f8721189ba2a874d9cde43c83bcf2aaf904a",
+    "coulis_core/context.py": "48b7758bddc10181a6164ae7603182ff247600b47bba7d5346f7c623fbb4187b",
+    "coulis_core/profile.py": "ca3c899e918cd8d4c27739c0f8cf394515c3947e49a1999f70fce0f3b70bada0",
+    "coulis_core/taste_store.py": "384176f0a6ceb200e3ffaded1b7610ed3819c805b2de273cb472525e5def4eb9"
+  },
+  "split": "unseen_topic",
+  "synthetic": true,
+  "command": "python3 -m coulis_research.personalization prepare --dataset evals/fixtures/personalization/synthetic.json --split unseen_topic --output private/personalization-smoke/bundle.json",
+  "cases": 1,
+  "conditions": [
+    "no_profile",
+    "samples_only",
+    "samples_preferences"
+  ],
+  "coverage": [
+    {
+      "eligible_samples": 1,
+      "retrieved_samples": 1,
+      "eligible_preferences": 1,
+      "conflicts": []
+    }
+  ],
+  "model_calls": 0,
+  "human_ballots": 0,
+  "personalization_gain": null,
+  "status": "Synthetic preparation smoke test only; no effectiveness measurement"
+}
