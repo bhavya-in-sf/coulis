@@ -66,3 +66,7 @@ The ambition now directly overlaps with better writing models. Coulis's proposed
 The current homepage uses licensed editorial sauce photography, warm off-white backgrounds, near-black type, a restrained red accent, square image crops, thin rules, and generous whitespace. Real food photography grounds the literal Coulis metaphor; the main headline and research architecture establish the AI lab. Technical diagrams explain proposed systems, never fabricated performance. OpenAI, Anthropic, and Taste Labs inform the requested research-led visual direction; their logos, assets, and page layouts are not reused.
 
 The primary journey is research → local prototype → paid B2B2C design partnership. Hosted model/API and enterprise offerings remain clearly marked as waitlist. Photo provenance and license boundaries are documented in `assets/CREDITS.md`.
+
+### Current decision: restore original identity
+
+Supersedes the photographic-homepage direction above: restore Instrument Sans with Instrument Serif italics, the dark red animated landscape, white body, canary accents, pill CTAs, and rounded cards. Keep the current taste-LLM research narrative, B2B2C partnerships, evidence boundaries, and local prototype. The stock berry photograph remains a secondary illustration of the name rather than the hero. Fonts now load from the committed `option-pepple/fonts` directory. See `STRATEGY-COMPARISON.md` for the product-versus-lab viability comparison.
