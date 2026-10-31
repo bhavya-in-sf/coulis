@@ -12,6 +12,27 @@ from pathlib import Path
 SCHEMA_VERSION = "coulis.profile/v1"
 
 
+def rhythm_fingerprint(samples):
+    """Mean and spread of words per sentence, and lines per post, measured from the person's own samples.
+    Deterministic; computed once per profile load. Empty dict when there are too few samples."""
+    import statistics
+    sents, lines = [], []
+    for smp in samples:
+        for sent in re.split(r"(?<=[.!?])\s+|\n+", smp):
+            w = len(sent.split())
+            if w >= 2:
+                sents.append(w)
+        lines.append(len([l for l in smp.splitlines() if l.strip()]))
+    if len(sents) < 8 or len(lines) < 2:
+        return {}
+    return {"words_per_sentence": round(statistics.mean(sents), 1),
+            "words_per_sentence_sd": round(statistics.pstdev(sents), 1),
+            "lines_per_post": round(statistics.mean(lines), 1),
+            "lines_per_post_sd": round(statistics.pstdev(lines), 1),
+            "n_sentences": len(sents)}
+
+
+
 @dataclass
 class Rule:
     text: str
@@ -54,6 +75,8 @@ class Profile:
             "banned": [(p.why, p.regex) for p in self.banned],
             "owner": norm(self.owner),
             "product": norm(self.product),
+            "samples": list(self.samples),
+            "rhythm": rhythm_fingerprint(self.samples),
         }
 
     def to_files(self):

@@ -34,7 +34,7 @@ TOOLS = [
     {"name": "coulis_learn",
      "description": "Propose taste rules from the difference between an AI draft and what the user actually posted. Rules are proposals only; the user must approve each one before it is saved.",
      "inputSchema": {"type": "object", "required": ["draft", "final"], "additionalProperties": False,
-                     "properties": {"profile_dir": PROFILE_DIR, "draft": {"type": "string"}, "final": {"type": "string"}}}},
+                     "properties": {"profile_dir": PROFILE_DIR, "draft": {"type": "string"}, "final": {"type": "string"}, "surface": SURFACE}}},
     {"name": "coulis_add",
      "description": "Add one entry to the user's claims.md (created if missing): an approved fact the gate should allow (e.g. '1,200 users'), or a banned phrase with a reason. Only call this after the user explicitly says to add it.",
      "inputSchema": {"type": "object", "required": ["kind", "text"], "additionalProperties": False,
@@ -51,7 +51,8 @@ TOOLS = [
      "inputSchema": {"type": "object", "required": ["picked", "rejected"], "additionalProperties": False,
                      "properties": {"profile_dir": PROFILE_DIR, "picked": {"type": "string"},
                                     "rejected": {"type": "array", "items": {"type": "string"}},
-                                    "surface": SURFACE, "context": {"type": "string", "description": "What the variants were for, e.g. 'hook for launch post'"}}}},
+                                    "surface": SURFACE, "context": {"type": "string", "description": "What the variants were for, e.g. 'hook for launch post'"},
+                                    "why": {"type": "string", "enum": ["clearer", "bolder", "truer", "more_me", "shorter", "other"], "description": "Why the user picked it, in their words, mapped to one tag"}}}},
     {"name": "coulis_doctor",
      "description": "Health check of the user's taste profile: are TASTE.md and claims.md present, complete and recent? Returns problems with one-line fixes.",
      "inputSchema": {"type": "object", "properties": {"profile_dir": PROFILE_DIR}, "additionalProperties": False}},
@@ -94,6 +95,54 @@ def home_dir():
 
 def profile():
     return profile_from_folder(profile_dir())
+
+
+def _append(name, rec):
+    """One JSON row to a file next to the profile. Local only; nothing is uploaded."""
+    path = profile_dir() / name
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a") as f:
+        f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    return path
+
+
+def recent_sent(surface, n=20):
+    """The last n posts the user actually sent on this surface (from sent.jsonl), for the repetition checks."""
+    path = profile_dir() / "sent.jsonl"
+    if not path.exists():
+        return []
+    rows = []
+    for line in path.read_text().splitlines():
+        try:
+            r = json.loads(line)
+        except ValueError:
+            continue
+        if r.get("surface", surface) == surface and r.get("text"):
+            rows.append({"id": r.get("id", r.get("t", "?")), "date": (r.get("t") or "")[:10], "title": r["text"][:70], "text": r["text"]})
+    return rows[-n:]
+
+
+def record_edit_pair(draft, final, surface, proposed_rules):
+    """Capture the one signal that is never wrong: what the user actually sent, next to the draft they were given.
+    Writes edit-pairs.jsonl (original, revision, surface, proposed rules), overrides.jsonl (flagged lines the user
+    kept, and passed lines the user changed) and sent.jsonl (the final, for the repetition checks). All local."""
+    import datetime
+    t = datetime.datetime.now().isoformat(timespec="seconds")
+    try:
+        prof = profile()
+        before = check(draft, prof, surface)
+        fin_norm = final.lower().replace("\u2019", "'")
+        kept = [i for i in before["issues"] if i.get("quote") and i["quote"].lower().replace("\u2019", "'") in fin_norm]
+        for i in kept:
+            _append("overrides.jsonl", {"t": t, "kind": "kept_flagged", "check": i["check"], "quote": i["quote"], "surface": surface})
+        if not before["issues"] and draft.strip() != final.strip():
+            _append("overrides.jsonl", {"t": t, "kind": "edited_passed", "surface": surface, "chars_changed": abs(len(final) - len(draft))})
+        _append("edit-pairs.jsonl", {"t": t, "surface": surface, "original": draft, "revision": final,
+                                     "verdict_before": before["verdict"], "proposed_rules": [r["text"] for r in proposed_rules],
+                                     "approved": None})
+        _append("sent.jsonl", {"t": t, "surface": surface, "text": final})
+    except Exception as e:  # capture must never break the tool
+        _append("hook-log.jsonl", {"t": t, "event": "capture_error", "error": str(e)[:160]})
 
 
 def learned_recently(prof, days=7):
@@ -192,7 +241,8 @@ def call_tool(name, args):
 
 def _call_tool(name, args):
     if name == "coulis_check":
-        out = check(args["text"], profile(), args.get("surface", "linkedin"), max_sameness=args.get("max_sameness"))
+        out = check(args["text"], profile(), args.get("surface", "linkedin"), history=recent_sent(args.get("surface", "linkedin")),
+                    max_sameness=args.get("max_sameness"))
         d = profile_dir()
         if not ((d / "TASTE.md").exists() or (d / "claims.md").exists()):
             out["profile_status"] = ("default: no profile yet, so every number is unapproved and only the house "
@@ -211,7 +261,9 @@ def _call_tool(name, args):
                     "output_schema": SCHEMA}
         return critique(args["text"], prof, surface)
     if name == "coulis_learn":
-        return learn(args["draft"], args["final"], profile())
+        out = learn(args["draft"], args["final"], profile())
+        record_edit_pair(args["draft"], args["final"], args.get("surface", "linkedin"), out.get("proposed_rules", []))
+        return out
     if name == "coulis_add":
         return add_entry(args["kind"], args["text"], args.get("reason", ""))
     if name == "coulis_skip":
@@ -220,7 +272,7 @@ def _call_tool(name, args):
         import datetime
         rec = {"t": datetime.datetime.now().isoformat(timespec="seconds"), "picked": args["picked"],
                "rejected": args.get("rejected", []), "surface": args.get("surface", "linkedin"),
-               "context": args.get("context", "")}
+               "context": args.get("context", ""), "why": args.get("why", "")}
         path = profile_dir() / "picks.jsonl"
         path.parent.mkdir(parents=True, exist_ok=True)
         with path.open("a") as f:

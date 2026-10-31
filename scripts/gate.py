@@ -198,6 +198,26 @@ MODES = {
 }
 
 
+OPENERS = [
+    ("excited_opener", r"^(i'?m |i am |we'?re |we are )?(excited|thrilled|delighted|proud|humbled|honou?red) to (share|announce)", "Opens with the stock announcement line."),
+    ("in_todays", r"^in today'?s ", "Opens with \"in today's\", the default AI preamble."),
+    ("question_opener", r"^[^.!?\n]{8,140}\?\s*$", "Opens with a question. The default AI hook."),
+    ("not_x_but_y", r"^(it'?s|this is|that'?s) not (just |only |about )?[^.?!]{3,60}?,? (it'?s|this is|but) ", "Opens on the \"it's not X, it's Y\" frame."),
+    ("ever_wondered", r"^(ever wondered|have you ever|imagine (a|if) )", "Opens with the rhetorical \"ever wondered\" setup."),
+]
+
+
+def first_line(text):
+    for l in text.splitlines():
+        if l.strip():
+            return l.strip()
+    return ""
+
+
+def sentence_lengths(text):
+    return [len(x.split()) for x in re.split(r"(?<=[.!?])\s+|\n+", text) if len(x.split()) >= 2]
+
+
 def check(text, persona, surface="reddit", history=()):
     t = norm(text)
     issues = []
@@ -209,6 +229,31 @@ def check(text, persona, surface="reddit", history=()):
     for d in ("—", "–", "--"):
         if d in text:
             add("Hold", "em_dash", "Em dash or double hyphen (house rule).", d)
+
+    # 1b. opening pattern: line one is a pain, a punch or a promise, never a warm-up
+    fl = norm(first_line(text))
+    if fl:
+        for name, rx, why in OPENERS:
+            if re.search(rx, fl):
+                alt = ""
+                for smp in persona.get("samples", []):
+                    sl = first_line(smp)
+                    if sl and not any(re.search(r2, norm(sl)) for _, r2, _ in OPENERS):
+                        alt = f" Your own openers look like: \"{sl[:90]}\""
+                        break
+                add("Revise", "opening", why + alt, first_line(text)[:90])
+                break
+
+    # 1c. rhythm fingerprint: sentence length against the person's own samples
+    rh = persona.get("rhythm") or {}
+    sl = sentence_lengths(text)
+    if rh and len(sl) >= 3 and rh.get("words_per_sentence_sd", 0) > 0:
+        mean = sum(sl) / len(sl)
+        z = (mean - rh["words_per_sentence"]) / rh["words_per_sentence_sd"]
+        if abs(z) > 2:
+            direction = "longer" if z > 0 else "shorter"
+            add("Revise", "rhythm", f"Sentences run {mean:.0f} words on average; yours run {rh['words_per_sentence']:.0f} "
+                                    f"(spread {rh['words_per_sentence_sd']:.0f}). This draft reads {direction} than you.", f"{mean:.0f} words per sentence")
 
     # 2. claims vs claims.md
     seen = set()
@@ -280,6 +325,15 @@ def check(text, persona, surface="reddit", history=()):
             if overlap > 0.12:
                 why.append(f"{overlap:.0%} shared phrasing")
             add("Revise", "sameness", f"Too close to {h['id']} ({h['date']}): " + "; ".join(why), h["title"][:70])
+
+    # 7b. repeated phrases: an exact six-word run already used in a recent post
+    g6 = ngrams(t, 6)
+    for h in history:
+        shared = g6 & h.get("grams6", set())
+        shared = {p for p in shared if not re.search(r"\d", p)}  # numbers repeat on purpose
+        if shared:
+            phrase = sorted(shared, key=len)[-1]
+            add("Revise", "repeat_phrase", f"Same phrase as {h['id']} ({h['date']}).", phrase)
 
     uniq, keys = [], set()
     for i in issues:

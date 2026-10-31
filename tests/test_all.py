@@ -183,3 +183,31 @@ class Sameness(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class NewChecks(unittest.TestCase):
+    def prof(self):
+        return profile_from_folder(ROOT / "personas" / "bhavya")
+
+    def test_opening_pattern_flags_excited_to_share(self):
+        r = check("Excited to share that we shipped a thing today. It took a week.", self.prof(), "linkedin")
+        self.assertTrue(any(i["check"] == "opening" for i in r["issues"]))
+        o = [i for i in r["issues"] if i["check"] == "opening"][0]
+        self.assertIn("Your own openers", o["detail"])
+
+    def test_opening_pattern_passes_plain_opener(self):
+        r = check("100 investors who back women building AI. One list.\nComment INVESTORS and I will send it.", self.prof(), "linkedin")
+        self.assertFalse(any(i["check"] == "opening" for i in r["issues"]))
+
+    def test_rhythm_fingerprint_exists_and_flags_long_sentences(self):
+        p = self.prof()
+        self.assertIn("words_per_sentence", p.to_persona()["rhythm"])
+        long = " ".join(["This sentence keeps going and going with clause after clause so that it runs far past anything she would ever write in a post."] * 4)
+        r = check(long, p, "linkedin")
+        self.assertTrue(any(i["check"] == "rhythm" for i in r["issues"]))
+
+    def test_repeat_phrase_against_history(self):
+        hist = [{"id": "P1", "date": "2026-10-01", "title": "t", "text": "We built a check for AI drafts that runs before you post anything."}]
+        r = check("Today: we built a check for AI drafts that runs before the team posts.", self.prof(), "linkedin", history=hist)
+        self.assertTrue(any(i["check"] == "repeat_phrase" for i in r["issues"]))
+

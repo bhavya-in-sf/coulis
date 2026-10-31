@@ -26,7 +26,7 @@ def check(text, profile, surface="linkedin", history=(), max_sameness=None):
         raise ValueError(f"surface must be one of {SURFACES}")
     hist = [{"id": h.get("id", "?"), "date": h.get("date", ""), "title": h.get("title", "")[:70],
              "skeleton": {k for k, p in _gate.SKELETONS.items() if _gate.re.search(p, _gate.norm(h["text"]))},
-             "grams": _gate.ngrams(_gate.norm(h["text"]))} for h in history]
+             "grams": _gate.ngrams(_gate.norm(h["text"])), "grams6": _gate.ngrams(_gate.norm(h["text"]), 6)} for h in history]
     r = _gate.check(text, profile.to_persona(), surface, hist)
     same = r.get("sameness", {"score": 0, "label": "", "hits": []})
     if max_sameness is not None and same["score"] > max_sameness:
