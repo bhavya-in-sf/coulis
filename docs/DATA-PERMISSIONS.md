@@ -34,3 +34,9 @@ The waitlist sends its displayed fields to FormSubmit and the configured recipie
 ## Basis for this policy
 
 We deliberately separate service delivery, evaluation, publication and training. See the [ICO guidance on purpose limitation in generative AI](https://ico.org.uk/about-the-ico/what-we-do/our-work-on-artificial-intelligence/generative-ai-second-call-for-evidence/) and the [US Copyright Office's AI materials](https://www.copyright.gov/ai/). Applicable obligations depend on the data and jurisdiction; this product policy does not declare the historical corpus legally cleared.
+
+## Proposed taste-LLM research
+
+The new model direction does not expand existing permissions. Training permission must identify whether use covers shared model weights, personal adapters, research evaluation, public examples, commercial deployment and checkpoint distribution, separately where applicable. Keep a record-level permissions manifest. Exclude material without the required authority from the relevant pipeline.
+
+Before collecting training data, specify what withdrawal stops and what can actually be deleted or retrained. Do not promise removal of a person's influence from already distributed weights unless a verified process exists. Establish a checkpoint/data retention policy and release gate before training or distributing a model. No shared-training pipeline or such release is enabled by the current prototype.

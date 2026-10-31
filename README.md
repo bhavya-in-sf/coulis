@@ -1,10 +1,10 @@
 # coulis
 
-**A frontier research lab building AI taste infrastructure.**
+**A frontier research lab building a taste LLM and taste infrastructure for AI.**
 
-Your judgment, available to the models you use. [Research agenda](docs/RESEARCH.md).
+**AI, with taste.** Named for coulis: concentrated flavor that brings out character. [Research agenda](docs/RESEARCH.md).
 
-Coulis is a reusable local layer for approved facts, contextual editorial preferences, critique and learning from edits. An AI application can call it rather than maintain its own disconnected user profile. Writing is the first domain; infrastructure is the product direction.
+We aim to build a language model that generates, critiques and chooses according to individual judgment in context. Writing is our first domain. The code here is a local experimental interface—approved memory, constraints and critique through existing models—not a trained Coulis taste LLM. The model is a research goal; infrastructure is how applications will use it.
 
 Install today to check a draft, review preference proposals, and carry approved context into the next critique. Better writing, reduced editing time and improvement on unseen topics have **not been validated in user tests**.
 
@@ -94,6 +94,10 @@ Local checks make no network call. Critique sends selected drafts and profile co
 
 ## Direction
 
-The product is taste infrastructure. The initial domain is writing. Candidate first paying customers are small AI writing/agent product teams that need to maintain their users' judgment across sessions and models. Agencies managing several voices are design partners and evaluation environments, not a limit on the product's ambition. Hosted paid access remains waitlist only.
+The research goal is a taste LLM; the commercial delivery is taste infrastructure. The initial domain is writing. Candidate first paying customers are small AI writing/agent product teams that need to maintain their users' judgment across sessions and models. Agencies managing several voices are design partners and evaluation environments, not a limit on the product's ambition. Hosted model and API access remain waitlist only. See [brand and positioning](docs/POSITIONING.md) and [launch/YC drafts](docs/LAUNCH-YC.md).
 
 Formerly sauce/Tastee; legacy profile-directory discovery remains supported. MIT. Built by Bhavya Goel.
+
+## Commercial and funding strategy
+
+**B2B2C. VC-first. Paid from the first commercial engagement.** AI product companies are the buyers; their end users receive personalized taste capabilities. Raise venture capital for the model research and infrastructure while selling scoped integrations/evaluations of the existing prototype. These paid pilots are distinct from future hosted taste-LLM/API access, which remains waitlist only. No revenue or funding amount is claimed without verification. See [business model and initial paid offer](docs/BUSINESS.md).

@@ -34,3 +34,7 @@ Randomize and blind labels per brief. Save prompt/model versions, temperature, s
 Track week-1 through week-4 use by writer and agency; include dropouts and setup time. Analyse paired differences and bootstrap by writer/agency, not by output comparison. Report denominators, uncertainty, negative outcomes and ties. No savings claim until real results exist. Pre-register the protocol and decision thresholds before looking at outcomes.
 
 See [PILOT.md](PILOT.md) for the ready-to-use pilot workflow and data template.
+
+## Taste-LLM extension (planned)
+
+The current runner is a deterministic diagnostic, not evaluation of a trained Coulis model. When a candidate exists, add it as a separate condition alongside its equally informed base model, profile/retrieval and current Coulis memory baselines. Keep generation, ranking, critique and continual-learning results separate. Record model checkpoint, training-data version, license, training configuration and held-out splits. See RESEARCH.md. No model-performance result is claimed today.

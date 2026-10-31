@@ -1,6 +1,6 @@
 # Coulis: capability and ownership status
 
-Coulis is being built as a frontier research lab for AI taste infrastructure. Writing is the first domain, and the plug-in is the current experimental interface. [Research agenda](RESEARCH.md).
+Coulis is being built as a frontier research lab building a taste LLM and taste infrastructure for AI. Writing is the first domain, and the plug-in is the current experimental interface. [Research agenda](RESEARCH.md).
 
 Install the local layer to check drafts and carry approved editorial preferences into the next critique. Stop repeating the same corrections is the goal; savings and unseen-topic gains have not been measured.
 
@@ -50,6 +50,10 @@ Store a list of records in claims.json or use coulis_approve_claim after explici
 
 The user approves the complete wording and any paraphrases. The engine normalizes capitalization, whitespace and equivalent numeric notation, not meaning. It does not approve unseen paraphrases by guessing. A source reference is provenance, not verification that the source is true. Expired/future/incomplete/conflicting records stay unresolved. Legacy claims.md notes no longer authorize numbers: migrate deliberately rather than inventing metadata. Qualitative claims and undetected numeric wording still need human review. `Send` is retained for compatibility and means only “No configured rule violations found”; it is never permission to publish or a statement that facts are verified.
 
-## Why this differs from LLMs that write well
+## Relationship to LLMs that write well
 
-A better writing model improves general generation. Coulis aims to carry an individual's approved, context-specific judgment across models and sessions. The model can write; Coulis supplies memory, checks constraints, and structures review. Native models can also personalize and critique. The incremental value of this layer over a well-configured model is a hypothesis to test, not an assumed moat.
+The model ambition directly overlaps with better writing LLMs. Coulis proposes learning individual judgment conditioned on context, including generation, critique and selection. That distinction must be demonstrated against equally informed writing-model baselines. The current local code provides approved memory and constraints using existing models; it is not the proposed trained taste LLM. See [the model research plan](RESEARCH.md).
+
+## Commercial and funding strategy
+
+**B2B2C. VC-first. Paid from the first commercial engagement.** AI product companies are the buyers; their end users receive personalized taste capabilities. Raise venture capital for the model research and infrastructure while selling scoped integrations/evaluations of the existing prototype. These paid pilots are distinct from future hosted taste-LLM/API access, which remains waitlist only. No revenue or funding amount is claimed without verification. See [business model and initial paid offer](BUSINESS.md).

@@ -1,43 +1,62 @@
-# Coulis positioning
+# Coulis: brand and company direction
 
-Coulis is being built as a frontier research lab for AI taste infrastructure. Writing is the first research domain. The plug-in is the experimental interface. Neither an agency service nor a writing assistant defines the company.
+**Coulis is a frontier research lab building a taste LLM and the infrastructure to use it.**
 
-## Three ways to connect the core message to installing today
+Writing is the first research domain. The local plug-in is the current experimental interface and baseline. The proposed taste LLM is not trained or released; hosted model/API access is waitlist only.
 
-### 1. Portable judgment — recommended homepage
+## Literal name and brand idea
 
-**Taste infrastructure for AI. Your judgment, available to every model you use.**
+A coulis is a smooth sauce made from puréed fruit or vegetables, often strained. It can accompany a dish or serve as a base. [American Heritage Dictionary](https://www.ahdictionary.com/word/search.html?q=coulis)
 
-Install the local prototype to give your AI approved facts and contextual preferences it can retrieve for the next draft. Connect through Python or MCP; review what it remembers.
+The brand interpretation: concentrated flavor that brings out character. Human choices and edits are the ingredients we hope to learn from; the model should preserve differences rather than blend everyone into an average. This is a metaphor, not a technical description of training.
 
-This connects the infrastructure ambition to a concrete integration. “Every model” is the direction; current compatibility and hosted availability must remain explicit.
+**Brand line: AI, with taste.**
+**Category: Taste infrastructure for AI.**
+**Company: A frontier research lab building a taste LLM.**
+**Research question: Can a language model learn what good means to a particular person, in a particular context?**
 
-### 2. Continual learning — research narrative
+Do not reduce the metaphor to “a finishing sauce on generic output.” The proposed model should influence generation and selection from the start, as well as critique afterward. A coulis can be a base as well as a finish.
 
-**Taste infrastructure for AI. Built to learn what good means to you.**
+## Website hero
 
-Turn your edits into preferences you approve, then carry them into the next critique. Our research asks how those preferences can improve judgment on new topics and in new contexts.
+Taste infrastructure for AI.
+**AI, with taste.**
 
-The immediate loop is implemented preference memory. Learned model weights and demonstrated generalization are future research, not claims about the present prototype.
+Coulis is a frontier research lab building a taste LLM: a language model designed to generate, critique and choose with an understanding of individual judgment. Writing is our first domain.
 
-### 3. Application infrastructure — developer narrative
+Primary CTA: **Explore the research** → research program.
+Secondary CTA: **Try the prototype** → current local-check demo and installation.
+Developer CTA: **Become a paid design partner** → discussion of a scoped local integration/evaluation engagement. Hosted taste-model/API access is separately waitlisted.
+Availability line: Taste LLM in research. Open-source local prototype available. Hosted model/API access is waitlist only.
 
-**Taste infrastructure for AI. Give your product a memory for human judgment.**
+## Visual identity
 
-Integrate a local layer for approved preferences, contextual retrieval and draft checks. Keep each person's taste scoped to the audience and task. Hosted access is waitlist only.
+Use literal coulis gestures: a poured ribbon, a spoon-drawn curve, concentrated pools of color. Deep berry and tomato red express the sauce; warm cream suggests a ceramic plate; dark ink and restrained technical typography carry the lab. Keep fluid illustration separate from charts so evidence remains readable. Avoid cartoon chefs, menu-style navigation, ingredient puns for API names, or treating every preference as food.
 
-This speaks to the first commercial buyer while preserving the lab's identity.
+Use the existing Coulis wordmark with a sauce-swipe symbol. Keep serif accents for human expression and sans-serif/monospace for explanation and results. The homepage should feel tactile and precise, not like a restaurant or an abstract AI dashboard.
 
-## First paying customer
+## Brand architecture
 
-Target a small AI writing/communication-agent product team with active users, repeated editing workflows and authority to integrate. It buys reusable taste infrastructure, not a package of agency copywriting. Agencies and professional writers should be design/evaluation partners because they supply explicit edits, multiple voices and context changes. Larger labs and enterprises are later commercial partners after a defensible result and service reliability exist.
+- **Coulis:** company and master brand.
+- **Coulis Research:** papers, protocols and findings.
+- **Coulis taste LLM:** descriptive working name for the proposed model; do not assign a released version before training and evaluation.
+- **Coulis Preview:** current experimental plug-in and demos, powered by rules/memory and existing models.
+- **Coulis API:** future delivery of model and taste-state capabilities; waitlist only.
+
+## Commercial direction
+
+Target first paying customers: small AI writing or communication-agent product teams with active users and recurring personalization needs. The planned product is hosted taste-model inference, personalized critique/ranking and taste-state updates. Agencies and professional writers are research/evaluation partners. Their workflows are the first testbed, not the boundary of the company.
+
+Do not promise that training from scratch is required. Start by evaluating whether post-training an appropriately licensed base model can produce a measurable advantage. Foundation pretraining is a later resource decision requiring evidence, a team and a compute plan.
 
 ## Editing-time hypothesis
 
-No user tests have been completed. For pilot planning only, hypothesize 10–25% less active editing time after setup on repeated tasks. Setup and false positives may make initial use slower. Measure active editing time including Coulis corrections, setup cost, writer preference and factual regressions. This is a planning hypothesis, not a public performance claim.
+No user outcome tests have been completed. A 10–25% reduction after setup on repeated tasks is only an internal pilot hypothesis; onboarding and false positives may make use slower. Do not use it as a launch or application result.
 
-## Difference from “LLMs that write well”
+## Relationship to LLMs that write well
 
-A writing model aims to generate better text. Coulis researches how to represent whose judgment matters, what context it applies in, and how that judgment changes with feedback. That representation can condition generation, critique candidates, rank alternatives and guide an agent's choices. Better writing models are potential substrates and customers as well as competitors. Native personalization is a real baseline; model independence alone does not establish superiority.
+The ambition now directly overlaps with better writing models. Coulis's proposed distinction is whose judgment the model learns and how that judgment changes with context and feedback. Fluent or generally preferred writing is not the same as person-conditioned preference. Compare against strong writing models with equal context; do not claim a unique category or proven advantage before experiments.
 
-The ambition expands beyond writing only when cross-domain evidence supports it. Today the inspectable prototype supplies memory and checks; the research agenda is to develop and evaluate richer learned taste representations and predictors.
+## Commercial and funding strategy
+
+**B2B2C. VC-first. Paid from the first commercial engagement.** AI product companies are the buyers; their end users receive personalized taste capabilities. Raise venture capital for the model research and infrastructure while selling scoped integrations/evaluations of the existing prototype. These paid pilots are distinct from future hosted taste-LLM/API access, which remains waitlist only. No revenue or funding amount is claimed without verification. See [business model and initial paid offer](BUSINESS.md).

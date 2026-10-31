@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>coulis · taste infrastructure for AI</title>
-<meta name="description" content="coulis is the layer every AI calls before it speaks for you. It checks each draft against your facts and your voice, critiques it on eight parts, and learns from your edits. Open source, inside Claude and Cursor.">
+<title>Coulis · AI, with taste</title>
+<meta name="description" content="Coulis is a frontier research lab building a taste LLM and taste infrastructure for AI. Writing is our first domain. Explore the research and try our open-source prototype.">
 <style>
 @font-face{font-family:"Instrument Sans";src:url(brand-options/fonts/InstrumentSans-Regular.ttf);font-weight:400}
 @font-face{font-family:"Instrument Sans";src:url(brand-options/fonts/InstrumentSans-Bold.ttf);font-weight:600 800}
 @font-face{font-family:"Instrument Serif";src:url(brand-options/fonts/InstrumentSerif-Regular.ttf);font-weight:400}
 @font-face{font-family:"Instrument Serif";src:url(brand-options/fonts/InstrumentSerif-Italic.ttf);font-style:italic}
-:root{--ink:#111;--white:#fff;--deep:#8B1A12;--deep2:#B3241C;--canary:#FFE14D;--tint:#FFF6C2;--soft:#F6F6F8;--muted:#6b6b6b;--line:#e6e6e6;--night:#120807;--night2:#2A0D0A;--pass:#2E6B3A}
+:root{--ink:#111;--white:#FFFCF6;--deep:#8B1A12;--deep2:#B3241C;--canary:#FFE14D;--tint:#FFF6C2;--soft:#FBF6EE;--muted:#6b6b6b;--line:#e6e6e6;--night:#120807;--night2:#2A0D0A;--pass:#2E6B3A}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--white);color:var(--ink);font-family:"Instrument Sans",system-ui,sans-serif;font-size:17px;line-height:1.5;overflow-x:clip;-webkit-font-smoothing:antialiased}
@@ -30,8 +30,8 @@ button{font:inherit}
 .btn.ghost{background:transparent;color:inherit;border:1px solid currentColor}
 .btn.ghost:hover{background:rgba(255,255,255,.08)}
 .light .btn.ghost:hover{background:var(--soft)}
-/* hero with live landscape */
-.hero{position:relative;color:#fff;overflow:hidden;padding:120px 0 0;min-height:100svh;background:var(--night)}
+/* A poured coulis ribbon: static, decorative, no motion dependency. */
+.hero{position:relative;color:#fff;overflow:hidden;padding:120px 0 80px;min-height:720px;background:var(--night)}
 #land{position:absolute;inset:0;width:100%;height:100%;display:block}
 .grain{position:absolute;inset:0;opacity:.06;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.9'/></svg>");mix-blend-mode:screen;pointer-events:none}
 .hero .wrap{position:relative;text-align:center}
@@ -44,9 +44,10 @@ h1 .w span{display:inline-block;transform:translateY(110%);transition:transform 
 .in .sub{opacity:1;transform:none}
 .cta{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;opacity:0;transition:opacity .8s .7s}
 .in .cta{opacity:1}
+.partner-link{flex-basis:100%;font-size:14px;margin-top:8px;text-underline-offset:4px}
 .cta small{max-width:760px;min-width:0;white-space:normal;overflow-wrap:anywhere;font-size:13px;color:rgba(255,255,255,.65);width:100%;margin-top:8px}
 .stage{perspective:1600px;margin:64px auto 0;max-width:1040px;opacity:0;transform:translateY(40px);transition:all 1.1s .8s cubic-bezier(.2,.7,.2,1)}
-.in .stage{opacity:1;transform:none}
+.in .stage,.stage.on{opacity:1;transform:none}
 .app{background:#fff;color:var(--ink);border-radius:16px;box-shadow:0 60px 120px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.14);display:grid;grid-template-columns:220px 1fr 300px;min-height:420px;text-align:left;transform:rotateX(8deg);transform-origin:50% 100%;transition:transform .6s cubic-bezier(.2,.7,.2,1);overflow:hidden}
 .side{background:var(--soft);border-right:1px solid var(--line);padding:16px;font-size:13px}
 .side b{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px}
@@ -172,29 +173,99 @@ h2{margin:0;font-family:"Instrument Sans",system-ui,sans-serif;font-weight:600;l
 .final h2{margin:0 auto 24px;max-width:16ch;position:relative}
 .final .wrap{position:relative}
 footer{padding:28px max(20px,4vw);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
-@media(max-width:900px){.app{grid-template-columns:1fr;transform:none}.side,.panel{display:none}.why,.feats,.stats,.eight,.now,.trust,.ent,.mode{grid-template-columns:1fr}.nav nav{display:none}.hero{padding-top:90px}.axq{position:static}.demo iframe{height:1100px}}
+.brand-story{display:grid;grid-template-columns:minmax(220px,.8fr) 1.2fr;gap:64px;align-items:center}.plate{max-width:360px}.plate svg{display:block;width:100%}.brand-story p{max-width:56ch;color:var(--muted)}
+@media(max-width:900px){.app{grid-template-columns:1fr;transform:none}.side,.panel{display:none}.why,.feats,.stats,.eight,.now,.trust,.ent,.mode,.brand-story{grid-template-columns:1fr}.nav nav{display:none}.hero{padding-top:90px}.axq{position:static}.demo iframe{height:1100px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}h1 .w span{transform:none}.sub,.cta,.stage,.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 <section class="hero" id="top">
-  <canvas id="land" aria-hidden="true"></canvas>
+  <svg id="land" viewBox="0 0 1440 1100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs><linearGradient id="sauce" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#541022"/><stop offset=".55" stop-color="#AC292B"/><stop offset="1" stop-color="#43101A"/></linearGradient><linearGradient id="glaze" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#FAAF77" stop-opacity="0"/><stop offset=".5" stop-color="#FAAF77" stop-opacity=".35"/><stop offset="1" stop-color="#FAAF77" stop-opacity="0"/></linearGradient></defs>
+    <path d="M-180 940 C150 1110 330 600 670 720 S1120 1100 1600 650" fill="none" stroke="url(#sauce)" stroke-width="210" stroke-linecap="round"/>
+    <path d="M-180 885 C150 1055 330 545 670 665 S1120 1045 1600 595" fill="none" stroke="url(#glaze)" stroke-width="7" stroke-linecap="round"/>
+  </svg>
   <div class="grain"></div>
   <div class="nav">
-    <a class="mark" href="#top" aria-label="coulis"><svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="11" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="13" r="4" fill="#FFE14D"/></svg>coulis</a>
-    <nav><a href="#how">Prototype</a><a href="#eight">Critique</a><a href="#try">Try it</a><a href="#research">Research</a><a href="#enterprise">Enterprise</a></nav>
-    <a class="btn" href="https://github.com/bhavya-in-sf/coulis" rel="noopener">Install on GitHub</a>
+    <a class="mark" href="#top" aria-label="coulis"><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M5 20C-2 12 11-2 21 5C28 11 16 24 8 19C3 16 14 7 18 9C21 11 13 17 11 14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>coulis</a>
+    <nav><a href="#name">The name</a><a href="#research">Model research</a><a href="#try">Prototype</a><a href="#enterprise">Paid partnerships</a></nav>
+    <a class="btn" href="#research">Explore the research</a>
   </div>
   <div class="wrap">
-    <span class="pill">A frontier research lab for AI taste infrastructure</span>
-    <h1><span class="w"><span>Taste infrastructure for AI.</span></span><br><span class="w"><span><i>Your judgment, available</i></span></span> <span class="w"><span><i>to every model you use.</i></span></span></h1>
-    <p class="sub">Install coulis to check drafts against your approved facts and carry your editorial preferences into the next critique. Connect through local Python or MCP. Keep each person, audience and purpose in context. You approve what it remembers.</p>
+    <span class="pill">A frontier research lab building a taste LLM</span>
+    <h1><span class="w"><span>Taste infrastructure for AI.</span></span><br><span class="w"><span><i>AI,</i></span></span> <span class="w"><span><i>with taste.</i></span></span></h1>
+    <p class="sub">We’re building a language model that learns what good means to you—what to say, what to change and what to leave out. Writing is our first domain. Taste infrastructure is how other AI systems will use it.</p>
     <div class="cta">
-      <a class="btn" href="https://github.com/bhavya-in-sf/coulis" rel="noopener">Install on GitHub</a>
-      <a class="btn ghost" href="waitlist.html?door=enterprise">Enterprise · join waitlist</a>
-      <small>Open source. Inside Claude Code, Claude Desktop and Cursor today. Local checks stay on your machine; model critique shares selected context with your provider.</small>
+      <a class="btn" href="#research">Explore the research</a>
+      <a class="btn ghost" href="#try">Try the prototype</a>
+      <a class="partner-link" href="waitlist.html?door=enterprise">For AI companies: become a paid design partner →</a>
+      <small>Taste LLM in research. Open-source local prototype available. Hosted model/API access is waitlist only.</small>
     </div>
-    <div class="stage">
+
+  </div>
+</section>
+
+<section class="light" id="name"><div class="wrap brand-story">
+  <div class="plate" aria-hidden="true"><svg viewBox="0 0 320 320"><circle cx="160" cy="160" r="143" fill="#fffdf7" stroke="#E9DDCC" stroke-width="2"/><circle cx="160" cy="160" r="118" fill="none" stroke="#EEE4D7"/><path d="M81 222C22 143 164 40 238 104C296 156 157 250 106 193C76 161 181 95 210 126C230 149 158 200 145 170" fill="none" stroke="#9A2331" stroke-width="25" stroke-linecap="round"/><path d="M78 214C34 145 166 52 231 107" fill="none" stroke="#D9695A" stroke-width="4" stroke-linecap="round"/></svg></div>
+  <div><span class="label">Why coulis</span><h2>Concentrated flavor.<br><i>Distinct character.</i></h2><p>A coulis is a smooth sauce made from fruit or vegetables. A base or a finishing touch, it brings another dimension to a dish.</p><p>That is our starting metaphor: AI should bring out your character. Our research asks how a model can learn your choices without blending them into everyone else’s.</p><a href="POSITIONING.md">The brand and the research direction →</a></div>
+</div></section>
+<section class="light" id="research">
+  <div class="wrap">
+    <span class="label reveal">Coulis Research</span>
+    <h2 class="reveal">A language model.<br><i>A sense of your taste.</i></h2>
+    <p class="lede reveal">Our goal is a taste LLM that generates, critiques and ranks language according to a person and a context. We plan to compare post-training, personal conditioning and continual adaptation against strong writing-model baselines. The taste LLM is not trained or released; no user outcome study has been completed. <a href="RESEARCH.md">Read the research agenda</a>.</p>
+    <div class="stats">
+      <div class="stat reveal"><b>Generate</b><span>Research goal: produce language that reflects individual judgment, beyond stylistic imitation.</span></div>
+      <div class="stat reveal"><b>Choose</b><span>Research goal: critique and rank alternatives against the person’s contextual preferences.</span></div>
+      <div class="stat reveal"><b>Adapt</b><span>Research goal: learn from authorized feedback without forgetting or mixing people’s preferences.</span></div>
+      <div class="stat reveal"><b>Evaluate</b><span>Blinded human comparisons, held-out topics, factual checks and published limitations. Studies are not yet run.</span></div>
+    </div>
+    <div class="papers reveal">
+      <a href="https://arxiv.org/abs/2306.05685" rel="noopener">Zheng 2023 · LLM as judge</a>
+      <a href="https://arxiv.org/abs/2309.05196" rel="noopener">Padmakumar and He 2024 · co-writing reduces diversity</a>
+      <a href="https://www.science.org/doi/10.1126/sciadv.adn5290" rel="noopener">Doshi and Hauser 2024 · Science Advances</a>
+      <a href="https://arxiv.org/abs/2409.14509" rel="noopener">Chakrabarty 2025 · 8,000 edits of AI text</a>
+      <a href="https://arxiv.org/abs/2304.11406" rel="noopener">Salemi 2024 · LaMP personalization</a>
+      <a href="https://arxiv.org/abs/2406.07016" rel="noopener">Kobak 2024 · excess vocabulary</a>
+      <a href="https://arxiv.org/abs/2305.14251" rel="noopener">Min 2023 · FActScore</a>
+    </div>
+    <p class="fine reveal">See the <a href="BENCHMARK.md">benchmark status and reproducible synthetic fixture</a>. Historical private-input results cannot be reproduced from the public repo and are not current effectiveness claims.</p>
+  </div>
+</section>
+<div class="inside">
+  <div class="lab">Available locally: Claude Code, Claude Desktop, Cursor, MCP and Python. Hosted enterprise features are waitlist only.</div>
+  <div class="track" aria-hidden="true">
+    <span>Claude Code</span><span>Claude Desktop</span><span>Cursor</span><span>Any MCP client</span><span>Hosted API · waitlist</span><span>Python SDK</span><span>Hosted SDKs · waitlist</span><span>Slack · planned</span>
+    <span>Claude Code</span><span>Claude Desktop</span><span>Cursor</span><span>Any MCP client</span><span>Hosted API · waitlist</span><span>Python SDK</span><span>Hosted SDKs · waitlist</span><span>Slack · planned</span>
+  </div>
+</div>
+
+<section class="light center" id="why">
+  <div class="wrap">
+    <span class="label reveal">The problem</span>
+    <h2 class="reveal">AI learned patterns. <i>Taste needs context.</i></h2>
+    <p class="lede reveal">Your creativity, individuality and judgment change with the audience and moment. Our research asks how AI can learn those distinctions without flattening them into a single default.</p>
+    <div class="why reveal">
+      <div class="card">
+        <div class="hd"><span>Your edit, 14:06</span><span>1 rule proposed</span></div>
+        <div class="diff"><del>Excited to share that we're leveraging AI to 10x your workflow.</del><br><ins>We built a local check for AI drafts.</ins></div>
+        <div class="rule"><div><b>Open with the thing you built, not with excitement.</b><br><small>Illustrative proposal · LinkedIn launch context</small></div><button type="button" id="approve">Approve</button></div>
+      </div>
+      <div>
+        <h3>We bring you back.</h3>
+        <p>We aim to teach a language model to generate, critique and choose with individual taste. Our current prototype tests approved preference memory and contextual review using existing models. It gives us a baseline for the taste LLM we want to build.</p>
+        <a class="btn" href="#how">Prototype</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="light" id="how">
+  <div class="wrap">
+    <span class="label reveal">How it works</span>
+    <h2 class="reveal">The prototype. <i>Our first experimental interface.</i></h2>
+    <div class="stage reveal">
       <div class="app" id="app">
         <div class="side">
           <b>Profile</b><div class="on">Bhavya</div><div>Startup team</div>
@@ -220,41 +291,6 @@ footer{padding:28px max(20px,4vw);display:flex;justify-content:space-between;gap
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<div class="inside">
-  <div class="lab">Available locally: Claude Code, Claude Desktop, Cursor, MCP and Python. Hosted enterprise features are waitlist only.</div>
-  <div class="track" aria-hidden="true">
-    <span>Claude Code</span><span>Claude Desktop</span><span>Cursor</span><span>Any MCP client</span><span>Hosted API · waitlist</span><span>Python SDK</span><span>Hosted SDKs · waitlist</span><span>Slack · planned</span>
-    <span>Claude Code</span><span>Claude Desktop</span><span>Cursor</span><span>Any MCP client</span><span>Hosted API · waitlist</span><span>Python SDK</span><span>Hosted SDKs · waitlist</span><span>Slack · planned</span>
-  </div>
-</div>
-
-<section class="light center" id="why">
-  <div class="wrap">
-    <span class="label reveal">The problem</span>
-    <h2 class="reveal">AI learned patterns. <i>Taste needs context.</i></h2>
-    <p class="lede reveal">Your creativity, individuality and judgment change with the audience and moment. Our research asks how AI can learn those distinctions without flattening them into a single default.</p>
-    <div class="why reveal">
-      <div class="card">
-        <div class="hd"><span>Your edit, 14:06</span><span>1 rule proposed</span></div>
-        <div class="diff"><del>Excited to share that we're leveraging AI to 10x your workflow.</del><br><ins>We built a local check for AI drafts.</ins></div>
-        <div class="rule"><div><b>Open with the thing you built, not with excitement.</b><br><small>Illustrative proposal · LinkedIn launch context</small></div><button type="button" id="approve">Approve</button></div>
-      </div>
-      <div>
-        <h3>We bring you back.</h3>
-        <p>A better model can write well. Coulis carries the preferences you approve across drafts and tools. It checks configured constraints, retrieves relevant context and proposes memory updates from your edits. Improvement over a well-configured model is a research question, not an established result.</p>
-        <a class="btn" href="#how">Prototype</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="light" id="how">
-  <div class="wrap">
-    <span class="label reveal">How it works</span>
-    <h2 class="reveal">Three steps. <i>Cheapest first, most personal last.</i></h2>
     <div class="feats">
       <div class="feat reveal">
         <div class="ui"><div class="t"><span>Check</span><span>local · no model</span></div><div class="q">"300+ founders" is not on your approved list.</div><div class="q">Em dash. Only if your profile avoids it.</div><div class="ok">Revise. Two lines to settle.</div></div>
@@ -306,29 +342,7 @@ footer{padding:28px max(20px,4vw);display:flex;justify-content:space-between;gap
   </div>
 </section>
 
-<section class="light" id="research">
-  <div class="wrap">
-    <span class="label reveal">Coulis Research</span>
-    <h2 class="reveal">Learning judgment. <i>Preserving individuality.</i></h2>
-    <p class="lede reveal">We are studying how AI can represent, learn and apply individual judgment across contexts. Writing is our first domain; the plug-in is our experimental interface. No user outcome tests have been completed; this prototype does not include a trained proprietary taste model. <a href="RESEARCH.md">Read the research agenda</a>.</p>
-    <div class="stats">
-      <div class="stat reveal"><b>Local</b><span>Rules and approval matching are testable without a model.</span></div>
-      <div class="stat reveal"><b>8 axes</b><span>Model critique is separate from deterministic checking; usefulness is not yet validated.</span></div>
-      <div class="stat reveal"><b>Untested</b><span>Editing-time savings, repeated use and unseen-topic improvement.</span></div>
-      <div class="stat reveal"><b>Open</b><span>A synthetic diagnostic, explicit denominators and a human pilot protocol.</span></div>
-    </div>
-    <div class="papers reveal">
-      <a href="https://arxiv.org/abs/2306.05685" rel="noopener">Zheng 2023 · LLM as judge</a>
-      <a href="https://arxiv.org/abs/2309.05196" rel="noopener">Padmakumar and He 2024 · co-writing reduces diversity</a>
-      <a href="https://www.science.org/doi/10.1126/sciadv.adn5290" rel="noopener">Doshi and Hauser 2024 · Science Advances</a>
-      <a href="https://arxiv.org/abs/2409.14509" rel="noopener">Chakrabarty 2025 · 8,000 edits of AI text</a>
-      <a href="https://arxiv.org/abs/2304.11406" rel="noopener">Salemi 2024 · LaMP personalization</a>
-      <a href="https://arxiv.org/abs/2406.07016" rel="noopener">Kobak 2024 · excess vocabulary</a>
-      <a href="https://arxiv.org/abs/2305.14251" rel="noopener">Min 2023 · FActScore</a>
-    </div>
-    <p class="fine reveal">See the <a href="BENCHMARK.md">benchmark status and reproducible synthetic fixture</a>. Historical private-input results cannot be reproduced from the public repo and are not current effectiveness claims.</p>
-  </div>
-</section>
+
 
 <section class="light" id="now">
   <div class="wrap">
@@ -337,7 +351,7 @@ footer{padding:28px max(20px,4vw);display:flex;justify-content:space-between;gap
     <div class="now">
       <div class="reveal"><b>40%</b><p>LinkedIn reports a 40% reduction in views of content classified as AI slop after its interventions. This is not a fixed reach penalty on an individual post.</p><small><a href="https://news.linkedin.com/2026/how-linkedin-is-tackling-ai-slop">LinkedIn, 2026</a></small></div>
       <div class="reveal"><b>880K</b><p>Research reports reduced variation across a large writing corpus. It motivates the problem; it does not establish that Coulis reverses it.</p><small>Nature Human Behaviour, 2026</small></div>
-      <div class="reveal"><b>Your context</b><p>Writing tools already personalize and critique. Coulis must earn its place through useful approved memory and fewer repeated corrections.</p><small>A hypothesis to test against strong native-model baselines</small></div>
+      <div class="reveal"><b>Your context</b><p>Our proposed taste LLM must outperform an equally informed base model on real people’s choices. We will measure generation, critique and ranking separately.</p><small>A hypothesis to test against strong native-model baselines</small></div>
     </div>
   </div>
 </section>
@@ -354,15 +368,15 @@ footer{padding:28px max(20px,4vw);display:flex;justify-content:space-between;gap
 
     <div class="ent reveal" id="enterprise">
       <div>
-        <span class="label" style="border-color:rgba(255,255,255,.2);color:#fff">coulis 2.0 · enterprise waitlist only</span>
-        <h2>Your team. Your voices. <i>Enterprise is coming.</i></h2>
-        <p>Planned for AI applications and teams that need a shared taste layer: shared approvals, client permissions and review history. Hosted APIs, custom models and ERP/CRM integrations are not available. Join the waitlist to discuss a future pilot; this does not provision a service.</p>
-        <a class="btn" href="waitlist.html?door=enterprise">Enterprise · join waitlist</a>
+        <span class="label" style="border-color:rgba(255,255,255,.2);color:#fff">B2B2C · paid design partnerships</span>
+        <h2>Build with Coulis.<br><i>Taste, inside your product.</i></h2>
+        <p>We’re opening paid design-partner discussions with AI writing and communication-agent companies. Start with a scoped integration and evaluation of the local prototype for your users. We’re pursuing venture funding for the taste LLM and infrastructure in parallel. Hosted model/API access remains waitlist only; this form does not provision a service.</p>
+        <a class="btn" href="waitlist.html?door=enterprise">Become a paid design partner</a>
       </div>
       <div class="list">
         <div><b>People</b>Founders and teams: launch posts, LinkedIn and X posts, cold emails, bios, investor updates. Agencies and ghostwriters running many voices.</div>
-        <div><b>Machines</b>Local Python and MCP integrations today. Hosted APIs and SDK services are waitlist only.</div>
-        <div><b>Enterprise</b>Waitlist only. Shared governance, roles, custom models and integrations are planned, not live. Individual voices will remain separate from company-wide constraints.</div>
+        <div><b>Machines</b>Local Python/MCP integration and evaluation are the proposed paid pilot scope. Hosted model APIs remain waitlist only.</div>
+        <div><b>Enterprise</b>Businesses are the buyers; their users receive the taste capabilities. Shared governance and hosted deployment are planned. Each person’s preferences and permissions stay distinct.</div>
       </div>
     </div>
   </div>
@@ -370,49 +384,18 @@ footer{padding:28px max(20px,4vw);display:flex;justify-content:space-between;gap
 
 <section class="final" id="install">
   <div class="wrap">
-    <h2 class="reveal">AI learned everyone. <i>We bring you back.</i></h2>
+    <h2 class="reveal">AI, <i>with taste.</i></h2>
     <div class="cta" style="opacity:1">
-      <a class="btn" href="https://github.com/bhavya-in-sf/coulis" rel="noopener">Install on GitHub</a>
-      <a class="btn ghost" href="waitlist.html?door=enterprise">Enterprise · join waitlist</a>
-      <small>/plugin marketplace add bhavya-in-sf/coulis · /plugin install coulis@coulis · then /coulis:extract with your LinkedIn export</small>
+      <a class="btn" href="#research">Explore the research</a>
+      <a class="btn ghost" href="#try">Try the prototype</a>
+      <small>Local prototype installation: /plugin marketplace add bhavya-in-sf/coulis · /plugin install coulis@coulis · then /coulis:extract with your LinkedIn export</small>
     </div>
   </div>
 </section>
-<footer><span>coulis · Taste infrastructure for AI · San Francisco</span><span><a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a> · <a href="PRODUCT.md">Capabilities &amp; ownership</a> · <a href="DATA-PERMISSIONS.md">Data permissions</a> · <a href="BENCHMARK.md">Benchmark</a> · MIT</span></footer>
+<footer><span>coulis · Taste infrastructure for AI · San Francisco</span><span><a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a> · <a href="PRODUCT.md">Capabilities &amp; ownership</a> · <a href="BUSINESS.md">B2B2C partnerships</a> · <a href="DATA-PERMISSIONS.md">Data permissions</a> · <a href="BENCHMARK.md">Benchmark</a> · MIT</span></footer>
 
 <script>
 (function(){
-  /* live landscape: layered ridges at dusk, drifting slowly. Drawn in code; no footage. */
-  var c=document.getElementById('land'),x=c.getContext('2d'),W,H,t=0,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function size(){W=c.width=innerWidth;H=c.height=c.parentNode.offsetHeight;}
-  size();addEventListener('resize',size);
-  function noise(n){return Math.sin(n*1.7)*.5+Math.sin(n*.53+1.3)*.3+Math.sin(n*3.1+.7)*.15+Math.sin(n*7.3)*.05}
-  var layers=[
-    {y:.50,amp:.08,f:1.3,sp:.010,col:'#3A1210'},
-    {y:.58,amp:.09,f:2.0,sp:.018,col:'#2C0E0C'},
-    {y:.66,amp:.10,f:2.9,sp:.028,col:'#200B09'},
-    {y:.76,amp:.12,f:3.8,sp:.040,col:'#170908'},
-    {y:.88,amp:.10,f:5.2,sp:.055,col:'#120807'}
-  ];
-  function draw(){
-    var g=x.createLinearGradient(0,0,0,H);
-    g.addColorStop(0,'#120807');g.addColorStop(.42,'#2A0D0A');g.addColorStop(.58,'#8B1A12');g.addColorStop(.66,'#E9A93A');g.addColorStop(.72,'#FFE14D');g.addColorStop(.78,'#3A1210');
-    x.fillStyle=g;x.fillRect(0,0,W,H);
-    var glow=x.createRadialGradient(W*.5,H*.7,0,W*.5,H*.7,W*.5);
-    glow.addColorStop(0,'rgba(255,225,77,.45)');glow.addColorStop(1,'rgba(255,225,77,0)');
-    x.fillStyle=glow;x.fillRect(0,0,W,H);
-    layers.forEach(function(L,i){
-      x.beginPath();x.moveTo(0,H);
-      for(var px=0;px<=W;px+=6){var n=noise(px/W*L.f*3+t*L.sp+i*9);var y=H*L.y+n*H*L.amp;x.lineTo(px,y)}
-      x.lineTo(W,H);x.closePath();x.fillStyle=L.col;x.fill();
-      /* mist */
-      var m=x.createLinearGradient(0,H*L.y-H*.06,0,H*L.y+H*.12);m.addColorStop(0,'rgba(255,225,77,0)');m.addColorStop(1,'rgba(255,225,77,'+(0.06-i*0.01)+')');x.fillStyle=m;x.fillRect(0,H*L.y-H*.06,W,H*.18);
-    });
-    t+=1;
-    if(!reduce)requestAnimationFrame(draw);
-  }
-  draw();if(reduce)draw();
-
   var hero=document.getElementById('top');
   setTimeout(function(){hero.classList.add('in')},80);addEventListener('load',function(){hero.classList.add('in')});
   setTimeout(function(){document.getElementById('app').classList.add('marked')},1900);
