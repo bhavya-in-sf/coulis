@@ -30,7 +30,7 @@
 :root[data-palette^="d"] .light .l2{background:var(--c4)}
 :root[data-palette^="d"] .light .l3{background:var(--c1);opacity:.35}
 :root[data-palette^="d"] .light .l4{background:var(--c4)}
-:root[data-palette^="d"] .card.glow,:root[data-palette^="d"] .card.photo,:root[data-palette^="d"] .band,:root[data-palette^="d"] .six .pic{background:linear-gradient(135deg,var(--c2),var(--c1))}
+:root[data-palette^="d"] .card.glow,:root[data-palette^="d"] .card.photo,:root[data-palette^="d"] .band,:root[data-palette^="d"] .six .pic{background:radial-gradient(120% 90% at 100% 0%,rgba(255,225,77,.22),transparent 55%),var(--c2)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
@@ -103,7 +103,7 @@ nav .links .btn{height:38px;padding:0 16px;color:#fff}
 /* hero */
 .hero{position:relative;padding:calc(140px + env(safe-area-inset-top,0px)) 0 40px;text-align:center}
 .hero .in{position:relative;z-index:1}
-.hero h1{font-size:clamp(44px,6.8vw,96px);max-width:14ch;margin:14px auto 0}
+.hero h1{font-size:clamp(40px,6vw,84px);max-width:16ch;margin:14px auto 0}
 .hero .lede{margin:22px auto 0;max-width:54ch;color:#444;font-size:clamp(16px,1.3vw,19px)}
 .hero .acts{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap}
 .hero .fine{margin-top:12px;font-size:13px;color:var(--muted)}
@@ -225,14 +225,14 @@ section{padding:clamp(80px,10vw,140px) 0;position:relative}
 .final .wm{position:relative;z-index:1;font-family:var(--serif);font-style:italic;font-size:clamp(90px,22vw,300px);line-height:1;color:#111;opacity:.08;margin-top:40px;pointer-events:none}
 
 /* footer */
-footer{background:#111;color:#bbb;padding:56px 0 36px;font-size:14px;margin-top:-10px}
+footer{background:#111;color:#d0d0d0;padding:56px 0 36px;font-size:14px;margin-top:-10px}
 footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}
 footer .mark{color:#fff;font-weight:600;font-size:22px;letter-spacing:-.03em}
 footer h4{margin:0 0 12px;font-size:13px;color:#fff;font-weight:600}
 footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-footer a{text-decoration:none;color:#bbb}
+footer a{text-decoration:none;color:#d0d0d0}
 footer a:hover{color:#fff}
-footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:#888}
+footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:#a8a8a8}
 
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .no-js .reveal,.reveal.in{opacity:1;transform:none}
@@ -268,95 +268,95 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 <header class="hero" id="top">
   <div class="light" aria-hidden="true"><span class="l1"></span><span class="l2"></span><span class="l3"></span><span class="l4"></span></div>
   <div class="wrap in">
-    <p class="eyebrow">Your words, in your voice.</p>
-    <h1 id="h1"><span class="w"><span>Sound</span></span> <span class="w"><span>like</span></span> <span class="w"><span>you,</span></span><br><span class="w"><span><i>even</i></span></span> <span class="w"><span><i>when</i></span></span> <span class="w"><span><i>AI</i></span></span> <span class="w"><span><i>writes</i></span></span> <span class="w"><span><i>it.</i></span></span></h1>
-    <p class="lede">sauce is a free editor for AI drafts, not a detector. It checks every draft against your own facts and your own voice before it goes out, quotes each problem, and never writes a word for you. Inside Claude and Cursor.</p>
+    <p class="eyebrow">We bring you back.</p>
+    <h1 id="h1"><span class="w"><span>Taste</span></span> <span class="w"><span>infrastructure</span></span><br><span class="w"><span><i>for</i></span></span> <span class="w"><span><i>AI.</i></span></span></h1>
+    <p class="lede">The layer every AI calls before it speaks for you. sauce checks each draft against your facts and your voice, and revises only with your approval. Free and open source, inside Claude and Cursor today.</p>
     <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Try it for free <span class="ar">→</span></a><a class="btn ghost" href="#frag">See it check a draft</a></div>
-    <p class="fine">No account. No credit card. Your taste file stays on your Mac.</p>
+    <p class="fine">No account. No credit card. Your taste file stays on your machine.</p>
     <div class="held">
       <div class="frag" id="frag" data-ui role="group" aria-label="sauce check, live">
         <div class="bar"><span><b>sauce_check</b> · profile: Bhavya</span><span><span id="same" style="font-weight:600;margin-right:10px"></span><span class="pill" id="ms">4 ms</span></span></div>
         <div style="padding:12px 14px"><textarea id="draft" rows="3" spellcheck="false" aria-label="Your draft">Excited to share that we're leveraging AI to 10x your workflow — a total game-changer. 300+ founders already trust us. Comment below!</textarea></div>
-        <div class="verdict BLOCK" id="verdict"><span class="dot"></span><span id="vword">BLOCK</span><span class="note" id="vnote">Sent back. Fix the BLOCK lines before this goes out.</span></div>
+        <div class="verdict BLOCK" id="verdict"><span class="dot"></span><span id="vword">Hold</span><span class="note" id="vnote">Fix the quoted lines before this goes out.</span></div>
         <div id="lines"></div>
         <div class="tools">
           <button type="button" class="chip" data-try="Excited to share that we're leveraging AI to 10x your workflow — a total game-changer. 300+ founders already trust us. Comment below!">The AI draft</button>
           <button type="button" class="chip" data-try="100 investors who back women building AI. One list. Comment INVESTORS and I'll send it.">Her real post</button>
           <button type="button" class="chip" data-try="I just passed 62K followers on LinkedIn. Here is what I'd tell my 2022 self.">An approved number</button>
         </div>
-        <div class="learn">Runs in your browser on <b>Bhavya's real profile</b>. Approved: 62K followers, Top Voice 2024, about 3,000 readers, 100 investors, 673 posts. Banned: em dashes, "game-changer", "delve". Edit the draft; it re-checks as you type. sauce never guesses who wrote this: these are your rules.</div>
+        <div class="learn">Runs in your browser on <b>Bhavya's real profile</b>. Approved: 62K followers, Top Voice 2024, about 3,000 readers, 100 investors, 673 posts. Banned: em dashes, "game-changer", "delve". Edit the draft; it re-checks as you type. Send, Revise or Hold, read against her own rules.</div>
       </div>
     </div>
   </div>
 </header>
 
 <section class="inside wrap" id="where" aria-label="Works where you write">
-  <div class="head"><b>Works where you write</b><span>One check, three doors. The same two files behind all of them.</span></div>
+  <div class="head"><h2 class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Works where you write</h2><b>Works where you write</b><span>People, machines and enterprises. The same taste file behind all of them.</span></div>
   <div class="doors">
     <div class="door"><h3>Claude Code and Claude Desktop</h3><p>Two commands. The hook sends Claude back if it ever skips the check.</p><pre>/plugin marketplace add bhavya-in-sf/sauce
 /plugin install sauce@sauce</pre></div>
     <div class="door"><h3>Cursor, and any MCP client</h3><p>One block in your MCP config. Same six tools, same profile.</p><pre>"sauce": { "command": "python3",
   "args": ["~/sauce/mcp/server.py"] }</pre></div>
-    <div class="door"><h3>Agents and apps, via the API</h3><p>One call before anything ships. ChatGPT, Slack and Docs come through here.</p><pre>POST /v1/check
-{ "text": "...", "max_sameness": 50 }</pre></div>
+    <div class="door"><h3>Agents and apps, via the API</h3><p>One call before anything ships. ChatGPT, Slack and Docs come through here. Key-authenticated; <a href="https://github.com/bhavya-in-sf/sauce/blob/main/docs/API.md" rel="noopener">API docs</a>.</p><pre>POST /v1/check
+{ "text": "...", "min_score": 70 }</pre></div>
   </div>
 </section>
 
 <section class="intro wrap" id="features">
-  <div class="top reveal"><h2>Designed to keep you <i>sounding like you.</i></h2><p>Humanizers hide the tells. Detectors guess who wrote it. sauce does neither: it reads your draft against your own rules and sends it back with each problem quoted.</p></div>
+  <div class="top reveal"><h2>Three steps. <i>Cheapest first, most personal last.</i></h2><p>Everyone else writes for you. sauce judges what was written: against your facts, your voice and your own recent posts.</p></div>
   <div class="three">
-    <div class="reveal"><h3>The gate</h3><p>Fixed rules, no model call, the same answer every time. Em dashes, banned phrases, filler, unapproved numbers, "10x" claims, a hook you used this week. Four milliseconds.</p></div>
-    <div class="reveal"><h3>The critique</h3><p>Eight things scored separately against your own samples: clarity, proof, why you, the ask, hook, voice, boldness, rhythm. Never one number. It rewrites only the weakest line.</p></div>
-    <div class="reveal"><h3>The learning</h3><p>Edit a checked draft and sauce proposes the rule it saw. You say yes or no. Every approved rule is a line in a file you own, so your taste compounds and travels with you.</p></div>
+    <div class="reveal"><h3>Check</h3><p>Fixed rules, no AI model, about 4 ms, the same answer every time. Facts you never approved, the AI tells, a hook you already used. The answer comes in plain words: Send, Revise or Hold, with each problem quoted and an alternative in your own words.</p></div>
+    <div class="reveal"><h3>Score</h3><p>One number, 0 to 100: how much this draft sounds like you. Eight parts measured in the backend and averaged. You see the score, the weakest part, and one rewritten line.</p></div>
+    <div class="reveal"><h3>Learn</h3><p>Change a draft and it proposes the rule it saw. You approve. The rule joins a taste file you own. Continual learning from the one signal that is never wrong: what you actually sent.</p></div>
   </div>
 </section>
 
 <section class="bento wrap">
-  <div class="head reveal"><div><p class="eyebrow">Make the check work for you</p><h2>Check smarter. Post with <i>confidence.</i></h2></div><p>Four pieces of the product at real size. Every label and number is real.</p></div>
+  <div class="head reveal"><div><p class="eyebrow">Competition</p><h2>Everyone else writes for you. <i>We judge what was written.</i></h2></div><p>Four pieces of the product at real size. Every label and number is real.</p></div>
   <div class="grid">
-    <div class="card glow reveal"><div class="ui" data-ui><div class="bar"><span><b>Draft</b> · LinkedIn · 14:02</span><span class="pill">4 ms</span></div><div style="padding:10px 14px">We hit $50k MRR this month. Our AI makes writing effortless for every founder who wants to grow.</div><div class="verdict FIX"><span class="dot"></span>FIX<span class="note">Two lines to settle.</span></div><div class="row"><span class="lvl FIX">FIX</span><span><span class="q">"$50k MRR"</span> <span class="d">Not on your approved list.</span></span></div><div class="row"><span class="lvl FIX">FIX</span><span><span class="q">"effortless"</span> <span class="d">Filler.</span></span></div></div><h3>The gate</h3><p>Every number you have not approved is sent back, quoted, with the fix named.</p></div>
-    <div class="card small reveal"><div class="ui" data-ui><div class="bar"><span><b>sauce_critique</b></span><span class="pill">8 axes</span></div><div class="row"><span class="lvl">HOOK</span><span><span class="q">5</span> <span class="d">Opens with a question.</span></span></div><div class="row"><span class="lvl">VOICE</span><span><span class="q">8</span> <span class="d">Your cadence.</span></span></div><div class="row"><span class="lvl">PROOF</span><span><span class="q">4</span> <span class="d">Weakest. No number.</span></span></div></div><h3>The critique</h3><p>Eight scores, never one. Only the weakest line gets a rewrite.</p></div>
+    <div class="card glow reveal"><div class="ui" data-ui><div class="bar"><span><b>Draft</b> · LinkedIn · 14:02</span><span class="pill">4 ms</span></div><div style="padding:10px 14px">We hit $50k MRR this month. Our AI makes writing effortless for every founder who wants to grow.</div><div class="verdict FIX"><span class="dot"></span>Revise<span class="note">Two lines to settle before you send.</span></div><div class="row"><span class="lvl FIX">Revise</span><span><span class="q">"$50k MRR"</span> <span class="d">Not on your approved list.</span></span></div><div class="row"><span class="lvl FIX">Revise</span><span><span class="q">"effortless"</span> <span class="d">Filler.</span></span></div></div><h3>The gate</h3><p>Every number you have not approved is sent back, quoted, with the fix named.</p></div>
+    <div class="card small reveal"><div class="ui" data-ui><div class="bar"><span><b>sauce score</b></span><span class="pill">71 · weakest 3 of 8 parts</span></div><div class="row"><span class="lvl">HOOK</span><span><span class="q">5</span> <span class="d">Opens with a question.</span></span></div><div class="row"><span class="lvl">VOICE</span><span><span class="q">8</span> <span class="d">Your cadence.</span></span></div><div class="row"><span class="lvl">PROOF</span><span><span class="q">4</span> <span class="d">Weakest. No number.</span></span></div></div><h3>The score</h3><p>One number for people and for agents. Only the weakest line gets a rewrite.</p></div>
     <div class="card small reveal"><div class="faces"><span>62K</span><span>TV</span><span>3K</span><span>100</span><span>673</span></div><h3>Approved facts</h3><p>One file of numbers you stand behind. Approve a fact once, in plain English. Teams share one list.</p></div>
-    <div class="card photo reveal"><div class="ph"><span>Photo: a founder writing, warm light · drop into photos/learn.jpg</span></div><h3>Learns from your edits</h3><p>Change a draft and sauce proposes the rule it saw. You approve each one. Your taste file grows by one line.</p></div>
+    <div class="card photo reveal"><div class="ui" data-ui style="margin-bottom:16px"><div class="bar"><span><b>sauce_learn</b></span><span class="pill">1 rule proposed</span></div><div style="padding:10px 14px">You cut "excited to share" again. Add <b>no "excited to share" openers</b> to your taste file?</div><div style="padding:0 14px 12px;display:flex;gap:8px"><span class="pill">Approve</span><span class="pill">Not now</span></div></div><h3>Learns from your edits</h3><p>Change a draft and sauce proposes the rule it saw. You approve each one. Your taste file grows by one line.</p></div>
   </div>
 </section>
 
 <section class="why wrap" id="why">
-  <div class="top reveal"><div><p class="eyebrow">Why it works</p><h2>Built for judgment, made for <i>real posts.</i></h2></div><p>sauce is not about writing more. It is the moment before posting, the one a good editor used to do by hand, turned into a check that runs every time.</p></div>
+  <div class="top reveal"><div><p class="eyebrow">A research lab</p><h2>Can taste be <i>measured and learned?</i></h2></div><p>We learn it from the edits people make, model each person's voice from their own writing, and check the AI judge against human readers.</p></div>
   <div class="two">
     <div class="steps">
-      <div class="step on reveal"><div class="n">01</div><h3>It never writes for you</h3><p>A checker cannot make you generic. The words stay yours, including the ones you got wrong.</p></div>
-      <div class="step reveal"><div class="n">02</div><h3>It never guesses who wrote it</h3><p>Detectors flag real people. sauce checks your draft against your own rules, so it cannot flag you by mistake.</p></div>
-      <div class="step reveal"><div class="n">03</div><h3>It learns from what you ship</h3><p>Every edit becomes a proposed rule. Every approval is a line in a file you own. That file is the product.</p></div>
+      <div class="step on reveal"><div class="n">01</div><h3>Approval first</h3><p>It never sends or rewrites without your yes. Every change comes with an explanation.</p></div>
+      <div class="step reveal"><div class="n">02</div><h3>Private by default</h3><p>Your taste file stays on your machine; the basic check never calls a model; the API never logs drafts.</p></div>
+      <div class="step reveal"><div class="n">03</div><h3>Validated</h3><p>Known drafts with known answers before every release, and posts the system has never seen.</p></div>
     </div>
-    <div class="pic reveal"><div class="ph"><span>Photo: portrait, headphones, black and white · drop into photos/why.jpg</span></div></div>
+    <div class="pic reveal" style="display:flex;align-items:center;padding:28px"><div class="ui" data-ui style="width:100%"><div class="bar"><span><b>TASTE.md</b> · yours, on your machine</span></div><div style="padding:12px 14px;font:13px/22px ui-monospace,monospace">+ No "excited to share" openers<br>+ Numbers: 62K followers, Top Voice 2024<br>+ Hooks: lead with a number, not a question</div></div></div>
   </div>
 </section>
 
 <section id="proof"><div class="band reveal">
-  <p class="eyebrow">No guesswork. Just numbers.</p>
-  <h2>Ready to taste it <i>before you send it?</i></h2>
-  <p>Tested on real writing: one founder's archive, one startup's Slack, eleven writers' held-out posts. Enough to show the pattern, not an accuracy rate. Every number reruns from the repo.</p>
+  <p class="eyebrow">Our research</p>
+  <h2>What we used. <i>What it showed.</i></h2>
+  <p>2,437 real posts across 38 voices, 2022 to 2026. One method every time: run the real writing through sauce, compare with what the writer actually did. Every number reruns from the repo.</p>
   <div class="stats">
-    <div class="stat"><b>68%</b><span>of 673 LinkedIn posts pass as written</span></div>
-    <div class="stat"><b>46/47</b><span>team drafts pass after one approved fact</span></div>
-    <div class="stat"><b>41/44</b><span>held-out posts read their author's voice</span></div>
-    <div class="stat"><b>15%</b><span>less engagement on posts the gate would block</span></div>
+    <div class="stat"><b>2 in 3</b><span>of 673 published posts pass untouched</span></div>
+    <div class="stat"><b>46/47</b><span>team drafts fixed by one approved fact</span></div>
+    <div class="stat"><b>16/24</b><span>held-out posts score higher on their own profile</span></div>
+    <div class="stat"><b>15%</b><span>less engagement on posts the check would have held</span></div>
   </div>
   <a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Try it for free <span class="ar">→</span></a>
 </div></section>
 
 <section class="six wrap">
-  <div class="top reveal"><div><h2>Checked <i>every day.</i></h2></div><p>Six things sauce reads before a draft goes out. All quoted back to you. No guess about who wrote it.</p></div>
+  <div class="top reveal"><div><h2>Checked <i>every day.</i></h2></div><p>Six things sauce reads before a draft goes out. Each one quoted back to you, with a way to fix it.</p></div>
   <div class="two">
-    <div class="pic reveal"><div class="ph"><span>Photo: silhouette in violet light · drop into photos/six.jpg</span></div></div>
+    <div class="pic reveal" style="display:flex;align-items:center;justify-content:center;padding:28px;color:#fff;text-align:center"><div><div style="font:600 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;opacity:.85">sauce score</div><div style="font:italic 400 clamp(90px,12vw,150px)/1 var(--serif);color:var(--c1)">82</div><div style="font-size:18px">Sounds like you.</div></div></div>
     <div class="checks">
-      <div class="check reveal"><div class="n">01</div><h3>Em dashes and double hyphens</h3><span class="ex">"We shipped — finally." <b>BLOCK</b> em dash</span><p>The clearest AI tell. Blocked by default; your call to allow.</p></div>
-      <div class="check reveal"><div class="n">02</div><h3>Unapproved numbers</h3><span class="ex">"300+ founders trust us" <b>FIX</b> not on your list</span><p>Followers, revenue, "10x". Numbers about other people pass; numbers about you must be on your list.</p></div>
-      <div class="check reveal"><div class="n">03</div><h3>Banned phrases and filler</h3><span class="ex">"a total game-changer" <b>BLOCK</b> banned</span><p>"Game-changer", "delve", "in today's fast-paced world", and your own list.</p></div>
-      <div class="check reveal"><div class="n">04</div><h3>The stock hooks</h3><span class="ex">"It's not about speed, it's about taste." <b>FIX</b> the not-X-but-Y frame</span><p>"It's not X, it's Y." A question opener. "Comment below." Flagged, with the score it costs.</p></div>
-      <div class="check reveal"><div class="n">05</div><h3>Repeats</h3><span class="ex">"7 lessons from…" <b>FIX</b> same skeleton as Tuesday</span><p>A format or hook you already used this week.</p></div>
-      <div class="check reveal"><div class="n">06</div><h3>Sameness, 0 to 100</h3><span class="ex">Sameness 82 <b>reads as AI</b> · 4 tells quoted</span><p>How much the draft reads like the average AI post, from quoted tells only. Teams can gate on it.</p></div>
+      <div class="check reveal"><div class="n">01</div><h3>Em dashes and double hyphens</h3><span class="ex">"We shipped — finally." <b>Hold</b> em dash</span><p>The clearest AI tell. Held by default; your call to allow.</p></div>
+      <div class="check reveal"><div class="n">02</div><h3>Unapproved numbers</h3><span class="ex">"300+ founders trust us" <b>Revise</b> not on your list</span><p>Followers, revenue, "10x". Numbers about other people pass; numbers about you must be on your list.</p></div>
+      <div class="check reveal"><div class="n">03</div><h3>Banned phrases and filler</h3><span class="ex">"a total game-changer" <b>Hold</b> banned</span><p>"Game-changer", "delve", "in today's fast-paced world", and your own list.</p></div>
+      <div class="check reveal"><div class="n">04</div><h3>The stock hooks</h3><span class="ex">"It's not about speed, it's about taste." <b>Revise</b> the not-X-but-Y frame</span><p>"It's not X, it's Y." A question opener. "Comment below." Flagged, with the score it costs.</p></div>
+      <div class="check reveal"><div class="n">05</div><h3>Repeats</h3><span class="ex">"7 lessons from…" <b>Revise</b> same skeleton as Tuesday</span><p>A format or hook you already used this week.</p></div>
+      <div class="check reveal"><div class="n">06</div><h3>The score, 0 to 100</h3><span class="ex">Score 18 <b>sounds like AI</b> · 4 tells quoted</span><p>Under 40 sounds like AI. 40 to 70 getting there. 70 and up sounds like you; 90 and up, ready to send. One number for people and for agents.</p></div>
     </div>
   </div>
 </section>
@@ -365,8 +365,8 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
   <div class="light" aria-hidden="true"><span class="l1" style="top:auto;bottom:-10%"></span><span class="l2" style="top:auto;bottom:0"></span><span class="l4"></span></div>
   <div class="wrap in">
     <p class="eyebrow">Your words, in your voice.</p>
-    <h2>Sound like you, <i>not like everyone.</i></h2>
-    <p>Two commands in Claude Code or Cursor. The default rules work before you have told it anything about yourself. Your taste file grows from there.</p>
+    <h2>AI learned everyone. <i>We bring you back.</i></h2>
+    <p>Two commands in Claude Code or Cursor. The default rules work before it knows anything about you. Your taste file grows from there.</p>
     <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Try it for free <span class="ar">→</span></a><a class="btn ghost" href="https://voiceprint-vibe-checker.lovable.app" rel="noopener">Score a draft online</a></div>
     <div class="wm" aria-hidden="true">sauce</div>
   </div>
@@ -374,7 +374,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 
 <footer><div class="wrap">
   <div class="cols">
-    <div><div class="mark">sauce</div><p style="margin-top:10px;max-width:30ch">An editor for AI drafts, not a detector. Built in San Francisco.</p></div>
+    <div><div class="mark">sauce</div><p style="margin-top:10px;max-width:30ch">Taste infrastructure for AI. Built in San Francisco.</p></div>
     <div><h4>Get started</h4><ul><li><a href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Install</a></li><li><a href="https://github.com/bhavya-in-sf/sauce/blob/main/docs/INSTALL.md" rel="noopener">Cursor and MCP</a></li><li><a href="https://voiceprint-vibe-checker.lovable.app" rel="noopener">Free online check</a></li></ul></div>
     <div><h4>Product</h4><ul><li><a href="#features">The gate</a></li><li><a href="#features">Critique</a></li><li><a href="#why">Learn</a></li><li><a href="https://github.com/bhavya-in-sf/sauce/blob/main/docs/API.md" rel="noopener">API</a></li></ul></div>
     <div><h4>Company</h4><ul><li><a href="https://github.com/bhavya-in-sf/sauce" rel="noopener">GitHub</a></li><li><a href="index-editorial-v3.html#seat">Waitlist and dinners</a></li><li><a href="https://github.com/bhavya-in-sf/sauce/blob/main/README.md" rel="noopener">README</a></li></ul></div>
@@ -395,7 +395,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
   function approved(num){var a=APPROVED.join(" ").toLowerCase(),base=num.toLowerCase().replace(/,/g,"");var forms=[base];if(/k$/.test(base))forms.push(base.slice(0,-1)+"000",base.slice(0,-1)+",000");if(/^\d{4,}$/.test(base))forms.push(Number(base).toLocaleString("en-US"));return forms.some(function(f){return new RegExp("(^|[^\\d,])"+f.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"(?!\\d)").test(a)})}
   function aboutUs(t,k){var s=t.slice(Math.max(0,t.lastIndexOf(".",k)+1),(t.indexOf(".",k)+1)||t.length);return FIRST.test(s)||!/\b[A-Z][a-z]+/.test(s.replace(/^\s*[A-Z]/,"x"))}
   function check(text){var t=text.replace(/’/g,"'"),low=t.toLowerCase(),out=[],seen={};function add(l,q,d){var k=l+q;if(seen[k])return;seen[k]=1;out.push({level:l,q:q,d:d})}
-    ["—","–","--"].forEach(function(d){if(t.indexOf(d)>-1)add("BLOCK",d,"Em dash or double hyphen. Her house rule.")});
+    ["—","–","--"].forEach(function(d){if(t.indexOf(d)>-1)add("BLOCK",d,"Em dash or double hyphen. A house rule on this profile.")});
     var m,money=/\$\s?(\d[\d,.]*)\s?(k|m)?\+?\s*(arr|mrr|revenue)?/g;while((m=money.exec(low))){if(!approved(m[1]+(m[2]||""))&&aboutUs(t,m.index))add("BLOCK",m[0].trim(),"Money claim not on her approved list.")}
     var count=/\b(\d[\d,.]*)\s?(k)?\+?\s*(followers|subscribers|readers|users|customers|founders|companies|posts|investors|leads|clients)\b/g;while((m=count.exec(low))){if(!approved(m[1].replace(/,/g,"")+(m[2]||""))&&aboutUs(t,m.index))add("FIX",m[0].trim(),"Number not on her approved list. Add it, or cut it.")}
     var mult=/\b(\d+(?:\.\d+)?)\s?x(?![\w\d])/g;while((m=mult.exec(low))){if(aboutUs(t,m.index))add("FIX",m[0].trim(),"A result claim. Prove it, or cut it.")}
@@ -404,15 +404,15 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
     var v=out.some(function(i){return i.level==="BLOCK"})?"BLOCK":out.length?"FIX":"PASS";
     var same=0;out.forEach(function(i){same+=i.level==="BLOCK"?20:10});
     [[/\b(it'?s|this is|that'?s) not (just |only |about )?[^.?!]{3,60}?,? (it'?s|this is|but) /,12],[/^\s*[^.!?\n]{8,120}\?\s*(\n|$)/,12],[/\b(comment|drop) (below|a |")/,12],[/(^[^\n]{10,90}\n\n){4,}/m,12]].forEach(function(r){if(r[0].test(low))same+=r[1]});
-    same=Math.min(100,same);var lbl=same<=20?"sounds like a person":same<=50?"some AI tells":same<=80?"reads as AI":"pure slop";
+    same=Math.min(100,same);var lbl="";
     return{verdict:v,issues:out,sameness:same,label:lbl}}
   var ta=document.getElementById("draft"),verdict=document.getElementById("verdict"),vword=document.getElementById("vword"),vnote=document.getElementById("vnote"),lines=document.getElementById("lines"),ms=document.getElementById("ms");
-  var COPY={BLOCK:"Sent back. Fix the BLOCK lines before this goes out.",FIX:"Close. Fix the FIX lines and it ships.",PASS:"Ships. Specific, approved, in her voice."};
+  var COPY={BLOCK:"Fix the quoted lines before this goes out.",FIX:"Close. Revise the quoted lines and send.",PASS:"Specific, approved, in her voice."};var WORD={BLOCK:"Hold",FIX:"Revise",PASS:"Send"};
   function esc(s){return s.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-  function render(){var t0=performance.now(),r=check(ta.value);verdict.className="verdict "+r.verdict;vword.textContent=r.verdict;vnote.textContent=COPY[r.verdict];
-    lines.innerHTML=r.issues.map(function(i){return '<div class="row"><span class="lvl '+i.level+'">'+i.level+'</span><span><span class="q">'+esc(i.q)+'</span> <span class="d">'+esc(i.d)+'</span></span></div>'}).join("");
+  function render(){var t0=performance.now(),r=check(ta.value);verdict.className="verdict "+r.verdict;vword.textContent=WORD[r.verdict];vnote.textContent=COPY[r.verdict];
+    lines.innerHTML=r.issues.map(function(i){return '<div class="row"><span class="lvl '+i.level+'">'+WORD[i.level]+'</span><span><span class="q">'+esc(i.q)+'</span> <span class="d">'+esc(i.d)+'</span></span></div>'}).join("");
     ms.textContent=Math.max(1,Math.round(performance.now()-t0))+" ms";
-    var sm=document.getElementById("same");sm.textContent="Sameness "+r.sameness+" · "+r.label;sm.style.color=r.sameness>50?"#c2261c":r.sameness>20?"#8a5a00":"#1f6b3a"}
+    var sm=document.getElementById("same");var sc=100-r.sameness,sl=sc>=90?"ready to send":sc>=70?"sounds like you":sc>=40?"getting there":"sounds like AI";sm.textContent="Score "+sc+" · "+sl;sm.style.color=sc<40?"#c2261c":sc<70?"#8a5a00":"#1f6b3a"}
   var timer;ta.addEventListener("input",function(){clearTimeout(timer);timer=setTimeout(render,150)});
   document.querySelectorAll("[data-try]").forEach(function(b){b.addEventListener("click",function(){ta.value=b.getAttribute("data-try");render()})});
   render();
