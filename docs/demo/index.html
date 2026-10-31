@@ -141,7 +141,7 @@ nav .links .btn{height:38px;padding:0 16px;color:#fff}
 .inside .head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
 .inside .head b{color:var(--ink);font-weight:600;font-size:15px}
 .doors{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
-.door{background:var(--soft);border-radius:16px;padding:20px}
+.door{background:var(--soft);border-radius:16px;padding:20px;min-width:0}
 .door h3{font-size:16px;margin-bottom:6px}
 .door p{font-size:14px;color:var(--muted);margin-bottom:12px;max-width:34ch}
 .door pre{margin:0;background:#111;color:#f3f3f3;border-radius:10px;padding:12px 14px;font:12.5px/1.6 ui-monospace,Menlo,monospace;overflow-x:auto;white-space:pre}
@@ -255,7 +255,38 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
   .light span{filter:blur(40px)}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
-</style>
+
+/* asset-library modules, deck palette */
+.lib{padding:96px 0 0}.lib .top{display:grid;grid-template-columns:7fr 5fr;gap:40px;align-items:end;margin-bottom:40px}.lib .top>p{color:var(--muted);font-size:15px;max-width:36ch}
+.lib .top h2{font-size:clamp(34px,4.4vw,60px);max-width:14ch}
+.toggle{margin-bottom:20px;font-size:13px;display:flex;gap:10px;align-items:center;color:#444}.toggle input{accent-color:#8B1A12;width:18px;height:18px}
+.pattern-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#e6e6e6;border:1px solid #e6e6e6;border-radius:18px;overflow:hidden}
+.pattern{min-height:230px;display:grid;place-items:center;background:#F6F6F8;padding:36px 23px}
+.pattern .sample{position:relative;font-size:22px;line-height:1.15;padding:18px;outline:1px solid #8B1A12;transition:outline-color .3s}
+.pattern .tag{word-spacing:normal;position:absolute;bottom:100%;left:-1px;background:#FFE14D;font:600 10px/1 var(--sans,'Instrument Sans',system-ui,sans-serif);letter-spacing:.04em;text-transform:uppercase;padding:7px;white-space:nowrap;transition:opacity .3s}
+.pattern.serif{background:#FFF6C2}.serif .sample{font:italic 32px/1.05 var(--serif,'Instrument Serif',Georgia,serif)}
+.rounded .sample{border-radius:35px;background:#fff;font-size:17px;text-align:center;box-shadow:0 14px 30px rgba(0,0,0,.08)}
+.accent .sample{background:#fff;border-left:5px solid #8B1A12;font-size:20px}
+.headline .sample{font-size:30px;font-weight:600;letter-spacing:-.03em}
+.pulse .sample:before{content:'';display:block;width:12px;height:12px;border-radius:50%;background:#8B1A12;margin-bottom:12px}
+.nested .sample{box-shadow:inset 0 0 0 10px #fff,inset 0 0 0 11px #e6e6e6;padding:25px;background:#F6F6F8;font-size:17px}
+.trio .sample{font-size:18px;word-spacing:20px}.steps .sample{font-size:18px;line-height:2}
+.pattern-grid.off .sample{outline-color:transparent}.pattern-grid.off .tag{opacity:0}
+.modes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.mode{padding:22px;min-height:180px;background:#F6F6F8;border-radius:14px}.mode:first-child{background:#FFF6C2}
+.mode .meta{font:600 11px var(--sans,'Instrument Sans',system-ui,sans-serif);letter-spacing:.06em;text-transform:uppercase;color:#8B1A12}
+.mode-art{margin-top:20px;height:65px;background:repeating-linear-gradient(0deg,#dedede 0 5px,transparent 5px 14px);width:75%}
+.mode:nth-child(2) .mode-art{background:repeating-linear-gradient(90deg,#FFE14D 0 25px,transparent 25px 31px)}
+.mode:nth-child(3) .mode-art{background:repeating-linear-gradient(0deg,#8B1A12 0 3px,transparent 3px 14px);opacity:.55}
+.mode:nth-child(4) .mode-art{background:linear-gradient(135deg,#FFE14D,#FFF6C2);border-radius:40px}
+.mode h3{font-size:19px;margin:18px 0 0;letter-spacing:-.02em}
+.term{background:#111;color:#eee;border-radius:18px;overflow:hidden;font-size:15px;line-height:1.9;min-height:290px}
+.term .bar{background:#242424;color:#aaa;padding:12px 24px;font-size:13px}
+.term ol{padding:24px 34px;list-style:none;margin:0}.term li{margin:8px 0}.term li:before{content:'› ';color:#FFE14D}
+.term button{background:#242424;color:#eee;border:1px solid #444;border-radius:999px;padding:9px 16px;margin:0 30px 25px;font:inherit;font-size:13px;cursor:pointer}.term button:hover{background:#333}
+@media(max-width:900px){.pattern-grid,.modes-grid{grid-template-columns:repeat(2,1fr)}.lib .top{grid-template-columns:1fr;gap:12px}}
+@media(max-width:540px){.pattern-grid{grid-template-columns:1fr}.pattern{min-height:200px}.modes-grid{grid-template-columns:1fr}}
+body{overflow-x:clip}</style>
 </head>
 <body>
 <script>document.documentElement.classList.replace('no-js','js')</script>
@@ -276,16 +307,16 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
     <p class="fine">No account. No credit card. Your taste file stays on your machine.</p>
     <div class="held">
       <div class="frag" id="frag" data-ui role="group" aria-label="coulis check, live">
-        <div class="bar"><span><b>coulis_check</b> · profile: Bhavya</span><span><span id="same" style="font-weight:600;margin-right:10px"></span><span class="pill" id="ms">4 ms</span></span></div>
-        <div style="padding:12px 14px"><textarea id="draft" rows="3" spellcheck="false" aria-label="Your draft">Excited to share that we're leveraging AI to 10x your workflow — a total game-changer. 300+ founders already trust us. Comment below!</textarea></div>
+        <div class="bar"><span><b>coulis_check</b> · profile: Sam (Notely)</span><span><span id="same" style="font-weight:600;margin-right:10px"></span><span class="pill" id="ms">4 ms</span></span></div>
+        <div style="padding:12px 14px"><textarea id="draft" rows="3" spellcheck="false" aria-label="Your draft">Excited to share that Notely is the first AI note app for founders — a total game-changer. 5,000 founders already use it. Comment below!</textarea></div>
         <div class="verdict BLOCK" id="verdict"><span class="dot"></span><span id="vword">Hold</span><span class="note" id="vnote">Fix the quoted lines before this goes out.</span></div>
         <div id="lines"></div>
         <div class="tools">
-          <button type="button" class="chip" data-try="Excited to share that we're leveraging AI to 10x your workflow — a total game-changer. 300+ founders already trust us. Comment below!">The AI draft</button>
-          <button type="button" class="chip" data-try="100 investors who back women building AI. One list. Comment INVESTORS and I'll send it.">Her real post</button>
-          <button type="button" class="chip" data-try="I just passed 62K followers on LinkedIn. Here is what I'd tell my 2022 self.">An approved number</button>
+          <button type="button" class="chip" data-try="Excited to share that Notely is the first AI note app for founders — a total game-changer. 5,000 founders already use it. Comment below!">The AI draft</button>
+          <button type="button" class="chip" data-try="Notely turns your messy meeting notes into a clean founder update. 1,200 users since we launched in March.">Sam's real post</button>
+          <button type="button" class="chip" data-try="40 paying teams. Here is the one feature they asked for most.">An approved number</button>
         </div>
-        <div class="learn">Runs in your browser on <b>Bhavya's real profile</b>. Approved: 62K followers, Top Voice 2024, about 3,000 readers, 100 investors, 673 posts. Banned: em dashes, "game-changer", "delve". Edit the draft; it re-checks as you type. Send, Revise or Hold, read against her own rules.</div>
+        <div class="learn">Runs in your browser on <b>a sample founder profile (Sam, Notely; fictional)</b>. Approved: 1,200 users, 40 paying teams, launched in March. Banned: em dashes, "game-changer", "the first". Edit the draft; it re-checks as you type. Send, Revise or Hold, read against his own rules.</div>
       </div>
     </div>
   </div>
@@ -294,7 +325,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 <section class="inside wrap" id="where" aria-label="Works where you write">
   <div class="head"><h2 class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Works where you write</h2><b>Works where you write</b><span>People, machines and enterprises. The same taste file behind all of them.</span></div>
   <div class="doors">
-    <div class="door"><h3>Claude Code and Claude Desktop</h3><p>Two commands. The hook sends Claude back if it ever skips the check.</p><pre>/plugin marketplace add bhavya-in-sf/coulis
+    <div class="door"><h3>Claude Code and Claude Desktop</h3><p>Two commands, then <code>/coulis:extract</code> with your LinkedIn export (Me, Settings, Data privacy, Get a copy of your data, Posts; about 10 minutes by email). No export? <code>/coulis:setup</code> asks five questions instead. The hook sends Claude back if it ever skips the check.</p><pre>/plugin marketplace add bhavya-in-sf/coulis
 /plugin install coulis@coulis</pre></div>
     <div class="door"><h3>Cursor, and any MCP client</h3><p>One block in your MCP config. Same six tools, same profile.</p><pre>"coulis": { "command": "python3",
   "args": ["~/coulis/mcp/server.py"] }</pre></div>
@@ -303,6 +334,11 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
   </div>
 </section>
 
+
+<section class="lib wrap" id="problem" aria-labelledby="hp">
+  <div class="top reveal"><div><p class="eyebrow">The problem</p><h2 id="hp">AI sounds like everyone. <i>It cannot express you.</i></h2></div><p>Eight ways a draft sounds like everyone else. Each one quoted back to you, with the label the check attaches. Toggle the labels off and read them cold.</p></div>
+  <div id="patterns"></div>
+</section>
 <section class="intro wrap" id="features">
   <div class="top reveal"><h2>Three steps. <i>Cheapest first, most personal last.</i></h2><p>Everyone else writes for you. coulis judges what was written: against your facts, your voice and your own recent posts.</p></div>
   <div class="three">
@@ -319,7 +355,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 </section>
 
 <section class="bento wrap">
-  <div class="head reveal"><div><p class="eyebrow">Competition</p><h2>Everyone else writes for you. <i>We judge what was written.</i></h2></div><p>Four pieces of the product at real size. Every label and number is real.</p></div>
+  <div class="head reveal"><div><p class="eyebrow">The product</p><h2>Everyone else writes for you. <i>We judge what was written.</i></h2></div><p>Four pieces of the product at real size. Every label and number is real.</p></div>
   <div class="grid">
     <div class="card glow reveal"><div class="ui" data-ui><div class="bar"><span><b>Draft</b> · LinkedIn · 14:02</span><span class="pill">4 ms</span></div><div style="padding:10px 14px">We hit $50k MRR this month. Our AI makes writing effortless for every founder who wants to grow.</div><div class="verdict FIX"><span class="dot"></span>Revise<span class="note">Two lines to settle before you send.</span></div><div class="row"><span class="lvl FIX">Revise</span><span><span class="q">"$50k MRR"</span> <span class="d">Not on your approved list.</span></span></div><div class="row"><span class="lvl FIX">Revise</span><span><span class="q">"effortless"</span> <span class="d">Filler.</span></span></div></div><h3>The gate</h3><p>Every number you have not approved is sent back, quoted, with the fix named.</p></div>
     <div class="card small reveal"><div class="ui" data-ui><div class="bar"><span><b>coulis score</b></span><span class="pill">71 · weakest 3 of 8 parts</span></div><div class="row"><span class="lvl">HOOK</span><span><span class="q">5</span> <span class="d">Opens with a question.</span></span></div><div class="row"><span class="lvl">VOICE</span><span><span class="q">8</span> <span class="d">Your cadence.</span></span></div><div class="row"><span class="lvl">PROOF</span><span><span class="q">4</span> <span class="d">Weakest. No number.</span></span></div></div><h3>The score</h3><p>One number for people and for agents. Only the weakest line gets a rewrite.</p></div>
@@ -368,6 +404,16 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
   </div>
 </section>
 
+
+<section class="lib wrap" id="modes" aria-labelledby="hm">
+  <div class="top reveal"><div><p class="eyebrow">Written for the moment</p><h2 id="hm">A cold email <i>is not a launch post.</i></h2></div><p>Launch posts, cold emails, investor updates and bios each get their own rules: a word limit, the one thing the draft must contain, and the score it has to reach.</p></div>
+  <div id="modegrid" class="modes-grid reveal"></div>
+</section>
+
+<section class="lib wrap" id="onecheck" aria-labelledby="ho">
+  <div class="top reveal"><div><p class="eyebrow">One check</p><h2 id="ho">What one check looks like, <i>line by line.</i></h2></div><p>The whole sequence runs on your machine. The gate never calls a model; the score does, only when you ask for it.</p></div>
+  <div id="term" class="term reveal"></div>
+</section>
 <section class="final">
   <div class="light" aria-hidden="true"><span class="l1" style="top:auto;bottom:-10%"></span><span class="l2" style="top:auto;bottom:0"></span><span class="l4"></span></div>
   <div class="wrap in">
@@ -384,7 +430,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
     <div><div class="mark">coulis</div><p style="margin-top:10px;max-width:30ch">Taste infrastructure for AI. Built in San Francisco.</p></div>
     <div><h4>Get started</h4><ul><li><a href="https://github.com/bhavya-in-sf/coulis#install" rel="noopener">Install</a></li><li><a href="https://github.com/bhavya-in-sf/coulis/blob/main/docs/INSTALL.md" rel="noopener">Cursor and MCP</a></li><li><a href="https://voiceprint-vibe-checker.lovable.app" rel="noopener">Free online check</a></li></ul></div>
     <div><h4>Product</h4><ul><li><a href="#features">The gate</a></li><li><a href="#features">Critique</a></li><li><a href="#why">Learn</a></li><li><a href="https://github.com/bhavya-in-sf/coulis/blob/main/docs/API.md" rel="noopener">API</a></li></ul></div>
-    <div><h4>Company</h4><ul><li><a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a></li><li><a href="index-editorial-v3.html#seat">Waitlist and dinners</a></li><li><a href="https://github.com/bhavya-in-sf/coulis/blob/main/README.md" rel="noopener">README</a></li></ul></div>
+    <div><h4>Company</h4><ul><li><a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a></li><li><a href="../index-editorial-v3.html#seat">Waitlist and dinners</a></li><li><a href="https://github.com/bhavya-in-sf/coulis/blob/main/README.md" rel="noopener">README</a></li></ul></div>
   </div>
   <div class="legal"><span>2026 · coulis · MIT</span><span>Nothing leaves your Mac for the basic check</span></div>
 </div></footer>
@@ -395,16 +441,16 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 (function(){
-  var APPROVED=["62K followers","62,000 followers","Top Voice 2024","3,000 newsletter readers","100 investors","673 posts","100+ AI companies","5 years"];
+  var APPROVED=["1,200 users","1200 users","40 paying teams","launched in March"];
   var FILLER=["streamline","leverage","leveraging","unlock","seamless","empower","delve","in today's fast-paced","elevate your","effortless"];
-  var BANNED=[{rx:/\bgame-?changer\b/g,why:"Banned. Her rule: generic AI filler."},{rx:/\bdelve\b/g,why:"Banned. Her rule: generic AI filler."}];
+  var BANNED=[{rx:/\bgame-?changer\b/g,why:"Banned. Sam's rule: generic AI filler."},{rx:/\bdelve\b/g,why:"Banned. Sam's rule: generic AI filler."},{rx:/\bthe first\b/g,why:"Banned. Never call Notely the first anything."}];
   var FIRST=/\b(i|i'm|i've|me|my|we|we're|our|us|clients?|customers?|users?|team)\b/;
   function approved(num){var a=APPROVED.join(" ").toLowerCase(),base=num.toLowerCase().replace(/,/g,"");var forms=[base];if(/k$/.test(base))forms.push(base.slice(0,-1)+"000",base.slice(0,-1)+",000");if(/^\d{4,}$/.test(base))forms.push(Number(base).toLocaleString("en-US"));return forms.some(function(f){return new RegExp("(^|[^\\d,])"+f.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"(?!\\d)").test(a)})}
   function aboutUs(t,k){var s=t.slice(Math.max(0,t.lastIndexOf(".",k)+1),(t.indexOf(".",k)+1)||t.length);return FIRST.test(s)||!/\b[A-Z][a-z]+/.test(s.replace(/^\s*[A-Z]/,"x"))}
   function check(text){var t=text.replace(/’/g,"'"),low=t.toLowerCase(),out=[],seen={};function add(l,q,d){var k=l+q;if(seen[k])return;seen[k]=1;out.push({level:l,q:q,d:d})}
     ["—","–","--"].forEach(function(d){if(t.indexOf(d)>-1)add("BLOCK",d,"Em dash or double hyphen. A house rule on this profile.")});
-    var m,money=/\$\s?(\d[\d,.]*)\s?(k|m)?\+?\s*(arr|mrr|revenue)?/g;while((m=money.exec(low))){if(!approved(m[1]+(m[2]||""))&&aboutUs(t,m.index))add("BLOCK",m[0].trim(),"Money claim not on her approved list.")}
-    var count=/\b(\d[\d,.]*)\s?(k)?\+?\s*(followers|subscribers|readers|users|customers|founders|companies|posts|investors|leads|clients)\b/g;while((m=count.exec(low))){if(!approved(m[1].replace(/,/g,"")+(m[2]||""))&&aboutUs(t,m.index))add("FIX",m[0].trim(),"Number not on her approved list. Add it, or cut it.")}
+    var m,money=/\$\s?(\d[\d,.]*)\s?(k|m)?\+?\s*(arr|mrr|revenue)?/g;while((m=money.exec(low))){if(!approved(m[1]+(m[2]||""))&&aboutUs(t,m.index))add("BLOCK",m[0].trim(),"Money claim not on his approved list.")}
+    var count=/\b(\d[\d,.]*)\s?(k)?\+?\s*(followers|subscribers|readers|users|customers|founders|companies|posts|investors|leads|clients)\b/g;while((m=count.exec(low))){if(!approved(m[1].replace(/,/g,"")+(m[2]||""))&&aboutUs(t,m.index))add("FIX",m[0].trim(),"Number not on his approved list. Add it, or cut it.")}
     var mult=/\b(\d+(?:\.\d+)?)\s?x(?![\w\d])/g;while((m=mult.exec(low))){if(aboutUs(t,m.index))add("FIX",m[0].trim(),"A result claim. Prove it, or cut it.")}
     BANNED.forEach(function(b){var r;b.rx.lastIndex=0;while((r=b.rx.exec(low)))add("BLOCK",r[0],b.why)});
     FILLER.forEach(function(f){if(low.indexOf(f)>-1)add("FIX",f,"Filler. Say what actually happened.")});
@@ -414,7 +460,7 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
     same=Math.min(100,same);var lbl="";
     return{verdict:v,issues:out,sameness:same,label:lbl}}
   var ta=document.getElementById("draft"),verdict=document.getElementById("verdict"),vword=document.getElementById("vword"),vnote=document.getElementById("vnote"),lines=document.getElementById("lines"),ms=document.getElementById("ms");
-  var COPY={BLOCK:"Fix the quoted lines before this goes out.",FIX:"Close. Revise the quoted lines and send.",PASS:"Specific, approved, in her voice."};var WORD={BLOCK:"Hold",FIX:"Revise",PASS:"Send"};
+  var COPY={BLOCK:"Fix the quoted lines before this goes out.",FIX:"Close. Revise the quoted lines and send.",PASS:"Specific, approved, in his voice."};var WORD={BLOCK:"Hold",FIX:"Revise",PASS:"Send"};
   function esc(s){return s.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
   function render(){var t0=performance.now(),r=check(ta.value);verdict.className="verdict "+r.verdict;vword.textContent=WORD[r.verdict];vnote.textContent=COPY[r.verdict];
     lines.innerHTML=r.issues.map(function(i){return '<div class="row"><span class="lvl '+i.level+'">'+WORD[i.level]+'</span><span><span class="q">'+esc(i.q)+'</span> <span class="d">'+esc(i.d)+'</span></span></div>'}).join("");
@@ -471,6 +517,18 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
       document.querySelectorAll(".stat b").forEach(function(b){gsap.from(b,{opacity:0,y:20,duration:.9,ease:"power3.out",scrollTrigger:{trigger:b,start:"top 85%"}})});
     }
   }
+})();
+</script>
+
+<script>
+(function(){
+  var E=function(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!==undefined)e.textContent=x;return e};
+  var patterns=[["Stock opening","Thrilled to announce our next chapter.","serif"],["Vague promise","Everything you need. All in one place.","rounded"],["Unapproved number","Your team. Now 10x faster.","accent"],["Filler","Unlock your potential.","pulse"],["Generic headline","The future of work starts here.","headline"],["Repeated idea","A better way to work. A smarter way to work.","nested"],["Interchangeable claims","Create. Connect. Grow.","trio"],["Repeated hook","Discover. Build. Transform.","steps"]];
+  var root=document.getElementById('patterns');if(root){var lab=E('label','toggle'),chk=E('input');chk.type='checkbox';chk.checked=true;lab.append(chk,document.createTextNode('Show the labels'));var grid=E('div','pattern-grid');patterns.forEach(function(p){var tile=E('div','pattern '+p[2]),s=E('div','sample',p[1]);s.append(E('span','tag',p[0]));tile.append(s);grid.append(tile)});chk.onchange=function(){grid.classList.toggle('off',!chk.checked)};root.append(lab,grid)}
+  var modes=[["Launch post","What did you build?"],["Cold email","Why this person? 125 words, one ask."],["Investor update","What changed, in numbers? 400 words."],["Bio","Who are you, in one line? 80 words."]];
+  var mg=document.getElementById('modegrid');if(mg){modes.forEach(function(m){var a=E('article','mode');a.append(E('span','meta',m[0]),E('div','mode-art'),E('h3','',m[1]));mg.append(a)})}
+  var lines=["Loading your approved facts","Loading your voice file","Check: fixed rules, no AI model, about 4 ms","Quoted: \u201c10x faster\u201d is not in your approved facts","Verdict: Revise. One line to settle before you send","Score, on request: 71, weakest part proof","Your decision. Nothing is saved without your yes"];
+  var box=document.getElementById('term');if(box){var list=E('ol'),timer;var play=function(){clearTimeout(timer);list.replaceChildren();var i=0;var next=function(){list.append(E('li','',lines[i++]));if(i<lines.length)timer=setTimeout(next,450)};if(matchMedia('(prefers-reduced-motion: reduce)').matches){lines.forEach(function(s){list.append(E('li','',s))})}else next()};var btn=E('button','','Replay');btn.type='button';btn.onclick=play;box.append(E('div','bar','coulis_check \u00b7 one draft'),list,btn);lines.forEach(function(s){list.append(E('li','',s))});if('IntersectionObserver' in window){var once=false;new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!once){once=true;play()}})},{threshold:.4}).observe(box)}}
 })();
 </script>
 </body>

@@ -160,3 +160,10 @@ MIT. Built by Bhavya Goel.
 - `python3 scripts/taste_card.py --out card.html` renders a shareable one-page card of how you write, measured from your own samples. Nothing invented.
 - `coulis setup --linkedin export.zip` builds your TASTE.md and claims.md from your own posts in one command (the export: LinkedIn > Me > Settings & Privacy > Data privacy > Get a copy of your data > Posts).
 - `coulis check --max-sameness 50` turns the sameness score into a team gate.
+
+## Privacy
+- The gate runs on your machine and makes no network call.
+- The critique sends your draft and a few of your sample posts to Claude under your own account. coulis keeps nothing from that call.
+- Your taste files and the local log stay in `~/.coulis/`. The log records verdicts and tool names, never your drafts.
+- The landing page has no analytics or tracking. The waitlist form keeps a name, an email and your choice, nothing else.
+- Security problems: see [SECURITY.md](SECURITY.md).

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>coulis · waitlist</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#111;--muted:#6b6b70;--line:#ececef;--red:#8B1A12;--yellow:#FFE14D}
+*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:17px/1.5 'Instrument Sans',system-ui,sans-serif;padding:48px 20px 80px}
+.wrap{max-width:640px;margin:0 auto}a{color:inherit}
+h1{font-size:clamp(34px,6vw,56px);letter-spacing:-.035em;line-height:1.02;margin:0 0 8px}h1 i{font-family:'Instrument Serif';font-style:italic;font-weight:400;letter-spacing:0}
+.lede{color:var(--muted);margin:0 0 28px}
+.wl{margin-top:72px;max-width:640px}
+.wl h3{font-size:var(--step-lead);margin-bottom:6px}
+.wl .lede{color:var(--muted);margin-bottom:22px}
+.wl .doors{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:18px;font-size:15px}
+.wl .doors label{display:flex;gap:8px;align-items:center;cursor:pointer}
+.wl .doors input{accent-color:var(--ink);margin:0}
+.wl .fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.wl label.f{display:block;font:700 13px var(--display);margin-bottom:6px}
+.wl input,.wl select{width:100%;padding:12px 12px;border:1.5px solid var(--ink);background:var(--bg);color:var(--ink);font:inherit;font-size:16px;border-radius:0}
+.wl .full{grid-column:1/-1}
+.wl .act{display:flex;gap:16px;align-items:center;margin-top:16px;flex-wrap:wrap}
+.wl .msg{font-size:15px;min-height:22px;font-weight:600}
+.wl .msg.ok{color:var(--pass)}
+.wl .msg.err{color:var(--block)}
+.btn{display:inline-flex;align-items:center;height:46px;padding:0 22px;border-radius:999px;background:var(--ink);color:#fff;border:0;font:500 14px 'Instrument Sans';cursor:pointer}
+.btn:disabled{opacity:.5}
+.back{display:inline-block;margin-bottom:28px;color:var(--muted);text-decoration:none;font-size:14px}
+.privacy{margin-top:24px;font-size:13px;color:var(--muted)}
+</style></head><body><div class="wrap">
+<a class="back" href="index.html">← coulis</a>
+<h1>Join the <i>waitlist.</i></h1>
+<p class="lede">Early access to releases, or a seat at one of the dinners in San Francisco. Both free.</p>
+<form class="wl" id="wl" novalidate>
+      <h3>Join the waitlist</h3>
+      <p class="lede">Early access to releases, or a seat at one of the dinners in San Francisco. Both free.</p>
+      <div class="doors" role="radiogroup" aria-label="What are you joining">
+        <label><input type="radio" name="door" value="plugin" checked> The plug-in</label>
+        <label><input type="radio" name="door" value="table"> The dinners</label>
+        <label><input type="radio" name="door" value="both"> Both</label>
+      </div>
+      <div class="fields">
+        <div><label class="f" for="wl-name">Name</label><input id="wl-name" name="name" type="text" autocomplete="name" placeholder="Your name"></div>
+        <div><label class="f" for="wl-email">Email</label><input id="wl-email" name="email" type="email" autocomplete="email" placeholder="you@company.com"></div>
+        <div><label class="f" for="wl-role">You are</label><select id="wl-role" name="role"><option>A founder</option><option>A marketer</option><option>A writer or ghostwriter</option><option>An engineer</option><option>An investor</option><option>Curious</option></select></div>
+        <div><label class="f" for="wl-pain">The last draft that went out wrong (optional)</label><input id="wl-pain" name="pain" type="text" placeholder="One line"></div>
+      </div>
+      <div class="act"><button class="btn" id="wl-submit" type="submit">Join the waitlist</button><span class="msg" id="wl-msg" role="status" aria-live="polite"></span></div>
+    </form>
+<p class="privacy">We keep your name, email and what you picked, nothing else. No tracking. Ask to be removed any time by replying to the first email.</p>
+</div>
+<script>(function(){/* ---- waitlist ---- */
+  var ENDPOINT="https://formsubmit.co/ajax/ac327ff10bcd43f64f6e489f7fb0f09c";
+  var f=document.getElementById("wl"), msg=document.getElementById("wl-msg"), btn=document.getElementById("wl-submit");
+  f.addEventListener("submit",function(e){
+    e.preventDefault(); msg.className="msg err"; msg.textContent="";
+    var name=document.getElementById("wl-name").value.trim(), email=document.getElementById("wl-email").value.trim();
+    if(!name){ msg.textContent="Add your name, then try again."; document.getElementById("wl-name").focus(); return; }
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ msg.textContent="That email doesn't look right. Use name@example.com."; document.getElementById("wl-email").focus(); return; }
+    var door=(f.querySelector("input[name=door]:checked")||{}).value;
+    var data={door:door,name:name,email:email,role:document.getElementById("wl-role").value,pain:document.getElementById("wl-pain").value.trim(),_subject:"coulis waitlist: "+door,_template:"table"};
+    btn.disabled=true; btn.textContent="Joining...";
+    var ctrl=window.AbortController?new AbortController():null, t=setTimeout(function(){ if(ctrl) ctrl.abort(); },15000);
+    fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(data),signal:ctrl?ctrl.signal:undefined})
+      .then(function(r){ return r.json().catch(function(){return {}}).then(function(j){ return {ok:r.ok,j:j}; });})();</script>
+</body></html>

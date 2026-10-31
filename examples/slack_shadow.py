@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """coulis shadow mode for a Slack channel: read drafts, run the gate, log results. Posts nothing.
 
-    python3 examples/slack_shadow.py --env ~/.coulis/secrets/pumpgtm-slack.env \
-        --profile ~/Cowork/taste-layer/personas/pumpgtm --out ~/.coulis/shadow/pumpgtm
+    python3 examples/slack_shadow.py --env ~/.coulis/secrets/slack.env \
+        --profile ~/clients/acme --out ~/.coulis/shadow/acme
     python3 examples/slack_shadow.py ... --digest          # print what it would have caught, by day
 
 The .env file holds two lines: SLACK_BOT_TOKEN=xoxb-...  and  SLACK_CHANNEL=C...

@@ -7,8 +7,8 @@
 
        python3 evals/run_eval.py regression --persona personas/example --golden evals/golden/example.json
        # private pilot (kept out of this public repo):
-       python3 evals/run_eval.py regression --persona ~/Cowork/taste-layer/personas/pumpgtm \
-           --golden ~/Cowork/taste-layer/personas/pumpgtm/backtest.json
+       python3 evals/run_eval.py regression --persona ~/clients/acme \
+           --golden ~/clients/acme/backtest.json
 
 2. Edit pairs: does Coulis predict what a human actually changes?
    Each pair is {id, draft, final}. Free metrics come from the gate and learn.
