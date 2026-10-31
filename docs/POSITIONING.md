@@ -70,3 +70,7 @@ The primary journey is research → local prototype → paid B2B2C design partne
 ### Current decision: restore original identity
 
 Supersedes the photographic-homepage direction above: restore Instrument Sans with Instrument Serif italics, the dark red animated landscape, white body, canary accents, pill CTAs, and rounded cards. Keep the current taste-LLM research narrative, B2B2C partnerships, evidence boundaries, and local prototype. The stock berry photograph remains a secondary illustration of the name rather than the hero. Fonts now load from the committed `option-pepple/fonts` directory. See `STRATEGY-COMPARISON.md` for the product-versus-lab viability comparison.
+
+### Founder-data research thesis
+
+Lead with the personal-data starting point and founder experience, then explain the experiment. What we build: a taste LLM and infrastructure. How: permissioned editorial decisions, strong baselines, scoped memory and bounded model adaptation. Revenue: paid B2B2C evaluations/integrations followed by recurring model/API usage when validated. Bhavya currently leads model engineering. The founder confirms archive research/training permissions; usable decision-pair coverage and model advantage remain to be established.

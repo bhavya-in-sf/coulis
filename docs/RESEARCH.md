@@ -47,7 +47,7 @@ Use separate tests for generation, ranking, critique and continual adaptation. W
 | Local constraints and approved contextual memory | Implemented prototype | Regression and workflow tests |
 | Human baseline study | Prepared, not run | Blinded comparisons and permissioned outcomes |
 | Rights-cleared training dataset | Not established | Auditable purpose-specific permissions and split manifest |
-| First taste-LLM candidate | Research plan only | Base-model/license choice, technical owner, compute budget, reproducible training run |
+| First taste-LLM candidate | Research plan only | Base-model/license choice, scoped compute budget, reproducible training run |
 | Continual model adaptation | Research plan only | Gains on new preferences without unacceptable forgetting or leakage |
 | Hosted model/API pilot | Waitlist only | Measured benefit, operational reliability and willing integrators |
 
@@ -56,3 +56,11 @@ The next step is the human baseline and data-rights work, followed by a bounded 
 ## Commercial and funding strategy
 
 **B2B2C. VC-first. Paid from the first commercial engagement.** AI product companies are the buyers; their end users receive personalized taste capabilities. Raise venture capital for the model research and infrastructure while selling scoped integrations/evaluations of the existing prototype. These paid pilots are distinct from future hosted taste-LLM/API access, which remains waitlist only. No revenue or funding amount is claimed without verification. See [business model and initial paid offer](BUSINESS.md).
+
+## Founder-led research and the data starting point
+
+Bhavya Goel currently leads model engineering, as confirmed October 31, 2026. The research direction draws on her personal writing and experience running social media and personal-branding businesses. The founder confirms research/training permission for the historical archive. Record that permission and provenance per source before creating training splits; do not conflate permission with exclusive ownership.
+
+The specific hypothesis is that contextual editorial decisions, including edits and rejected alternatives, can improve individual judgment beyond an equally informed profile-and-retrieval baseline. The archive's usable before/after pair coverage remains to be measured. Collect missing decisions prospectively through the writing product. Public posts alone are not evidence that those traces exist.
+
+Founder experience informs problem selection and annotation. Technical evidence comes from reproducible experiments and measured user outcomes. The lab is the company; the writing product is its first application and experimental interface.
