@@ -33,6 +33,20 @@ def run(folder):
             problems.append({"issue": f"Only {len(facts)} approved facts", "fix": "Add your key numbers (followers, users, revenue) so they stop getting flagged."})
         if "## Banned phrases" not in c:
             problems.append({"issue": "No banned phrases section", "fix": "Add phrases you always cut, e.g. 'game-changer'."})
+    try:
+        import sys as _s; _s.path.insert(0, str(Path(__file__).resolve().parent.parent))
+        from coulis_core import profile_from_folder
+        from coulis_core.context import build_context, _tokens
+        prof = profile_from_folder(d)
+        raw = sum(_tokens(x) for x in prof.samples) + sum(_tokens(r.text) for r in prof.rules) + sum(_tokens(f) for f in prof.approved_facts)
+        b = build_context("a draft about what you usually write", prof, "linkedin")
+        ok.append(f"profile is about {raw} tokens; the critic sees about {b['tokens']['total']} of a {b['tokens']['budget']} budget "
+                  f"({len(b['samples'])} of {len(prof.samples)} samples, {len(b['preferences'])} of {len(prof.rules)} rules, {len(b['facts'])} of {len(prof.approved_facts)} facts)")
+        if raw > b['tokens']['budget'] * 3:
+            problems.append({"issue": f"Profile is {raw} tokens, well over the {b['tokens']['budget']} the critic reads per call",
+                             "fix": "That is fine for retrieval, but prune rules you no longer want; the finder only shows the matching samples."})
+    except Exception as e:  # doctor never fails because of a size estimate
+        ok.append(f"token size not measured ({str(e)[:60]})")
     picks = d / "picks.jsonl"
     if picks.exists():
         ok.append(f"{sum(1 for _ in picks.open())} variant picks saved")

@@ -111,7 +111,23 @@ class Workflow:
             if supersedes: p['supersedes']=supersedes
             result=self.store.add('local','profile',p)
             self.db.execute('UPDATE proposals SET resolved=1 WHERE id=?',(proposal_id,))
+        self._render_to_taste(p)
         return result
+
+    def _render_to_taste(self, p):
+        """One source of truth for the person: an approved preference is also written under
+        '## Learned from my edits' in TASTE.md, so what they read is what the model gets. The DB id
+        is kept in the line so the profile loader does not add it twice."""
+        taste = self.folder / 'TASTE.md'
+        scope = ', '.join(f"{k}={v}" for k, v in (p.get('scope') or {}).items())
+        line = f"- [{p['effective_at'][:10]}] {p['text']}" + (f" (scope: {scope})" if scope else "") + f" <!-- id:{p['id']} -->"
+        text = taste.read_text() if taste.exists() else "# TASTE.md\n"
+        if p['id'] in text:
+            return
+        if '## Learned from my edits' not in text:
+            text = text.rstrip() + "\n\n## Learned from my edits\n"
+        text = text.rstrip() + "\n" + line + "\n"
+        taste.write_text(text)
 
     def revise(self, preference_id, value, wording):
         rows = self.store.list_preferences('local','profile')

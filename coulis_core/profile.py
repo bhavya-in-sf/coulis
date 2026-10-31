@@ -149,6 +149,8 @@ def parse_files(taste_md="", claims_md=""):
         p.samples = [s.strip() for s in samples if s.strip() and not s.strip().startswith("<!--")]
         p.rules = [Rule(text=r) for r in _bullets(_section(taste_md, "My rules"))]
         for r in _bullets(_section(taste_md, "Learned from my edits")):
+            if "<!-- id:" in r:
+                continue  # a display copy of a database preference; the database row carries its scope
             m = re.match(r"[\[(](\d{4}-\d{2}-\d{2})[^\])]*[\])]\s*(.*)", r)
             p.rules.append(Rule(text=m.group(2) if m else r, source="learned", added=m.group(1) if m else ""))
     return p
