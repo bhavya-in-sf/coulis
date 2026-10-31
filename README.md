@@ -133,7 +133,7 @@ Rules for an agent: never send on Hold; never invent a number to satisfy a claim
 
 - OpenClaw skill: [`openclaw/`](openclaw/) (`clawhub install coulis`).
 - Claude Code and Claude Desktop: the plug-in above (MCP tools `coulis_check`, `coulis_add`, `coulis_learn`).
-- Over HTTP: the Taste API preview in [`api/`](api/), SDKs in [`sdk/`](sdk/).
+- Over HTTP: for teams and agents, on the waitlist.
 - Hosted API and per-check pricing for agent companies: not yet. Write to the address in the footer of the site.
 
 ## For developers
