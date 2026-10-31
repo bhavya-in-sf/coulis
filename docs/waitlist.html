@@ -30,7 +30,12 @@ h1{font-size:clamp(34px,6vw,56px);letter-spacing:-.035em;line-height:1.02;margin
 <a class="back" href="index.html">← coulis</a>
 <h1>Join the <i>waitlist.</i></h1>
 <p class="lede">Early access to releases, or a seat at one of the dinners in San Francisco. Both free.</p>
-<form class="wl" id="wl" novalidate>
+<form class="wl" id="wl" action="https://formsubmit.co/ac327ff10bcd43f64f6e489f7fb0f09c" method="POST">
+      <input type="hidden" name="_captcha" value="true">
+      <input type="hidden" name="_subject" value="coulis waitlist">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://bhavya-in-sf.github.io/coulis/waitlist.html?sent=1">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
       <h3>Join the waitlist</h3>
       <p class="lede">Early access to releases, or a seat at one of the dinners in San Francisco. Both free.</p>
       <div class="doors" role="radiogroup" aria-label="What are you joining">
@@ -46,20 +51,14 @@ h1{font-size:clamp(34px,6vw,56px);letter-spacing:-.035em;line-height:1.02;margin
       </div>
       <div class="act"><button class="btn" id="wl-submit" type="submit">Join the waitlist</button><span class="msg" id="wl-msg" role="status" aria-live="polite"></span></div>
     </form>
-<p class="privacy">We keep your name, email and what you picked, nothing else. No tracking. Ask to be removed any time by replying to the first email.</p>
+<p class="privacy">We keep your name, email and what you picked, nothing else. No tracking. A one-click check on the next page keeps robots out. Ask to be removed any time by replying to the first email.</p>
 </div>
-<script>(function(){/* ---- waitlist ---- */
-  var ENDPOINT="https://formsubmit.co/ajax/ac327ff10bcd43f64f6e489f7fb0f09c";
-  var f=document.getElementById("wl"), msg=document.getElementById("wl-msg"), btn=document.getElementById("wl-submit");
-  f.addEventListener("submit",function(e){
-    e.preventDefault(); msg.className="msg err"; msg.textContent="";
-    var name=document.getElementById("wl-name").value.trim(), email=document.getElementById("wl-email").value.trim();
-    if(!name){ msg.textContent="Add your name, then try again."; document.getElementById("wl-name").focus(); return; }
-    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ msg.textContent="That email doesn't look right. Use name@example.com."; document.getElementById("wl-email").focus(); return; }
-    var door=(f.querySelector("input[name=door]:checked")||{}).value;
-    var data={door:door,name:name,email:email,role:document.getElementById("wl-role").value,pain:document.getElementById("wl-pain").value.trim(),_subject:"coulis waitlist: "+door,_template:"table"};
-    btn.disabled=true; btn.textContent="Joining...";
-    var ctrl=window.AbortController?new AbortController():null, t=setTimeout(function(){ if(ctrl) ctrl.abort(); },15000);
-    fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(data),signal:ctrl?ctrl.signal:undefined})
-      .then(function(r){ return r.json().catch(function(){return {}}).then(function(j){ return {ok:r.ok,j:j}; });})();</script>
+<script>(function(){
+  var f=document.getElementById("wl"),msg=document.getElementById("wl-msg");
+  if(new URLSearchParams(location.search).get("sent")){f.hidden=true;document.querySelector("h1").innerHTML="You're on the <i>list.</i>";document.querySelector(".lede").textContent="We'll email you when the next release ships. Dinner invites go out by hand."}
+  f.addEventListener("submit",function(e){var name=document.getElementById("wl-name").value.trim(),email=document.getElementById("wl-email").value.trim();
+    if(!name){e.preventDefault();msg.textContent="Add your name, then try again.";document.getElementById("wl-name").focus();return}
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){e.preventDefault();msg.textContent="That email doesn't look right.";document.getElementById("wl-email").focus();return}
+    msg.textContent="One quick check on the next page, then you're in."});
+})();</script>
 </body></html>

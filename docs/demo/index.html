@@ -329,8 +329,7 @@ body{overflow-x:clip}</style>
 /plugin install coulis@coulis</pre></div>
     <div class="door"><h3>Cursor, and any MCP client</h3><p>One block in your MCP config. Same six tools, same profile.</p><pre>"coulis": { "command": "python3",
   "args": ["~/coulis/mcp/server.py"] }</pre></div>
-    <div class="door"><h3>Agents and apps, via the API</h3><p>One call before anything ships. ChatGPT, Slack and Docs come through here. Key-authenticated; <a href="https://github.com/bhavya-in-sf/coulis/blob/main/docs/API.md" rel="noopener">API docs</a>.</p><pre>POST /v1/check
-{ "text": "...", "min_score": 70 }</pre></div>
+    <div class="door"><h3>Teams and agents</h3><p>One shared voice, one approved-facts list, a sameness limit for everything an agent sends. Not public yet.</p><pre style="background:#fff;color:#111;border:1px solid var(--line)"><a href="waitlist.html" style="text-decoration:none;font-weight:600">Join the waitlist →</a></pre></div>
   </div>
 </section>
 
@@ -369,7 +368,7 @@ body{overflow-x:clip}</style>
   <div class="two">
     <div class="steps">
       <div class="step on reveal"><div class="n">01</div><h3>Approval first</h3><p>It never sends or rewrites without your yes. Every change comes with an explanation.</p></div>
-      <div class="step reveal"><div class="n">02</div><h3>Private by default</h3><p>Your taste file stays on your machine; the basic check never calls a model; the API never logs drafts.</p></div>
+      <div class="step reveal"><div class="n">02</div><h3>Private by default</h3><p>Your taste file stays on your machine; the basic check never calls a model; nothing is sent anywhere by the gate.</p></div>
       <div class="step reveal"><div class="n">03</div><h3>Validated</h3><p>Known drafts with known answers before every release, and posts the system has never seen.</p></div>
     </div>
     <div class="pic reveal" style="display:flex;align-items:center;padding:28px"><div class="ui" data-ui style="width:100%"><div class="bar"><span><b>TASTE.md</b> · yours, on your machine</span></div><div style="padding:12px 14px;font:13px/22px ui-monospace,monospace">+ No "excited to share" openers<br>+ Numbers: 62K followers, Top Voice 2024<br>+ Hooks: lead with a number, not a question</div></div></div>
@@ -429,7 +428,7 @@ body{overflow-x:clip}</style>
   <div class="cols">
     <div><div class="mark">coulis</div><p style="margin-top:10px;max-width:30ch">Taste infrastructure for AI. Built in San Francisco.</p></div>
     <div><h4>Get started</h4><ul><li><a href="https://github.com/bhavya-in-sf/coulis#install" rel="noopener">Install</a></li><li><a href="https://github.com/bhavya-in-sf/coulis/blob/main/docs/INSTALL.md" rel="noopener">Cursor and MCP</a></li><li><a href="demo.html">Live demo</a></li></ul></div>
-    <div><h4>Product</h4><ul><li><a href="#features">The gate</a></li><li><a href="#features">Critique</a></li><li><a href="#why">Learn</a></li><li><a href="https://github.com/bhavya-in-sf/coulis/blob/main/docs/API.md" rel="noopener">API</a></li></ul></div>
+    <div><h4>Product</h4><ul><li><a href="#features">The gate</a></li><li><a href="#features">Critique</a></li><li><a href="#why">Learn</a></li><li><a href="waitlist.html">Teams and agents</a></li></ul></div>
     <div><h4>Company</h4><ul><li><a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a></li><li><a href="../index-editorial-v3.html#seat">Waitlist and dinners</a></li><li><a href="https://github.com/bhavya-in-sf/coulis/blob/main/README.md" rel="noopener">README</a></li></ul></div>
   </div>
   <div class="legal"><span>2026 · coulis · MIT</span><span>Nothing leaves your Mac for the basic check</span></div>

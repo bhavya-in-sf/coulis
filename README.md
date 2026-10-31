@@ -136,11 +136,10 @@ Rules for an agent: never send on Hold; never invent a number to satisfy a claim
 - Over HTTP: the Taste API preview in [`api/`](api/), SDKs in [`sdk/`](sdk/).
 - Hosted API and per-check pricing for agent companies: not yet. Write to the address in the footer of the site.
 
-## For developers (preview)
+## For developers
 - `coulis_core/`: the taste layer as a library. JSON in, JSON out.
 - `mcp/server.py`: MCP server with `coulis_check`, `coulis_critique` (works without an API key), `coulis_learn`, `coulis_add` and `coulis_profile`. Ships inside the plug-in.
-- `api/`: the Taste API (REST): profiles, check, critique, learn, rule approval, usage. See [docs/API.md](docs/API.md).
-- `sdk/`: Python and TypeScript clients. `examples/writing_app.py` shows a writing app gating every draft.
+- `examples/writing_app.py` shows a writing app gating every draft with the library.
 - `personas/bhavya/`: a real founder's profile, published with her permission: TASTE.md built from 673 public LinkedIn posts, an approved-facts list, and 553 posts to test against. Point Coulis at it to see a real taste profile in action: `COULIS_PROFILE_DIR=personas/bhavya`.
 - `evals/`: a regression suite (same input, same verdict) and an edit-pairs suite. Run `python3 -m unittest discover -s tests`.
 
@@ -149,7 +148,7 @@ Rules for an agent: never send on Hold; never invent a number to satisfy a claim
 - v0.2: core library, MCP server, Taste API preview, SDKs, evals
 - v0.3: gate calibrated on real posts; MCP works with no API key; `coulis_add`
 - v0.4: a real founder's profile and 553-post regression set (this release)
-- Next: hosted API, pitches and decks
+- Next: teams and agents. Join the waitlist at bhavya-in-sf.github.io/coulis/waitlist.html
 
 ## License
 MIT. Built by Bhavya Goel.
@@ -159,7 +158,7 @@ MIT. Built by Bhavya Goel.
 - `python3 scripts/deck_check.py deck.pdf` checks a deck slide by slide and flags the same noun with different numbers across slides ("300 customers" on slide 3, "350" on slide 9). Also .pptx and .md.
 - `python3 scripts/taste_card.py --out card.html` renders a shareable one-page card of how you write, measured from your own samples. Nothing invented.
 - `coulis setup --linkedin export.zip` builds your TASTE.md and claims.md from your own posts in one command (the export: LinkedIn > Me > Settings & Privacy > Data privacy > Get a copy of your data > Posts).
-- `coulis check --max-sameness 50` turns the sameness score into a team gate.
+- `coulis check --max-sameness 50` turns the sameness score into a gate.
 
 ## Privacy
 - The gate runs on your machine and makes no network call.
