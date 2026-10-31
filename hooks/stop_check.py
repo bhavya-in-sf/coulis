@@ -13,6 +13,21 @@ import json
 import os
 import re
 import sys
+import time
+from pathlib import Path
+
+
+def debug(event, **kw):
+    """One line per run in ~/.sauce/hook-log.jsonl so you can see the hook fired (SAUCE_HOOK_LOG=0 to turn off)."""
+    if os.environ.get("SAUCE_HOOK_LOG", "1") == "0":
+        return
+    try:
+        d = Path.home() / ".sauce"
+        d.mkdir(exist_ok=True)
+        with (d / "hook-log.jsonl").open("a") as f:
+            f.write(json.dumps({"t": time.strftime("%Y-%m-%dT%H:%M:%S"), "event": event, **kw}) + "\n")
+    except OSError:
+        pass
 
 CODE_LANGS_OK = {"", "text", "txt", "markdown", "md"}
 COMMANDY = re.compile(r"^\s*(/|\$|git |cd |claude |python3? |npm |bash |curl |ls |mkdir |hdiutil |export |echo )")
@@ -84,9 +99,21 @@ def main():
     try:
         data = json.load(sys.stdin)
         if data.get("stop_hook_active"):
+            debug("skip_already_asked")
             return  # already asked once this turn
-        turn = last_turn(data["transcript_path"])
-    except Exception:
+        # The desktop app can fire Stop before the last reply is written to the transcript: wait for it briefly.
+        turn = []
+        for _ in range(6):
+            turn = last_turn(data["transcript_path"])
+            if any(b.get("type") == "text" for r in turn for b in (r.get("message", {}).get("content") or [])
+                   if isinstance(b, dict)):
+                break
+            time.sleep(0.25)
+        extra = data.get("last_assistant_message")
+        if isinstance(extra, str) and extra.strip():
+            turn = turn + [{"type": "assistant", "message": {"content": [{"type": "text", "text": extra}]}}]
+    except Exception as e:
+        debug("error", error=str(e)[:200])
         return  # never get in the way on errors
     used_sauce, learned, checked, text = False, False, [], []
     for r in turn:
@@ -100,6 +127,7 @@ def main():
             elif b.get("type") == "text":
                 text.append(b.get("text", ""))
     drafts = drafts_in("\n".join(text))
+    debug("ran", drafts=len(drafts), used_sauce=used_sauce, turn_rows=len(turn))
     pair = edited_pair(checked, drafts) if (checked and drafts and not learned) else None
     if pair:
         # the draft that was checked is not the draft that went out: that difference is taste. Learn from it, once.

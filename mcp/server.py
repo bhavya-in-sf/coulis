@@ -19,7 +19,7 @@ from sauce_core import __version__, check, critique, learn, profile_from_folder 
 
 PROTOCOL = "2025-06-18"
 PROFILE_DIR = {"type": "string", "description": "Optional: folder with the TASTE.md and claims.md to use for this call (e.g. a company or client profile). Defaults to the user's own profile."}
-SURFACE = {"type": "string", "enum": ["linkedin", "x", "reddit", "instagram", "youtube"], "default": "linkedin"}
+SURFACE = {"type": "string", "enum": ["linkedin", "x", "reddit", "instagram", "youtube", "cold_email", "investor_update", "bio"], "default": "linkedin"}
 
 TOOLS = [
     {"name": "sauce_check",
@@ -46,6 +46,15 @@ TOOLS = [
      "inputSchema": {"type": "object", "required": ["reason"], "additionalProperties": False,
                      "properties": {"profile_dir": PROFILE_DIR, "reason": {"type": "string"},
                                     "kind": {"type": "string", "description": "What the writing was, e.g. 'Slack reply', 'email', 'LinkedIn post'"}}}},
+    {"name": "sauce_pick",
+     "description": "Record which of several variants (e.g. 3 alternative hooks) the user picked. Each pick is saved as pairwise taste data (picked beats each rejected) in picks.jsonl next to the profile, for learning and the benchmark. Call only after the user picks.",
+     "inputSchema": {"type": "object", "required": ["picked", "rejected"], "additionalProperties": False,
+                     "properties": {"profile_dir": PROFILE_DIR, "picked": {"type": "string"},
+                                    "rejected": {"type": "array", "items": {"type": "string"}},
+                                    "surface": SURFACE, "context": {"type": "string", "description": "What the variants were for, e.g. 'hook for launch post'"}}}},
+    {"name": "sauce_doctor",
+     "description": "Health check of the user's taste profile: are TASTE.md and claims.md present, complete and recent? Returns problems with one-line fixes.",
+     "inputSchema": {"type": "object", "properties": {"profile_dir": PROFILE_DIR}, "additionalProperties": False}},
     {"name": "sauce_profile",
      "description": "Return the user's taste profile (TASTE.md + claims.md) as structured JSON.",
      "inputSchema": {"type": "object", "properties": {"profile_dir": PROFILE_DIR}, "additionalProperties": False}},
@@ -200,6 +209,21 @@ def _call_tool(name, args):
         return add_entry(args["kind"], args["text"], args.get("reason", ""))
     if name == "sauce_skip":
         return {"logged": True, "reason": args["reason"]}
+    if name == "sauce_pick":
+        import datetime
+        rec = {"t": datetime.datetime.now().isoformat(timespec="seconds"), "picked": args["picked"],
+               "rejected": args.get("rejected", []), "surface": args.get("surface", "linkedin"),
+               "context": args.get("context", "")}
+        path = profile_dir() / "picks.jsonl"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("a") as f:
+            f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        n = sum(1 for _ in path.open())
+        return {"saved": True, "pairs_added": len(rec["rejected"]), "total_picks": n, "file": str(path)}
+    if name == "sauce_doctor":
+        sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
+        import doctor
+        return doctor.run(profile_dir())
     if name == "sauce_profile":
         out = profile().to_dict()
         out["learned_this_week"] = learned_recently(profile(), 7)

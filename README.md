@@ -43,6 +43,16 @@ Then `/sauce:critique` scores the draft on 8 separate axes against her own sampl
 
 **Tested on a real team.** On 47 messages a startup's team drafted for its creator program, Sauce flagged the pay terms 32 times, because two versions of the terms were in circulation. Once the team confirmed one version, 46 of 47 passed, and the gate still caught the one unsupported number.
 
+
+## New in 0.7
+- **Directions, with approval:** `/sauce:bolder`, `/sauce:quieter`, `/sauce:shorter`, `/sauce:clearer`. One rewrite, checked, and nothing changes until you say yes.
+- **Variants that teach:** `/sauce:variants` shows 3 hooks; your pick is saved as taste data (`sauce_pick`).
+- **Modes by surface:** `linkedin`, `x`, `cold_email`, `investor_update`, `bio` (plus reddit, instagram, youtube), each with its own rules and target score.
+- **`/sauce:extract`:** turn your past posts or LinkedIn export into a starter TASTE.md and claims.md.
+- **`/sauce:doctor`:** checks your profile is complete and up to date.
+- **Always on:** the Stop hook now waits for the last reply before checking, and logs each run to `~/.sauce/hook-log.jsonl`.
+- **Benchmark:** a public "sounds like you" test for AI writing apps. See [docs/BENCHMARK.md](docs/BENCHMARK.md).
+
 ## Try it in 60 seconds (no setup)
 Check any draft against the real founder profile that ships with the repo:
 

@@ -183,6 +183,21 @@ def ngrams(t, n=3):
     return {" ".join(w[i:i + n]) for i in range(len(w) - n + 1)}
 
 
+# Modes: each surface has its own length limit, target score and extra rules.
+MODES = {
+    "linkedin":        { "target_score": 70, "label": "LinkedIn post"},
+    "x":               {  "target_score": 70, "label": "X post"},
+    "reddit":          { "target_score": 70, "label": "Reddit post"},
+    "instagram":       { "target_score": 70, "label": "Instagram caption"},
+    "youtube":         {"target_score": 70, "label": "YouTube description"},
+    "cold_email":      {"max_words": 125, "target_score": 80, "label": "Cold email",
+                        "ask": r"\?|reply|worth a|open to|15 min|call"},
+    "investor_update": {"max_words": 400, "target_score": 85, "label": "Investor update",
+                        "needs_number": True},
+    "bio":             {"max_words": 80,  "target_score": 80, "label": "Bio"},
+}
+
+
 def check(text, persona, surface="reddit", history=()):
     t = norm(text)
     issues = []
@@ -242,6 +257,16 @@ def check(text, persona, surface="reddit", history=()):
         if "i will not promote" in t and names_product:
             add("BLOCK", "promo_honesty", "Says 'I will not promote' but names the product.", "i will not promote")
 
+    # 6b. mode rules (length, the ask, numbers) per surface
+    mode = MODES.get(surface, {})
+    words = len(text.split())
+    if mode.get("max_words") and words > mode["max_words"]:
+        add("FIX", "mode_length", f"{words} words. {mode['label']}: keep it under {mode['max_words']}.")
+    if mode.get("ask") and not re.search(mode["ask"], t):
+        add("FIX", "mode_ask", f"{mode['label']}: needs one clear ask.")
+    if mode.get("needs_number") and not re.search(r"\d", t):
+        add("FIX", "mode_numbers", f"{mode['label']}: carry at least one real number.")
+
     # 7. sameness vs recent posts on the same surface
     skel = {k for k, p in SKELETONS.items() if re.search(p, t)}
     grams = ngrams(t)
@@ -299,7 +324,7 @@ def backtest(persona_dir):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--persona", required=True)
-    ap.add_argument("--surface", default="reddit", choices=["reddit", "x", "linkedin", "instagram", "youtube"])
+    ap.add_argument("--surface", default="reddit", choices=list(MODES))
     ap.add_argument("--backtest", action="store_true")
     ap.add_argument("--json", action="store_true")
     ap.add_argument("file", nargs="?")

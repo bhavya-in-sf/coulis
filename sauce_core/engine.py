@@ -13,7 +13,7 @@ if str(_SCRIPTS) not in sys.path:
 import gate as _gate    # noqa: E402
 import learn as _learn  # noqa: E402
 
-SURFACES = ("reddit", "x", "linkedin", "instagram", "youtube")
+SURFACES = tuple(_gate.MODES)
 
 
 def check(text, profile, surface="linkedin", history=(), max_sameness=None):
@@ -34,7 +34,9 @@ def check(text, profile, surface="linkedin", history=(), max_sameness=None):
                             "detail": f"Sameness {same['score']} is over this profile's limit of {max_sameness}.",
                             "quote": ", ".join(same["hits"][:3])})
         r["verdict"] = "BLOCK"
+    mode = _gate.MODES.get(surface, {})
     return {"verdict": r["verdict"], "issues": r["issues"], "skeleton": r["skeleton"], "sameness": same,
+            "mode": surface, "target_score": mode.get("target_score", 70),
             "counts": {lvl: sum(1 for i in r["issues"] if i["level"] == lvl) for lvl in ("BLOCK", "FIX")}}
 
 
