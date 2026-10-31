@@ -1,6 +1,6 @@
 # TASTE.md
 
-Your taste, in one file. Sauce reads this before every critique. You own it: edit or delete anything.
+Your taste, in one file. Coulis reads this before every critique. You own it: edit or delete anything.
 
 Scope: this file applies to the folder it lives in. Keep a separate TASTE.md per brand or client so styles don't bleed into each other.
 
@@ -23,5 +23,5 @@ Scope: this file applies to the folder it lives in. Keep a separate TASTE.md per
 -
 
 ## Learned from my edits
-<!-- Added by /sauce:learn, only after you approve each one. -->
+<!-- Added by /coulis:learn, only after you approve each one. -->
 <!-- Format: - [YYYY-MM-DD] Rule. (Evidence: "what the draft said" → "what you posted") -->

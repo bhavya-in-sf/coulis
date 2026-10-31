@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>sauce</title>
-<meta name="description" content="sauce is a free, open-source editor for AI drafts, not a detector. It checks every draft against your own facts and your own voice before it goes out. Inside Claude and Cursor.">
+<title>coulis</title>
+<meta name="description" content="coulis is a free, open-source editor for AI drafts, not a detector. It checks every draft against your own facts and your own voice before it goes out. Inside Claude and Cursor.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
 :root[data-palette="d5"]{--c1:#F1E7D0;--c2:#1F3DFF;--c3:#F1E7D0;--c4:#FAF6EC}
 :root[data-palette="d6"]{--c1:#FF8A00;--c2:#1B1B1F;--c3:#FF8A00;--c4:#FFE1BF}
 :root[data-palette="d7"]{--c1:#FFF3D6;--c2:#0F6B5B;--c3:#FFF3D6;--c4:#FFFBF0}
-:root[data-palette="d8"]{--c1:#FFE14D;--c2:#8B1A12;--c3:#FFE14D;--c4:#FFF6C2}
+:root[data-palette="d8"]{--c1:#FCE6EA;--c2:#B3122E;--c3:#FCE6EA;--c4:#FFF6C2}
 :root[data-palette^="d"] .light .l2{background:var(--c4)}
 :root[data-palette^="d"] .light .l3{background:var(--c1);opacity:.35}
 :root[data-palette^="d"] .light .l4{background:var(--c4)}
@@ -259,30 +259,30 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 /* asset-library modules, deck palette */
 .lib{padding:96px 0 0}.lib .top{display:grid;grid-template-columns:7fr 5fr;gap:40px;align-items:end;margin-bottom:40px}.lib .top>p{color:var(--muted);font-size:15px;max-width:36ch}
 .lib .top h2{font-size:clamp(34px,4.4vw,60px);max-width:14ch}
-.toggle{margin-bottom:20px;font-size:13px;display:flex;gap:10px;align-items:center;color:#444}.toggle input{accent-color:#8B1A12;width:18px;height:18px}
+.toggle{margin-bottom:20px;font-size:13px;display:flex;gap:10px;align-items:center;color:#444}.toggle input{accent-color:#B3122E;width:18px;height:18px}
 .pattern-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#e6e6e6;border:1px solid #e6e6e6;border-radius:18px;overflow:hidden}
 .pattern{min-height:230px;display:grid;place-items:center;background:#F6F6F8;padding:36px 23px}
-.pattern .sample{position:relative;font-size:22px;line-height:1.15;padding:18px;outline:1px solid #8B1A12;transition:outline-color .3s}
-.pattern .tag{word-spacing:normal;position:absolute;bottom:100%;left:-1px;background:#FFE14D;font:600 10px/1 var(--sans,'Instrument Sans',system-ui,sans-serif);letter-spacing:.04em;text-transform:uppercase;padding:7px;white-space:nowrap;transition:opacity .3s}
+.pattern .sample{position:relative;font-size:22px;line-height:1.15;padding:18px;outline:1px solid #B3122E;transition:outline-color .3s}
+.pattern .tag{word-spacing:normal;position:absolute;bottom:100%;left:-1px;background:#FCE6EA;font:600 10px/1 var(--sans,'Instrument Sans',system-ui,sans-serif);letter-spacing:.04em;text-transform:uppercase;padding:7px;white-space:nowrap;transition:opacity .3s}
 .pattern.serif{background:#FFF6C2}.serif .sample{font:italic 32px/1.05 var(--serif,'Instrument Serif',Georgia,serif)}
 .rounded .sample{border-radius:35px;background:#fff;font-size:17px;text-align:center;box-shadow:0 14px 30px rgba(0,0,0,.08)}
-.accent .sample{background:#fff;border-left:5px solid #8B1A12;font-size:20px}
+.accent .sample{background:#fff;border-left:5px solid #B3122E;font-size:20px}
 .headline .sample{font-size:30px;font-weight:600;letter-spacing:-.03em}
-.pulse .sample:before{content:'';display:block;width:12px;height:12px;border-radius:50%;background:#8B1A12;margin-bottom:12px}
+.pulse .sample:before{content:'';display:block;width:12px;height:12px;border-radius:50%;background:#B3122E;margin-bottom:12px}
 .nested .sample{box-shadow:inset 0 0 0 10px #fff,inset 0 0 0 11px #e6e6e6;padding:25px;background:#F6F6F8;font-size:17px}
 .trio .sample{font-size:18px;word-spacing:20px}.steps .sample{font-size:18px;line-height:2}
 .pattern-grid.off .sample{outline-color:transparent}.pattern-grid.off .tag{opacity:0}
 .modes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .mode{padding:22px;min-height:180px;background:#F6F6F8;border-radius:14px}.mode:first-child{background:#FFF6C2}
-.mode .meta{font:600 11px var(--sans,'Instrument Sans',system-ui,sans-serif);letter-spacing:.06em;text-transform:uppercase;color:#8B1A12}
+.mode .meta{font:600 11px var(--sans,'Instrument Sans',system-ui,sans-serif);letter-spacing:.06em;text-transform:uppercase;color:#B3122E}
 .mode-art{margin-top:20px;height:65px;background:repeating-linear-gradient(0deg,#dedede 0 5px,transparent 5px 14px);width:75%}
-.mode:nth-child(2) .mode-art{background:repeating-linear-gradient(90deg,#FFE14D 0 25px,transparent 25px 31px)}
-.mode:nth-child(3) .mode-art{background:repeating-linear-gradient(0deg,#8B1A12 0 3px,transparent 3px 14px);opacity:.55}
-.mode:nth-child(4) .mode-art{background:linear-gradient(135deg,#FFE14D,#FFF6C2);border-radius:40px}
+.mode:nth-child(2) .mode-art{background:repeating-linear-gradient(90deg,#FCE6EA 0 25px,transparent 25px 31px)}
+.mode:nth-child(3) .mode-art{background:repeating-linear-gradient(0deg,#B3122E 0 3px,transparent 3px 14px);opacity:.55}
+.mode:nth-child(4) .mode-art{background:linear-gradient(135deg,#FCE6EA,#FFF6C2);border-radius:40px}
 .mode h3{font-size:19px;margin:18px 0 0;letter-spacing:-.02em}
 .term{background:#111;color:#eee;border-radius:18px;overflow:hidden;font-size:15px;line-height:1.9;min-height:290px}
 .term .bar{background:#242424;color:#aaa;padding:12px 24px;font-size:13px}
-.term ol{padding:24px 34px;list-style:none;margin:0}.term li{margin:8px 0}.term li:before{content:'› ';color:#FFE14D}
+.term ol{padding:24px 34px;list-style:none;margin:0}.term li{margin:8px 0}.term li:before{content:'› ';color:#FCE6EA}
 .term button{background:#242424;color:#eee;border:1px solid #444;border-radius:999px;padding:9px 16px;margin:0 30px 25px;font:inherit;font-size:13px;cursor:pointer}.term button:hover{background:#333}
 @media(max-width:900px){.pattern-grid,.modes-grid{grid-template-columns:repeat(2,1fr)}.lib .top{grid-template-columns:1fr;gap:12px}}
 @media(max-width:540px){.pattern-grid{grid-template-columns:1fr}.pattern{min-height:200px}.modes-grid{grid-template-columns:1fr}}
@@ -293,8 +293,8 @@ body{overflow-x:clip}</style>
 
 <div class="cursor" id="cursor" aria-hidden="true"></div>
 <nav aria-label="Main"><div class="wrap in">
-  <a class="mark" href="#top">sauce</a>
-  <div class="links"><a href="#features">Features</a><a href="#why">Why it works</a><a href="#proof">Proof</a><a href="https://github.com/bhavya-in-sf/sauce" rel="noopener">GitHub</a><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Try it for free <span class="ar">→</span></a></div>
+  <a class="mark" href="#top">coulis</a>
+  <div class="links"><a href="#features">Features</a><a href="#why">Why it works</a><a href="#proof">Proof</a><a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a><a class="btn" href="https://github.com/bhavya-in-sf/coulis#install" rel="noopener">Try it for free <span class="ar">→</span></a></div>
 </div></nav>
 
 <header class="hero" id="top">
@@ -302,12 +302,12 @@ body{overflow-x:clip}</style>
   <div class="wrap in">
     <p class="eyebrow">We bring you back.</p>
     <h1 id="h1"><span class="w"><span>Taste</span></span> <span class="w"><span>infrastructure</span></span><br><span class="w"><span><i>for</i></span></span> <span class="w"><span><i>AI.</i></span></span></h1>
-    <p class="lede">The layer every AI calls before it speaks for you. sauce checks each draft against your facts and your voice, and revises only with your approval. Free and open source, inside Claude and Cursor today.</p>
-    <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Try it for free <span class="ar">→</span></a><a class="btn ghost" href="#frag">See it check a draft</a></div>
+    <p class="lede">The layer every AI calls before it speaks for you. coulis checks each draft against your facts and your voice, and revises only with your approval. Free and open source, inside Claude and Cursor today.</p>
+    <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/coulis#install" rel="noopener">Try it for free <span class="ar">→</span></a><a class="btn ghost" href="#frag">See it check a draft</a></div>
     <p class="fine">No account. No credit card. Your taste file stays on your machine.</p>
     <div class="held">
-      <div class="frag" id="frag" data-ui role="group" aria-label="sauce check, live">
-        <div class="bar"><span><b>sauce_check</b> · profile: Bhavya</span><span><span id="same" style="font-weight:600;margin-right:10px"></span><span class="pill" id="ms">4 ms</span></span></div>
+      <div class="frag" id="frag" data-ui role="group" aria-label="coulis check, live">
+        <div class="bar"><span><b>coulis_check</b> · profile: Bhavya</span><span><span id="same" style="font-weight:600;margin-right:10px"></span><span class="pill" id="ms">4 ms</span></span></div>
         <div style="padding:12px 14px"><textarea id="draft" rows="3" spellcheck="false" aria-label="Your draft">Excited to share that we're leveraging AI to 10x your workflow — a total game-changer. 300+ founders already trust us. Comment below!</textarea></div>
         <div class="verdict BLOCK" id="verdict"><span class="dot"></span><span id="vword">Hold</span><span class="note" id="vnote">Fix the quoted lines before this goes out.</span></div>
         <div id="lines"></div>
@@ -325,11 +325,11 @@ body{overflow-x:clip}</style>
 <section class="inside wrap" id="where" aria-label="Works where you write">
   <div class="head"><h2 class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Works where you write</h2><b>Works where you write</b><span>People, machines and enterprises. The same taste file behind all of them.</span></div>
   <div class="doors">
-    <div class="door"><h3>Claude Code and Claude Desktop</h3><p>Two commands, then <code>/sauce:extract</code> with your LinkedIn export (Me, Settings, Data privacy, Get a copy of your data, Posts; about 10 minutes by email). No export? <code>/sauce:setup</code> asks five questions instead. The hook sends Claude back if it ever skips the check.</p><pre>/plugin marketplace add bhavya-in-sf/sauce
-/plugin install sauce@sauce</pre></div>
-    <div class="door"><h3>Cursor, and any MCP client</h3><p>One block in your MCP config. Same six tools, same profile.</p><pre>"sauce": { "command": "python3",
-  "args": ["~/sauce/mcp/server.py"] }</pre></div>
-    <div class="door"><h3>Agents and apps, via the API</h3><p>One call before anything ships. ChatGPT, Slack and Docs come through here. Key-authenticated; <a href="https://github.com/bhavya-in-sf/sauce/blob/main/docs/API.md" rel="noopener">API docs</a>.</p><pre>POST /v1/check
+    <div class="door"><h3>Claude Code and Claude Desktop</h3><p>Two commands, then <code>/coulis:extract</code> with your LinkedIn export (Me, Settings, Data privacy, Get a copy of your data, Posts; about 10 minutes by email). No export? <code>/coulis:setup</code> asks five questions instead. The hook sends Claude back if it ever skips the check.</p><pre>/plugin marketplace add bhavya-in-sf/coulis
+/plugin install coulis@coulis</pre></div>
+    <div class="door"><h3>Cursor, and any MCP client</h3><p>One block in your MCP config. Same six tools, same profile.</p><pre>"coulis": { "command": "python3",
+  "args": ["~/coulis/mcp/server.py"] }</pre></div>
+    <div class="door"><h3>Agents and apps, via the API</h3><p>One call before anything ships. ChatGPT, Slack and Docs come through here. Key-authenticated; <a href="https://github.com/bhavya-in-sf/coulis/blob/main/docs/API.md" rel="noopener">API docs</a>.</p><pre>POST /v1/check
 { "text": "...", "min_score": 70 }</pre></div>
   </div>
 </section>
@@ -340,14 +340,14 @@ body{overflow-x:clip}</style>
   <div id="patterns"></div>
 </section>
 <section class="intro wrap" id="features">
-  <div class="top reveal"><h2>Three steps. <i>Cheapest first, most personal last.</i></h2><p>Everyone else writes for you. sauce judges what was written: against your facts, your voice and your own recent posts.</p></div>
+  <div class="top reveal"><h2>Three steps. <i>Cheapest first, most personal last.</i></h2><p>Everyone else writes for you. coulis judges what was written: against your facts, your voice and your own recent posts.</p></div>
   <div class="three">
     <div class="reveal"><h3>Check</h3><p>Fixed rules, no AI model, about 4 ms, the same answer every time. Facts you never approved, the AI tells, a hook you already used. The answer comes in plain words: Send, Revise or Hold, with each problem quoted and an alternative in your own words.</p></div>
     <div class="reveal"><h3>Score</h3><p>One number, 0 to 100: how much this draft sounds like you. Eight parts measured in the backend and averaged. You see the score, the weakest part, and one rewritten line.</p></div>
     <div class="reveal"><h3>Learn</h3><p>Change a draft and it proposes the rule it saw. You approve. The rule joins a taste file you own. Continual learning from the one signal that is never wrong: what you actually sent.</p></div>
   </div>
   <div class="reveal" style="margin-top:36px;padding-top:24px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;font-size:15px;color:#444">
-    <div><b style="color:var(--ink)">Directions</b><br>/sauce:bolder, quieter, shorter, clearer. One rewrite, checked, used only on your yes.</div>
+    <div><b style="color:var(--ink)">Directions</b><br>/coulis:bolder, quieter, shorter, clearer. One rewrite, checked, used only on your yes.</div>
     <div><b style="color:var(--ink)">Variants that teach</b><br>Three hooks, you pick one. Every pick grows your taste file.</div>
     <div><b style="color:var(--ink)">Modes</b><br>LinkedIn, X, cold email, investor update, bio. Each with its own rules and target score.</div>
     <div><b style="color:var(--ink)">Extract and doctor</b><br>Your past posts become your starting profile. Doctor tells you what is missing.</div>
@@ -358,9 +358,9 @@ body{overflow-x:clip}</style>
   <div class="head reveal"><div><p class="eyebrow">The product</p><h2>Everyone else writes for you. <i>We judge what was written.</i></h2></div><p>Four pieces of the product at real size. Every label and number is real.</p></div>
   <div class="grid">
     <div class="card glow reveal"><div class="ui" data-ui><div class="bar"><span><b>Draft</b> · LinkedIn · 14:02</span><span class="pill">4 ms</span></div><div style="padding:10px 14px">We hit $50k MRR this month. Our AI makes writing effortless for every founder who wants to grow.</div><div class="verdict FIX"><span class="dot"></span>Revise<span class="note">Two lines to settle before you send.</span></div><div class="row"><span class="lvl FIX">Revise</span><span><span class="q">"$50k MRR"</span> <span class="d">Not on your approved list.</span></span></div><div class="row"><span class="lvl FIX">Revise</span><span><span class="q">"effortless"</span> <span class="d">Filler.</span></span></div></div><h3>The gate</h3><p>Every number you have not approved is sent back, quoted, with the fix named.</p></div>
-    <div class="card small reveal"><div class="ui" data-ui><div class="bar"><span><b>sauce score</b></span><span class="pill">71 · weakest 3 of 8 parts</span></div><div class="row"><span class="lvl">HOOK</span><span><span class="q">5</span> <span class="d">Opens with a question.</span></span></div><div class="row"><span class="lvl">VOICE</span><span><span class="q">8</span> <span class="d">Your cadence.</span></span></div><div class="row"><span class="lvl">PROOF</span><span><span class="q">4</span> <span class="d">Weakest. No number.</span></span></div></div><h3>The score</h3><p>One number for people and for agents. Only the weakest line gets a rewrite.</p></div>
+    <div class="card small reveal"><div class="ui" data-ui><div class="bar"><span><b>coulis score</b></span><span class="pill">71 · weakest 3 of 8 parts</span></div><div class="row"><span class="lvl">HOOK</span><span><span class="q">5</span> <span class="d">Opens with a question.</span></span></div><div class="row"><span class="lvl">VOICE</span><span><span class="q">8</span> <span class="d">Your cadence.</span></span></div><div class="row"><span class="lvl">PROOF</span><span><span class="q">4</span> <span class="d">Weakest. No number.</span></span></div></div><h3>The score</h3><p>One number for people and for agents. Only the weakest line gets a rewrite.</p></div>
     <div class="card small reveal"><div class="faces"><span>62K</span><span>TV</span><span>3K</span><span>100</span><span>673</span></div><h3>Approved facts</h3><p>One file of numbers you stand behind. Approve a fact once, in plain English. Teams share one list.</p></div>
-    <div class="card photo reveal"><div class="ui" data-ui style="margin-bottom:16px"><div class="bar"><span><b>sauce_learn</b></span><span class="pill">1 rule proposed</span></div><div style="padding:10px 14px">You cut "excited to share" again. Add <b>no "excited to share" openers</b> to your taste file?</div><div style="padding:0 14px 12px;display:flex;gap:8px"><span class="pill">Approve</span><span class="pill">Not now</span></div></div><h3>Learns from your edits</h3><p>Change a draft and sauce proposes the rule it saw. You approve each one. Your taste file grows by one line.</p></div>
+    <div class="card photo reveal"><div class="ui" data-ui style="margin-bottom:16px"><div class="bar"><span><b>coulis_learn</b></span><span class="pill">1 rule proposed</span></div><div style="padding:10px 14px">You cut "excited to share" again. Add <b>no "excited to share" openers</b> to your taste file?</div><div style="padding:0 14px 12px;display:flex;gap:8px"><span class="pill">Approve</span><span class="pill">Not now</span></div></div><h3>Learns from your edits</h3><p>Change a draft and coulis proposes the rule it saw. You approve each one. Your taste file grows by one line.</p></div>
   </div>
 </section>
 
@@ -379,20 +379,20 @@ body{overflow-x:clip}</style>
 <section id="proof"><div class="band reveal">
   <p class="eyebrow">Our research</p>
   <h2>What we used. <i>What it showed.</i></h2>
-  <p>2,437 real posts across 38 voices, 2022 to 2026. One method every time: run the real writing through sauce, compare with what the writer actually did. Every number reruns from the repo.</p>
+  <p>2,437 real posts across 38 voices, 2022 to 2026. One method every time: run the real writing through coulis, compare with what the writer actually did. Every number reruns from the repo.</p>
   <div class="stats">
     <div class="stat"><b>2 in 3</b><span>of 673 published posts pass untouched</span></div>
     <div class="stat"><b>46/47</b><span>team drafts fixed by one approved fact</span></div>
     <div class="stat"><b>16/24</b><span>held-out posts score higher on their own profile</span></div>
     <div class="stat"><b>15%</b><span>less engagement on posts the check would have held</span></div>
   </div>
-  <a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Try it for free <span class="ar">→</span></a>
+  <a class="btn" href="https://github.com/bhavya-in-sf/coulis#install" rel="noopener">Try it for free <span class="ar">→</span></a>
 </div></section>
 
 <section class="six wrap">
-  <div class="top reveal"><div><h2>Checked <i>every day.</i></h2></div><p>Six things sauce reads before a draft goes out. Each one quoted back to you, with a way to fix it.</p></div>
+  <div class="top reveal"><div><h2>Checked <i>every day.</i></h2></div><p>Six things coulis reads before a draft goes out. Each one quoted back to you, with a way to fix it.</p></div>
   <div class="two">
-    <div class="pic reveal" style="display:flex;align-items:center;justify-content:center;padding:28px;color:#fff;text-align:center"><div><div style="font:600 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;opacity:.85">sauce score</div><div style="font:italic 400 clamp(90px,12vw,150px)/1 var(--serif);color:var(--c1)">82</div><div style="font-size:18px">Sounds like you.</div></div></div>
+    <div class="pic reveal" style="display:flex;align-items:center;justify-content:center;padding:28px;color:#fff;text-align:center"><div><div style="font:600 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;opacity:.85">coulis score</div><div style="font:italic 400 clamp(90px,12vw,150px)/1 var(--serif);color:var(--c1)">82</div><div style="font-size:18px">Sounds like you.</div></div></div>
     <div class="checks">
       <div class="check reveal"><div class="n">01</div><h3>Em dashes and double hyphens</h3><span class="ex">"We shipped — finally." <b>Hold</b> em dash</span><p>The clearest AI tell. Held by default; your call to allow.</p></div>
       <div class="check reveal"><div class="n">02</div><h3>Unapproved numbers</h3><span class="ex">"300+ founders trust us" <b>Revise</b> not on your list</span><p>Followers, revenue, "10x". Numbers about other people pass; numbers about you must be on your list.</p></div>
@@ -420,19 +420,19 @@ body{overflow-x:clip}</style>
     <p class="eyebrow">Your words, in your voice.</p>
     <h2>AI learned everyone. <i>We bring you back.</i></h2>
     <p>Two commands in Claude Code or Cursor. The default rules work before it knows anything about you. Your taste file grows from there.</p>
-    <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Try it for free <span class="ar">→</span></a><a class="btn ghost" href="https://voiceprint-vibe-checker.lovable.app" rel="noopener">Score a draft online</a></div>
-    <div class="wm" aria-hidden="true">sauce</div>
+    <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/coulis#install" rel="noopener">Try it for free <span class="ar">→</span></a><a class="btn ghost" href="https://voiceprint-vibe-checker.lovable.app" rel="noopener">Score a draft online</a></div>
+    <div class="wm" aria-hidden="true">coulis</div>
   </div>
 </section>
 
 <footer><div class="wrap">
   <div class="cols">
-    <div><div class="mark">sauce</div><p style="margin-top:10px;max-width:30ch">Taste infrastructure for AI. Built in San Francisco.</p></div>
-    <div><h4>Get started</h4><ul><li><a href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Install</a></li><li><a href="https://github.com/bhavya-in-sf/sauce/blob/main/docs/INSTALL.md" rel="noopener">Cursor and MCP</a></li><li><a href="https://voiceprint-vibe-checker.lovable.app" rel="noopener">Free online check</a></li></ul></div>
-    <div><h4>Product</h4><ul><li><a href="#features">The gate</a></li><li><a href="#features">Critique</a></li><li><a href="#why">Learn</a></li><li><a href="https://github.com/bhavya-in-sf/sauce/blob/main/docs/API.md" rel="noopener">API</a></li></ul></div>
-    <div><h4>Company</h4><ul><li><a href="https://github.com/bhavya-in-sf/sauce" rel="noopener">GitHub</a></li><li><a href="index-editorial-v3.html#seat">Waitlist and dinners</a></li><li><a href="https://github.com/bhavya-in-sf/sauce/blob/main/README.md" rel="noopener">README</a></li></ul></div>
+    <div><div class="mark">coulis</div><p style="margin-top:10px;max-width:30ch">Taste infrastructure for AI. Built in San Francisco.</p></div>
+    <div><h4>Get started</h4><ul><li><a href="https://github.com/bhavya-in-sf/coulis#install" rel="noopener">Install</a></li><li><a href="https://github.com/bhavya-in-sf/coulis/blob/main/docs/INSTALL.md" rel="noopener">Cursor and MCP</a></li><li><a href="https://voiceprint-vibe-checker.lovable.app" rel="noopener">Free online check</a></li></ul></div>
+    <div><h4>Product</h4><ul><li><a href="#features">The gate</a></li><li><a href="#features">Critique</a></li><li><a href="#why">Learn</a></li><li><a href="https://github.com/bhavya-in-sf/coulis/blob/main/docs/API.md" rel="noopener">API</a></li></ul></div>
+    <div><h4>Company</h4><ul><li><a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a></li><li><a href="index-editorial-v3.html#seat">Waitlist and dinners</a></li><li><a href="https://github.com/bhavya-in-sf/coulis/blob/main/README.md" rel="noopener">README</a></li></ul></div>
   </div>
-  <div class="legal"><span>2026 · sauce · MIT</span><span>Nothing leaves your Mac for the basic check</span></div>
+  <div class="legal"><span>2026 · coulis · MIT</span><span>Nothing leaves your Mac for the basic check</span></div>
 </div></footer>
 
 
@@ -528,7 +528,7 @@ body{overflow-x:clip}</style>
   var modes=[["Launch post","What did you build?"],["Cold email","Why this person? 125 words, one ask."],["Investor update","What changed, in numbers? 400 words."],["Bio","Who are you, in one line? 80 words."]];
   var mg=document.getElementById('modegrid');if(mg){modes.forEach(function(m){var a=E('article','mode');a.append(E('span','meta',m[0]),E('div','mode-art'),E('h3','',m[1]));mg.append(a)})}
   var lines=["Loading your approved facts","Loading your voice file","Check: fixed rules, no AI model, about 4 ms","Quoted: \u201c10x faster\u201d is not in your approved facts","Verdict: Revise. One line to settle before you send","Score, on request: 71, weakest part proof","Your decision. Nothing is saved without your yes"];
-  var box=document.getElementById('term');if(box){var list=E('ol'),timer;var play=function(){clearTimeout(timer);list.replaceChildren();var i=0;var next=function(){list.append(E('li','',lines[i++]));if(i<lines.length)timer=setTimeout(next,450)};if(matchMedia('(prefers-reduced-motion: reduce)').matches){lines.forEach(function(s){list.append(E('li','',s))})}else next()};var btn=E('button','','Replay');btn.type='button';btn.onclick=play;box.append(E('div','bar','sauce_check \u00b7 one draft'),list,btn);lines.forEach(function(s){list.append(E('li','',s))});if('IntersectionObserver' in window){var once=false;new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!once){once=true;play()}})},{threshold:.4}).observe(box)}}
+  var box=document.getElementById('term');if(box){var list=E('ol'),timer;var play=function(){clearTimeout(timer);list.replaceChildren();var i=0;var next=function(){list.append(E('li','',lines[i++]));if(i<lines.length)timer=setTimeout(next,450)};if(matchMedia('(prefers-reduced-motion: reduce)').matches){lines.forEach(function(s){list.append(E('li','',s))})}else next()};var btn=E('button','','Replay');btn.type='button';btn.onclick=play;box.append(E('div','bar','coulis_check \u00b7 one draft'),list,btn);lines.forEach(function(s){list.append(E('li','',s))});if('IntersectionObserver' in window){var once=false;new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!once){once=true;play()}})},{threshold:.4}).observe(box)}}
 })();
 </script>
 </body>

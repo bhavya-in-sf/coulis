@@ -1,13 +1,13 @@
-# sauce for OpenClaw
+# coulis for OpenClaw
 
 The same check as the Claude plug-in, as an OpenClaw skill. Deterministic, local, no model call.
 
 Install:
 ```
-clawhub install sauce
+clawhub install coulis
 ```
-or copy `openclaw/sauce/` into `~/.openclaw/skills/sauce/` and clone this repo into `~/.openclaw/skills/sauce/repo`.
+or copy `openclaw/coulis/` into `~/.openclaw/skills/coulis/` and clone this repo into `~/.openclaw/skills/coulis/repo`.
 
-The skill tells the agent to run `scripts/sauce.py check` before any post, email or message that goes out under the owner's name, and what to do with BLOCK, FIX and PASS. See `sauce/SKILL.md`.
+The skill tells the agent to run `scripts/coulis.py check` before any post, email or message that goes out under the owner's name, and what to do with BLOCK, FIX and PASS. See `coulis/SKILL.md`.
 
-Publishing to ClawHub (owner only): `clawhub publish openclaw/sauce`.
+Publishing to ClawHub (owner only): `clawhub publish openclaw/coulis`.

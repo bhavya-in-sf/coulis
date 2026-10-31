@@ -1,9 +1,9 @@
 ---
 name: learn
-description: Learn the user's taste from their edits. Compare an AI draft with the version the user actually published, propose taste rules from the differences, and add the ones the user approves to TASTE.md. Use when the user says "learn from this", "here's what I actually posted", "update my taste", or runs /sauce:learn.
+description: Learn the user's taste from their edits. Compare an AI draft with the version the user actually published, propose taste rules from the differences, and add the ones the user approves to TASTE.md. Use when the user says "learn from this", "here's what I actually posted", "update my taste", or runs /coulis:learn.
 ---
 
-# Sauce: learn
+# Coulis: learn
 
 Goal: taste learned from what the user does, not just what they say. Every rule needs the user's approval.
 

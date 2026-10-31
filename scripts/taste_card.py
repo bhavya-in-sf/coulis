@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""sauce taste card: one shareable page that shows how you write, from your own profile.
+"""coulis taste card: one shareable page that shows how you write, from your own profile.
 
-    python3 scripts/taste_card.py --profile ~/.sauce --out card.html
+    python3 scripts/taste_card.py --profile ~/.coulis --out card.html
 
 Reads TASTE.md and claims.md, measures the samples (sentence length, opener style, dash habit,
 average length), and renders a white card with red bubbles. Nothing is invented: every line on the
@@ -17,7 +17,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from sauce_core.profile import profile_from_folder  # noqa: E402
+from coulis_core.profile import profile_from_folder  # noqa: E402
 
 
 def measure(samples):
@@ -62,17 +62,17 @@ h2{{font-size:13px;letter-spacing:.02em;color:#6b6b6b;margin:28px 0 10px;font-we
 .mark{{font-weight:600;color:#111}}
 </style></head><body><div class="card">
 <h1>How {name} writes</h1>
-<p class="sub">Measured from {m.get('n', 0)} of their own posts by sauce. Nothing here is a guess.</p>
+<p class="sub">Measured from {m.get('n', 0)} of their own posts by coulis. Nothing here is a guess.</p>
 <ul>{''.join(f'<li>{r}</li>' for r in rows)}</ul>
 {('<h2>Rules they wrote</h2><ul class="rules">' + ''.join(f'<li>{html.escape(r)}</li>' for r in rules) + '</ul>') if rules else ''}
 {('<h2>Numbers they stand behind</h2><ul class="rules">' + ''.join(f'<li>{html.escape(f)}</li>' for f in facts) + '</ul>') if facts else ''}
-<div class="foot"><span class="mark">sauce</span><span>An editor for AI drafts, not a detector · github.com/bhavya-in-sf/sauce</span></div>
+<div class="foot"><span class="mark">coulis</span><span>An editor for AI drafts, not a detector · github.com/bhavya-in-sf/coulis</span></div>
 </div></body></html>"""
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--profile", default=os.path.expanduser("~/.sauce"))
+    ap.add_argument("--profile", default=os.path.expanduser("~/.coulis"))
     ap.add_argument("--out", default="taste-card.html")
     a = ap.parse_args()
     prof = Path(a.profile)

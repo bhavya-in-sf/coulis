@@ -65,7 +65,7 @@ def _observe(posts):
     else:
         obs.append("Observed: posts open with a claim, not a question. Keep it that way.")
     if dashes / n > 0.3:
-        obs.append(f"Observed: {dashes} of {n} recent posts use an em dash. sauce blocks them by default; delete this rule if you want them back.")
+        obs.append(f"Observed: {dashes} of {n} recent posts use an em dash. coulis blocks them by default; delete this rule if you want them back.")
     else:
         obs.append("Observed: almost no em dashes. Good; the gate blocks them.")
     short = sum(1 for p in posts if p["words"] < 120)
@@ -83,13 +83,13 @@ def setup_from_linkedin(path, out_dir, name=""):
     samples = sorted(recent[:40], key=lambda p: -p["words"])[:N_SAMPLES]
     out = Path(out_dir).expanduser()
     out.mkdir(parents=True, exist_ok=True)
-    taste = ["# TASTE.md", "", "Built by `sauce setup` from your LinkedIn export. Edit anything; delete what is wrong.", "",
+    taste = ["# TASTE.md", "", "Built by `coulis setup` from your LinkedIn export. Edit anything; delete what is wrong.", "",
              "## Who I write as", f"- Name / role: {name}", "- Who I write for:", "- What I want readers to do:", "",
              "## My voice in samples"]
     for i, p in enumerate(samples, 1):
         taste += ["", f"### Sample {i}", f"<!-- {p['date']}, {p['words']} words -->", p["text"]]
     taste += ["", "## My rules"] + [f"- {o}" for o in _observe(posts[:40])]
-    taste += ["", "## Learned from my edits", "<!-- Added by sauce learn, only after you approve each one. -->", ""]
+    taste += ["", "## Learned from my edits", "<!-- Added by coulis learn, only after you approve each one. -->", ""]
     claims = ["# claims.md", f"owner: {name}", "product:", "",
               "## Approved facts", "<!-- Empty on purpose. Every number you post must be added here first. Say 'add 1,200 users as a fact'. -->", "",
               "## Needs confirm", "", "## Banned phrases",

@@ -1,12 +1,12 @@
-# Fly.io config for the sauce API. First run: `fly launch --copy-config --no-deploy`, then the secrets and volume
+# Fly.io config for the coulis API. First run: `fly launch --copy-config --no-deploy`, then the secrets and volume
 # commands in docs/HOSTING.md, then `fly deploy`.
-app = "sauce-api"
+app = "coulis-api"
 primary_region = "sjc"
 
 [build]
 
 [env]
-  SAUCE_DB = "/data/sauce.db"
+  COULIS_DB = "/data/coulis.db"
 
 [http_service]
   internal_port = 8787
@@ -16,7 +16,7 @@ primary_region = "sjc"
   min_machines_running = 0
 
 [[mounts]]
-  source = "sauce_data"
+  source = "coulis_data"
   destination = "/data"
 
 [[vm]]

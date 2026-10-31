@@ -1,6 +1,6 @@
 // SDK contract test with a stubbed fetch (no server needed): node sdk/typescript/test.mts
 import assert from "node:assert/strict";
-import { Sauce, SauceError } from "./src/index.ts";
+import { Coulis, CoulisError } from "./src/index.ts";
 
 const calls: Array<{ url: string; init: any }> = [];
 (globalThis as any).fetch = async (url: string, init: any) => {
@@ -14,7 +14,7 @@ const calls: Array<{ url: string; init: any }> = [];
   return new Response(JSON.stringify({ id: "prf_1", profile: {} }));
 };
 
-const t = new Sauce({ apiKey: "tst_x", baseUrl: "https://api.example.com/" });
+const t = new Coulis({ apiKey: "tst_x", baseUrl: "https://api.example.com/" });
 const p = await t.createProfile({ samples: ["one post"] });
 assert.equal(p.id, "prf_1");
 const r = await t.check("prf_1", "We hit $20k MRR", "x");
@@ -22,5 +22,5 @@ assert.equal(r.verdict, "BLOCK");
 const sent = JSON.parse(calls[1].init.body);
 assert.deepEqual(sent, { profile_id: "prf_1", text: "We hit $20k MRR", surface: "x" });
 assert.equal(calls[1].url, "https://api.example.com/v1/check");
-await assert.rejects(new Sauce({ apiKey: "bad" }).usage(), (e: SauceError) => e.status === 401 && e.code === "unauthorized");
+await assert.rejects(new Coulis({ apiKey: "bad" }).usage(), (e: CoulisError) => e.status === 401 && e.code === "unauthorized");
 console.log("ts sdk: all assertions passed");

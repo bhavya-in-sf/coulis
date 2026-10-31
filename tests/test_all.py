@@ -1,4 +1,4 @@
-"""Sauce test suite. No network, no model calls (the critic is faked).
+"""Coulis test suite. No network, no model calls (the critic is faked).
 
     python3 -m unittest discover -s tests -v
 """
@@ -12,8 +12,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from sauce_core import AXES, check, learn, profile_from_dict, profile_from_folder  # noqa: E402
-from sauce_core.profile import parse_files  # noqa: E402
+from coulis_core import AXES, check, learn, profile_from_dict, profile_from_folder  # noqa: E402
+from coulis_core.profile import parse_files  # noqa: E402
 from api.server import Api  # noqa: E402
 from api.store import Cipher, Store  # noqa: E402
 from evals.run_eval import regression  # noqa: E402
@@ -169,14 +169,14 @@ class Mcp(unittest.TestCase):
 
     def setUp(self):
         self.dir = tempfile.mkdtemp(dir=os.environ.get("TMPDIR"))
-        os.environ["SAUCE_PROFILE_DIR"] = self.dir
+        os.environ["COULIS_PROFILE_DIR"] = self.dir
         self.key = os.environ.pop("ANTHROPIC_API_KEY", None)
         sys.path.insert(0, str(ROOT / "mcp"))
         import server
         self.s = server
 
     def tearDown(self):
-        os.environ.pop("SAUCE_PROFILE_DIR", None)
+        os.environ.pop("COULIS_PROFILE_DIR", None)
         if self.key:
             os.environ["ANTHROPIC_API_KEY"] = self.key
 
@@ -186,15 +186,15 @@ class Mcp(unittest.TestCase):
 
     def test_new_user_flow(self):
         text = "We now have 1,200 users."
-        self.assertEqual(self.call("sauce_check", {"text": text})["verdict"], "FIX")
-        self.assertTrue(self.call("sauce_add", {"kind": "approved_fact", "text": "1,200 users"})["added"])
-        self.assertFalse(self.call("sauce_add", {"kind": "approved_fact", "text": "1,200 users"})["added"])
-        self.assertEqual(self.call("sauce_check", {"text": text})["verdict"], "PASS")
-        self.call("sauce_add", {"kind": "banned_phrase", "text": "game-changer", "reason": "generic"})
-        self.assertEqual(self.call("sauce_check", {"text": "A game-changer."})["verdict"], "BLOCK")
+        self.assertEqual(self.call("coulis_check", {"text": text})["verdict"], "FIX")
+        self.assertTrue(self.call("coulis_add", {"kind": "approved_fact", "text": "1,200 users"})["added"])
+        self.assertFalse(self.call("coulis_add", {"kind": "approved_fact", "text": "1,200 users"})["added"])
+        self.assertEqual(self.call("coulis_check", {"text": text})["verdict"], "PASS")
+        self.call("coulis_add", {"kind": "banned_phrase", "text": "game-changer", "reason": "generic"})
+        self.assertEqual(self.call("coulis_check", {"text": "A game-changer."})["verdict"], "BLOCK")
 
     def test_critique_without_key_uses_host_model(self):
-        out = self.call("sauce_critique", {"text": "We now have 1,200 users."})
+        out = self.call("coulis_critique", {"text": "We now have 1,200 users."})
         self.assertEqual(out["mode"], "host_model")
         self.assertIn("rhythm", json.dumps(out["output_schema"]))
 
@@ -218,7 +218,7 @@ class StopHook(unittest.TestCase):
         post = "```\nI built a free tool that knows how I write. It checks every draft before it goes out.\n```"
         self.assertEqual(self.run_hook([A(t(post))]), "block")
         self.assertEqual(self.run_hook([A(t(post))], active=True), "allow")  # never loops
-        self.assertEqual(self.run_hook([A({"type": "tool_use", "name": "mcp__plugin_sauce_sauce__sauce_check"}),
+        self.assertEqual(self.run_hook([A({"type": "tool_use", "name": "mcp__plugin_coulis_coulis__coulis_check"}),
                                         A(t(post))]), "allow")
         self.assertEqual(self.run_hook([A(t("> My LinkedIn just passed 62K followers."))]), "block")
         self.assertEqual(self.run_hook([A(t("```bash\ngit push origin HEAD\n```"))]), "allow")
@@ -233,7 +233,7 @@ class PythonSdk(unittest.TestCase):
         import urllib.error
         import urllib.request
         sys.path.insert(0, str(ROOT / "sdk" / "python"))
-        import sauce_client
+        import coulis_client
         tmp = tempfile.mkdtemp(dir=os.environ.get("TMPDIR"))
         store = Store(os.path.join(tmp, "s.db"), Cipher(Cipher.new_key()))
         api = Api(store, critic=fake_critic)
@@ -255,15 +255,15 @@ class PythonSdk(unittest.TestCase):
         real = urllib.request.urlopen
         urllib.request.urlopen = fake_urlopen
         try:
-            t = sauce_client.Sauce(key, "http://localhost:8787")
+            t = coulis_client.Coulis(key, "http://localhost:8787")
             p = t.create_profile(samples=["We launched in March."], approved_facts=["1,200 users"])
             self.assertEqual(t.check(p["id"], "We have 1,200 users.")["verdict"], "PASS")
             self.assertEqual(t.check(p["id"], "We hit $20k MRR")["verdict"], "BLOCK")
             self.assertEqual(set(t.critique(p["id"], "hello")["axes"]), set(AXES))
             r = t.learn(p["id"], "We leverage AI. Great.", "Great.")
             self.assertTrue(t.approve_rule(r["proposed_rules"][0]["id"])["approved"])
-            with self.assertRaises(sauce_client.SauceError) as e:
-                sauce_client.Sauce("tst_bad", "http://localhost:8787").usage()
+            with self.assertRaises(coulis_client.CoulisError) as e:
+                coulis_client.Coulis("tst_bad", "http://localhost:8787").usage()
             self.assertEqual(e.exception.status, 401)
         finally:
             urllib.request.urlopen = real
@@ -272,7 +272,7 @@ class PythonSdk(unittest.TestCase):
 
 class Sameness(unittest.TestCase):
     def test_sameness_score_and_gate(self):
-        from sauce_core import check, profile_from_samples
+        from coulis_core import check, profile_from_samples
         prof = profile_from_samples(["A real post about something specific I did last week."])
         slop = "It's not about speed, it's about taste. Fast, cheap, and good. Comment below!"
         r = check(slop, prof, "linkedin")
@@ -283,7 +283,7 @@ class Sameness(unittest.TestCase):
 
     def test_linkedin_importer(self):
         import tempfile, csv, os
-        from sauce_core.importers import setup_from_linkedin
+        from coulis_core.importers import setup_from_linkedin
         d = tempfile.mkdtemp()
         p = os.path.join(d, "Shares.csv")
         with open(p, "w", newline="") as f:

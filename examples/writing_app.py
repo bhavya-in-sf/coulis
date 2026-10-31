@@ -2,11 +2,11 @@
 """Example: an AI writing app that runs every draft through the Taste API
 before the user sees it.
 
-Claude writes a draft, Sauce's gate checks it (no model call), and if the
+Claude writes a draft, Coulis's gate checks it (no model call), and if the
 gate blocks it, Claude gets the quoted issues back for one revision. The user
 only ever sees a draft that passed, or the issues that still need a human.
 
-    export ANTHROPIC_API_KEY=...  SAUCE_API_KEY=tst_...  SAUCE_PROFILE_ID=prf_...
+    export ANTHROPIC_API_KEY=...  COULIS_API_KEY=tst_...  COULIS_PROFILE_ID=prf_...
     python3 examples/writing_app.py "Announce that we passed 1,200 users"
 """
 import os
@@ -16,7 +16,7 @@ from pathlib import Path
 import anthropic
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "sdk" / "python"))
-from sauce_client import Sauce  # noqa: E402
+from coulis_client import Coulis  # noqa: E402
 
 MODEL = "claude-opus-5-5"
 
@@ -32,18 +32,18 @@ def draft(client, brief, feedback=None):
 
 def main():
     brief = " ".join(sys.argv[1:]) or "Announce our launch"
-    claude, sauce = anthropic.Anthropic(), Sauce()
-    profile_id = os.environ["SAUCE_PROFILE_ID"]
+    claude, coulis = anthropic.Anthropic(), Coulis()
+    profile_id = os.environ["COULIS_PROFILE_ID"]
 
     text = draft(claude, brief)
-    result = sauce.check(profile_id, text)
+    result = coulis.check(profile_id, text)
     if result["verdict"] == "BLOCK":
         issues = "\n".join(f"- {i['check']}: \"{i['quote']}\" ({i['detail']})" for i in result["issues"])
         text = draft(claude, brief, issues)
-        result = sauce.check(profile_id, text)
+        result = coulis.check(profile_id, text)
 
     print(text, "\n")
-    print(f"Sauce verdict: {result['verdict']}")
+    print(f"Coulis verdict: {result['verdict']}")
     for i in result["issues"]:
         print(f"  {i['level']} {i['check']}: {i['quote']!r}  {i['detail']}")
     if result["verdict"] != "PASS":

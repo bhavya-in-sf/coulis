@@ -1,11 +1,11 @@
 ---
 name: research
-description: The sauce researcher. Sweep for new research and data on taste, AI homogenization, pluralistic alignment, human content as AI infrastructure and the AI share of the web; verify every source by opening it; and propose new EVIDENCE.md entries with what each proves and does NOT prove. Use when the user says "research sweep", "what's new in taste research", "update the evidence", or runs /sauce:research.
+description: The coulis researcher. Sweep for new research and data on taste, AI homogenization, pluralistic alignment, human content as AI infrastructure and the AI share of the web; verify every source by opening it; and propose new EVIDENCE.md entries with what each proves and does NOT prove. Use when the user says "research sweep", "what's new in taste research", "update the evidence", or runs /coulis:research.
 ---
 
-# Sauce: research (the evidence sweep)
+# Coulis: research (the evidence sweep)
 
-The researcher keeps sauce's claims honest. It finds new sources, opens them, and proposes ledger entries. It never writes a claim it has not read in the source.
+The researcher keeps coulis's claims honest. It finds new sources, opens them, and proposes ledger entries. It never writes a claim it has not read in the source.
 
 ## Topics (the seed library is EVIDENCE.md, E1 to E13)
 1. Taste and personalization: personal vs population preference models, pluralistic alignment, steerable models.
@@ -23,12 +23,12 @@ The researcher keeps sauce's claims honest. It finds new sources, opens them, an
    ### E<next number>. <one-line finding>
    - Source: [title](url) (venue or arXiv id, year)
    - Finding: <numbers, sample, method, in plain words>
-   - Used for: <which sauce rule, feature, or pitch claim it supports>
+   - Used for: <which coulis rule, feature, or pitch claim it supports>
    - Does NOT prove: <limits, conflicts of interest, what it can't support>
    ```
 5. Also list sources that contradict a current entry, under "Challenges".
 6. Show the user the proposed entries. Write them into EVIDENCE.md only after the user approves each one.
-7. Run the user's sauce check on the summary before showing it (no overclaiming, no em dashes).
+7. Run the user's coulis check on the summary before showing it (no overclaiming, no em dashes).
 
 ## Output to the user
 - New entries proposed (count, one line each)

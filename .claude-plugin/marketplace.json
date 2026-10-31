@@ -1,15 +1,15 @@
 {
-  "name": "sauce",
+  "name": "coulis",
   "owner": {
     "name": "Bhavya Goel"
   },
   "metadata": {
     "description": "The taste layer for AI. Starts with founder writing.",
-    "version": "0.7.0"
+    "version": "0.8.0"
   },
   "plugins": [
     {
-      "name": "sauce",
+      "name": "coulis",
       "description": "The taste layer for AI writing. Four commands (setup, critique, learn, gate) plus MCP tools: an instant gate that blocks unapproved claims and banned phrases, an 8-axis critique that works without an API key, and rules learned from your edits.",
       "source": "./"
     }

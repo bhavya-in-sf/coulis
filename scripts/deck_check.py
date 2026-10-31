@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""sauce deck check: run the gate over a deck, one slide at a time, then look across slides.
+"""coulis deck check: run the gate over a deck, one slide at a time, then look across slides.
 
     python3 scripts/deck_check.py deck.pdf            # or .pptx, .md (slides split on '---' or '# ')
-    python3 scripts/deck_check.py deck.pdf --profile ~/.sauce
+    python3 scripts/deck_check.py deck.pdf --profile ~/.coulis
 
 Per slide: the usual verdict with each issue quoted. Across slides: the same thing said with two
 different numbers (e.g. "300 customers" on slide 3, "350 customers" on slide 9), which is the
@@ -19,7 +19,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import gate  # noqa: E402
-from sauce_core.profile import profile_from_folder  # noqa: E402
+from coulis_core.profile import profile_from_folder  # noqa: E402
 
 NOUN = re.compile(r"\b(\$?\d[\d,.]*\s?(?:k|m|b)?\+?%?)\s*(customers|users|founders|companies|teams|posts|followers|arr|mrr|revenue|"
                   r"installs|downloads|members|readers|subscribers|employees|countries|markets|pilots|tests|calls|meetings)\b", re.I)
@@ -61,7 +61,7 @@ def cross_slide(slides):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("deck")
-    ap.add_argument("--profile", default=os.path.expanduser("~/.sauce"))
+    ap.add_argument("--profile", default=os.path.expanduser("~/.coulis"))
     ap.add_argument("--json", action="store_true")
     a = ap.parse_args()
     prof = Path(a.profile)

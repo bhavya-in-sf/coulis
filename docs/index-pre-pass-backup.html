@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>sauce</title>
-<meta name="description" content="sauce is a free, open-source editor for AI drafts, not a detector. It checks every draft against your own facts and your own voice before it goes out. Inside Claude and Cursor.">
+<title>coulis</title>
+<meta name="description" content="coulis is a free, open-source editor for AI drafts, not a detector. It checks every draft against your own facts and your own voice before it goes out. Inside Claude and Cursor.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -262,8 +262,8 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 
 <div class="cursor" id="cursor" aria-hidden="true"></div>
 <nav aria-label="Main"><div class="wrap in">
-  <a class="mark" href="#top">sauce</a>
-  <div class="links"><a href="#features">Features</a><a href="#why">Why it works</a><a href="#proof">Proof</a><a href="https://github.com/bhavya-in-sf/sauce" rel="noopener">GitHub</a><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Try it for free <span class="ar">→</span></a></div>
+  <a class="mark" href="#top">coulis</a>
+  <div class="links"><a href="#features">Features</a><a href="#why">Why it works</a><a href="#proof">Proof</a><a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a><a class="btn" href="https://github.com/bhavya-in-sf/coulis#install" rel="noopener">Try it for free <span class="ar">→</span></a></div>
 </div></nav>
 
 <header class="hero" id="top">
@@ -271,12 +271,12 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
   <div class="wrap in">
     <p class="eyebrow">We bring you back.</p>
     <h1 id="h1"><span class="w"><span>Taste</span></span> <span class="w"><span>infrastructure</span></span><br><span class="w"><span><i>for</i></span></span> <span class="w"><span><i>AI.</i></span></span></h1>
-    <p class="lede">The layer every AI calls before it speaks for you. sauce checks each draft against your facts and your voice, and revises only with your approval. Free and open source, inside Claude and Cursor today.</p>
-    <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Try it for free <span class="ar">→</span></a><a class="btn ghost" href="#frag">See it check a draft</a></div>
+    <p class="lede">The layer every AI calls before it speaks for you. coulis checks each draft against your facts and your voice, and revises only with your approval. Free and open source, inside Claude and Cursor today.</p>
+    <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/coulis#install" rel="noopener">Try it for free <span class="ar">→</span></a><a class="btn ghost" href="#frag">See it check a draft</a></div>
     <p class="fine">No account. No credit card. Your taste file stays on your machine.</p>
     <div class="held">
-      <div class="frag" id="frag" data-ui role="group" aria-label="sauce check, live">
-        <div class="bar"><span><b>sauce_check</b> · profile: Bhavya</span><span><span id="same" style="font-weight:600;margin-right:10px"></span><span class="pill" id="ms">4 ms</span></span></div>
+      <div class="frag" id="frag" data-ui role="group" aria-label="coulis check, live">
+        <div class="bar"><span><b>coulis_check</b> · profile: Bhavya</span><span><span id="same" style="font-weight:600;margin-right:10px"></span><span class="pill" id="ms">4 ms</span></span></div>
         <div style="padding:12px 14px"><textarea id="draft" rows="3" spellcheck="false" aria-label="Your draft">Excited to share that we're leveraging AI to 10x your workflow — a total game-changer. 300+ founders already trust us. Comment below!</textarea></div>
         <div class="verdict BLOCK" id="verdict"><span class="dot"></span><span id="vword">Hold</span><span class="note" id="vnote">Fix the quoted lines before this goes out.</span></div>
         <div id="lines"></div>
@@ -294,24 +294,24 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 <section class="inside wrap" id="where" aria-label="Works where you write">
   <div class="head"><h2 class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Works where you write</h2><b>Works where you write</b><span>People, machines and enterprises. The same taste file behind all of them.</span></div>
   <div class="doors">
-    <div class="door"><h3>Claude Code and Claude Desktop</h3><p>Two commands. The hook sends Claude back if it ever skips the check.</p><pre>/plugin marketplace add bhavya-in-sf/sauce
-/plugin install sauce@sauce</pre></div>
-    <div class="door"><h3>Cursor, and any MCP client</h3><p>One block in your MCP config. Same six tools, same profile.</p><pre>"sauce": { "command": "python3",
-  "args": ["~/sauce/mcp/server.py"] }</pre></div>
-    <div class="door"><h3>Agents and apps, via the API</h3><p>One call before anything ships. ChatGPT, Slack and Docs come through here. Key-authenticated; <a href="https://github.com/bhavya-in-sf/sauce/blob/main/docs/API.md" rel="noopener">API docs</a>.</p><pre>POST /v1/check
+    <div class="door"><h3>Claude Code and Claude Desktop</h3><p>Two commands. The hook sends Claude back if it ever skips the check.</p><pre>/plugin marketplace add bhavya-in-sf/coulis
+/plugin install coulis@coulis</pre></div>
+    <div class="door"><h3>Cursor, and any MCP client</h3><p>One block in your MCP config. Same six tools, same profile.</p><pre>"coulis": { "command": "python3",
+  "args": ["~/coulis/mcp/server.py"] }</pre></div>
+    <div class="door"><h3>Agents and apps, via the API</h3><p>One call before anything ships. ChatGPT, Slack and Docs come through here. Key-authenticated; <a href="https://github.com/bhavya-in-sf/coulis/blob/main/docs/API.md" rel="noopener">API docs</a>.</p><pre>POST /v1/check
 { "text": "...", "min_score": 70 }</pre></div>
   </div>
 </section>
 
 <section class="intro wrap" id="features">
-  <div class="top reveal"><h2>Three steps. <i>Cheapest first, most personal last.</i></h2><p>Everyone else writes for you. sauce judges what was written: against your facts, your voice and your own recent posts.</p></div>
+  <div class="top reveal"><h2>Three steps. <i>Cheapest first, most personal last.</i></h2><p>Everyone else writes for you. coulis judges what was written: against your facts, your voice and your own recent posts.</p></div>
   <div class="three">
     <div class="reveal"><h3>Check</h3><p>Fixed rules, no AI model, about 4 ms, the same answer every time. Facts you never approved, the AI tells, a hook you already used. The answer comes in plain words: Send, Revise or Hold, with each problem quoted and an alternative in your own words.</p></div>
     <div class="reveal"><h3>Score</h3><p>One number, 0 to 100: how much this draft sounds like you. Eight parts measured in the backend and averaged. You see the score, the weakest part, and one rewritten line.</p></div>
     <div class="reveal"><h3>Learn</h3><p>Change a draft and it proposes the rule it saw. You approve. The rule joins a taste file you own. Continual learning from the one signal that is never wrong: what you actually sent.</p></div>
   </div>
   <div class="reveal" style="margin-top:36px;padding-top:24px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;font-size:15px;color:#444">
-    <div><b style="color:var(--ink)">Directions</b><br>/sauce:bolder, quieter, shorter, clearer. One rewrite, checked, used only on your yes.</div>
+    <div><b style="color:var(--ink)">Directions</b><br>/coulis:bolder, quieter, shorter, clearer. One rewrite, checked, used only on your yes.</div>
     <div><b style="color:var(--ink)">Variants that teach</b><br>Three hooks, you pick one. Every pick grows your taste file.</div>
     <div><b style="color:var(--ink)">Modes</b><br>LinkedIn, X, cold email, investor update, bio. Each with its own rules and target score.</div>
     <div><b style="color:var(--ink)">Extract and doctor</b><br>Your past posts become your starting profile. Doctor tells you what is missing.</div>
@@ -322,9 +322,9 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
   <div class="head reveal"><div><p class="eyebrow">Competition</p><h2>Everyone else writes for you. <i>We judge what was written.</i></h2></div><p>Four pieces of the product at real size. Every label and number is real.</p></div>
   <div class="grid">
     <div class="card glow reveal"><div class="ui" data-ui><div class="bar"><span><b>Draft</b> · LinkedIn · 14:02</span><span class="pill">4 ms</span></div><div style="padding:10px 14px">We hit $50k MRR this month. Our AI makes writing effortless for every founder who wants to grow.</div><div class="verdict FIX"><span class="dot"></span>Revise<span class="note">Two lines to settle before you send.</span></div><div class="row"><span class="lvl FIX">Revise</span><span><span class="q">"$50k MRR"</span> <span class="d">Not on your approved list.</span></span></div><div class="row"><span class="lvl FIX">Revise</span><span><span class="q">"effortless"</span> <span class="d">Filler.</span></span></div></div><h3>The gate</h3><p>Every number you have not approved is sent back, quoted, with the fix named.</p></div>
-    <div class="card small reveal"><div class="ui" data-ui><div class="bar"><span><b>sauce score</b></span><span class="pill">71 · weakest 3 of 8 parts</span></div><div class="row"><span class="lvl">HOOK</span><span><span class="q">5</span> <span class="d">Opens with a question.</span></span></div><div class="row"><span class="lvl">VOICE</span><span><span class="q">8</span> <span class="d">Your cadence.</span></span></div><div class="row"><span class="lvl">PROOF</span><span><span class="q">4</span> <span class="d">Weakest. No number.</span></span></div></div><h3>The score</h3><p>One number for people and for agents. Only the weakest line gets a rewrite.</p></div>
+    <div class="card small reveal"><div class="ui" data-ui><div class="bar"><span><b>coulis score</b></span><span class="pill">71 · weakest 3 of 8 parts</span></div><div class="row"><span class="lvl">HOOK</span><span><span class="q">5</span> <span class="d">Opens with a question.</span></span></div><div class="row"><span class="lvl">VOICE</span><span><span class="q">8</span> <span class="d">Your cadence.</span></span></div><div class="row"><span class="lvl">PROOF</span><span><span class="q">4</span> <span class="d">Weakest. No number.</span></span></div></div><h3>The score</h3><p>One number for people and for agents. Only the weakest line gets a rewrite.</p></div>
     <div class="card small reveal"><div class="faces"><span>62K</span><span>TV</span><span>3K</span><span>100</span><span>673</span></div><h3>Approved facts</h3><p>One file of numbers you stand behind. Approve a fact once, in plain English. Teams share one list.</p></div>
-    <div class="card photo reveal"><div class="ui" data-ui style="margin-bottom:16px"><div class="bar"><span><b>sauce_learn</b></span><span class="pill">1 rule proposed</span></div><div style="padding:10px 14px">You cut "excited to share" again. Add <b>no "excited to share" openers</b> to your taste file?</div><div style="padding:0 14px 12px;display:flex;gap:8px"><span class="pill">Approve</span><span class="pill">Not now</span></div></div><h3>Learns from your edits</h3><p>Change a draft and sauce proposes the rule it saw. You approve each one. Your taste file grows by one line.</p></div>
+    <div class="card photo reveal"><div class="ui" data-ui style="margin-bottom:16px"><div class="bar"><span><b>coulis_learn</b></span><span class="pill">1 rule proposed</span></div><div style="padding:10px 14px">You cut "excited to share" again. Add <b>no "excited to share" openers</b> to your taste file?</div><div style="padding:0 14px 12px;display:flex;gap:8px"><span class="pill">Approve</span><span class="pill">Not now</span></div></div><h3>Learns from your edits</h3><p>Change a draft and coulis proposes the rule it saw. You approve each one. Your taste file grows by one line.</p></div>
   </div>
 </section>
 
@@ -343,20 +343,20 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
 <section id="proof"><div class="band reveal">
   <p class="eyebrow">Our research</p>
   <h2>What we used. <i>What it showed.</i></h2>
-  <p>2,437 real posts across 38 voices, 2022 to 2026. One method every time: run the real writing through sauce, compare with what the writer actually did. Every number reruns from the repo.</p>
+  <p>2,437 real posts across 38 voices, 2022 to 2026. One method every time: run the real writing through coulis, compare with what the writer actually did. Every number reruns from the repo.</p>
   <div class="stats">
     <div class="stat"><b>2 in 3</b><span>of 673 published posts pass untouched</span></div>
     <div class="stat"><b>46/47</b><span>team drafts fixed by one approved fact</span></div>
     <div class="stat"><b>16/24</b><span>held-out posts score higher on their own profile</span></div>
     <div class="stat"><b>15%</b><span>less engagement on posts the check would have held</span></div>
   </div>
-  <a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Try it for free <span class="ar">→</span></a>
+  <a class="btn" href="https://github.com/bhavya-in-sf/coulis#install" rel="noopener">Try it for free <span class="ar">→</span></a>
 </div></section>
 
 <section class="six wrap">
-  <div class="top reveal"><div><h2>Checked <i>every day.</i></h2></div><p>Six things sauce reads before a draft goes out. Each one quoted back to you, with a way to fix it.</p></div>
+  <div class="top reveal"><div><h2>Checked <i>every day.</i></h2></div><p>Six things coulis reads before a draft goes out. Each one quoted back to you, with a way to fix it.</p></div>
   <div class="two">
-    <div class="pic reveal" style="display:flex;align-items:center;justify-content:center;padding:28px;color:#fff;text-align:center"><div><div style="font:600 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;opacity:.85">sauce score</div><div style="font:italic 400 clamp(90px,12vw,150px)/1 var(--serif);color:var(--c1)">82</div><div style="font-size:18px">Sounds like you.</div></div></div>
+    <div class="pic reveal" style="display:flex;align-items:center;justify-content:center;padding:28px;color:#fff;text-align:center"><div><div style="font:600 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;opacity:.85">coulis score</div><div style="font:italic 400 clamp(90px,12vw,150px)/1 var(--serif);color:var(--c1)">82</div><div style="font-size:18px">Sounds like you.</div></div></div>
     <div class="checks">
       <div class="check reveal"><div class="n">01</div><h3>Em dashes and double hyphens</h3><span class="ex">"We shipped — finally." <b>Hold</b> em dash</span><p>The clearest AI tell. Held by default; your call to allow.</p></div>
       <div class="check reveal"><div class="n">02</div><h3>Unapproved numbers</h3><span class="ex">"300+ founders trust us" <b>Revise</b> not on your list</span><p>Followers, revenue, "10x". Numbers about other people pass; numbers about you must be on your list.</p></div>
@@ -374,19 +374,19 @@ footer .legal{margin-top:40px;display:flex;justify-content:space-between;gap:16p
     <p class="eyebrow">Your words, in your voice.</p>
     <h2>AI learned everyone. <i>We bring you back.</i></h2>
     <p>Two commands in Claude Code or Cursor. The default rules work before it knows anything about you. Your taste file grows from there.</p>
-    <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Try it for free <span class="ar">→</span></a><a class="btn ghost" href="https://voiceprint-vibe-checker.lovable.app" rel="noopener">Score a draft online</a></div>
-    <div class="wm" aria-hidden="true">sauce</div>
+    <div class="acts"><a class="btn" href="https://github.com/bhavya-in-sf/coulis#install" rel="noopener">Try it for free <span class="ar">→</span></a><a class="btn ghost" href="https://voiceprint-vibe-checker.lovable.app" rel="noopener">Score a draft online</a></div>
+    <div class="wm" aria-hidden="true">coulis</div>
   </div>
 </section>
 
 <footer><div class="wrap">
   <div class="cols">
-    <div><div class="mark">sauce</div><p style="margin-top:10px;max-width:30ch">Taste infrastructure for AI. Built in San Francisco.</p></div>
-    <div><h4>Get started</h4><ul><li><a href="https://github.com/bhavya-in-sf/sauce#install" rel="noopener">Install</a></li><li><a href="https://github.com/bhavya-in-sf/sauce/blob/main/docs/INSTALL.md" rel="noopener">Cursor and MCP</a></li><li><a href="https://voiceprint-vibe-checker.lovable.app" rel="noopener">Free online check</a></li></ul></div>
-    <div><h4>Product</h4><ul><li><a href="#features">The gate</a></li><li><a href="#features">Critique</a></li><li><a href="#why">Learn</a></li><li><a href="https://github.com/bhavya-in-sf/sauce/blob/main/docs/API.md" rel="noopener">API</a></li></ul></div>
-    <div><h4>Company</h4><ul><li><a href="https://github.com/bhavya-in-sf/sauce" rel="noopener">GitHub</a></li><li><a href="index-editorial-v3.html#seat">Waitlist and dinners</a></li><li><a href="https://github.com/bhavya-in-sf/sauce/blob/main/README.md" rel="noopener">README</a></li></ul></div>
+    <div><div class="mark">coulis</div><p style="margin-top:10px;max-width:30ch">Taste infrastructure for AI. Built in San Francisco.</p></div>
+    <div><h4>Get started</h4><ul><li><a href="https://github.com/bhavya-in-sf/coulis#install" rel="noopener">Install</a></li><li><a href="https://github.com/bhavya-in-sf/coulis/blob/main/docs/INSTALL.md" rel="noopener">Cursor and MCP</a></li><li><a href="https://voiceprint-vibe-checker.lovable.app" rel="noopener">Free online check</a></li></ul></div>
+    <div><h4>Product</h4><ul><li><a href="#features">The gate</a></li><li><a href="#features">Critique</a></li><li><a href="#why">Learn</a></li><li><a href="https://github.com/bhavya-in-sf/coulis/blob/main/docs/API.md" rel="noopener">API</a></li></ul></div>
+    <div><h4>Company</h4><ul><li><a href="https://github.com/bhavya-in-sf/coulis" rel="noopener">GitHub</a></li><li><a href="index-editorial-v3.html#seat">Waitlist and dinners</a></li><li><a href="https://github.com/bhavya-in-sf/coulis/blob/main/README.md" rel="noopener">README</a></li></ul></div>
   </div>
-  <div class="legal"><span>2026 · sauce · MIT</span><span>Nothing leaves your Mac for the basic check</span></div>
+  <div class="legal"><span>2026 · coulis · MIT</span><span>Nothing leaves your Mac for the basic check</span></div>
 </div></footer>
 
 

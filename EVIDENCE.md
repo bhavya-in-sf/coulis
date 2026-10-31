@@ -1,6 +1,6 @@
 # Evidence ledger
 
-Every rule in Sauce traces back to one of two kinds of source, always labeled:
+Every rule in Coulis traces back to one of two kinds of source, always labeled:
 
 - **Research (E):** a paper or dataset, linked, with what it proves and what it doesn't.
 - **Practitioner (P):** real editing experience, labeled as experience, not research.
@@ -48,7 +48,7 @@ No rule ships without one. If you find a claim here that's wrong or overstated, 
 ### E7. AI help makes each writer better and everyone more alike
 - Source: [Doshi & Hauser 2024, Science Advances](https://www.science.org/doi/pdf/10.1126/sciadv.adn5290) (doi 10.1126/sciadv.adn5290)
 - Finding: in a pre-registered experiment with 293 writers, access to AI story ideas raised ratings of creativity and writing quality, most for less creative writers, but AI-assisted stories were more similar to each other.
-- Used for: why sauce protects individual voice instead of chasing a generic "better".
+- Used for: why coulis protects individual voice instead of chasing a generic "better".
 - Does NOT prove: anything about professional or founder writing (short stories, online participants).
 
 ### E8. LLM help homogenizes ideas across people
@@ -61,7 +61,7 @@ No rule ships without one. If you find a claim here that's wrong or overstated, 
 - Sources: [Sourati et al. 2026, Nature Human Behaviour](https://www.nature.com/articles/s41562-026-02549-7); [Sourati, Ziabari & Dehghani 2026, Trends in Cognitive Sciences](https://www.cell.com/trends/cognitive-sciences/fulltext/S1364-6613(26)00003-3) (preprint arXiv 2508.01491)
 - Finding: across 880,000 texts, writing became less varied as AI use spread after ChatGPT; LLM rewrites kept meaning but compressed style and blurred author traits (classifiers lost accuracy for age and gender). The review argues LLM styles reproduce dominant norms and erode minority voices.
 - Used for: the "why now" slide and the core pain point (sounds like everyone).
-- Does NOT prove: that a taste layer reverses the trend. That's what sauce has to show.
+- Does NOT prove: that a taste layer reverses the trend. That's what coulis has to show.
 
 ### E10. AI edits pull writing away from the writer's voice
 - Source: [How LLMs Distort Our Written Language](https://arxiv.org/html/2603.18161v2) (arXiv 2603.18161)

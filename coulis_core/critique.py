@@ -1,8 +1,8 @@
 """Judgment half: the critic step. Eight separate axes, never one overall score.
 
-The only part of Sauce that calls a model. Returns structured JSON so apps
+The only part of Coulis that calls a model. Returns structured JSON so apps
 can use each axis on its own. Model and effort are configurable:
-SAUCE_MODEL (default claude-opus-5-5) and SAUCE_EFFORT (default low,
+COULIS_MODEL (default claude-opus-5-5) and COULIS_EFFORT (default low,
 since this runs on every draft and speed is an open critique).
 """
 import json
@@ -43,7 +43,7 @@ SCHEMA = {
     },
 }
 
-SYSTEM = """You are Sauce's critic step. You score one draft against one person's taste profile.
+SYSTEM = """You are Coulis's critic step. You score one draft against one person's taste profile.
 
 Score each of the 8 axes from 1 to 10, separately. Never produce an overall score.
 Checkable axes (clarity, proof, why_you, ask) are judged the same way for everyone.
@@ -79,8 +79,8 @@ def critique(text, profile, surface="linkedin", model=None, effort=None, client=
         # an org-level key must name a workspace; set ANTHROPIC_WORKSPACE_ID (wrkspc_...) or use a workspace key
         ws = os.environ.get("ANTHROPIC_WORKSPACE_ID")
         client = anthropic.Anthropic(default_headers={"anthropic-workspace-id": ws} if ws else None)
-    model = model or os.environ.get("SAUCE_MODEL", "claude-opus-5-5")
-    effort = effort or os.environ.get("SAUCE_EFFORT", "low")
+    model = model or os.environ.get("COULIS_MODEL", "claude-opus-5-5")
+    effort = effort or os.environ.get("COULIS_EFFORT", "low")
     response = client.messages.create(
         model=model,
         max_tokens=4096,

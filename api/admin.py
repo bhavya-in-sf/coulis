@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Admin CLI for the Taste API.
 
-    python3 api/admin.py new-enc-key            # generate SAUCE_ENC_KEY (store it in a secret manager)
+    python3 api/admin.py new-enc-key            # generate COULIS_ENC_KEY (store it in a secret manager)
     python3 api/admin.py create-key --owner acme --rate 60
     python3 api/admin.py revoke-key tst_...
 """

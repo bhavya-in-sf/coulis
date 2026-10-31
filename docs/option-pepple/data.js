@@ -68,10 +68,10 @@ window.PEPPLE_ASSETS = {
   ],
   "install": {
     "platforms": ["Claude Code", "Claude Desktop", "Cursor"],
-    "command": "/plugin marketplace add bhavya-in-sf/sauce",
+    "command": "/plugin marketplace add bhavya-in-sf/coulis",
     "steps": [
-      {"title": "Add the plug-in", "body": "In Claude Code run /plugin marketplace add bhavya-in-sf/sauce, then /plugin install sauce@sauce. (Working package name while the brand name is decided.)"},
-      {"title": "Build your taste file", "body": "Run /sauce:extract on your past posts or LinkedIn export. Confirm each fact before it counts."},
+      {"title": "Add the plug-in", "body": "In Claude Code run /plugin marketplace add bhavya-in-sf/coulis, then /plugin install coulis@coulis. (Working package name while the brand name is decided.)"},
+      {"title": "Build your taste file", "body": "Run /coulis:extract on your past posts or LinkedIn export. Confirm each fact before it counts."},
       {"title": "Check a draft", "body": "Write as usual. Each quoted issue waits for your decision before anything goes out."}
     ]
   },

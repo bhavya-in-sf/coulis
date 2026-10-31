@@ -4,7 +4,7 @@ A public test AI writing apps can run to see whether their output sounds like th
 
 **Task 1, held-out voice.** Posts by known authors that the system never saw. Does the author's own profile score the post as more "them" than a stranger's profile? First results: own profile higher in 16 of 24 held-out posts (6 voices; 6 ties, 2 lower), then 41 of 44 (11 voices). Small samples: a pattern, not an accuracy rate.
 
-**Task 2, pairwise picks.** Every time someone picks one of three variants with `/sauce:variants`, sauce saves "picked beats rejected" pairs (`picks.jsonl`). The benchmark reports how often the score ranks the human's pick higher. Apps can submit pairs of (their output, the human's pick).
+**Task 2, pairwise picks.** Every time someone picks one of three variants with `/coulis:variants`, coulis saves "picked beats rejected" pairs (`picks.jsonl`). The benchmark reports how often the score ranks the human's pick higher. Apps can submit pairs of (their output, the human's pick).
 
 Run it:
 

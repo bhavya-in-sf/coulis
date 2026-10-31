@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Shadow-mode replay: run an agent's past drafts through Sauce in time order,
-as if Sauce had been checking each draft live. Read-only: it never posts anywhere.
+"""Shadow-mode replay: run an agent's past drafts through Coulis in time order,
+as if Coulis had been checking each draft live. Read-only: it never posts anywhere.
 
     python3 replay.py --persona ../personas/example --out report.md
 """

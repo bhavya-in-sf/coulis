@@ -1,7 +1,7 @@
 """Python client for the Taste API. Standard library only.
 
-    from sauce_client import Sauce
-    t = Sauce(api_key="tst_...", base_url="http://localhost:8787")
+    from coulis_client import Coulis
+    t = Coulis(api_key="tst_...", base_url="http://localhost:8787")
     prof = t.create_profile(samples=["a post I'm proud of", "another"], owner="Sam", approved_facts=["1,200 users"])
     result = t.check(prof["id"], "Notely hit $20k MRR")
     if result["verdict"] == "BLOCK": ...
@@ -12,19 +12,19 @@ import urllib.error
 import urllib.request
 
 
-class SauceError(Exception):
+class CoulisError(Exception):
     def __init__(self, status, code, message):
         super().__init__(f"{status} {code}: {message}")
         self.status, self.code, self.message = status, code, message
 
 
-class Sauce:
+class Coulis:
     def __init__(self, api_key=None, base_url=None, timeout=60):
-        self.api_key = api_key or os.environ.get("SAUCE_API_KEY")
-        self.base_url = (base_url or os.environ.get("SAUCE_BASE_URL", "http://localhost:8787")).rstrip("/")
+        self.api_key = api_key or os.environ.get("COULIS_API_KEY")
+        self.base_url = (base_url or os.environ.get("COULIS_BASE_URL", "http://localhost:8787")).rstrip("/")
         self.timeout = timeout
         if not self.api_key:
-            raise ValueError("Pass api_key or set SAUCE_API_KEY.")
+            raise ValueError("Pass api_key or set COULIS_API_KEY.")
 
     def _req(self, method, path, body=None):
         data = json.dumps(body).encode() if body is not None else None
@@ -38,7 +38,7 @@ class Sauce:
                 err = json.loads(e.read())["error"]
             except Exception:
                 err = {"code": "http_error", "message": str(e)}
-            raise SauceError(e.code, err.get("code"), err.get("message")) from None
+            raise CoulisError(e.code, err.get("code"), err.get("message")) from None
 
     # profiles
     def create_profile(self, samples=None, profile=None, **fields):

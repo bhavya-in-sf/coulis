@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""sauce doctor: health check of a taste profile folder (TASTE.md + claims.md).
+"""coulis doctor: health check of a taste profile folder (TASTE.md + claims.md).
 
     python3 scripts/doctor.py [profile_dir]
 """
@@ -14,15 +14,15 @@ def run(folder):
     problems, ok = [], []
     taste, claims = d / "TASTE.md", d / "claims.md"
     if not taste.exists():
-        problems.append({"issue": "No TASTE.md", "fix": "Run /sauce:extract or /sauce:setup to build your voice file."})
+        problems.append({"issue": "No TASTE.md", "fix": "Run /coulis:extract or /coulis:setup to build your voice file."})
     else:
         t = taste.read_text(encoding="utf-8", errors="ignore")
         ok.append("TASTE.md found")
         if len(t.split()) < 80:
-            problems.append({"issue": "TASTE.md is very short", "fix": "Add 3 to 5 of your best posts as samples, or run /sauce:extract."})
+            problems.append({"issue": "TASTE.md is very short", "fix": "Add 3 to 5 of your best posts as samples, or run /coulis:extract."})
         age = (time.time() - taste.stat().st_mtime) / 86400
         if age > 30:
-            problems.append({"issue": f"TASTE.md not updated in {int(age)} days", "fix": "Run /sauce:learn on a recent post you edited."})
+            problems.append({"issue": f"TASTE.md not updated in {int(age)} days", "fix": "Run /coulis:learn on a recent post you edited."})
     if not claims.exists():
         problems.append({"issue": "No claims.md", "fix": "Say 'add <fact> as a fact' so the gate knows your real numbers."})
     else:
@@ -40,4 +40,4 @@ def run(folder):
 
 
 if __name__ == "__main__":
-    print(json.dumps(run(sys.argv[1] if len(sys.argv) > 1 else "~/.sauce"), indent=2))
+    print(json.dumps(run(sys.argv[1] if len(sys.argv) > 1 else "~/.coulis"), indent=2))

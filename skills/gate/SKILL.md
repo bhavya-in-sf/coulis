@@ -1,9 +1,9 @@
 ---
 name: gate
-description: Pre-post gate. Before a post goes out, check it against the persona's claims and rules (hard checks) and its taste (critique), and return BLOCK, FIX or PASS with exact fixes. Use when the user or an agent says "gate this", "check before posting", "can this go out", or runs /sauce:gate.
+description: Pre-post gate. Before a post goes out, check it against the persona's claims and rules (hard checks) and its taste (critique), and return BLOCK, FIX or PASS with exact fixes. Use when the user or an agent says "gate this", "check before posting", "can this go out", or runs /coulis:gate.
 ---
 
-# Sauce: gate (check before it posts)
+# Coulis: gate (check before it posts)
 
 Two halves, in this order.
 

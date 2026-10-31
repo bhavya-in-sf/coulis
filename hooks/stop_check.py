@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Sauce Stop hook: make sure drafts get checked.
+"""Coulis Stop hook: make sure drafts get checked.
 
 Runs when Claude finishes a reply. If the reply contains text the user is
 likely to post or send (a quoted block or an unlabelled code block of prose)
-and no Sauce tool ran during the turn, it asks Claude to check those drafts
-with sauce_check, or record sauce_skip with a reason, before the user sees
+and no Coulis tool ran during the turn, it asks Claude to check those drafts
+with coulis_check, or record coulis_skip with a reason, before the user sees
 the reply. It asks once per turn, never loops, and never blocks on errors.
 
-Turn off with SAUCE_HOOK=0.
+Turn off with COULIS_HOOK=0.
 """
 import json
 import os
@@ -18,11 +18,11 @@ from pathlib import Path
 
 
 def debug(event, **kw):
-    """One line per run in ~/.sauce/hook-log.jsonl so you can see the hook fired (SAUCE_HOOK_LOG=0 to turn off)."""
-    if os.environ.get("SAUCE_HOOK_LOG", "1") == "0":
+    """One line per run in ~/.coulis/hook-log.jsonl so you can see the hook fired (COULIS_HOOK_LOG=0 to turn off)."""
+    if os.environ.get("COULIS_HOOK_LOG", "1") == "0":
         return
     try:
-        d = Path.home() / ".sauce"
+        d = Path.home() / ".coulis"
         d.mkdir(exist_ok=True)
         with (d / "hook-log.jsonl").open("a") as f:
             f.write(json.dumps({"t": time.strftime("%Y-%m-%dT%H:%M:%S"), "event": event, **kw}) + "\n")
@@ -94,7 +94,7 @@ def edited_pair(checked, drafts, min_change=0.15, max_change=0.8):
 
 
 def main():
-    if (os.environ.get("SAUCE_HOOK") or os.environ.get("TASTEE_HOOK", "1")) == "0":
+    if (os.environ.get("COULIS_HOOK") or os.environ.get("TASTEE_HOOK", "1")) == "0":
         return
     try:
         data = json.load(sys.stdin)
@@ -115,37 +115,37 @@ def main():
     except Exception as e:
         debug("error", error=str(e)[:200])
         return  # never get in the way on errors
-    used_sauce, learned, checked, text = False, False, [], []
+    used_coulis, learned, checked, text = False, False, [], []
     for r in turn:
         for b in r.get("message", {}).get("content", []) or []:
-            if b.get("type") == "tool_use" and "sauce_" in b.get("name", ""):
-                used_sauce = True
-                if b["name"].endswith("sauce_learn"):
+            if b.get("type") == "tool_use" and "coulis_" in b.get("name", ""):
+                used_coulis = True
+                if b["name"].endswith("coulis_learn"):
                     learned = True
-                if b["name"].endswith("sauce_check"):
+                if b["name"].endswith("coulis_check"):
                     checked.append(str((b.get("input") or {}).get("text", "")))
             elif b.get("type") == "text":
                 text.append(b.get("text", ""))
     drafts = drafts_in("\n".join(text))
-    debug("ran", drafts=len(drafts), used_sauce=used_sauce, turn_rows=len(turn))
+    debug("ran", drafts=len(drafts), used_coulis=used_coulis, turn_rows=len(turn))
     pair = edited_pair(checked, drafts) if (checked and drafts and not learned) else None
     if pair:
         # the draft that was checked is not the draft that went out: that difference is taste. Learn from it, once.
         print(json.dumps({
             "decision": "block",
-            "reason": ("Sauce: the final draft in this reply differs from the version that was checked. Call sauce_learn "
+            "reason": ("Coulis: the final draft in this reply differs from the version that was checked. Call coulis_learn "
                        "with draft = the checked version and final = the version in the reply (same profile_dir as the check), "
                        "then give the reply again with the proposed rules listed in one short line each, for the user to approve or reject. "
                        "Do not save any rule without their yes."),
         }))
         return
-    if drafts and not used_sauce:
+    if drafts and not used_coulis:
         print(json.dumps({
             "decision": "block",
-            "reason": (f"Sauce: this reply has {len(drafts)} draft(s) the user may post or send, and none were "
-                       "checked. Run sauce_check on each draft (use profile_dir if it's written for a company "
+            "reason": (f"Coulis: this reply has {len(drafts)} draft(s) the user may post or send, and none were "
+                       "checked. Run coulis_check on each draft (use profile_dir if it's written for a company "
                        "or client), fix any BLOCK issues, then give the reply again. If a block isn't something "
-                       "the user will post or send, call sauce_skip with the reason instead."),
+                       "the user will post or send, call coulis_skip with the reason instead."),
         }))
 
 
