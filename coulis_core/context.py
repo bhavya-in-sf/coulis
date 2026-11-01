@@ -33,5 +33,7 @@ def build_context(text, profile, surface='linkedin', context=None, method='bm25'
         samples = [{'id':d['id'], 'text':d['text'], 'score':None} for d in documents[:k]]
     else:
         samples = retrieve(text, documents, k, method)
+        if not samples:  # nothing overlapped: fall back to the first samples rather than judging with none
+            samples = [{'id':d['id'], 'text':d['text'], 'score':None} for d in documents[:k]]
     return {'samples': samples, 'preferences':[asdict(r) for r in selected],
             'conflicts': conflicts, 'retrieval_method':method, 'facts_verified':False}

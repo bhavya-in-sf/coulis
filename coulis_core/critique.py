@@ -59,7 +59,7 @@ Two more checks, answered in one sentence each or left empty:
 
 def build_prompt(text, profile, surface, context=None, retrieval_method=None):
     from .context import build_context
-    method = retrieval_method or os.environ.get('COULIS_RETRIEVAL', 'original')
+    method = retrieval_method or os.environ.get('COULIS_RETRIEVAL', 'bm25')  # finder on by default; it abstains when nothing matches, so the worst case is the old behaviour
     bundle = build_context(text, profile, surface, context, method)
     rules = [r['text'] for r in bundle['preferences']]
     rules += ['UNRESOLVED preference conflict: ' + key + '. Ask the user; do not choose a side.' for key in bundle['conflicts']]
