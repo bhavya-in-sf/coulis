@@ -177,7 +177,7 @@ class Sameness(unittest.TestCase):
             for i in range(8):
                 w.writerow({"Date": f"2026-0{i+1}-01 10:00:00", "ShareLink": "", "ShareCommentary": ("Word " * 90).strip() + f" post {i}.", "SharedUrl": "", "MediaUrl": "", "Visibility": "MEMBER_NETWORK"})
         out = setup_from_linkedin(p, os.path.join(d, "prof"), name="Test")
-        self.assertEqual(out["samples"], 6)
+        self.assertEqual(out["samples"], 8)  # all eight qualify; the cap is 30
         self.assertTrue(os.path.exists(os.path.join(d, "prof", "TASTE.md")))
 
 
@@ -210,4 +210,17 @@ class NewChecks(unittest.TestCase):
         hist = [{"id": "P1", "date": "2026-10-01", "title": "t", "text": "We built a check for AI drafts that runs before you post anything."}]
         r = check("Today: we built a check for AI drafts that runs before the team posts.", self.prof(), "linkedin", history=hist)
         self.assertTrue(any(i["check"] == "repeat_phrase" for i in r["issues"]))
+
+
+class ContextBudget(unittest.TestCase):
+    def test_budget_is_respected_and_reported(self):
+        from coulis_core.context import build_context
+        from coulis_core import profile_from_samples
+        prof = profile_from_samples(["Post number %d about investors and founders. " % i * 20 for i in range(12)],
+                                    approved_facts=["62K LinkedIn followers", "4,000+ newsletter subscribers"] + [f"{n} things" for n in range(30)])
+        b = build_context("A post about investors: 62K followers.", prof, "linkedin", budget_tokens=900)
+        self.assertLessEqual(b["tokens"]["total"], 900)
+        self.assertIn("62K LinkedIn followers", b["facts"])
+        self.assertTrue(b["dropped"]["samples"] >= 1)
+        self.assertLessEqual(len(b["facts"]), 12)
 

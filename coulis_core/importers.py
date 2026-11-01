@@ -15,7 +15,7 @@ import statistics
 import zipfile
 from pathlib import Path
 
-MIN_W, MAX_W, N_SAMPLES = 60, 400, 6
+MIN_W, MAX_W, N_SAMPLES = 60, 400, 30
 
 
 def _rows_from(path):
@@ -80,7 +80,7 @@ def setup_from_linkedin(path, out_dir, name=""):
     if not posts:
         raise ValueError("No posts between 60 and 400 words found in the export.")
     recent = [p for p in posts if p["date"] >= posts[0]["date"][:4]] or posts
-    samples = sorted(recent[:40], key=lambda p: -p["words"])[:N_SAMPLES]
+    samples = sorted(recent[:60], key=lambda p: -p["words"])[:N_SAMPLES]
     out = Path(out_dir).expanduser()
     out.mkdir(parents=True, exist_ok=True)
     taste = ["# TASTE.md", "", "Built by `coulis setup` from your LinkedIn export. Edit anything; delete what is wrong.", "",
