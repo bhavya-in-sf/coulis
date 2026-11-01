@@ -3,61 +3,45 @@
 <title>coulis · waitlist</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#111;--muted:#6b6b70;--line:#ececef;--red:#8B1A12;--yellow:#FFE14D}
-*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:17px/1.5 'Instrument Sans',system-ui,sans-serif;padding:48px 20px 80px}
-.wrap{max-width:640px;margin:0 auto}a{color:inherit}
-h1{font-size:clamp(34px,6vw,56px);letter-spacing:-.035em;line-height:1.02;margin:0 0 8px}h1 i{font-family:'Instrument Serif';font-style:italic;font-weight:400;letter-spacing:0}
-.lede{color:var(--muted);margin:0 0 28px}
-.wl{margin-top:72px;max-width:640px}
-.wl h3{font-size:var(--step-lead);margin-bottom:6px}
-.wl .lede{color:var(--muted);margin-bottom:22px}
-.wl .doors{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:18px;font-size:15px}
-.wl .doors label{display:flex;gap:8px;align-items:center;cursor:pointer}
-.wl .doors input{accent-color:var(--ink);margin:0}
-.wl .fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.wl label.f{display:block;font:700 13px var(--display);margin-bottom:6px}
-.wl input,.wl select{width:100%;padding:12px 12px;border:1.5px solid var(--ink);background:var(--bg);color:var(--ink);font:inherit;font-size:16px;border-radius:0}
-.wl .full{grid-column:1/-1}
-.wl .act{display:flex;gap:16px;align-items:center;margin-top:16px;flex-wrap:wrap}
-.wl .msg{font-size:15px;min-height:22px;font-weight:600}
-.wl .msg.ok{color:var(--pass)}
-.wl .msg.err{color:var(--block)}
-.btn{display:inline-flex;align-items:center;height:46px;padding:0 22px;border-radius:999px;background:var(--ink);color:#fff;border:0;font:500 14px 'Instrument Sans';cursor:pointer}
+:root{--ink:#111;--muted:#6b6b70;--line:#ececef}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:#fff;color:var(--ink);font:17px/1.5 'Instrument Sans',system-ui,sans-serif;display:flex;flex-direction:column;padding:28px 20px 40px}
+.wrap{max-width:560px;margin:auto;width:100%}
+a{color:inherit}
+.back{position:absolute;top:28px;left:20px;color:var(--muted);text-decoration:none;font-size:14px}
+h1{font-size:clamp(40px,7vw,64px);letter-spacing:-.035em;line-height:1.02;margin:0 0 12px}
+h1 i{font-family:'Instrument Serif';font-style:italic;font-weight:400;letter-spacing:0}
+.lede{color:var(--muted);margin:0 0 32px;font-size:18px}
+form{display:flex;gap:10px;flex-wrap:wrap}
+input[type=email]{flex:1 1 260px;height:52px;padding:0 16px;border:1.5px solid var(--ink);background:#fff;color:var(--ink);font:inherit;font-size:17px;border-radius:0;min-width:0}
+input[type=email]:focus{outline:2px solid var(--ink);outline-offset:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 26px;border-radius:999px;background:var(--ink);color:#fff;border:0;font:500 15px 'Instrument Sans';cursor:pointer;white-space:nowrap}
 .btn:disabled{opacity:.5}
-.back{display:inline-block;margin-bottom:28px;color:var(--muted);text-decoration:none;font-size:14px}
-.privacy{margin-top:24px;font-size:13px;color:var(--muted)}
-</style></head><body><div class="wrap">
+.msg{min-height:24px;margin-top:12px;font-size:15px;font-weight:600;color:var(--muted)}
+.fine{margin-top:28px;font-size:13px;color:var(--muted);line-height:1.5}
+</style></head><body>
 <a class="back" href="index.html">← coulis</a>
-<h1>Join the <i>waitlist.</i></h1>
-<p class="lede">Early access to releases, and the integration waitlist for coulis 2.0. Both free.</p>
-<form class="wl" id="wl" action="https://formsubmit.co/ac327ff10bcd43f64f6e489f7fb0f09c" method="POST">
-      <input type="hidden" name="_captcha" value="true">
-      <input type="hidden" name="_subject" value="coulis waitlist">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="https://bhavya-in-sf.github.io/coulis/waitlist.html?sent=1">
-      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-      <h3>Join the waitlist</h3>
-      <p class="lede">Early access to releases, and the integration waitlist for coulis 2.0. Both free.</p>
-      <div class="doors" role="radiogroup" aria-label="What are you joining">
-        <label><input type="radio" name="door" value="writing-pilot" checked> The writing pilot</label>
-        <label><input type="radio" name="door" value="integration-waitlist"> Integration and API waitlist (coulis 2.0)</label>
-      </div>
-      <div class="fields">
-        <div><label class="f" for="wl-name">Name</label><input id="wl-name" name="name" type="text" autocomplete="name" placeholder="Your name"></div>
-        <div><label class="f" for="wl-email">Email</label><input id="wl-email" name="email" type="email" autocomplete="email" placeholder="you@company.com"></div>
-        <div><label class="f" for="wl-role">You are</label><select id="wl-role" name="role"><option>A founder</option><option>A marketer</option><option>A writer or ghostwriter</option><option>An engineer</option><option>An investor</option><option>Curious</option></select></div>
-        <div><label class="f" for="wl-pain">The last draft that went out wrong (optional)</label><input id="wl-pain" name="pain" type="text" placeholder="One line"></div>
-      </div>
-      <p class="fine" style="font-size:13px;color:#6b6b6b;margin:0 0 12px">Signing up records your name, email, role and what you asked for. It does not guarantee access, and it grants no permission to process, keep or train on your writing; those are separate and explained in <a href="DATA-PERMISSIONS.md">data and permissions</a>.</p>
-      <div class="act"><button class="btn" id="wl-submit" type="submit">Join the waitlist</button><span class="msg" id="wl-msg" role="status" aria-live="polite"></span></div>
-    </form>
-<p class="privacy">We keep your name, email and what you picked, nothing else. No tracking. A one-click check on the next page keeps robots out. Ask to be removed any time by replying to the first email.</p>
+<div class="wrap">
+<h1 id="h">Join the <i>waitlist.</i></h1>
+<p class="lede" id="lede">One email when the next release ships. Free.</p>
+<form id="wl" action="https://formsubmit.co/ac327ff10bcd43f64f6e489f7fb0f09c" method="POST">
+  <input type="hidden" name="_captcha" value="true">
+  <input type="hidden" name="_subject" value="coulis waitlist">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_next" value="https://bhavya-in-sf.github.io/coulis/waitlist.html?sent=1">
+  <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+  <label for="wl-email" class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email</label>
+  <input id="wl-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@company.com" required autofocus>
+  <button class="btn" type="submit">Join</button>
+</form>
+<p class="msg" id="wl-msg" role="status" aria-live="polite"></p>
+<p class="fine">We keep your email, nothing else. No tracking. A one-click check on the next page keeps robots out. Signing up grants no permission to process, keep or train on your writing; see <a href="DATA-PERMISSIONS.md">data and permissions</a>. Reply to the first email to be removed.</p>
 </div>
 <script>(function(){
   var f=document.getElementById("wl"),msg=document.getElementById("wl-msg");
-  if(new URLSearchParams(location.search).get("sent")){f.hidden=true;document.querySelector("h1").innerHTML="You're on the <i>list.</i>";document.querySelector(".lede").textContent="We'll email you when the next release ships."}
-  f.addEventListener("submit",function(e){var name=document.getElementById("wl-name").value.trim(),email=document.getElementById("wl-email").value.trim();
-    if(!name){e.preventDefault();msg.textContent="Add your name, then try again.";document.getElementById("wl-name").focus();return}
+  if(new URLSearchParams(location.search).get("sent")){f.hidden=true;document.getElementById("h").innerHTML="You're on the <i>list.</i>";document.getElementById("lede").textContent="We'll email you when the next release ships."}
+  f.addEventListener("submit",function(e){var email=document.getElementById("wl-email").value.trim();
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){e.preventDefault();msg.textContent="That email doesn't look right.";document.getElementById("wl-email").focus();return}
     msg.textContent="One quick check on the next page, then you're in."});
 })();</script>

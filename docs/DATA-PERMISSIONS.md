@@ -14,7 +14,7 @@ Three different permissions, never bundled.
 - Takeout and other personal exports: not part of any dataset.
 
 ## What signup means
-Joining the writing pilot or the integration waitlist records your name, email, role and what you asked for. It does not guarantee access, and it grants none of the three permissions above.
+Joining the waitlist records your email, nothing else. It does not guarantee access, and it grants none of the three permissions above.
 
 ## Hosting
 The self-hosted API preview accepts server-configured bearer keys and profile mappings. Keys are kept in memory/environment, and profile/workflow data is plaintext on the server filesystem. HTTP access logs are off; explicit edit/choice workflows retain drafts with permission. It is not a managed hosted service. See [API boundaries and deletion](API.md).
