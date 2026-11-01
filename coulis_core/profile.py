@@ -146,7 +146,12 @@ def parse_files(taste_md="", claims_md=""):
         p.audience = _field(taste_md, "Who I write for")
         p.goal = _field(taste_md, "What I want readers to do")
         samples = re.findall(r"^###\s+Sample \d+\s*\n(.*?)(?=^###\s|^##\s|\Z)", taste_md, re.M | re.S)
-        p.samples = [s.strip() for s in samples if s.strip() and not s.strip().startswith("<!--")]
+        cleaned = []
+        for smp in samples:
+            smp = re.sub(r"^\s*<!--.*?-->\s*", "", smp.strip(), flags=re.S)  # drop the date/word-count note extract writes
+            if smp.strip():
+                cleaned.append(smp.strip())
+        p.samples = cleaned
         p.rules = [Rule(text=r) for r in _bullets(_section(taste_md, "My rules"))]
         for r in _bullets(_section(taste_md, "Learned from my edits")):
             if "<!-- id:" in r:

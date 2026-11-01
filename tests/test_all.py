@@ -179,6 +179,9 @@ class Sameness(unittest.TestCase):
         out = setup_from_linkedin(p, os.path.join(d, "prof"), name="Test")
         self.assertEqual(out["samples"], 8)  # all eight qualify; the cap is 30
         self.assertTrue(os.path.exists(os.path.join(d, "prof", "TASTE.md")))
+        prof = profile_from_folder(os.path.join(d, "prof"))
+        self.assertEqual(len(prof.samples), 8)  # the extracted samples must load back (they carry a leading comment)
+        self.assertIn("words_per_sentence", prof.to_persona()["rhythm"])
 
 
 if __name__ == "__main__":
