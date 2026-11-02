@@ -153,7 +153,7 @@ Rules for an agent: never send on Hold; never invent a number to satisfy a claim
 - v0.2: core library, MCP server, Taste API preview, SDKs, evals
 - v0.3: gate calibrated on real posts; MCP works with no API key; `coulis_add`
 - v0.4: a real founder's profile and 553-post regression set (this release)
-- Next: teams and agents. Join the waitlist at bhavya-in-sf.github.io/coulis/waitlist.html
+- Next: teams and agents. Join the waitlist at getcoulis.vercel.app/waitlist.html
 
 ## License
 MIT. Built by Bhavya Goel.
