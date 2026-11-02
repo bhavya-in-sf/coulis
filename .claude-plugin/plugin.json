@@ -1,14 +1,14 @@
 {
   "name": "coulis",
   "description": "The taste layer for AI. Learns what good writing looks like to you, and checks every draft before you see it. Starts with founder writing.",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "author": {
     "name": "Bhavya Goel"
   },
   "license": "MIT",
   "skills": "./skills",
   "mcpServers": {
-    "coulis": {
+    "taste": {
       "command": "python3",
       "args": [
         "${CLAUDE_PLUGIN_ROOT}/mcp/server.py"

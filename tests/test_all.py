@@ -149,7 +149,7 @@ class StopHook(unittest.TestCase):
         post = "```\nI built a free tool that knows how I write. It checks every draft before it goes out.\n```"
         self.assertEqual(self.run_hook([A(t(post))]), "block")
         self.assertEqual(self.run_hook([A(t(post))], active=True), "allow")  # never loops
-        self.assertEqual(self.run_hook([A({"type": "tool_use", "name": "mcp__plugin_coulis_coulis__check"}),
+        self.assertEqual(self.run_hook([A({"type": "tool_use", "name": "mcp__plugin_coulis_taste__check"}),
                                         A(t(post))]), "allow")
         self.assertEqual(self.run_hook([A(t("> My LinkedIn just passed 62K followers."))]), "block")
         self.assertEqual(self.run_hook([A(t("```bash\ngit push origin HEAD\n```"))]), "allow")
