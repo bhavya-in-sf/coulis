@@ -13,3 +13,5 @@ sdk/typescript/dist/
 docs/brand-options/
 
 .!*
+docs/_previews/
+.env*
