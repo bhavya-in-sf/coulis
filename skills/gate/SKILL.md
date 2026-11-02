@@ -5,7 +5,7 @@ description: Pre-post gate. Before a post goes out, check it against the persona
 
 # Coulis: gate (check before it posts)
 
-Follow `reference/workflow.md` in the plugin root (two levels up). Before writing or critique, use `coulis_context` with the current profile, surface and known audience/purpose. Use its approved contextual preferences, not just TASTE.md; expose unresolved conflicts. Capture edits and approvals through `coulis_workflow` when the user wants learning.
+Follow `reference/workflow.md` in the plugin root (two levels up). Before writing or critique, use `context` with the current profile, surface and known audience/purpose. Use its approved contextual preferences, not just TASTE.md; expose unresolved conflicts. Capture edits and approvals through `workflow` when the user wants learning.
 
 
 Two halves, in this order.

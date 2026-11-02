@@ -1,6 +1,6 @@
 # Security
 
-coulis runs on your machine. The basic check (`coulis_check`, the gate) makes no network call. The critique sends the draft and a few of your sample posts to Claude under your own Claude subscription or API key; coulis stores nothing from that call. Your taste files (`TASTE.md`, `claims.md`) and the local log (`~/.coulis/coulis-log.jsonl`, verdicts only, never drafts) stay on your machine.
+coulis runs on your machine. The basic check (`check`, the gate) makes no network call. The critique sends the draft and a few of your sample posts to Claude under your own Claude subscription or API key; coulis stores nothing from that call. Your taste files (`TASTE.md`, `claims.md`) and the local log (`~/.coulis/coulis-log.jsonl`, verdicts only, never drafts) stay on your machine.
 
 The optional REST API (`api/`) stores profiles encrypted at rest, keeps API keys only as hashes, never logs request bodies or drafts, and rate-limits per key. It is not hosted by us today; if you run it, set `COULIS_ENC_KEY`.
 

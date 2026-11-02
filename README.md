@@ -50,12 +50,12 @@ Then `/coulis:critique` scores the draft on 8 separate axes against her own samp
 
 ## New in 0.7
 - **Directions, with approval:** `/coulis:bolder`, `/coulis:quieter`, `/coulis:shorter`, `/coulis:clearer`. One rewrite, checked, and nothing changes until you say yes.
-- **Variants that teach:** `/coulis:variants` shows 3 hooks; your pick is saved as taste data (`coulis_pick`).
+- **Variants that teach:** `/coulis:variants` shows 3 hooks; your pick is saved as taste data (`pick`).
 - **Modes by surface:** `linkedin`, `x`, `cold_email`, `investor_update`, `bio` (plus reddit, instagram, youtube), each with its own rules and target score.
 - **`/coulis:extract`:** turn your past posts or LinkedIn export into a starter TASTE.md and claims.md. To get the export: LinkedIn > Me > Settings & Privacy > Data privacy > Get a copy of your data > tick Posts > Request archive. The zip arrives by email in about 10 minutes.
 - **`/coulis:doctor`:** checks your profile is complete and up to date.
 - **v0.9, three more checks, no model:** the opening pattern (question openers, "Excited to share", "In today's", the not-X-but-Y frame, with one of your own openers quoted back), a rhythm fingerprint measured from your samples, and repeated six-word phrases across your last 20 sent posts.
-- **v0.9, the data that improves it:** every `coulis_learn` writes the edit pair (original, revision, surface, proposed rules) to `edit-pairs.jsonl`, flagged lines you kept to `overrides.jsonl`, and the final to `sent.jsonl`, all next to your profile, never uploaded. `coulis_pick` takes a `why` tag.
+- **v0.9, the data that improves it:** every `learn` writes the edit pair (original, revision, surface, proposed rules) to `edit-pairs.jsonl`, flagged lines you kept to `overrides.jsonl`, and the final to `sent.jsonl`, all next to your profile, never uploaded. `pick` takes a `why` tag.
 - **Always on:** the Stop hook now waits for the last reply before checking, and logs each run to `~/.coulis/hook-log.jsonl`.
 - **Benchmark:** a public "sounds like you" test for AI writing apps. See [docs/BENCHMARK.md](docs/BENCHMARK.md).
 
@@ -137,13 +137,13 @@ Exit code 2 = Hold (do not send), 1 = Revise (fix the quoted lines, then send), 
 Rules for an agent: never send on Hold; never invent a number to satisfy a claim check (cut it or ask the owner to approve it); add facts only after the owner says yes (`coulis.py add approved_fact "..."`); when the owner edits your draft, run `coulis.py learn draft.txt final.txt` and propose the rules it finds.
 
 - OpenClaw skill: [`openclaw/`](openclaw/) (`clawhub install coulis`).
-- Claude Code and Claude Desktop: the plug-in above (MCP tools `coulis_check`, `coulis_add`, `coulis_learn`).
+- Claude Code and Claude Desktop: the plug-in above (MCP tools `check`, `add`, `learn`).
 - Over HTTP: for teams and agents, on the waitlist.
 - Hosted API and per-check pricing for agent companies: not yet. Write to the address in the footer of the site.
 
 ## For developers
 - `coulis_core/`: the taste layer as a library. JSON in, JSON out.
-- `mcp/server.py`: MCP server with `coulis_check`, `coulis_critique` (works without an API key), `coulis_learn`, `coulis_add` and `coulis_profile`. Ships inside the plug-in.
+- `mcp/server.py`: MCP server with `check`, `critique` (works without an API key), `learn`, `add` and `profile`. Ships inside the plug-in.
 - `examples/writing_app.py` shows a writing app gating every draft with the library.
 - `personas/bhavya/`: a real founder's profile, published with her permission: TASTE.md built from 673 public LinkedIn posts, an approved-facts list, and 553 posts to test against. Point Coulis at it to see a real taste profile in action: `COULIS_PROFILE_DIR=personas/bhavya`.
 - `evals/`: a regression suite (same input, same verdict) and an edit-pairs suite. Run `python3 -m unittest discover -s tests`.
@@ -151,7 +151,7 @@ Rules for an agent: never send on Hold; never invent a number to satisfy a claim
 ## Roadmap
 - v0.1: founder writing, local `TASTE.md`
 - v0.2: core library, MCP server, Taste API preview, SDKs, evals
-- v0.3: gate calibrated on real posts; MCP works with no API key; `coulis_add`
+- v0.3: gate calibrated on real posts; MCP works with no API key; `add`
 - v0.4: a real founder's profile and 553-post regression set (this release)
 - Next: teams and agents. Join the waitlist at getcoulis.vercel.app/waitlist
 
@@ -175,7 +175,7 @@ MIT. Built by Bhavya Goel.
 
 ## Research retrieval and feedback
 
-The existing MCP product now includes `coulis_context` (relevant writing samples and approved contextual preferences) and `coulis_feedback` (explicit, local feedback recording). Set `COULIS_RETRIEVAL=bm25` when starting the server to use relevant-example retrieval in critique; the default remains the original sample order.
+The existing MCP product now includes `context` (relevant writing samples and approved contextual preferences) and `feedback` (explicit, local feedback recording). Set `COULIS_RETRIEVAL=bm25` when starting the server to use relevant-example retrieval in critique; the default remains the original sample order.
 
 [Research setup, dataset adapters, measured retrieval results, and limitations](research/README.md). No model training or paid model calls are performed by the research runner.
 

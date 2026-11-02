@@ -50,7 +50,7 @@ def main():
         except Exception:
             pass
         for r in rows:
-            if r["tool"] == "coulis_skip":
+            if r["tool"] in ("skip", "coulis_skip"):  # older log rows use the old name
                 print(f"  skip {r['ts']}: {r.get('kind') or '?'}: {r['reason']}")
         return
     if a.cmd in ("workflow", "context", "feedback", "call"):
@@ -67,11 +67,11 @@ def main():
         gate_args = {"max_sameness": a.max_sameness} if (a.cmd == "check" and a.max_sameness is not None) else {}
         out = server.call_tool("coulis_" + a.cmd, {"text": read(a.args[0]), "surface": a.surface, **gate_args, **extra})
     elif a.cmd == "skip":
-        out = server.call_tool("coulis_skip", {"reason": a.args[0], "kind": a.kind, **extra})
+        out = server.call_tool("skip", {"reason": a.args[0], "kind": a.kind, **extra})
     elif a.cmd == "add":
-        out = server.call_tool("coulis_add", {"kind": a.args[0], "text": a.args[1], **extra})
+        out = server.call_tool("add", {"kind": a.args[0], "text": a.args[1], **extra})
     else:
-        out = server.call_tool("coulis_learn", {"draft": read(a.args[0]), "final": read(a.args[1]), **extra})
+        out = server.call_tool("learn", {"draft": read(a.args[0]), "final": read(a.args[1]), **extra})
     if a.cmd == "check":
         if a.json:
             print(json.dumps(out, indent=2, ensure_ascii=False))

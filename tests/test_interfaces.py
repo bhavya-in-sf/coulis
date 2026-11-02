@@ -41,7 +41,7 @@ class InterfaceTests(unittest.TestCase):
         remote = self.client.call('context', **args)
         self.assertEqual(remote['preferences'][0]['id'], pref['id'])
         self.assertEqual(remote, self.local.call('context', **args))
-        self.assertEqual(remote, service._dispatch.call_tool('coulis_context', {**args,'profile_dir':str(self.a)}))
+        self.assertEqual(remote, service._dispatch.call_tool('context', {**args,'profile_dir':str(self.a)}))
         proc = subprocess.run([sys.executable, 'scripts/coulis.py', 'context', json.dumps(args), '--profile', str(self.a)], cwd=ROOT, capture_output=True, text=True, check=True)
         self.assertEqual(remote, json.loads(proc.stdout))
         with patch.dict(os.environ, {'ANTHROPIC_API_KEY':'','ANTHROPIC_AUTH_TOKEN':''}):

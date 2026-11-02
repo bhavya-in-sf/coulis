@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Coulis MCP server (stdio). The universal taste layer for Claude, Cursor and
-any MCP client. Zero dependencies beyond the standard library; coulis_critique
+any MCP client. Zero dependencies beyond the standard library; the `critique` tool
 also needs the anthropic SDK and a credential.
 
 Profile: the folder in COULIS_PROFILE_DIR (default: the current folder), i.e.
@@ -23,52 +23,52 @@ PROFILE_DIR = {"type": "string", "description": "Optional: folder with the TASTE
 SURFACE = {"type": "string", "enum": ["linkedin", "x", "reddit", "instagram", "youtube", "cold_email", "investor_update", "bio"], "default": "linkedin"}
 
 TOOLS = [
-    {"name": "coulis_check",
+    {"name": "check",
      "description": "The gate. Check a draft against the user's approved facts, banned phrases and house rules before it is shown or posted. Deterministic, no model call. Returns Hold, Revise or Send with each issue quoted.",
      "inputSchema": {"type": "object", "required": ["text"], "additionalProperties": False,
                      "properties": {"profile_dir": PROFILE_DIR, "text": {"type": "string"}, "surface": SURFACE,
                                     "max_sameness": {"type": "integer", "minimum": 0, "maximum": 100, "description": "Optional team gate: Hold when the sameness score is above this."}}}},
-    {"name": "coulis_critique",
+    {"name": "critique",
      "description": "The critic step. Score a draft on 8 separate axes (clarity, proof, why_you, ask, hook, voice, boldness, rhythm) against the user's taste profile, and rewrite only the weakest part. Never one overall score. With ANTHROPIC_API_KEY set it scores via the API; otherwise it returns the rubric and profile (mode: host_model) for you to score in this chat.",
      "inputSchema": {"type": "object", "required": ["text"], "additionalProperties": False,
                      "properties": {"profile_dir": PROFILE_DIR, "text": {"type": "string"}, "surface": SURFACE}}},
-    {"name": "coulis_learn",
+    {"name": "learn",
      "description": "Propose taste rules from the difference between an AI draft and what the user actually posted. Rules are proposals only; the user must approve each one before it is saved.",
      "inputSchema": {"type": "object", "required": ["draft", "final"], "additionalProperties": False,
                      "properties": {"profile_dir": PROFILE_DIR, "draft": {"type": "string"}, "final": {"type": "string"}, "surface": SURFACE}}},
-    {"name": "coulis_add",
+    {"name": "add",
      "description": "Add one entry to the user's claims.md (created if missing): an approved fact the gate should allow (e.g. '1,200 users'), or a banned phrase with a reason. Only call this after the user explicitly says to add it.",
      "inputSchema": {"type": "object", "required": ["kind", "text"], "additionalProperties": False,
                      "properties": {"profile_dir": PROFILE_DIR, "kind": {"type": "string", "enum": ["approved_fact", "banned_phrase"]},
                                     "text": {"type": "string", "description": "The fact, or the phrase to ban"},
                                     "reason": {"type": "string", "description": "Why it's banned (banned_phrase only)"}}}},
-    {"name": "coulis_skip",
+    {"name": "skip",
      "description": "Record that Coulis was considered for a piece of writing but didn't make sense to use, and why (e.g. 'internal Slack reply, no public claims', 'code comment'). Call this whenever you decide not to run the gate or critique on writing the user will send or post.",
      "inputSchema": {"type": "object", "required": ["reason"], "additionalProperties": False,
                      "properties": {"profile_dir": PROFILE_DIR, "reason": {"type": "string"},
                                     "kind": {"type": "string", "description": "What the writing was, e.g. 'Slack reply', 'email', 'LinkedIn post'"}}}},
-    {"name": "coulis_pick",
+    {"name": "pick",
      "description": "Record which of several variants (e.g. 3 alternative hooks) the user picked. Each pick is saved as pairwise taste data (picked beats each rejected) in picks.jsonl next to the profile, for learning and the benchmark. Call only after the user picks.",
      "inputSchema": {"type": "object", "required": ["picked", "rejected"], "additionalProperties": False,
                      "properties": {"profile_dir": PROFILE_DIR, "picked": {"type": "string"},
                                     "rejected": {"type": "array", "items": {"type": "string"}},
                                     "surface": SURFACE, "context": {"type": "string", "description": "What the variants were for, e.g. 'hook for launch post'"},
                                     "why": {"type": "string", "enum": ["clearer", "bolder", "truer", "more_me", "shorter", "other"], "description": "Why the user picked it, in their words, mapped to one tag"}}}},
-    {"name": "coulis_doctor",
+    {"name": "doctor",
      "description": "Health check of the user's taste profile: are TASTE.md and claims.md present, complete and recent? Returns problems with one-line fixes.",
      "inputSchema": {"type": "object", "properties": {"profile_dir": PROFILE_DIR}, "additionalProperties": False}},
-    {"name": "coulis_profile",
+    {"name": "profile",
      "description": "Return the user's taste profile (TASTE.md + claims.md) as structured JSON.",
      "inputSchema": {"type": "object", "properties": {"profile_dir": PROFILE_DIR}, "additionalProperties": False}},
 ]
 
 CONTEXT = {"type":"object","additionalProperties":False,"properties":{"audience":{"type":"string"},"purpose":{"type":"string"}}}
 TOOLS += [
-    {"name":"coulis_context", "description":"Retrieve this profile's relevant writing examples and approved contextual preferences. No model call; no factual verification.",
+    {"name":"context", "description":"Retrieve this profile's relevant writing examples and approved contextual preferences. No model call; no factual verification.",
      "inputSchema":{"type":"object","required":["text"],"additionalProperties":False,"properties":{
         "profile_dir":PROFILE_DIR,"text":{"type":"string"},"surface":SURFACE,"context":CONTEXT,
         "method":{"type":"string","enum":["original","bm25","tfidf"],"default":"bm25"}}}},
-    {"name":"coulis_feedback", "description":"Record explicit user feedback locally for research. Requires permission to store this event. Does not train a model or approve a preference.",
+    {"name":"feedback", "description":"Record explicit user feedback locally for research. Requires permission to store this event. Does not train a model or approve a preference.",
      "inputSchema":{"type":"object","required":["approved","example_id","action"],"additionalProperties":False,"properties":{
         "profile_dir":PROFILE_DIR,"approved":{"type":"boolean"},"example_id":{"type":"string"},
         "action":{"type":"string","enum":["accepted","edited","removed","not_selected","explicit_preference"]},
@@ -76,11 +76,11 @@ TOOLS += [
 ]
 
 
-TOOLS.append({"name":"coulis_workflow", "description":"Shared taste workflow. Actions: extract(comparison_id) proposes conservative structural preferences from a recorded style edit with evidence; may abstain; never approves automatically. edit(task,draft,final,context,category,consent:true,reason?) records a user-supplied final; create(task,candidates:2–8 distinct {text,condition} objects,context:{surface,audience?,purpose?},consent:true); view(comparison_id); decide(comparison_id,choice:displayed position|tie|neither,category:style|fact|task|other,reason?,final?); propose(comparison_id,key,value,wording); approve(proposal_id,approved:true,supersedes?); prepare(task,context); state(); disable(preference_id); revise(preference_id,value,wording); reject(proposal_id); purge(approved:true) deletes local workflow data only after explicit user request. Record decisions only from actual user choices. Never infer approval. prepare returns matched baseline/Coulis inputs for you to generate drafts using the same model/settings; no automatic model call.",
+TOOLS.append({"name":"workflow", "description":"Shared taste workflow. Actions: extract(comparison_id) proposes conservative structural preferences from a recorded style edit with evidence; may abstain; never approves automatically. edit(task,draft,final,context,category,consent:true,reason?) records a user-supplied final; create(task,candidates:2–8 distinct {text,condition} objects,context:{surface,audience?,purpose?},consent:true); view(comparison_id); decide(comparison_id,choice:displayed position|tie|neither,category:style|fact|task|other,reason?,final?); propose(comparison_id,key,value,wording); approve(proposal_id,approved:true,supersedes?); prepare(task,context); state(); disable(preference_id); revise(preference_id,value,wording); reject(proposal_id); purge(approved:true) deletes local workflow data only after explicit user request. Record decisions only from actual user choices. Never infer approval. prepare returns matched baseline/Coulis inputs for you to generate drafts using the same model/settings; no automatic model call.",
  "inputSchema":{"type":"object","required":["action"],"additionalProperties":False,"properties":{"profile_dir":PROFILE_DIR,"action":{"type":"string","enum":["create","edit","extract","view","decide","propose","approve","prepare","state","disable","revise","reject","purge"]},"arguments":{"type":"object"}}}})
 
 for tool in TOOLS:
-    if tool["name"] == "coulis_critique":
+    if tool["name"] == "critique":
         tool["inputSchema"]["properties"]["context"] = CONTEXT
 
 _ARG_DIR = ContextVar("profile_directory", default=None)  # per-call override from the optional profile_dir argument
@@ -225,7 +225,7 @@ def add_entry(kind, text, reason=""):
 def log_use(name, args, out):
     """Usage log next to the profile (coulis-log.jsonl): what was used, when, and the outcome.
     Stores a short preview of the text, never the whole draft. Turn off with COULIS_LOG=0."""
-    if (os.environ.get("COULIS_LOG") or os.environ.get("TASTEE_LOG", "1")) == "0" or name in ("coulis_profile", "coulis_context", "coulis_feedback", "coulis_workflow"):
+    if (os.environ.get("COULIS_LOG") or os.environ.get("TASTEE_LOG", "1")) == "0" or name in ("profile", "context", "feedback", "workflow"):
         return
     import datetime
     text = args.get("text") or args.get("draft") or ""
@@ -237,7 +237,7 @@ def log_use(name, args, out):
                 entry[k] = out[k]
         if "proposed_rules" in out:
             entry["rules_proposed"] = len(out["proposed_rules"])
-    if name == "coulis_skip":
+    if name == "skip":
         entry.update({"reason": args.get("reason", ""), "kind": args.get("kind", "")})
     try:
         home = home_dir()  # one log for every profile, so the record isn't split
@@ -251,6 +251,8 @@ def log_use(name, args, out):
 
 
 def call_tool(name, args):
+    if name and name.startswith("coulis_"):
+        name = name[len("coulis_"):]  # old tool names (coulis_check, ...) still work
     args = dict(args)
     token = _ARG_DIR.set(args.pop("profile_dir", None))
     try:
@@ -262,17 +264,17 @@ def call_tool(name, args):
 
 
 def _call_tool(name, args):
-    if name == "coulis_workflow":
+    if name == "workflow":
         from coulis_core.workflow import Workflow
         workflow = Workflow(profile_dir())
         try:
             return workflow.dispatch(args['action'], args.get('arguments', {}))
         finally:
             workflow.close()
-    if name == "coulis_context":
+    if name == "context":
         from coulis_core.context import build_context
         return build_context(args["text"], profile(), args.get("surface", "linkedin"), args.get("context"), args.get("method", "bm25"))
-    if name == "coulis_feedback":
+    if name == "feedback":
         from coulis_research.store import Store
         if args.get("approved") is not True:
             raise ValueError("Explicit permission to store feedback is required")
@@ -284,7 +286,7 @@ def _call_tool(name, args):
         finally:
             store.close()
         return {"saved":True,"model_trained":False,"preference_approved":False}
-    if name == "coulis_check":
+    if name == "check":
         out = check(args["text"], profile(), args.get("surface", "linkedin"), history=recent_sent(args.get("surface", "linkedin")),
                     max_sameness=args.get("max_sameness"))
         d = profile_dir()
@@ -293,7 +295,7 @@ def _call_tool(name, args):
                                      "tells are checked. Say 'add <fact> as a fact' to start claims.md, or run "
                                      "/coulis:setup (or `coulis setup --linkedin export.zip`) to build your voice file.")
         return out
-    if name == "coulis_critique":
+    if name == "critique":
         prof, surface = profile(), args.get("surface", "linkedin")
         if not (os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN")):
             # No key (the normal plug-in case): hand the rubric to the model already in the chat.
@@ -304,15 +306,15 @@ def _call_tool(name, args):
                     "task": build_prompt(args["text"], prof, surface, args.get("context")),
                     "output_schema": SCHEMA}
         return critique(args["text"], prof, surface, context=args.get("context"))
-    if name == "coulis_learn":
+    if name == "learn":
         out = learn(args["draft"], args["final"], profile())
         record_edit_pair(args["draft"], args["final"], args.get("surface", "linkedin"), out.get("proposed_rules", []))
         return out
-    if name == "coulis_add":
+    if name == "add":
         return add_entry(args["kind"], args["text"], args.get("reason", ""))
-    if name == "coulis_skip":
+    if name == "skip":
         return {"logged": True, "reason": args["reason"]}
-    if name == "coulis_pick":
+    if name == "pick":
         import datetime
         rec = {"t": datetime.datetime.now().isoformat(timespec="seconds"), "picked": args["picked"],
                "rejected": args.get("rejected", []), "surface": args.get("surface", "linkedin"),
@@ -323,11 +325,11 @@ def _call_tool(name, args):
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
         n = sum(1 for _ in path.open())
         return {"saved": True, "pairs_added": len(rec["rejected"]), "total_picks": n, "file": str(path)}
-    if name == "coulis_doctor":
+    if name == "doctor":
         sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
         import doctor
         return doctor.run(profile_dir())
-    if name == "coulis_profile":
+    if name == "profile":
         out = profile().to_dict()
         out["learned_this_week"] = learned_recently(profile(), 7)
         out["profile_dir"] = str(profile_dir())

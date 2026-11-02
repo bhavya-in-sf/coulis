@@ -120,9 +120,9 @@ class StoreTests(unittest.TestCase):
         spec=importlib.util.spec_from_file_location('research_mcp',ROOT/'mcp/server.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
         with tempfile.TemporaryDirectory() as d:
             Path(d,'TASTE.md').write_text('# Taste\n## My voice in 3 samples\n### Sample 1\nbread starter\n')
-            out=m.call_tool('coulis_context',{'profile_dir':d,'text':'bread'})
+            out=m.call_tool('context',{'profile_dir':d,'text':'bread'})
             self.assertEqual(out['samples'][0]['id'],'sample-1')
-            with self.assertRaises(ValueError): m.call_tool('coulis_feedback',{'profile_dir':d,'approved':False,'example_id':'e','action':'accepted'})
-            out=m.call_tool('coulis_feedback',{'profile_dir':d,'approved':True,'example_id':'e','action':'accepted'})
+            with self.assertRaises(ValueError): m.call_tool('feedback',{'profile_dir':d,'approved':False,'example_id':'e','action':'accepted'})
+            out=m.call_tool('feedback',{'profile_dir':d,'approved':True,'example_id':'e','action':'accepted'})
             self.assertTrue(out['saved'])
             self.assertFalse(out['model_trained'])

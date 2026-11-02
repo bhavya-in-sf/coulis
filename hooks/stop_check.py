@@ -4,7 +4,7 @@
 Runs when Claude finishes a reply. If the reply contains text the user is
 likely to post or send (a quoted block or an unlabelled code block of prose)
 and no Coulis tool ran during the turn, it asks Claude to check those drafts
-with coulis_check, or record coulis_skip with a reason, before the user sees
+with the `check` tool, or record the `skip` tool with a reason, before the user sees
 the reply. It asks once per turn, never loops, and never blocks on errors.
 
 Turn off with COULIS_HOOK=0.
@@ -120,9 +120,9 @@ def main():
         for b in r.get("message", {}).get("content", []) or []:
             if b.get("type") == "tool_use" and "coulis_" in b.get("name", ""):
                 used_coulis = True
-                if b["name"].endswith("coulis_learn"):
+                if b["name"].endswith("learn"):
                     learned = True
-                if b["name"].endswith("coulis_check"):
+                if b["name"].endswith("check"):
                     checked.append(str((b.get("input") or {}).get("text", "")))
             elif b.get("type") == "text":
                 text.append(b.get("text", ""))
@@ -133,7 +133,7 @@ def main():
         # the draft that was checked is not the draft that went out: that difference is taste. Learn from it, once.
         print(json.dumps({
             "decision": "block",
-            "reason": ("Coulis: the final draft in this reply differs from the version that was checked. Call coulis_learn "
+            "reason": ("Coulis: the final draft in this reply differs from the version that was checked. Call the `learn` tool "
                        "with draft = the checked version and final = the version in the reply (same profile_dir as the check), "
                        "then give the reply again with the proposed rules listed in one short line each, for the user to approve or reject. "
                        "Do not save any rule without their yes."),
@@ -143,9 +143,9 @@ def main():
         print(json.dumps({
             "decision": "block",
             "reason": (f"Coulis: this reply has {len(drafts)} draft(s) the user may post or send, and none were "
-                       "checked. Run coulis_check on each draft (use profile_dir if it's written for a company "
+                       "checked. Run the `check` tool on each draft (use profile_dir if it's written for a company "
                        "or client), fix any Hold issues, then give the reply again. If a block isn't something "
-                       "the user will post or send, call coulis_skip with the reason instead."),
+                       "the user will post or send, call the `skip` tool with the reason instead."),
         }))
 
 

@@ -57,14 +57,14 @@ Command `python3`, argument `/path/to/coulis/mcp/server.py`, environment variabl
 
 ## 4. Use it
 Just ask in plain words:
-- "Check this draft with Coulis: ..." → `coulis_check` (instant, no model call)
-- "Critique this with Coulis" → `coulis_critique` (8 axes, rewrites the weakest part)
-- "Add '1,200 users' as an approved fact" or "Ban the phrase 'game-changer'" → `coulis_add`
-- "Here's the AI draft and what I posted, learn from it" → `coulis_learn` (you approve each rule)
+- "Check this draft with Coulis: ..." → `check` (instant, no model call)
+- "Critique this with Coulis" → `critique` (8 axes, rewrites the weakest part)
+- "Add '1,200 users' as an approved fact" or "Ban the phrase 'game-changer'" → `add`
+- "Here's the AI draft and what I posted, learn from it" → `learn` (you approve each rule)
 
 ## Troubleshooting
 - **Tools don't show up:** check that the path in `args` is right (`ls /Users/YOU/coulis/mcp/server.py`) and restart the app.
-- **Every number gets flagged:** your `claims.md` has no approved facts yet. Add them with `coulis_add`.
+- **Every number gets flagged:** your `claims.md` has no approved facts yet. Add them with `add`.
 - **`python3` not found:** install Python from python.org, or use the full path (`which python3`).
 
 ### ChatGPT, Slack, Google Docs, anything else
