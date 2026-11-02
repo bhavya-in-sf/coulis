@@ -5,6 +5,6 @@ description: Health check of the user's taste profile. Checks that TASTE.md and 
 
 # Coulis: doctor
 
-1. Call coulis_doctor (pass profile_dir for a company or client profile).
+1. Call the `doctor` tool (pass profile_dir for a company or client profile).
 2. Show "healthy" or the list of problems, each with its one-line fix, most important first.
-3. Offer to run the fix (e.g. /coulis:extract, adding facts with coulis_add). Change nothing without a yes.
+3. Offer to run the fix (e.g. /coulis:extract, adding facts with the `add` tool). Change nothing without a yes.

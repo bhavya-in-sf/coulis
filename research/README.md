@@ -16,8 +16,8 @@ COULIS_RETRIEVAL=bm25 python3 mcp/server.py
 
 New tools on the **existing MCP server**:
 
-- `coulis_context`: text, surface, context, optional method and profile_dir. Returns retrieved samples, approved preferences, conflicts, and sample IDs. No model call.
-- `coulis_feedback`: approved=true, example_id, action, optional reason and profile_dir. Records explicit feedback next to that profile in coulis-research.db. Actions: accepted, edited, removed, not_selected, explicit_preference. This does not train, infer rejection labels, or approve a rule.
+- `context`: text, surface, context, optional method and profile_dir. Returns retrieved samples, approved preferences, conflicts, and sample IDs. No model call.
+- `feedback`: approved=true, example_id, action, optional reason and profile_dir. Records explicit feedback next to that profile in coulis-research.db. Actions: accepted, edited, removed, not_selected, explicit_preference. This does not train, infer rejection labels, or approve a rule.
 
 Example arguments:
 
@@ -25,7 +25,7 @@ Example arguments:
 {"text":"A post about database transactions","surface":"linkedin","context":{"audience":"engineers"},"method":"bm25"}
 ```
 
-Existing `coulis_learn` retains its current workflow. This update preserves the latest main branch, including its opening-pattern, rhythm and sent-history features. The SQLite preference store is now shared with the product through `coulis_core.taste_store`; the research module is a compatibility import. The CLI, API, SDKs and `coulis_workflow` write approved contextual preferences, and the existing profile loader exposes them to critique/context. Legacy Markdown rules remain readable; database rules are not duplicated into Markdown exports. See [the taste-loop guide](../docs/TASTE-LOOP.md).
+Existing `learn` retains its current workflow. This update preserves the latest main branch, including its opening-pattern, rhythm and sent-history features. The SQLite preference store is now shared with the product through `coulis_core.taste_store`; the research module is a compatibility import. The CLI, API, SDKs and `workflow` write approved contextual preferences, and the existing profile loader exposes them to critique/context. Legacy Markdown rules remain readable; database rules are not duplicated into Markdown exports. See [the taste-loop guide](../docs/TASTE-LOOP.md).
 
 ## Real-data evaluation
 

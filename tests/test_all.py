@@ -116,15 +116,16 @@ class Mcp(unittest.TestCase):
 
     def test_new_user_flow(self):
         text = "We now have 1,200 users."
-        self.assertEqual(self.call("coulis_check", {"text": text})["verdict"], "Revise")
-        self.assertTrue(self.call("coulis_add", {"kind": "approved_fact", "text": "1,200 users"})["added"])
-        self.assertFalse(self.call("coulis_add", {"kind": "approved_fact", "text": "1,200 users"})["added"])
-        self.assertEqual(self.call("coulis_check", {"text": text})["verdict"], "Send")
-        self.call("coulis_add", {"kind": "banned_phrase", "text": "game-changer", "reason": "generic"})
-        self.assertEqual(self.call("coulis_check", {"text": "A game-changer."})["verdict"], "Hold")
+        self.assertEqual(self.call("check", {"text": text})["verdict"], "Revise")
+        self.assertEqual(self.call("coulis_check", {"text": text})["verdict"], "Revise")  # old name still works
+        self.assertTrue(self.call("add", {"kind": "approved_fact", "text": "1,200 users"})["added"])
+        self.assertFalse(self.call("add", {"kind": "approved_fact", "text": "1,200 users"})["added"])
+        self.assertEqual(self.call("check", {"text": text})["verdict"], "Send")
+        self.call("add", {"kind": "banned_phrase", "text": "game-changer", "reason": "generic"})
+        self.assertEqual(self.call("check", {"text": "A game-changer."})["verdict"], "Hold")
 
     def test_critique_without_key_uses_host_model(self):
-        out = self.call("coulis_critique", {"text": "We now have 1,200 users."})
+        out = self.call("critique", {"text": "We now have 1,200 users."})
         self.assertEqual(out["mode"], "host_model")
         self.assertIn("rhythm", json.dumps(out["output_schema"]))
 
@@ -148,7 +149,7 @@ class StopHook(unittest.TestCase):
         post = "```\nI built a free tool that knows how I write. It checks every draft before it goes out.\n```"
         self.assertEqual(self.run_hook([A(t(post))]), "block")
         self.assertEqual(self.run_hook([A(t(post))], active=True), "allow")  # never loops
-        self.assertEqual(self.run_hook([A({"type": "tool_use", "name": "mcp__plugin_coulis_coulis__coulis_check"}),
+        self.assertEqual(self.run_hook([A({"type": "tool_use", "name": "mcp__plugin_coulis_coulis__check"}),
                                         A(t(post))]), "allow")
         self.assertEqual(self.run_hook([A(t("> My LinkedIn just passed 62K followers."))]), "block")
         self.assertEqual(self.run_hook([A(t("```bash\ngit push origin HEAD\n```"))]), "allow")

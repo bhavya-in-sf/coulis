@@ -81,7 +81,7 @@ class WorkflowTests(unittest.TestCase):
     def test_mcp_profile_and_workflow_share_memory(self):
         p=self.approved()
         spec=importlib.util.spec_from_file_location('workflow_mcp',ROOT/'mcp/server.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
-        result=m.call_tool('coulis_context',{'profile_dir':self.tmp.name,'text':'New task','surface':'linkedin','context':{'audience':'founders'}})
+        result=m.call_tool('context',{'profile_dir':self.tmp.name,'text':'New task','surface':'linkedin','context':{'audience':'founders'}})
         self.assertEqual(result['preferences'][0]['id'],p['id'])
-        state=m.call_tool('coulis_workflow',{'profile_dir':self.tmp.name,'action':'state'})
+        state=m.call_tool('workflow',{'profile_dir':self.tmp.name,'action':'state'})
         self.assertEqual(state['preferences'][0]['id'],p['id'])

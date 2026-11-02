@@ -6,7 +6,7 @@ Two tasks, both scored without a model:
 1. Held-out voice: for each held-out post by a known author, does that author's
    profile score it as more "them" than a stranger's profile? (own vs other)
 2. Pairwise picks: for each pick a human made between variants (picks.jsonl from
-   coulis_pick), does the score rank the picked line above the rejected ones?
+   the `pick` tool), does the score rank the picked line above the rejected ones?
 
 An AI writing app can run its own outputs through task 2: give it pairs of
 (your output, the human's pick) and report how often the human's pick wins.

@@ -13,5 +13,5 @@ description: Build a starter taste profile from someone's past writing: a Linked
    `python3 scripts/coulis.py setup --linkedin <export.zip or Shares.csv> --out <profile folder, default ~/.coulis> --name "<name, role>"`
    This writes TASTE.md and claims.md from the person's own posts, locally. Nothing is uploaded.
 3. Pasted or other files: read the posts and write TASTE.md with sections: Who, Audience, Voice (5 to 8 observed traits with a quoted example each), Hooks that worked, Words they never use, Format habits. Write claims.md with "## Approved" left EMPTY and a "## Needs confirm" list of every number that recurs in their posts.
-4. Never mark a number approved on your own. Show the "Needs confirm" list and ask the user to confirm each one (then use coulis_add).
-5. Finish with coulis_doctor and show what is still missing.
+4. Never mark a number approved on your own. Show the "Needs confirm" list and ask the user to confirm each one (then use the `add` tool).
+5. Finish with the `doctor` tool and show what is still missing.

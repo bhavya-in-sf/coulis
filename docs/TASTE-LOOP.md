@@ -4,7 +4,7 @@ One profile, one workflow database, all interfaces. The loop is **context → dr
 
 | Interface | Entry point |
 |---|---|
-| MCP and Claude plugin | coulis_context, coulis_workflow, coulis_critique |
+| MCP and Claude plugin | the `context` tool, the `workflow` tool, the `critique` tool |
 | CLI and OpenClaw | scripts/coulis.py context / workflow / call |
 | Python local | LocalClient(profile_dir) |
 | REST | POST /v1/context and /v1/workflow |
